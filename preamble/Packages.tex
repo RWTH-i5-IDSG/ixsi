@@ -1,0 +1,383 @@
+%----------------------------------------------------------
+%---- Packages --------------------------------------------
+%----------------------------------------------------------
+
+
+
+%---- Have to be loaded at first---------------------------
+\usepackage{rwthcommands}
+\usepackage{etex}
+\usepackage{ifthen}
+\usepackage{ifpdf}
+\usepackage{xspace}
+\usepackage{ragged2e}
+\usepackage{epsfig}
+% \usepackage{subfigure}
+\usepackage{calc}
+\usepackage{pslatex}
+\usepackage{apalike}
+\usepackage{scrextend}
+
+%---- Coding, Language, Fonts, and Symbols ----------------
+\usepackage{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{eurosym}
+\usepackage[expansion=false]{microtype}
+
+%---- Mathematic ------------------------------------------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amstext}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage[all]{onlyamsmath}
+\usepackage{latexsym}
+%\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{fixmath}
+\usepackage{icomma}
+
+%---- Scientific ------------------------------------------
+\usepackage{listings}
+\usepackage{bytefield}
+\usepackage[
+separate-uncertainty,
+multi-part-units=repeat,
+product-units=repeat,
+per-mode=symbol-or-fraction,
+]
+{siunitx}
+
+%---- Text and Layout -------------------------------------
+\usepackage[babel]{csquotes}
+\usepackage{upquote}
+\usepackage{varwidth}
+\usepackage{multicol}
+
+
+% \usepackage{enumitem}
+% within paragraphs
+\usepackage[svgnames]{xcolor}
+\usepackage[noadjust]{cite}
+
+%---- Floats - Tables, Figures ----------------------------
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage{dcolumn}
+\usepackage{float}
+%\usepackage{flafter}
+\usepackage[small,hang]{caption}
+%\usepackage{caption}
+\usepackage[
+caption=false,
+font=footnotesize
+]{subfig}
+
+\IfNotClass{beamer}{
+  \usepackage{paralist}
+  \usepackage[hyphens]{url}
+  \usepackage{makeidx}                    % Indexerstellung
+  \usepackage{SciTePress}
+  \usepackage{ftnright} % Fussnoten nur rechts
+}
+
+\IfClass{beamer}{%
+  \usepackage[accumulated]{beamerseminar}
+  \usepackage[overlay]{textpos}
+  \usepackage{pgfpages}                   % Ermöglicht eine Two-Screen Präsentation
+  \usepackage{textpos}                    % Absolute Positionierung von Texten/Graphiken
+}
+
+\IfNotClass{beamer}{%
+  
+}
+% \usepackage{flushend} % balance columns use for IEEE
+
+\IfNotClass{beamer}{
+
+}
+
+%---- hyperref --------------------------------------------
+\IfNotClass{beamer}{%
+  \usepackage[
+  %   draft,
+  %   final,
+  breaklinks=true,
+  linktocpage=true,
+  hyperfootnotes=true,
+  pagebackref=false,
+  plainpages=false,
+  %   naturalnames=true,
+  %   pageanchor=true,
+  bookmarks=true,
+  bookmarksnumbered=true,
+  hidelinks,
+  colorlinks=false,
+  linkcolor=blue,
+  urlcolor=blue,
+  citecolor=blue,
+  bookmarks=true,
+  bookmarksnumbered=true,
+  pdfpagemode=UseOutlines,
+  pdfpagelabels=true
+  ]{hyperref}
+}
+%---- Lists -------------------------------------------------
+\usepackage[
+  acronym,
+  shortcuts,
+  style=super,
+  description,
+  nowarn,
+  nonumberlist
+]{glossaries}
+
+%----------------------------------------------------------
+%---- Settings --------------------------------------------
+%----------------------------------------------------------
+
+%---- title pages -----------------------------------------
+
+\IfClass{beamer}{
+  \title[\thistitle]{\thisconference \\
+    \bigskip \thistitle}
+    \subtitle{\thisauthor}
+    \author{\thispresenter}
+    \institute{\thisaffiliation}
+    \date{\presentationdate}
+    \titlegraphic{\includegraphics[scale=0.3]{pics/logo.png}}
+}
+
+\IfNotClass{beamer}{
+  \title{\thistitle \subtitle{\thissubtitle}}
+  
+  \author{
+    \authorname{\thisauthor}
+    \affiliation{\thisaffiliation}
+    \email{\thisemail}
+  }
+  \keywords{\thiskeywords}
+  
+  \abstract{\thisabstract}
+}
+%--- hyperref meta data -----------------------------------
+
+\hypersetup{%
+  pdfauthor={\thisauthor},
+  pdfkeywords={\thiskeywords},
+  pdftitle={\thistitle ~- \thissubtitle},
+  pdfsubject={\thisconference}
+}
+
+%---- Floats ----------------------------------------------
+\graphicspath{{./graphics/}}
+
+
+\IfNotClass{beamer}{%
+  \renewcommand{\dbltopfraction}{0.7}
+  \renewcommand*{\topfraction}{0.85}
+  \renewcommand*{\bottomfraction}{.5}
+  
+  \setcounter{topnumber}{1}
+  \setcounter{dbltopnumber}{1}  
+  \setcounter{bottomnumber}{1}
+  \setcounter{totalnumber}{2}
+}
+
+
+%---- glossaries ------------------------------------------
+\renewcommand*{\glspostdescription}{}
+
+%---- listings --------------------------------------------
+\lstset{%
+  language=Java,
+  tabsize=2,
+  basewidth=0.55em,
+  frame=lines,
+  framerule=\heavyrulewidth,
+  basicstyle=\scriptsize\ttfamily,
+  keywordstyle=\bfseries\color{Maroon},
+  stringstyle=\color{Maroon},
+  commentstyle=\itshape\color{Green},
+  showstringspaces=false,
+  aboveskip=8pt,
+  belowskip=8pt,
+  numbers=left,
+  numberstyle=\tiny,
+  stepnumber=1,
+  numbersep=0.5em,
+  % xleftmargin=0.5em,
+  % xrightmargin=0.5em,
+  morecomment=[l]{//},
+  escapeinside={(*}{*)},
+  captionpos=b,
+}
+
+\lstdefinestyle{XML-style} {
+  language=XML,
+  morestring=[b]",
+  %morestring=[s]{>}{<},
+  morecomment=[s]{<?}{?>},
+  morecomment=[s]{<!--}{-->},
+  stringstyle=\color{black},
+  tagstyle=\color{Purple},
+  keywordstyle=\color{MediumBlue},
+  commentstyle=\color{gray}\slshape,
+  morekeywords={xmlns:xsi,xmlns:xsd,xmlns:soap,xmlns,version,type,name,minOccurs,maxOccurs,value,base,
+    elementFormDefault,targetNamespace,sex}% list your attributes here
+  }
+  
+  \lstdefinestyle{JSON-style} {
+    stringstyle=\color{black},
+  }
+  
+  \lstdefinestyle{XMLX-style} {
+    backgroundcolor=\color{white},
+    frame=leftline,
+    language=XML,
+    morestring=[b]",
+    %morestring=[s]{>}{<},
+    morecomment=[s]{<?}{?>},
+    morecomment=[s]{<!--}{-->},
+    stringstyle=\color{black},
+    tagstyle=\color{Purple},
+    keywordstyle=\color{MediumBlue},
+    commentstyle=\color{gray}\slshape,
+    morekeywords={xmlns:xsi,xmlns:xsd,xmlns:soap,xmlns,version,type,name,minOccurs,maxOccurs,value,base,
+      elementFormDefault,targetNamespace,sex},% list your attributes here
+      numbers=none
+    }
+    
+    \lstdefinestyle{JSONX-style} {
+      backgroundcolor=\color{white},
+      frame=leftline,
+      stringstyle=\color{black},
+      numbers=none
+    }
+
+
+%----------------------------------------------------------
+%---- Definitions -----------------------------------------
+%----------------------------------------------------------
+
+%---- General definitions ---------------------------------
+
+% Margin notes
+\providecommand{\marginline}[1]{\marginpar[\RaggedLeft{#1}]{\RaggedRight #1}}
+\newcommand*{\TODO}[1]{\marginline{\scriptsize\textcolor{red}{TODO: #1}}}
+
+% Style abbreviations
+\newcommand*{\ebf}[1]{\emph{\textbf{#1}}}
+\newcommand*{\bs}[1]{\boldsymbol{#1}}
+\renewcommand*{\_}{\ensuremath{\mathunderscore}\xspace}
+
+% Enumeration
+\newcommand*{\st}{\ensuremath{1^{\mbox{\scriptsize st}}}\xspace}
+\newcommand*{\nd}{\ensuremath{2^{\mbox{\scriptsize nd}}}\xspace}
+\newcommand*{\rd}{\ensuremath{3^{\mbox{\scriptsize rd}}}\xspace}
+\newcommand*{\nth}[1]{\ensuremath{#1^{\mbox{\scriptsize th}}}\xspace}
+
+% Arrows
+\renewcommand*{\implies}{\ensuremath{\rightarrow}\xspace}
+\renewcommand*{\iff}{\ensuremath{\leftrightarrow}\xspace}
+\newcommand*{\IF}{\ensuremath{\Rightarrow}\xspace}
+\newcommand*{\sra}{\ensuremath{\shortrightarrow}\xspace}
+\newcommand*{\sla}{\ensuremath{\shortleftarrow}\xspace}
+
+
+\newcolumntype{M}[1]{
+  >{\RaggedRight\arraybackslash\hspace{0pt}}m{#1}%
+}
+\newcolumntype{R}[1]{
+  >{\begin{turn}{90}\begin{minipage}{#1}%
+  \RaggedRight\arraybackslash\hspace{0pt}}l
+  <{\end{minipage}\end{turn}}%
+}
+\newcommand*{\armultirow}[3]{%
+  \multicolumn{#1}{#2}{%
+    \begin{picture}(0,0)%
+    \put(0,0){\begin{tabular}[t]{@{}#2@{}}#3\end{tabular}}%
+    \end{picture}%
+  }%
+}
+\makeatletter
+\newcolumntype{K}[1]{%
+  >{\DC@{.}{.}{#1}}l<{\DC@end}%
+}
+\makeatother
+
+%---- hyperref --------------------------------------------
+\addto\extrasenglish{%
+  \renewcommand*{\sectionautorefname}{Section}%
+  \renewcommand*{\subsectionautorefname}{\sectionautorefname}%
+  \renewcommand*{\subsubsectionautorefname}{\sectionautorefname}%
+}
+
+% \newcommand*{\definitionautorefname}{Definiton}
+% \newcommand*{\subfigureautorefname}{\figureautorefname}
+% \makeatletter
+% \let\@autoref=\autoref
+% \newcommand*{\autoref}[2][]{%
+%       \ifthenelse{\equal{#1}{}}{%
+%               \hyperref[{#2}]{\@autoref{#2}}%
+%       }{%
+%               \hyperref[{#2}]{\begin{NoHyper}\@autoref{#2}~\subref{#1}\end{NoHyper}}%
+%       }\xspace%
+% }
+% \makeatother
+
+%---- listings --------------------------------------------
+\newcommand*{\lineref}[2][]{%
+\ifthenelse{\equal{#1}{}}{%
+\hyperref[{#2}]{line~\ref*{#2}}%
+}{%
+\hyperref[{#2}]{\begin{NoHyper}line~\ref{#1}--\ref{#2}\end{NoHyper}}%
+}\xspace%
+}
+
+
+%----- Beamer settings --------------------------------------
+\IfClass{beamer}{
+  \setbeamercovered{transparent}                                  % Versteckter Text ist transparent
+  \setbeamertemplate{caption}{\insertcaption}             % Only text as caption
+  \setbeamerfont{caption}{size={\footnotesize}}           % Caption size
+  
+  \definecolor{background}{RGB}{0,86,139}
+  \definecolor{background2}{RGB}{215,224,235}
+  
+  \usecolortheme{rose}
+  \usecolortheme{sidebartab}
+  \useoutertheme[hideallsubsections,width=55pt,height=30pt]{sidebar}
+  
+  \setbeamertemplate{navigation symbols}{\insertframenumber /\inserttotalframenumber}
+  
+  \setbeamersize{text margin left=1em,text margin right=1em}
+  
+  \renewcommand{\arraystretch}{1.3}
+  
+  \defbeamertemplate*{title page}{customized}[1][] % lean title page
+  {
+    \usebeamerfont{title} \inserttitle\par
+    \usebeamerfont{subtitle}\insertsubtitle\par
+    \bigskip \bigskip
+    \usebeamerfont{author}\insertauthor\par
+    \usebeamerfont{institute}\insertinstitute\par
+    \medskip
+    \usebeamerfont{date}\insertdate\par
+    \vfill
+    \hfill \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
+  }
+}
+
+
+
+\deffootnote{0em}{1.6em}{\textsuperscript{\thefootnotemark}}
+
