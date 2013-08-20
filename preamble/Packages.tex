@@ -39,7 +39,7 @@
 \usepackage{mathtools}
 \usepackage{fixmath}
 \usepackage{icomma}
-
+\usepackage{cleveref}
 %---- Scientific ------------------------------------------
 \usepackage{listings}
 \usepackage{bytefield}
@@ -69,6 +69,8 @@ per-mode=symbol-or-fraction,
 \usepackage{tabularx}
 \usepackage{booktabs}
 \usepackage{multirow}
+\usepackage{floatrow}
+\floatsetup[widefigure]{}
 \usepackage{longtable}
 \usepackage{rotating}
 \usepackage{dcolumn}
@@ -127,9 +129,14 @@ font=footnotesize
   bookmarks=true,
   bookmarksnumbered=true,
   pdfpagemode=UseOutlines,
-  pdfpagelabels=true
+  pdfpagelabels=true,
+  pdfencoding=auto,
+  psdextra,
+  unicode
   ]{hyperref}
 }
+
+
 %---- Lists -------------------------------------------------
 \usepackage[
   acronym,
@@ -153,7 +160,7 @@ font=footnotesize
     \author{\thispresenter}
     \institute{\thisaffiliation}
     \date{\presentationdate}
-    \titlegraphic{\includegraphics[scale=0.4]{graphics/RWTHAachenUniversity.eps} \hspace{1em} \includegraphics[scale=0.10]{graphics/i5logo.eps}}
+    \titlegraphic{\includegraphics[scale=0.3]{pics/logo.png}}
 }
 
 \IfNotClass{beamer}{
@@ -363,14 +370,14 @@ font=footnotesize
   
   \renewcommand{\arraystretch}{1.3}
   
-  \defbeamertemplate*{title page}{customized}[1][]
+  \defbeamertemplate*{title page}{customized}[1][] % lean title page
   {
     \usebeamerfont{title} \inserttitle\par
     \usebeamerfont{subtitle}\insertsubtitle\par
     \bigskip \bigskip
-    \usebeamerfont{title}\insertauthor\par
-    \usebeamerfont{subtitle}\insertinstitute\par
-    \bigskip \bigskip
+    \usebeamerfont{author}\insertauthor\par
+    \usebeamerfont{institute}\insertinstitute\par
+    \medskip
     \usebeamerfont{date}\insertdate\par
     \vfill
     \hfill \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
