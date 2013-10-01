@@ -163,17 +163,24 @@ font=footnotesize
     \titlegraphic{\includegraphics[scale=0.3]{pics/logo.png}}
 }
 
-\IfNotClass{beamer}{
+\IfNotClass{beamer}{ % SciPress
   \title{\thistitle \subtitle{\thissubtitle}}
   
-  \author{
-    \authorname{\thisauthor}
-    \affiliation{\thisaffiliation}
-    \email{\thisemail}
-  }
-  \keywords{\thiskeywords}
-  
-  \abstract{\thisabstract}
+  \ifthenelse{\equal{\anonymize}{true}}{
+    \author{
+      \authorname{Undisclosed Authors}
+      \affiliation{Undisclosed Affiliations}
+      \email{}
+    }
+  }{
+    \author{
+      \authorname{\thisauthor}
+      \affiliation{\thisaffiliation}
+      \email{\thisemail}
+    }}
+    \keywords{\thiskeywords}
+    
+    \abstract{\thisabstract}
 }
 %--- hyperref meta data -----------------------------------
 
