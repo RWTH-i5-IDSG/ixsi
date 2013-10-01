@@ -184,11 +184,20 @@ font=footnotesize
 }
 %--- hyperref meta data -----------------------------------
 
-\hypersetup{%
-  pdfauthor={\thisauthor},
-  pdfkeywords={\thiskeywords},
-  pdftitle={\thistitle ~- \thissubtitle},
-  pdfsubject={\thisconference}
+\ifthenelse{\equal{\anonymize}{true}}{
+  \hypersetup{%
+    pdfauthor={Undisclosed},
+    pdfkeywords={\thiskeywords},
+    pdftitle={\thistitle ~- \thissubtitle},
+    pdfsubject={\thisconference}
+  }
+}{
+  \hypersetup{%
+    pdfauthor={\thisauthor},
+    pdfkeywords={\thiskeywords},
+    pdftitle={\thistitle ~- \thissubtitle},
+    pdfsubject={\thisconference}
+  }
 }
 
 %---- Floats ----------------------------------------------
