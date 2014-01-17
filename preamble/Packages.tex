@@ -35,7 +35,7 @@
 \usepackage{thmtools}
 \usepackage[all]{onlyamsmath}
 \usepackage{latexsym}
-%\usepackage{stmaryrd}
+\usepackage{stmaryrd}
 \usepackage{mathtools}
 \usepackage{fixmath}
 \usepackage{icomma}
@@ -52,7 +52,11 @@ per-mode=symbol-or-fraction,
 {siunitx}
 
 %---- Text and Layout -------------------------------------
-\usepackage[babel]{csquotes}
+\usepackage[
+babel,
+threshold=2,
+strict
+]{csquotes}
 \usepackage{upquote}
 \usepackage{varwidth}
 \usepackage{multicol}
@@ -77,18 +81,42 @@ per-mode=symbol-or-fraction,
 \usepackage{float}
 \floatstyle{plaintop}
 \restylefloat{table}
-%\usepackage{flafter}
-\usepackage[small]{caption}
-%\usepackage{caption}
+% flafter forces float to be placed after referenced
+%\ usepackage{flafter} 
+
+%  fancy captions (use default for insticc)
+% \usepackage[small,hang]{caption}
+
+%table caption on top
+\usepackage[tableposition=top,small]{caption}
+
 \usepackage[
 caption=false,
 ]{subfig}
 
+
+\graphicspath{{./graphics/}}
+
+
+% permissive float placement
+\IfNotClass{beamer}{%
+  \setcounter{topnumber}{4}
+  \setcounter{bottomnumber}{4}
+  \setcounter{totalnumber}{10}
+  \renewcommand{\textfraction}{0.15}
+  \renewcommand{\topfraction}{0.85}
+  \renewcommand{\bottomfraction}{0.70}
+  \renewcommand{\floatpagefraction}{0.66}
+}
+
+
+%---- misc ----------------------------------------------
+
 \IfNotClass{beamer}{
   \usepackage{paralist}
   \usepackage[hyphens]{url}
-  \usepackage{makeidx}                    % Indexerstellung
-  \usepackage{SciTePress}
+%   \usepackage{makeidx}                    % Indexerstellung
+  \usepackage{SciTePress} % INSTICC Class
   \usepackage{ftnright} % Fussnoten nur rechts
 }
 
@@ -99,14 +127,11 @@ caption=false,
   \usepackage{textpos}                    % Absolute Positionierung von Texten/Graphiken
 }
 
-\IfNotClass{beamer}{%
-  
-}
-% \usepackage{flushend} % balance columns use for IEEE
 
-\IfNotClass{beamer}{
+% balance columns use for IEEE/ACM
+\usepackage{flushend} 
+% \usepackage{balance} 
 
-}
 
 %---- hyperref --------------------------------------------
 \IfNotClass{beamer}{%
@@ -118,10 +143,9 @@ caption=false,
   hyperfootnotes=true,
   pagebackref=false,
   plainpages=false,
-  %   naturalnames=true,
-  %   pageanchor=true,
+  naturalnames=true,
+  pageanchor=true,
   bookmarks=true,
-  bookmarksnumbered=true,
   hidelinks,
   colorlinks=false,
   linkcolor=blue,
@@ -133,10 +157,13 @@ caption=false,
   pdfpagelabels=true,
   pdfencoding=auto,
   psdextra,
+  pdfstartview={FitH},
   unicode
   ]{hyperref}
 }
 
+% not usefull for pdflatex
+%\usepackage[hyphenbreaks]{breakurl}
 
 %---- Lists -------------------------------------------------
 \usepackage[
@@ -174,17 +201,30 @@ caption=false,
       \email{}
     }
   }{
-    \author{
-      \authorname{\thisauthor}
-      \affiliation{\thisaffiliation}
-      \email{\thisemail}
-    }}
-    \keywords{\thiskeywords}
-    
-    \abstract{\thisabstract}
+  \author{
+    \authorname{\thisauthor}
+    \affiliation{\thisaffiliation}
+    \email{\thisemail}
+  }}
+  \keywords{\thiskeywords}
+  
+  \abstract{\thisabstract}
 }
-%--- hyperref meta data -----------------------------------
 
+% \IfNotClass{beamer}{
+%   \title{\thistitle \subtitle{\thissubtitle}}
+%   
+%   \author{
+%     \authorname{\thisauthor}
+%     \affiliation{\thisaffiliation}
+%     \email{\thisemail}
+%   }
+%   \keywords{\thiskeywords}
+%   
+%   \abstract{\thisabstract}
+% }
+    
+%--- hyperref meta data -----------------------------------
 \ifthenelse{\equal{\anonymize}{true}}{
   \hypersetup{%
     pdfauthor={Undisclosed},
@@ -201,20 +241,6 @@ caption=false,
   }
 }
 
-%---- Floats ----------------------------------------------
-\graphicspath{{./graphics/}}
-
-
-\IfNotClass{beamer}{%
-  \renewcommand{\dbltopfraction}{0.7}
-  \renewcommand*{\topfraction}{0.85}
-  \renewcommand*{\bottomfraction}{.5}
-  
-  \setcounter{topnumber}{1}
-  \setcounter{dbltopnumber}{1}  
-  \setcounter{bottomnumber}{1}
-  \setcounter{totalnumber}{2}
-}
 
 
 %---- glossaries ------------------------------------------
@@ -339,26 +365,19 @@ caption=false,
 \makeatother
 
 %---- hyperref --------------------------------------------
+% Write Section instead of section for \ref
 \addto\extrasenglish{%
   \renewcommand*{\sectionautorefname}{Section}%
   \renewcommand*{\subsectionautorefname}{\sectionautorefname}%
   \renewcommand*{\subsubsectionautorefname}{\sectionautorefname}%
 }
 
-% \newcommand*{\definitionautorefname}{Definiton}
-% \newcommand*{\subfigureautorefname}{\figureautorefname}
-% \makeatletter
-% \let\@autoref=\autoref
-% \newcommand*{\autoref}[2][]{%
-%       \ifthenelse{\equal{#1}{}}{%
-%               \hyperref[{#2}]{\@autoref{#2}}%
-%       }{%
-%               \hyperref[{#2}]{\begin{NoHyper}\@autoref{#2}~\subref{#1}\end{NoHyper}}%
-%       }\xspace%
-% }
-% \makeatother
+\newcommand*{\definitionautorefname}{Definiton}
+\newcommand*{\subfigureautorefname}{\figureautorefname}
+
 
 %---- listings --------------------------------------------
+% add \lineref command for listing enviroment
 \newcommand*{\lineref}[2][]{%
 \ifthenelse{\equal{#1}{}}{%
 \hyperref[{#2}]{line~\ref*{#2}}%
@@ -401,12 +420,13 @@ caption=false,
   }
 }
 
-
+% tweak footnote line
 \renewcommand{\footnoterule}{%
   \kern -3pt
   \hrule width 1.5in
   \kern 2.6pt
 }
 
-\deffootnote{0em}{1.6em}{\textsuperscript{\thefootnotemark}}
+% superscript footnote number
+% \deffootnote{0em}{1.6em}{\textsuperscript{\thefootnotemark}}
 
