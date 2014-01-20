@@ -68,6 +68,7 @@ strict
 \usepackage[noadjust]{cite}
 
 %---- Floats - Tables, Figures ----------------------------
+
 \usepackage{graphicx}
 \usepackage{array}
 \usepackage{tabularx}
@@ -82,7 +83,7 @@ strict
 \floatstyle{plaintop}
 \restylefloat{table}
 % flafter forces float to be placed after referenced
-%\ usepackage{flafter} 
+% \usepackage{flafter} 
 
 %  fancy captions (use default for insticc)
 % \usepackage[small,hang]{caption}
@@ -93,7 +94,6 @@ strict
 \usepackage[
 caption=false,
 ]{subfig}
-
 
 \graphicspath{{./graphics/}}
 
@@ -229,14 +229,14 @@ caption=false,
   \hypersetup{%
     pdfauthor={Undisclosed},
     pdfkeywords={\thiskeywords},
-    pdftitle={\thistitle ~- \thissubtitle},
+    pdftitle={\thistitle \thissubtitle},
     pdfsubject={\thisconference}
   }
 }{
   \hypersetup{%
     pdfauthor={\thisauthor},
     pdfkeywords={\thiskeywords},
-    pdftitle={\thistitle ~- \thissubtitle},
+    pdftitle={\thistitle \thissubtitle},
     pdfsubject={\thisconference}
   }
 }
