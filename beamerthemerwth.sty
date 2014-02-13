@@ -8,6 +8,7 @@
 
 % \mode<presentation>
 \usepackage{pgfcomp-version-0-65}
+\usepackage[scaled]{helvet}
 % \usepackage{color}
 % \usepackage[absolute,overlay]{textpos}
 % \usepackage[T1]{fontenc}
@@ -17,14 +18,25 @@
 % Restyle the left margins for the itemize lists
 \setlength{\leftmargini}{5mm}
 
-% Define some colors. The colors are taken from the website's css sheets. 
+% Define some colors. The colors defined in the corporate identity manual
     \definecolor{RWTHblue}{RGB}{0,83,159}
     \definecolor{RWTHblack}{RGB}{0,0,0}
     \definecolor{RWTHwhite}{RGB}{255,255,255}
-    \definecolor{RWTHlightblue}{RGB}{127,170,208}
+    \definecolor{RWTHlightblue}{RGB}{142,186,226}
     \definecolor{RWTHgrey}{RGB}{51,51,51}
     \definecolor{RWTHlightgrey}{RGB}{204,204,204}
     \definecolor{RWTHsuperlightgrey}{RGB}{247,247,247}
+    \definecolor{RWTHpetrol}{RGB}{0,97,101}
+    \definecolor{RWTHteal}{RGB}{0,152,161}
+    \definecolor{RWTHmaygreen}{RGB}{189,205,0}
+    \definecolor{RWTHgreen}{RGB}{87,171,39}
+    \definecolor{RWTHyellow}{RGB}{255,237,0}
+    \definecolor{RWTHorange}{RGB}{246,168,0}
+    \definecolor{RWTHmagenta}{RGB}{227,0,102}
+    \definecolor{RWTHred}{RGB}{204,7,30}
+    \definecolor{RWTHbordeaux}{RGB}{161,16,53}
+    \definecolor{RWTHviolet}{RGB}{97,33,88}
+    \definecolor{RWTHpurple}{RGB}{122,111,172}
 
 % Assign the colors to the differen pars
     % Title
@@ -201,25 +213,25 @@
 % Style the frame footer
 \setbeamertemplate{footline}{
     % Use the predefined command
-    \RWTHfooter{\thisconference \ | \thispresenter  \ | \thistitle \ | \presentationdate \hfill \insertframenumber/\inserttotalframenumber}
+    \RWTHfooter{\thisconference \ | \thispresenter  \ | \thistitle \ | \presentationdate \hfill \insertframenumber \ /  \inserttotalframenumber}
 }
 
 % Style the title page
 \setbeamertemplate{title page}{
   \RWTHheader{\thisconferencelong}{\Large{\thisconference}}
-  \RWTHfooter{\hfill \insertframenumber/\inserttotalframenumber}
+  \RWTHfooter{\hfill \insertframenumber \ /  \inserttotalframenumber}
     
     % The presentation titlepage
     \begin{center}
-     \textcolor{RWTHgrey}{
-      \Large{\thistitle \thissubtitle}\\
-      \bigskip
-      \small{\thisauthor}\\
-      \smallskip
-      \small{\thisaffiliation}\\
-      \bigskip
-      \normalsize{\presentationdate}
-     }
+        \textcolor{RWTHgrey}{
+          \Large{\thistitle} \\
+          \bigskip
+          \small{\thisauthor} \\
+          \smallskip
+          \small{\thisaffiliation}\\
+          \bigskip
+          \normalsize{\presentationdate}
+        }
     \end{center}
 
     
