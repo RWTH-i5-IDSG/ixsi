@@ -35,4 +35,7 @@ talk/*.pdf
 *.xdy
 texmf
 .DS_Store
+*.idx
+*.ilg
+*.ind
 
