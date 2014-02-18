@@ -13,9 +13,9 @@
 \usepackage{ragged2e}
 \usepackage{epsfig}
 % \usepackage{subfigure}
+
 \usepackage{calc}
 \usepackage{pslatex}
-\usepackage{apalike}
 \usepackage{scrextend}
 
 %---- Coding, Language, Fonts, and Symbols ----------------
@@ -65,7 +65,7 @@ strict
 % \usepackage{enumitem}
 % within paragraphs
 \usepackage[svgnames]{xcolor}
-\usepackage[noadjust]{cite}
+
 
 %---- Floats - Tables, Figures ----------------------------
 
@@ -113,11 +113,13 @@ caption=false,
 %---- misc ----------------------------------------------
 
 \IfNotClass{beamer}{
+  \usepackage[noadjust]{cite}
   \usepackage{paralist}
   \usepackage[hyphens]{url}
   \usepackage{makeidx}                    % Indexerstellung
   \makeindex
   \usepackage{SciTePress} % INSTICC Class
+  
   \usepackage{ftnright} % Fussnoten nur rechts
 }
 
@@ -127,10 +129,10 @@ caption=false,
   \usepackage{pgfpages}                   % Ermöglicht eine Two-Screen Präsentation
   \usepackage{textpos}                    % Absolute Positionierung von Texten/Graphiken
 }
-
+\usepackage{apalike}
 
 % balance columns use for IEEE/ACM
-\usepackage{flushend} 
+% \usepackage{flushend} 
 % \usepackage{balance} 
 
 
@@ -161,12 +163,11 @@ caption=false,
   pdfstartview={FitH},
   unicode
   ]{hyperref}
-}
 
 % not usefull for pdflatex
 %\usepackage[hyphenbreaks]{breakurl}
 
-%---- Lists -------------------------------------------------
+%---- glossaries ------------------------------------------
 \usepackage[
   acronym,
   shortcuts,
@@ -175,6 +176,10 @@ caption=false,
   nowarn,
   nonumberlist
 ]{glossaries}
+\renewcommand*{\glspostdescription}{}
+
+
+} %if Until here
 
 %----------------------------------------------------------
 %---- Settings --------------------------------------------
@@ -220,8 +225,6 @@ caption=false,
 
 
 
-%---- glossaries ------------------------------------------
-\renewcommand*{\glspostdescription}{}
 
 %---- listings --------------------------------------------
 \lstset{%
