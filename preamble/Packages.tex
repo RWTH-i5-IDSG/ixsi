@@ -13,7 +13,7 @@
 \usepackage{ragged2e}
 \usepackage{epsfig}
 % \usepackage{subfigure}
-
+\usepackage{datetime}
 \usepackage{calc}
 \usepackage{pslatex}
 
@@ -359,8 +359,14 @@ caption=false,
 % ------ Fussnoten
 \pagestyle{scrheadings} 
 
-\refoot{\thispublishers ~- \textbf{\thistitle}}
-\lofoot{Stand \thisdate ~- Version \thisversion}
+% \foot{\thispublishers ~- \textbf{\thistitleshort}}
+% \lofoot{Stand \thisdate ~ \thistime ~- Version \thisversion}
+
+\ifoot{\thispublishers ~- \textbf{\thistitleshort} \\
+Stand \thisdate ~ \thistime ~- Version \thisversion
+}
+
+
 
 \renewcommand*{\chapterpagestyle}{scrheadings}
 % ------
