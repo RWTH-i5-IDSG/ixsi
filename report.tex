@@ -19,12 +19,12 @@
 \input{preamble/Settings}
 \input{preamble/Packages}
 
+
+
+\loadglsentries[\acronymtype]{preamble/Acronyms}
+
 \makeglossaries                                 % Make the glossary
 \makeindex                                      % Make the index
-
-\loadglsentries{preamble/Acronyms}
-
-
 
 \begin{document}
 
@@ -53,11 +53,10 @@
 \appendix
 \input{content/X-Appendix.tex}
 
-\addchap{Glossar}                                      
-
+% \addchap{Index}                                      
 \setglossarysection{section}
+\printglossary[type=\acronymtype,style=long]
 
-\printglossary[type=\acronymtype]
 \printindex
 
 \bibliographystyle{plain}

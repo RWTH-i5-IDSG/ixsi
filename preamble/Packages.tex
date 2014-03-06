@@ -115,7 +115,7 @@ caption=false,
   \usepackage[noadjust]{cite}
   \usepackage{paralist}
   \usepackage[hyphens]{url}
-  \usepackage{makeidx}                    % Indexerstellung 
+  \usepackage{imakeidx}                    % Indexerstellung 
   \usepackage{ftnright} % Fussnoten nur rechts
 }
 
@@ -139,12 +139,12 @@ caption=false,
   breaklinks=true,
   linktocpage=true,
   hyperfootnotes=true,
-  pagebackref=false,
+%   pagebackref=true,
   plainpages=false,
   naturalnames=true,
   pageanchor=true,
   bookmarks=true,
-  hidelinks,
+%   hidelinks,
   colorlinks=false,
   linkcolor=blue,
   urlcolor=blue,
@@ -168,10 +168,9 @@ caption=false,
   shortcuts,
   style=super,
   description,
-  nowarn,
   nonumberlist
 ]{glossaries}
-\renewcommand*{\glspostdescription}{}
+% \renewcommand*{\glspostdescription}{}
 
 
 } %if Until here
