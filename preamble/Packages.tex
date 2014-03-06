@@ -16,7 +16,6 @@
 
 \usepackage{calc}
 \usepackage{pslatex}
-\usepackage{scrextend}
 
 %---- Coding, Language, Fonts, and Symbols ----------------
 \usepackage{babel}
@@ -89,7 +88,7 @@ strict
 % \usepackage[small,hang]{caption}
 
 %table caption on top
-\usepackage[tableposition=top,small]{caption}
+\usepackage[small]{caption}
 
 \usepackage[
 caption=false,
@@ -116,10 +115,7 @@ caption=false,
   \usepackage[noadjust]{cite}
   \usepackage{paralist}
   \usepackage[hyphens]{url}
-  \usepackage{makeidx}                    % Indexerstellung
-  \makeindex
-  \usepackage{SciTePress} % INSTICC Class
-  
+  \usepackage{makeidx}                    % Indexerstellung 
   \usepackage{ftnright} % Fussnoten nur rechts
 }
 
@@ -129,7 +125,6 @@ caption=false,
   \usepackage{pgfpages}                   % Ermöglicht eine Two-Screen Präsentation
   \usepackage{textpos}                    % Absolute Positionierung von Texten/Graphiken
 }
-\usepackage{apalike}
 
 % balance columns use for IEEE/ACM
 % \usepackage{flushend} 
@@ -185,43 +180,15 @@ caption=false,
 %---- Settings --------------------------------------------
 %----------------------------------------------------------
 
-\IfNotClass{beamer}{ % SciPress
-  \title{\thistitle \subtitle{\thissubtitle}}
-  
-  \ifthenelse{\equal{\anonymize}{true}}{
-    \author{
-      \authorname{Undisclosed Authors}
-      \affiliation{Undisclosed Affiliations}
-      \email{}
-    }
-  }{
-  \author{
-    \authorname{\thisauthor}
-    \affiliation{\thisaffiliation}
-    \email{\thisemail}
-  }}
-  \keywords{\thiskeywords}
-  
-  \abstract{\thisabstract}
-}
 
     
 %--- hyperref meta data -----------------------------------
-\ifthenelse{\equal{\anonymize}{true}}{
-  \hypersetup{%
-    pdfauthor={Undisclosed},
-    pdfkeywords={\thiskeywords},
-    pdftitle={\thistitle \thissubtitle},
-    pdfsubject={\thisconference}
-  }
-}{
-  \hypersetup{%
-    pdfauthor={\thisauthor},
-    pdfkeywords={\thiskeywords},
-    pdftitle={\thistitle \thissubtitle},
-    pdfsubject={\thisconference}
-  }
+\hypersetup{%
+%   pdfauthor={\author},
+% %   pdfkeywords={\thiskeywords},
+%   pdftitle={\title},
 }
+
 
 
 
@@ -385,3 +352,16 @@ caption=false,
 % superscript footnote number
 % \deffootnote{0em}{1.6em}{\textsuperscript{\thefootnotemark}}
 
+\usepackage{scrpage2}
+
+
+\setcounter{tocdepth}{2} % nur 2 Gliederungsebenen im Inhaltsverzeichnis
+
+% ------ Fussnoten
+\pagestyle{scrheadings} 
+
+\refoot{\thispublishers ~- \textbf{\thistitle}}
+\lofoot{Stand \thisdate ~- Version \thisversion}
+
+\renewcommand*{\chapterpagestyle}{scrheadings}
+% ------

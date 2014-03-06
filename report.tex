@@ -1,0 +1,70 @@
+\documentclass[a4paper,
+  DIV=15, % Faktor Nutzefläche vs. Rand (zwischen 6 und 15)
+  BCOR=12mm, % Bindekorrekturfaktor für Klebebindung
+  twoside,
+  german,
+  titlepage=false,
+  footsepline=true,
+  toc=bib,indent,
+  fontsize=12pt % Standardschriftgröße, default = 11pt
+]{scrbook}
+\usepackage[utf8]{inputenc}
+
+
+%  metadata in Settings.tex
+
+
+
+% load settings
+\input{preamble/Settings}
+\input{preamble/Packages}
+
+\makeglossaries                                 % Make the glossary
+\makeindex                                      % Make the index
+
+\loadglsentries{preamble/Acronyms}
+
+
+
+\begin{document}
+
+\input{content/0-Titlepage.tex}
+
+\cleardoublepage
+
+
+\tableofcontents
+
+% \listoffigures 
+
+
+
+\cleardoublepage
+
+\input{content/1-Introduction.tex}
+
+% \input{content/2-Roles.tex}
+% \input{content/3-Services.tex}
+% \input{content/4-Datamodels.tex}
+% \input{content/5-Technical.tex}
+% \input{content/6-Datatypes.tex}
+% \input{content/7-Operations.tex}
+
+\appendix
+\input{content/X-Appendix.tex}
+
+\addchap{Glossar}                                      
+
+\setglossarysection{section}
+
+\printglossary[type=\acronymtype]
+\printindex
+
+\bibliographystyle{plain}
+{\small
+\bibliography{literature/Literature}}
+
+
+\vfill
+\end{document}
+
