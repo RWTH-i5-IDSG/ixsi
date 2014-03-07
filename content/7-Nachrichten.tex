@@ -1,0 +1,245 @@
+\chapter{Nachrichten}
+\label{sec:Nachrichten}
+Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf vier Nachrichtengrundtypen: Handshake, Request, Response und Update. Vom Typ Handshake sind nur die Nachrichten, die während der Handshake-Interaktion auf Dienstebene 0 ausgetauscht werden. Alle Nachrichten vom RIS an das FVS stellen Anfragen dar und sind daher vom Typ Request. Der Typ Response wird für direkte Antworten des FVS auf Anfragen des RIS verwendet. Um eine Zuordnung der Response-Nachrichten zu den zugehörigen Request-Nachrichten zu erlauben, wird jede Request-Nachrichte mit einer eindeutigen Transaction-ID markiert, die in der zugehörigen Response-Nachricht wieder mitgegeben werden muss. Eine Response-Nachricht kann anstelle ihres normalen Inhalts auch einen Fehler enthalten. Der letzte Nachrichtentyp „Update“ findet in den Fällen Verwendung, wenn das RIS fortlaufende Aktualisierungen vom FVS angefordert hat. Dazu wird dem RIS in der Antwort auf die Anfrage der fortlaufenden Aktualisierungen eine Abo-ID mitgeteilt, die in jeder zugehörigen Update-Nachricht mitgegeben wird.
+
+\input{xml/generated/messages.tex}
+
+\section{Fehler}
+Die Nachrichten des Nachrichtentyps Response können alternativ zu ihrem sonstigen Inhalt einen Fehler enthalten. Ein Fehler besteht aus eine Fehlernummer, die den Typ des Fehlers definiert, einem kurzen und einem langen Fehlertext.
+
+\input{xml/generated/error.tex}
+
+\subsection{Fehlernummern}
+Die Fehlernummern stellen die unterschiedlichen Typen von Fehlern dar und sind dreistellig. Die Fehlertypen spalten sich in zwei Gruppen. Kritische Fehler treten nur auf, wenn sich einer der beiden Interaktionspartner nicht Protokollkonform verhalten hat. Die Fehlernummer kritischer Fehler liegt zwischen 100 und 199. Die Nummern nicht kritischer Fehler liegen zwischen 200 und 299. Das FVS bricht, nachdem ein kritischer Fehler übertragen wurde, immer die entsprechende Verbindung zum RIS ab. Bei einem nicht kritischen Fehler ist nur die entsprechende Interaktion fehlgeschlagen und wird abgebrochen. Die Verbindung wird dadurch nicht beeinflusst und steht für weitere Interaktionen zur Verfügung.
+
+110	Allgemeiner Autorisierungsfehler: Das RIS ist nicht autorisiert eine Verbindung zum FVS aufzubauen.
+111	Verbindungslimit erreicht: Das RIS hält bereits zu viele geöffnete Verbindungen zum FVS.
+112	IP nicht zugelassen: Die IP des RIS, unter der es versucht eine Verbindung zum FVS aufzubauen, ist nicht zugelassen.
+120	Nicht Verstanden: Die Anfrage des RIS konnte nicht verarbeitet werden, da sie keine korrekte Form hatte.
+130	Interner Serverfehler: Bei der Verarbeitung der Anfrage ist im FVS ein Fehler aufgetreten.
+140, 240	Parameter Fehlerhaft: Die Parameter der Nachricht waren nicht im akzeptablen Bereich.
+241	Versions-ID ungültig: Die Versions-ID der Anfrage konnte keiner existierenden Liste zugeordnet werden.
+250	Benutzerauthentifizierung fehlgeschlagen: Der Benutzer konnte aus unbekannten Gründen nicht authentifiziert werden.
+251	Benutzerauthentifizierung fehlgeschlagen (ungültige Daten): Der Benutzer konnte aufgrund ungültiger Authentifizierungsdaten nicht authentifiziert werden.
+252	Benutzerauthentifizierung fehlgeschlagen (gesperrt): Der Benutzer konnte nicht authentifiziert werden, da sein Account gesperrt ist.
+260	Benutzer-Token abgelaufen: Die Aktion konnte nicht durchgeführt werden, da das übermittelte Benutzer-Token nicht mehr gültig ist.
+271	Stornierung fehlgeschlagen: Die Stornierung konnte nicht durchgeführt werden.
+272	Buchung fehlgeschlagen: Die Buchung konnte nicht durchgeführt werden.
+
+\subsection{XML Beispiel}
+TODO
+
+\section{Ebene 0 -- Handshake}
+Der Handshake besteht aus fünf Nachrichtentypen. Diese sind alle abgeleitet vom abstrakten Nachrichtentyp Handshake.
+
+\subsection{Liste der unterstützten Protokollversionen}
+Nach dem Verbindungsaufbau durch das RIS sendet das FVS eine Nachricht vom Typ ProtocolVersionListHandshake mit der Bezeichnung „protocol-version-list-handshake“ mit einer Liste der von Protokollversionen. Diese Liste sollte alle Versionen des Protokolls enthalten mit denen mit dem FVS kommuniziert werden kann. Anstelle der Liste kann ggf. ein Autorisierungsfehler (110, 111, 112) oder ein interner Serverfehler (130) in der Nachricht enthalten sein.
+
+\input{xml/generated/protocol-version-list-handshake.tex}
+
+\subsection{Auswahl einer Protokollversion}
+Das RIS wählt aus der erhaltenen Protokollversionsliste eine Protokollversion aus und sendet diese in einer Nachricht vom Typ ProtocolVersionSelectHandshake mit der Bezeichnung „protocol-version-select-handshake“ an das FVS.
+
+\input{xml/generated/protocol-version-select-handshake.tex}
+
+\subsection{Maximale unterstützte Dienstebene}
+Nach erfolgter Auswahl einer Protokollversion, sendet das FVS eine Nachricht vom Typ ProtocolLevelMaxHandshake mit der Bezeichnung „protocol-level-max-handshake“ mit der maximalen vom FVS angebotene Dienstebene an das RIS. Alternativ kann die Nachricht ggf. auch einen Parameterfehler (140), Nicht-Verstanden-Fehler (120) oder internen Serverfehler (130) enthalten.
+
+\input{xml/generated/protocol-level-max-handshake.tex}
+
+\subsection{Auswahl einer Dienstebene}
+Das RIS wählt eine Dienstebene gleich oder niedriger als die vom FVS angebotene maximale Dienstebene. Diese wird in einer Nachricht vom Typ ProtocolLevelSelectHandshake mit der Bezeichnung „protocol-level-select-handshake“ an das FVS gesendet.
+
+\input{xml/generated/protocol-level-select-handshake.tex}
+
+\subsection{Bestätigung}
+Um den Handshake abzuschließen, sendet das FVS nach erhalt der Nachricht zur Auswahl der Dienstebene eine Nachricht vom Typ FinishHandshake mit der Bezeichnung „finish-handshake“ zur Bestätigung der Auswahl. Diese Nachricht kann ggf. anstelle der Bestätigung auch einen Parameterfehler (140), Nicht-Verstanden-Fehler (120) oder internen Serverfehler (130) enthalten. 
+
+\input{xml/generated/finish-handshake.tex}
+
+\subsection{XML Beispiel}
+TODO
+
+\section{Ebene 0 -- Abfrage der Betreiber}
+Das RIS kann eine Liste der Betreiber vom FVS abfragen. Dazu sendet zunächst das RIS eine Nachricht vom Typ OperatorListRequest mit der Bezeichnung „operator-list-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ OperatorListResponse mit der Bezeichnung „operator-list-response“.
+
+\input{xml/generated/operator-list-messages.tex}
+
+\subsection{Anfrage Betreiberliste}
+Der Nachrichtentyp OperatorListRequest wird zur Anfrage von Betreiberlisten verwendet. Nachrichten dieses Typs können die Versions-ID einer aktuell bereits vorhandenen Betreiberliste enthalten.
+
+\input{xml/generated/operator-list-request.tex}
+
+\subsection{Antwort Betreiberliste}
+Der Nachrichtentyp OperatorListResponse dient zur Übermittlung einer Betreiberliste vom FVS zu RIS. Er enthält eine Betreiberliste und eine zugehörige Versions-ID. Alternativ kann eine Nachricht dieses Typs auch ein „no-change“ Element enthalten, falls sich die aktuelle Betreiberliste nicht von der Liste mit der in der Anfrage gegebenen Versions-ID  unterscheidet. Falls ein Fehler aufgetreten ist, kann die Nachricht auch einen Nicht-Verstanden-Fehler (120), internen Serverfehler (130) oder Parameterfehler (240, 241) enthalten.
+
+\input{xml/generated/operator-list-response.tex}
+
+\subsection{XML Beispiel}
+TODO
+
+\section{Ebene 0 -- Abfrage der Stationen}
+Das RIS kann eine Liste der Stationen vom FVS abfragen. Dazu sendet zunächst das RIS eine Nachricht vom Typ StationListRequest mit der Bezeichnung „station-list-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ StationListResponse mit der Bezeichnung „station-list-response“.
+
+\input{xml/generated/station-list-messages.tex}
+
+\subsection{Anfrage Stationsliste}
+Der Nachrichtentyp StationListRequest wird zur Anfrage von Stationslisten verwendet. Nachrichten dieses Typs müssen eine Betreiber-ID enthalten. Diese legt den Betreiber fest, dessen Stationen abgefragt werden sollen. Die Nachrichten können die Versions-ID einer aktuell bereits vorhandenen Stationsliste enthalten. Des weiteren können die Nachrichten einen Postleitzahlenbereich enthalten, der für eine Einschränkung der Stationsliste genutzt werden soll.
+
+\input{xml/generated/station-list-request.tex}
+
+\subsection{Antwort Stationsliste}
+Der Nachrichtentyp StationListResponse dient zur Übermittlung einer Stationsliste vom FVS zu RIS. Er enthält eine Stationsliste und eine zugehörige Versions-ID. Alternativ kann eine Nachricht dieses Typs auch ein „no-change“ Element enthalten, falls sich die aktuelle Stationsliste nicht von der Liste mit der in der Anfrage gegebenen Versions-ID  unterscheidet. Die Liste muss genau die Stationen des in der Anfrage gegebenen Betreibers und ggf. die im gegebenen PLZ-Bereich liegen enthalten. Falls ein Fehler aufgetreten ist, kann die Nachricht auch einen Nicht-Verstanden-Fehler (120), internen Serverfehler (130) oder Parameterfehler (240, 241) enthalten.
+
+\input{xml/generated/station-list-response.tex}
+
+\subsection{XML Beispiel}
+TODO
+
+\section{Ebene 1 -- Abfrage der Buchungsziele}
+Das RIS kann eine Liste der Buchungsziele vom FVS abfragen. Diese wird nach der Übertragung des aktuellen Standes durch Update-Nachrichten aktualisiert. Dazu sendet zunächst das RIS eine Nachricht vom Typ ReservationTargetRequest mit der Bezeichnung „reservation-target-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ ReservationTargetResponse mit der Bezeichnung „reservation-target-response“. Aktualisierungen sendet das FVS als Nachrichten vom Typ ReservationTargetUpdate mit der Bezeichnung „reservation-target-update“. Ein bestehendes Aktualisierungsabonnement kann durch das RIS mit einer Nachricht vom Typ ReservationTargetUpdateCancelRequest mit der Bezeichnung „reservation-target-update-cancel-request“. Diese wird durch eine Nachricht vom Typ ReservationTargetUpdateCancelResponse mit der Bezeichnung „reservation-target-update-cancel-response“ vom FVS bestätigt.
+
+\input{xml/generated/reservation-target-messages.tex}
+
+\subsection{Anfrage Buchungsziele}
+Buchungsziele werden durch eine Nachricht vom Typ ReservationTargetRequest angefordert. Diese muss eine Betreiber-ID enthalten. Diese schränkt die angefragten Buchungsziele auf Buchungsziele dieses Betreibers ein. Optional kann die Nachricht entweder einen Postleitzahlenbereich, ein GPS-Polygon oder eine Stations-ID enthalten. Diese dienen zur Filterung der zu übertragenden Buchungsziele.
+
+\input{xml/generated/reservation-target-request.tex}
+
+\subsection{Antwort Buchungszielliste}
+Nachrichten vom Typ ReservationTargetResponse enthalten eine Buchungsliste und eine Abo-ID, die in folgenden zugehörigen Update-Nachrichten zur Referenzierung verwendet wird. Falls ein Fehler aufgetreten ist, kann die Nachricht auch einen Nicht-Verstanden-Fehler (120), internen Serverfehler (130) oder Parameterfehler (240, 241) enthalten.
+
+\input{xml/generated/reservation-target-response.tex}
+
+\subsection{Aktualisierung eines Buchungsziels}
+Eine Aktualisierung der Buchungszielliste erfolgt durch Nachrichten vom Typ ReservationTargetUpdate. Wenn sich ein Buchungsziel geändert hat, enthält die Nachricht die veränderte Version des Buchungsziels. Die Buchungsziel-ID darf sich dabei nicht ändern. Wenn ein neues Buchungsziel hinzugekommen ist, enthält die Nachricht dieses Buchungsziel. Die Buchungsziel-ID des neuen Buchungsziels muss eindeutig über allen beim RIS noch vorliegenden Buchungszielen sein. Wenn ein Buchungsziel entfernt wurde, enthält die Nachricht nur eine Referenz auf das Buchungsziel in Form der Buchungsziel-ID. Der Inhalt des entfernten Buchungsziels wird nicht erneut übertragen.
+
+\input{xml/generated/reservation-target-update.tex}
+
+\subsection{Kündigung eines Buchungs-Abos}
+Zur Kündigung eines Buchungszielabonnements wird vom RIS eine Nachricht vom Typ ReservationTargetUpdateCancelRequest verwendet. Diese enthält eine Referenz auf das Abo in Form einer Abo-ID.
+
+\input{xml/generated/reservation-target-update-cancel-request.tex}
+
+\subsection{Bestätigung der Kündigung}
+Eine Nachricht zur Kündigung eines Buchungszielabonnements wird vom FVS mit einer Nachricht vom Typ ReservationTargetUpdateCancelResponse bestätigt. Die Nachricht kann anstelle einer Bestätigung auch einen Nicht-Verstanden-Fehler (120), internen Serverfehler (130) oder Parameterfehler (240) enthalten.
+
+\input{xml/generated/reservation-target-update-cancel-response.tex}
+
+\subsection{XML Beispiel}
+TODO
+
+\section{Ebene 2 -- Abfrage der Tarifliste}
+Das RIS kann eine Liste der Tarife vom FVS abfragen. Dazu sendet zunächst das RIS eine Nachricht vom Typ TariffListRequest mit der Bezeichnung „tariff-list-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ TariffListResponse mit der Bezeichnung „tariff-list-response“.
+
+\input{xml/generated/tariff-list-messages.tex}
+
+\subsection{Anfrage Tarifliste}
+Der Nachrichtentyp TariffListRequest wird zur Anfrage von Tariflisten verwendet. Nachrichten dieses Typs müssen eine Betreiber-ID enthalten. Diese legt den Betreiber fest, dessen Tarife abgefragt werden sollen. Die Nachrichten können die Versions-ID einer aktuell bereits vorhandenen Tarifliste enthalten.
+
+\input{xml/generated/tariff-list-request.tex}
+
+\subsection{Antwort Tarifliste}
+Der Nachrichtentyp TariffListResponse dient zur Übermittlung einer Tarifliste vom FVS zu RIS. Er enthält eine Tarifliste und eine zugehörige Versions-ID. Alternativ kann eine Nachricht dieses Typs auch ein „no-change“ Element enthalten, falls sich die aktuelle Tarifliste nicht von der Liste mit der in der Anfrage gegebenen Versions-ID  unterscheidet. Die Liste muss genau die Tarife des in der Anfrage gegebenen Betreibers enthalten. Falls ein Fehler aufgetreten ist, kann die Nachricht auch einen Nicht-Verstanden-Fehler (120), internen Serverfehler (130) oder Parameterfehler (240, 241) enthalten.
+
+\input{xml/generated/tariff-list-response.tex}
+
+\subsection{XML Beispiel}
+TODO
+
+\section{Ebene 3 -- Authentifizierung eines Benutzers}
+Das RIS kann die Authentifizierung eines Benutzers beim FVS anfordern. Dazu sendet zunächst das RIS eine Nachricht vom Typ AuthenticationRequest mit der Bezeichnung „authentication-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ AuthenticationResponse mit der Bezeichnung „authentication-response“.
+
+\input{xml/generated/authentication-messages.tex}
+
+\subsection{Anfrage Benutzerauthentifizierung}
+Eine Nachricht vom Typ AuthenticationRequest wird zur Anforderung der Authentifizierung eines Benutzers verwendet. Die Nachricht enthält eine Betreiber-ID, ein Identifikationsmerkmal des Benutzers (z.B. Name oder Email-Adresse) und ein Authorisierungsmerkmal des Benutzers (z.B. Passwort).
+
+\input{xml/generated/authentication-request.tex}
+
+\subsection{Antwort Benutzerinformationen}
+Eine Nachricht vom Typ AuthenticationResponse dient zur Übermittlung von Benutzerinformationen und Authentifizierungs-Token vom FVS zum RIS. Sie enthält einen Benutzerdatensatz. Falls ein Fehler aufgetreten ist, kann die Nachricht auch einen Nicht-Verstanden-Fehler (120), internen Serverfehler (130), Parameterfehler (240) oder Benutzerauthentifizierungsfehler (250, 251, 252) enthalten.
+
+\input{xml/generated/authentication-response.tex}
+
+\subsection{XML Beispiel}
+TODO
+
+\section{Ebene 3 -- Abfrage einer Preisauskunft}
+Das RIS kann eine Preisauskunft vom FVS abfragen. Dazu sendet zunächst das RIS eine Nachricht vom Typ PriceinfoRequest mit der Bezeichnung „price-info-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ PriceInfoResponse mit der Bezeichnung „price-info-response“.
+
+\input{xml/generated/price-info-messages.tex}
+
+\subsection{Anfrage Preis}
+Eine Nachricht vom Typ PriceInfoRequest wird zur Anforderung einer Preisinformation verwendet. Die Nachricht enthält:
+\begin{itemize}
+\item eine Betreiber-ID,
+\item eine User-ID als Referenz auf den Benutzer, für den die Preisauskunft gelten soll,
+\item eine Buchungsziel-ID als Referenz auf das Buchungsziel, auf das sich die Preisauskunft beziehen soll,
+\item eine Tarif-ID als Referenz auf den Tarif, auf den sich die Preisauskunft beziehen soll,
+\item einen Zeitbereich, für den das Fahrzeug ausgeliehen werden soll,
+\item eine Distanz, die mit dem Fahrzeug zurückgelegt werden soll
+\item und ein optionales Ziel, an dem das Fahrzeug zurückgegeben werden soll.
+\end{itemize}
+
+\input{xml/generated/price-info-request.tex}
+
+\subsection{Antwort Preisauskunft}
+Eine Nachricht vom Typ PriceInfoResponse dient zur Übermittlung von Preisinformationen vom FVS zum RIS. Sie enthält einen Preisinformationsdatensatz bestehend aus Kostenbeträgen für die Anmietung des Fahrzeugs, die zurückgelegte Distanz, die Mietzeit und Sonstiges. Falls ein Fehler aufgetreten ist, kann die Nachricht auch einen Nicht-Verstanden-Fehler (120), internen Serverfehler (130) oder Parameterfehler (240) enthalten.
+
+\input{xml/generated/price-info-response.tex}
+
+\subsection{XML Beispiel}
+TODO
+
+\section{Ebene 3 -- Anfrage zur genauen Verfügbarkeit}
+Das RIS kann eine Verfügbarkeitsauskunft vom FVS abfragen. Dazu sendet zunächst das RIS eine Nachricht vom Typ AvailabilityRequest mit der Bezeichnung „availability-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ AvailabilityResponse mit der Bezeichnung „availability-response“.
+
+\input{xml/generated/availability-messages.tex}
+
+\subsection{Anfrage Verfügbarkeit}
+Eine Nachricht vom Typ AvailabilityRequest wird zur Anforderung einer Verfügbarkeitsauskunft verwendet. Die Nachricht enthält:
+\begin{itemize}
+\item eine Betreiber-ID,
+\item eine User-ID als Referenz auf den Benutzer, für den die Verfügbarkeitsauskunft gelten soll,
+\item eine Buchungsziel-ID als Referenz auf das Buchungsziel, auf das sich die Preisauskunft beziehen soll,
+\item einen Zeitbereich, für den das Fahrzeug ausgeliehen werden soll
+\item und ein optionales Ziel, an dem das Fahrzeug zurückgegeben werden soll.
+\end{itemize}
+
+\input{xml/generated/availability-request.tex}
+
+\subsection{Antwort Verfügbarkeit}
+Eine Nachricht vom Typ AvailabilityResponse dient zur Übermittlung von Verfügbarkeitsinformationen vom FVS zum RIS. Sie enthält einen Verfügbarkeitsinformationsdatensatz bestehend aus einem Zeitbereich, für den ein Fahrzeug mit den bei der Anfrage angegebenen Parametern verfügbar ist, und einer Liste von Tarif-IDs, welche die möglichen Tarife für Buchungen darstellen. Der Zeitbereich muss mindestens den Zeitbereich, der bei der Anfrage angegeben wurde umfassen. Falls ein Fehler aufgetreten ist, kann die Nachricht auch einen Nicht-Verstanden-Fehler (120), internen Serverfehler (130) oder Parameterfehler (240) enthalten.
+
+\input{xml/generated/availability-response.tex}
+
+\subsection{XML Beispiel}
+TODO
+
+\section{Ebene 3 -- Auftrag zur Buchung}
+Das RIS kann eine Buchung beim FVS durchführen. Dazu sendet zunächst das RIS eine Nachricht vom Typ ReservationRequest mit der Bezeichnung „reservation-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ ReservationResponse mit der Bezeichnung „reservation-response“.
+
+\input{xml/generated/reservation-messages.tex}
+
+\subsection{Anfrage Buchung}
+Eine Nachricht vom Typ ReservationRequest wird zur Anfrage für die Durchführung einer Buchung verwendet. Die Nachricht enthält:
+\begin{itemize}
+\item eine Betreiber-ID,
+\item eine User-ID als Referenz auf den Benutzer, für den die Buchung durchgeführt werden soll,
+\item ein Authentifizierungs-Token, zur Authentifizierung des Benutzers,
+\item eine Tarif-ID als Referenz auf den Tarif, der für die Buchung verwendet warden soll,
+\item eine Buchungsziel-ID als Referenz auf das Buchungsziel, auf das sich die Buchung beziehen soll,
+\item einen Zeitbereich, für den das Fahrzeug ausgeliehen werden soll
+\item und ein optionales Ziel, an dem das Fahrzeug zurückgegeben werden soll.
+\end{itemize}
+
+\input{xml/generated/reservation-request.tex}
+
+\subsection{Antwort Buchung}
+Eine Nachricht vom Typ ReservationResponse dient zur Bestätigung der Durchführung einer Buchung und zur einmaligen Übermittlung der Buchungsinformationen vom FVS zum RIS. Sie enthält einen Buchungsinformationsdatensatz. Die Informationen des Datensatzes müssen den Informationen die in der zugehörigen Anfrage angegeben wurden entsprechen. Falls ein Fehler aufgetreten ist, kann die Nachricht auch einen Nicht-Verstanden-Fehler (120), internen Serverfehler (130), Parameterfehler (240), Benutzer-Token-Fehler (260) oder Buchungsfehler (271) enthalten.
+
+\input{xml/generated/reservation-response.tex}
+
+\subsection{XML Beispiel}
+TODO

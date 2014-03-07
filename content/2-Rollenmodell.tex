@@ -1,0 +1,77 @@
+\chapter{Rollenmodell}
+\label{sec:Rollenmodell}
+
+Das Rollenmodell beschreibt die vorkommenden Rollen des Integrationsszenarios eines Fahrzeugverleihsystems (hier CarSharing CS) in ein Reiseinformationssystem.
+
+\section{Reiseinformationssystem}
+
+\subsection{Beschreibung}
+Das Reiseinformationssystem (RIS) stellt ein Informationssystem für Reiseauskünfte dar und umfasst die Zusammenführung der Reiseangebote, die Konstruktion von Reiseketten, die Berechnung des Gesamtpreises für eine Reisekette, die Reservierung der Mobilitätsangebote für die einzelnen Elemente einer Reisekette, die Aufbereitung der Daten für die Darstellung in Benutzerschnittstellen und abschließend die Darstellung der Informationen.
+
+\section{Anwendungsfälle}
+\begin{itemize}
+\item Kunde fragt mit Suchbedingungen und Präferenzen Auskünfte über Mobilitätsangebote beim RIS an. Suchbedingungen und Präferenzen sind beispielsweise Start- und Zielort, Abfahrt- und Ankunftszeitpunkt, zu berücksichtigende Verkehrsmittel, Anzahl der Umstiege, Preisspanne, etc. Die Ergebnisse werden den Kunden über die Benutzerschnittstelle des RIS in Form von Reiseketten dargestellt. 
+\item Die Buchung einer Reisekette führt zur Erzeugung einer zeitlich und räumlich eingeschränkten Autorisierung  zur Nutzung der Mobilitätsangebote der gewählten Reisekette (Ticket) sowie der abschließenden Abrechnung der Dienstleistung.
+\end{itemize}
+
+\section{Fahrzeugverleihsystem}
+
+\subsection{Beschreibung}
+Fahrzeugverleihsystem – stellt ein Informationssystem zur Verwaltung und Buchung von Leihfahrzeugen und der Kunden dar, welches im Wesentlichen die stationsabhängige Verfügbarkeit von Leihfahrzeugen anbietet. Die Fahrzeuge können unterschiedliche Typen und Stationszuordnungen haben.
+
+\subsection{Anwendungsfälle}
+\begin{itemize}
+\item Ein Kunde bucht (leiht) über das FVS ein Fahrzeug zu vertraglich geregelten Preisen, Zeiten und Stationen aus  und nutzt  dieses.
+\item Ein Kunde fragt über das FVS die Vefügbarkeit eines Fahrzeugs an . 
+\end{itemize}
+
+\section{Benutzer RIS}
+
+\subsection{Beschreibung}
+Kunde RIS – stellt eine juristische Person dar, die befugt ist eine Reise zu buchen und unter Nutzung der gewählten Verkehrsmittel, anzutreten. 
+
+\subsection{Anwendungsfälle}
+\begin{itemize}
+\item Benutzer stellt Auskunftsanfrage an das RIS.
+\item Benutzer bucht Reise über das RIS.
+\end{itemize}
+
+\section{Benutzer FVS}
+
+\subsection{Beschreibung}
+Kunde FVS  - stellt eine juristische Person dar, die befugt ist ein Fahrzeug zu leihen und zu nutzen.
+
+\subsection{Anwendungsfälle}
+\begin{itemize}
+\item Benutzer stellt Auskunftsanfrage an das FVS.
+\item Benutzer reserviert ein Fahrzeug über das FVS.
+\item Benutzer bucht ein Fahrzeug über das FVS.
+\end{itemize}
+
+\section{Betreiber RIS}
+
+\subsection{Beschreibung}
+Betreiber RIS – stellt das RIS als Informationssystem für einen Mobilitätsanbieter als Dienstleistung bereit.
+
+\subsection{Anwendungsfälle}
+
+\section{Betreiber FVS}
+\subsection{Beschreibung}
+Betreiber FVS - stellt ein Informationssystem für FVS für einen Fahrzeugverleiher als Dienstleistung bereit.
+
+\subsection{Anwendungsfälle}
+
+\section{FVS-Station}
+
+\subsection{Beschreibung}
+FVS-Station - stellt die Fahrzeuge eines Mobilitätsanbieters an einer Station bereit.
+
+\subsection{Anwendungsfälle}
+
+\section{Fahrzeug}
+
+\subsection{Beschreibung}
+Fahrzeug – wird vom Mobilitätsanbieter über das FVS an einer Station als Mobilitätsangebot für den Kunden angeboten.
+
+\subsection{Anwendungsfälle}
+

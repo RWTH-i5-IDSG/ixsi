@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
+
+	<!-- oooooooooooooooo -->
+	<!-- Request Elements -->
+	<!-- oooooooooooooooo -->
+
+	<xs:element name="operator-list-request" type="OperatorListRequest" />
+	<xs:element name="station-list-request" type="StationListRequest" />
+	<xs:element name="reservation-target-request" type="ReservationTargetRequest" />
+	<xs:element name="reservation-target-update-cancel-request" type="ReservationTargetUpdateCancelRequest" />
+	<xs:element name="target-area-list-request" type="TargetAreaListRequest" />
+	<xs:element name="tariff-list-request" type="TariffListRequest" />
+	<xs:element name="authentication-request" type="AuthenticationRequest" />
+	<xs:element name="price-info-request" type="PriceInfoRequest" />
+	<xs:element name="availability-request" type="AvailabilityRequest" />
+	<xs:element name="reservation-request" type="ReservationRequest" />
+	<xs:element name="reservation-subscribe-request" type="ReservationSubscribeRequest" />
+	<xs:element name="reservation-update-cancel-request" type="ReservationUpdateCancelRequest" />
+	<xs:element name="reservation-cancel-request" type="ReservationCancelRequest" />
+	<xs:element name="reservation-change-request" type="ReservationChangeRequest" />
+
+	<!-- ooooooooooooooooo -->
+	<!-- Response Elements -->
+	<!-- ooooooooooooooooo -->
+
+	<xs:element name="operator-list-response" type="OperatorListResponse" />
+	<xs:element name="station-list-response" type="StationListResponse" />
+	<xs:element name="reservation-target-response" type="ReservationTargetResponse" />
+	<xs:element name="reservation-target-update-cancel-response" type="ReservationTargetUpdateCancelResponse" />
+	<xs:element name="target-area-list-response" type="TargetAreaListResponse" />
+	<xs:element name="tariff-list-response" type="TariffListResponse" />
+	<xs:element name="authentication-response" type="AuthenticationResponse" />
+	<xs:element name="price-info-response" type="PriceInfoResponse" />
+	<xs:element name="availability-response" type="AvailabilityResponse" />
+	<xs:element name="reservation-response" type="ReservationResponse" />
+	<xs:element name="reservation-subscribe-response" type="ReservationSubscribeResponse" />
+	<xs:element name="reservation-update-cancel-response" type="ReservationUpdateCancelResponse" />
+	<xs:element name="reservation-cancel-response" type="ReservationCancelResponse" />
+	<xs:element name="reservation-change-response" type="ReservationChangeResponse" />
+
+	<!-- ooooooooooooooo -->
+	<!-- Update Elements -->
+	<!-- ooooooooooooooo -->
+
+	<xs:element name="reservation-target-update" type="ReservationTargetUpdate" />
+	<xs:element name="reservation-update" type="ReservationUpdate" />
+
+	<!-- oooooooooooooooooo -->
+	<!-- Handshake Elements -->
+	<!-- oooooooooooooooooo -->
+
+	<xs:element name="protocol-version-list-handshake" type="ProtocolVersionListHandshake" />
+	<xs:element name="protocol-version-select-handshake" type="ProtocolVersionSelectHandshake" />
+	<xs:element name="protocol-level-max-handshake" type="ProtocolLevelMaxHandshake" />
+	<xs:element name="protocol-level-select-handshake" type="ProtocolLevelSelectHandshake" />
+	<xs:element name="finish-handshake" type="FinishHandshake" />
+
+	<!-- ooooooooooooooo -->
+	<!-- Operation Types -->
+	<!-- ooooooooooooooo -->
+
+	<xs:complexType name="Message" abstract="true" />
+
+	<xs:complexType name="TransactionMessage" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="Message">
+				<xs:attribute name="transaction-id" type="xs:string" use="required" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="Request" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="TransactionMessage" />
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="Response" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="TransactionMessage" />
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="Update" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="Message">
+				<xs:attribute name="abo-id" type="xs:string" use="required" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="Handshake" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="Message" />
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- ooooooooooooo -->
+	<!-- Request Types -->
+	<!-- ooooooooooooo -->
+
+	<xs:complexType name="OperatorListRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="current-version" type="xs:string" minOccurs="0" maxOccurs="1" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="StationListRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="operator-id" type="xs:string" />
+					<xs:element name="current-version" type="xs:string" minOccurs="0" maxOccurs="1" />
+					<xs:element name="zip-code" type="ZipCodeRange" minOccurs="0" maxOccurs="1" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ReservationTargetRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="operator-id" type="xs:string" />
+					<xs:choice minOccurs="0">
+						<xs:element name="zip-code" type="ZipCodeRange" />
+						<xs:element name="gps-area" type="GpsArea" />
+						<xs:element name="station-id" type="xs:string" />
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ReservationTargetUpdateCancelRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="abo-id" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="TargetAreaListRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="operator-id" type="xs:string" />
+					<xs:element name="current-version" type="xs:string" minOccurs="0" maxOccurs="1" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="TariffListRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="operator-id" type="xs:string" />
+					<xs:element name="current-version" type="xs:string" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="AuthenticationRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="operator-id" type="xs:string" />
+					<xs:element name="user-name" type="xs:string" />
+					<xs:element name="user-password" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="PriceInfoRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="operator-id" type="xs:string" />
+					<xs:element name="user-id" type="xs:string" />
+					<xs:element name="reserveration-target-id" type="xs:string" />
+					<xs:element name="tariff-id" type="xs:string" />
+					<xs:element name="time-range" type="TimeRange" />
+					<xs:element name="distance" type="xs:int" />
+					<xs:element name="destination" type="Destination" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="AvailabilityRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="operator-id" type="xs:string" />
+					<xs:element name="user-id" type="xs:string" />
+					<xs:element name="reservation-target-id" type="xs:string" />
+					<xs:element name="time-range" type="TimeRange" />
+					<xs:element name="destination" type="Destination" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ReservationRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="operator-id" type="xs:string" />
+					<xs:element name="user-id" type="xs:string" />
+					<xs:element name="user-token" type="xs:string" />
+					<xs:element name="tariff-id" type="xs:string" />
+					<xs:element name="reservation-target-id" type="xs:string" />
+					<xs:element name="time-range" type="TimeRange" />
+					<xs:element name="destination" type="Destination" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ReservationSubscribeRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="operator-id" type="xs:string" />
+					<xs:element name="reservation-id" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ReservationUpdateCancelRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="abo-id" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ReservationCancelRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="operator-id" type="xs:string" />
+					<xs:element name="reservation-id" type="xs:string" />
+					<xs:element name="user-id" type="xs:string" />
+					<xs:element name="user-token" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ReservationChangeRequest">
+		<xs:complexContent>
+			<xs:extension base="Request">
+				<xs:sequence>
+					<xs:element name="operator-id" type="xs:string" />
+					<xs:element name="reservation-id" type="xs:string" />
+					<xs:element name="user-id" type="xs:string" />
+					<xs:element name="user-token" type="xs:string" />
+					<xs:element name="tariff-id" type="xs:string" minOccurs="0" />
+					<xs:element name="reservation-target-id" type="xs:string" minOccurs="0" />
+					<xs:element name="time-range" type="TimeRange" minOccurs="0" />
+					<xs:element name="destination" type="Destination" minOccurs="0" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- oooooooooooooo -->
+	<!-- Response Types -->
+	<!-- oooooooooooooo -->
+
+	<xs:complexType name="OperatorListResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:choice>
+					<xs:sequence>
+						<xs:element name="version" type="xs:string" />
+						<xs:element name="operator-list" type="OperatorList" />
+					</xs:sequence>
+					<xs:element name="error" type="Error" />
+					<xs:element name="no-change" type="NoChange" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="StationListResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:choice>
+					<xs:sequence>
+						<xs:element name="version" type="xs:string" />
+						<xs:element name="station-list" type="StationList" />
+					</xs:sequence>
+					<xs:element name="error" type="Error" />
+					<xs:element name="no-change" type="NoChange" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ReservationTargetResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:choice>
+					<xs:sequence>
+						<xs:element name="abo-id" type="xs:string" />
+						<xs:element name="reservation-target-list" type="ReservationTargetList" />
+					</xs:sequence>
+					<xs:element name="error" type="Error" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ReservationTargetUpdateCancelResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:choice>
+					<xs:sequence>
+						<xs:element name="confirmation" type="Confirmation" />
+					</xs:sequence>
+					<xs:element name="error" type="Error" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="TargetAreaListResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:choice>
+					<xs:sequence>
+						<xs:element name="version" type="xs:string" />
+						<xs:element name="area-list" type="TargetAreaList" />
+					</xs:sequence>
+					<xs:element name="error" type="Error" />
+					<xs:element name="no-change" type="NoChange" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="TariffListResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:choice>
+					<xs:sequence>
+						<xs:element name="version" type="xs:string" maxOccurs="1" minOccurs="1" />
+						<xs:element name="tariff-list" type="TariffList" />
+					</xs:sequence>
+					<xs:element name="error" type="Error" />
+					<xs:element name="no-change" type="NoChange" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="AuthenticationResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:choice>
+					<xs:sequence>
+						<xs:element name="user" type="User" />
+					</xs:sequence>
+					<xs:element name="error" type="Error" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="PriceInfoResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:choice>
+					<xs:element name="price-info" type="PriceInfo" />
+					<xs:element name="error" type="Error" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="AvailabilityResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:choice>
+					<xs:sequence>
+						<xs:element name="availability" type="Availability" />
+					</xs:sequence>
+					<xs:element name="error" type="Error" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ReservationResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:choice>
+					<xs:sequence>
+						<xs:element name="reservation" type="Reservation" />
+					</xs:sequence>
+					<xs:element name="error" type="Error" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ReservationSubscribeResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:choice>
+					<xs:sequence>
+						<xs:element name="abo-id" type="xs:string" />
+						<xs:element name="reservation" type="Reservation" />
+					</xs:sequence>
+					<xs:element name="error" type="Error" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ReservationUpdateCancelResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:choice>
+					<xs:sequence>
+						<xs:element name="confirmation" type="Confirmation" />
+					</xs:sequence>
+					<xs:element name="error" type="Error" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ReservationCancelResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:choice>
+					<xs:sequence>
+						<xs:element name="confirmation" type="Confirmation" />
+					</xs:sequence>
+					<xs:element name="error" type="Error" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ReservationChangeResponse">
+		<xs:complexContent>
+			<xs:extension base="Response">
+				<xs:choice>
+					<xs:sequence>
+						<xs:element name="confirmation" type="Confirmation" />
+					</xs:sequence>
+					<xs:element name="error" type="Error" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- oooooooooooo -->
+	<!-- Update Types -->
+	<!-- oooooooooooo -->
+
+	<xs:complexType name="ReservationTargetUpdate">
+		<xs:complexContent>
+			<xs:extension base="Update">
+				<xs:choice>
+					<xs:element name="reservation-target" type="ReservationTarget" />
+					<xs:element name="reservation-target-deleted" type="ReservationTargetDeleted" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ReservationUpdate">
+		<xs:complexContent>
+			<xs:extension base="Update">
+				<xs:choice>
+					<xs:element name="reservation" type="Reservation" />
+					<xs:element name="reservation-target-deleted" type="ReservationDeleted" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- ooooooooooooooo -->
+	<!-- Handshake Types -->
+	<!-- ooooooooooooooo -->
+
+	<xs:complexType name="ProtocolVersionListHandshake">
+		<xs:complexContent>
+			<xs:extension base="Handshake">
+				<xs:choice>
+					<xs:element name="version" type="xs:string" />
+					<xs:element name="error" type="Error" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ProtocolVersionSelectHandshake">
+		<xs:complexContent>
+			<xs:extension base="Handshake">
+				<xs:sequence>
+					<xs:element name="version" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ProtocolLevelMaxHandshake">
+		<xs:complexContent>
+			<xs:extension base="Handshake">
+				<xs:choice>
+					<xs:element name="level-max" type="xs:string" />
+					<xs:element name="error" type="Error" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="ProtocolLevelSelectHandshake">
+		<xs:complexContent>
+			<xs:extension base="Handshake">
+				<xs:sequence>
+					<xs:element name="level" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="FinishHandshake">
+		<xs:complexContent>
+			<xs:extension base="Handshake">
+				<xs:choice>
+					<xs:element name="confirmation" type="Confirmation" />
+					<xs:element name="error" type="Error" />
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- ooooooooooooooooooooooooooooo -->
+	<!-- Interface specific data types -->
+	<!-- ooooooooooooooooooooooooooooo -->
+
+	<xs:complexType name="Confirmation" />
+
+	<xs:complexType name="OperatorList">
+		<xs:sequence>
+			<xs:element name="operator" type="Operator" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="StationList">
+		<xs:sequence>
+			<xs:element name="station" type="Station" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ReservationTargetList">
+		<xs:sequence>
+			<xs:element name="reservation-target" type="ReservationTarget" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TargetAreaList">
+		<xs:sequence>
+			<xs:element name="target-area" type="TargetArea" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TariffList">
+		<xs:sequence>
+			<xs:element name="tariff" type="Tariff" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TariffReferenceList">
+		<xs:sequence>
+			<xs:element name="tariff-id" type="xs:string" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GpsAreaList">
+		<xs:sequence>
+			<xs:element name="gps-area" type="GpsArea" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GpsArea">
+		<xs:sequence>
+			<xs:element name="point" type="GpsCoordinate" minOccurs="3" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="GpsCoordinate">
+		<xs:sequence>
+			<xs:element name="latitude" type="xs:float" />
+			<xs:element name="longitude" type="xs:float" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ZipCodeRange">
+		<xs:sequence>
+			<xs:element name="from" type="xs:int" />
+			<xs:element name="to" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TimeRangeList">
+		<xs:sequence>
+			<xs:element name="time-range" type="TimeRange" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TimeRange">
+		<xs:sequence>
+			<xs:element name="from" type="xs:dateTime" />
+			<xs:element name="to" type="xs:dateTime" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Destination">
+		<xs:choice>
+			<xs:element name="target-station-id" type="xs:string" />
+			<xs:element name="target-area-id" type="xs:string" />
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="Error">
+		<xs:sequence>
+			<xs:element name="code" type="xs:int" />
+			<xs:element name="short-message" type="xs:string" />
+			<xs:element name="long-message" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Address">
+		<xs:sequence>
+			<xs:element name="street" type="xs:string" />
+			<xs:element name="zipcode" type="xs:int" />
+			<xs:element name="city" type="xs:string" />
+			<xs:element name="country" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Feature">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="value" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="FeatureList">
+		<xs:sequence>
+			<xs:element name="feature" type="Feature" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="NoChange" />
+
+	<xs:complexType name="ReturnType" abstract="true" />
+
+	<xs:complexType name="StationDependent">
+		<xs:complexContent>
+			<xs:extension base="ReturnType">
+				<xs:sequence>
+					<xs:element name="station-id" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="StationIndependent">
+		<xs:complexContent>
+			<xs:extension base="ReturnType">
+				<xs:sequence>
+					<xs:element name="start-station-id" type="xs:string" />
+					<xs:element name="target-station-id" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="FreeFloating">
+		<xs:complexContent>
+			<xs:extension base="ReturnType">
+				<xs:sequence>
+					<xs:element name="start-position" type="GpsCoordinate" />
+					<xs:element name="target-area-id" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:simpleType name="Currency">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EUR" />
+			<xs:enumeration value="USD" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="VehicleCategory">
+		<xs:restriction base="xs:string">
+			<!-- TODO -->
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- oooooooooo -->
+	<!-- Data model -->
+	<!-- oooooooooo -->
+
+	<xs:complexType name="Operator">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="description" type="xs:string" />
+			<xs:element name="url-logo" type="xs:anyURI" minOccurs="0" />
+			<xs:element name="url-homepage" type="xs:anyURI" minOccurs="0" />
+			<xs:element name="url-login" type="xs:anyURI" minOccurs="0" />
+			<xs:element name="url-reservation" type="xs:anyURI" minOccurs="0" />
+			<xs:element name="service-phone" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="Station">
+		<xs:sequence>
+			<xs:element name="operator-id" type="xs:string" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="description" type="xs:string" />
+			<xs:element name="address" type="Address" />
+			<xs:element name="position" type="GpsCoordinate" minOccurs="0" />
+			<xs:element name="url-picture" type="xs:anyURI" minOccurs="0" />
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="Tariff">
+		<xs:sequence>
+			<xs:element name="operator-id" type="xs:string" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="public" type="xs:boolean" minOccurs="0" default="false" />
+			<xs:element name="description" type="xs:string" />
+			<xs:element name="url-logo" type="xs:anyURI" minOccurs="0" />
+			<xs:element name="time-unit" type="xs:int" />
+			<xs:element name="distance-unit" type="xs:int" />
+			<xs:element name="currency" type="Currency" />
+			<xs:element name="price-per-time-unit" type="xs:decimal" />
+			<xs:element name="price-per-distance-unit" type="xs:decimal" />
+			<xs:element name="basic-charge" type="xs:decimal" />
+			<xs:element name="time-range" type="TimeRange" minOccurs="0" />
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="User">
+		<xs:sequence>
+			<xs:element name="operator-id" type="xs:string" />
+			<xs:element name="tariff-list" type="TariffReferenceList" minOccurs="0" />
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="ReservationTarget">
+		<xs:sequence>
+			<xs:element name="operator-id" type="xs:string" />
+			<xs:choice>
+				<xs:element name="station-dependent" type="StationDependent" />
+				<xs:element name="station-independent" type="StationIndependent" />
+				<xs:element name="free-floating" type="FreeFloating" />
+			</xs:choice>
+			<xs:element name="time-range-list" type="TimeRangeList" />
+			<xs:element name="tariff-id" type="xs:string" minOccurs="0" />
+			<xs:element name="feature-list" type="FeatureList" minOccurs="0" />
+			<xs:element name="vehicle-category" type="VehicleCategory" />
+			<xs:element name="number-of-vehicles" type="xs:int" minOccurs="0" />
+			<xs:element name="min-range" type="xs:int" minOccurs="0" />
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="ReservationTargetDeleted">
+		<xs:attribute name="id" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="Reservation">
+		<xs:sequence>
+			<xs:element name="operator-id" type="xs:string" />
+			<xs:choice>
+				<xs:element name="station-dependent" type="StationDependent" />
+				<xs:element name="station-independent" type="StationIndependent" />
+				<xs:element name="free-floating" type="FreeFloating" />
+			</xs:choice>
+			<xs:element name="time-range" type="TimeRange" />
+			<xs:element name="tariff-id" type="xs:string" />
+			<xs:element name="feature-list" type="FeatureList" minOccurs="0" />
+			<xs:element name="vehicle-category" type="VehicleCategory" />
+			<xs:element name="min-range" type="xs:int" minOccurs="0" />
+			<xs:element name="billing-token" type="xs:string" minOccurs="0"/>
+			<xs:element name="user-id" type="xs:string" />
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="ReservationDeleted">
+		<xs:attribute name="id" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="TargetArea">
+		<xs:sequence>
+			<xs:element name="operator-id" type="xs:string" />
+			<xs:element name="gps-area-list" type="GpsAreaList" />
+			<xs:element name="gps-area-exception-list" type="GpsAreaList" minOccurs="0" />
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<!-- ooooooooooooooooo -->
+	<!-- Temporary resulst -->
+	<!-- ooooooooooooooooo -->
+
+	<xs:complexType name="Availability">
+		<xs:sequence>
+			<xs:element name="time-range" type="TimeRange" />
+			<xs:element name="tariff-list" type="TariffReferenceList" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="PriceInfo">
+		<xs:sequence>
+			<xs:element name="basic-charge" type="xs:decimal" minOccurs="0" />
+			<xs:element name="distance-charge" type="xs:decimal" minOccurs="0" />
+			<xs:element name="time-charge" type="xs:decimal" minOccurs="0" />
+			<xs:element name="other-charges" type="xs:decimal" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>
