@@ -16,6 +16,7 @@
 \usepackage{datetime}
 \usepackage{calc}
 \usepackage{pslatex}
+\usepackage{lineno}
 
 %---- Coding, Language, Fonts, and Symbols ----------------
 \usepackage{babel}
@@ -324,13 +325,13 @@ caption=false,
 
 %---- listings --------------------------------------------
 % add \lineref command for listing enviroment
-\newcommand*{\lineref}[2][]{%
-\ifthenelse{\equal{#1}{}}{%
-\hyperref[{#2}]{line~\ref*{#2}}%
-}{%
-\hyperref[{#2}]{\begin{NoHyper}line~\ref{#1}--\ref{#2}\end{NoHyper}}%
-}\xspace%
-}
+%\newcommand*{\lineref}[2][]{%
+%\ifthenelse{\equal{#1}{}}{%
+%\hyperref[{#2}]{line~\ref*{#2}}%
+%}{%
+%\hyperref[{#2}]{\begin{NoHyper}line~\ref{#1}--\ref{#2}\end{NoHyper}}%
+%}\xspace%
+%}
 
 
 %----- Beamer settings --------------------------------------
