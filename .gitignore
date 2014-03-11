@@ -38,4 +38,6 @@ texmf
 *.idx
 *.ilg
 *.ind
-
+*.make
+*.temp
+report.d
