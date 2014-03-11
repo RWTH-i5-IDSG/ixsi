@@ -53,11 +53,11 @@ END { print "</xsl:template></xsl:stylesheet>" }' > "generated/${bname}.xslt" 2>
 		exit 1
 	fi
 	
-	echo '\begin{minipage}{\textwidth}\begin{lstlisting}[style=xml-style]' >> generated/${bname}.tex
+	echo '\begin{lstlisting}[style=xml-style]' >> generated/${bname}.tex
 	
 	cat "generated/${bname}.xmlsnippet" | awk 'NR > 1 && /^<[^\/]/ { print "" } { print }' >> generated/${bname}.tex
 	
-	echo '\end{lstlisting}\end{minipage}' >> generated/${bname}.tex
+	echo '\end{lstlisting}' >> generated/${bname}.tex
 	
 	echo "done"
 
