@@ -1,0 +1,20 @@
+<station id="o1:s1">
+	<operator-id>o1</operator-id>
+	<name>Beispielstation</name>
+	<description>
+		<h1>Standort</h1>
+		Beschreibung des Standorts
+		<h1>ÖPNV</h1>
+		Linien: 1, 2, 3, 4
+		Haltestellen: Eine Haltestelle, eine andere Haltestelle
+		<h1>Taxi</h1>
+		Beschreibung eines Taxistandorts in der Nähe 
+	</description>
+	<address>
+		<street>Musterstraße</street>
+		<nummer>11</nummer>
+		<zipcode>52064</zipcode>
+		<city>Aachen</city>
+		<country>Germany</country>
+	</address>
+</station>

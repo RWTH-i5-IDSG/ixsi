@@ -60,7 +60,7 @@ Um den Handshake abzuschließen, sendet das FVS nach erhalt der Nachricht zur Au
 \input{xml/generated/finish-handshake.tex}
 
 \subsection{XML Beispiel}
-TODO
+\TODO{Ergänzen}
 
 \section{Ebene 0 -- Abfrage der Betreiber}
 Das RIS kann eine Liste der Betreiber vom FVS abfragen. Dazu sendet zunächst das RIS eine Nachricht vom Typ OperatorListRequest mit der Bezeichnung „operator-list-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ OperatorListResponse mit der Bezeichnung „operator-list-response“.
@@ -230,7 +230,7 @@ Eine Nachricht vom Typ ReservationRequest wird zur Anfrage für die Durchführun
 \item eine Betreiber-ID,
 \item eine User-ID als Referenz auf den Benutzer, für den die Buchung durchgeführt werden soll,
 \item ein Authentifizierungs-Token, zur Authentifizierung des Benutzers,
-\item eine Tarif-ID als Referenz auf den Tarif, der für die Buchung verwendet warden soll,
+\item eine Tarif-ID als Referenz auf den Tarif, der für die Buchung verwendet werden soll,
 \item eine Buchungsziel-ID als Referenz auf das Buchungsziel, auf das sich die Buchung beziehen soll,
 \item einen Zeitbereich, für den das Fahrzeug ausgeliehen werden soll
 \item und ein optionales Ziel, an dem das Fahrzeug zurückgegeben werden soll.
@@ -247,32 +247,32 @@ Eine Nachricht vom Typ ReservationResponse dient zur Bestätigung der Durchführ
 \TODO{Ergänzen}
 
 \section{Ebene 3 -- Anfrage für Aktualisierungen zu einer Buchung}
-
 Das RIS kann Aktualisierungen zu einer Buchung vom FVS abonnieren. Dazu sendet zunächst das RIS eine Nachricht vom Typ ReservationSubscribeRequest mit der Bezeichnung ,,reservation-subscribe-request''. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ ReservationSubscribeResponse mit der Bezeichnung ,,reservation-subscribe-response''. Aktualisierungen sendet das FVS als Nachrichten vom Typ ReservationUpdate mit der Bezeichnung ,,reservation-update''. Ein bestehendes Aktualisierungsabonnement kann durch das RIS mit einer Nachricht vom Typ ReservationUpdateCancelRequest mit der Bezeichnung „reservation-update-cancel-request“. Diese wird durch eine Nachricht vom Typ ReservationUpdateCancelResponse mit der Bezeichnung „reservation-update-cancel-response“ vom FVS bestätigt.
 
 \input{xml/generated/reservation-update-messages.tex}
 
 \subsection{Anfrage zur Abonnierung einer Buchung}
-
 Ein Abonnement für Informationen zu einer Buchung werden durch eine Nachricht vom Typ ReservationSubscribeRequest angefordert. Diese muss eine Betreiber-ID und Buchungs-ID enhalten um die zu abonnierende Buchung eindeutig zu identifizieren.
 
 \input{xml/generated/reservation-subscribe-request.tex}
 
 \subsection{Antwort zur Abonnierung einer Buchung}
-
 Nachrichten vom Typ ReservationSubscribeResponse enthalten einen Buchungsinformationsdatensatz und eine Abo-ID, die in folgenden zugehörigen Update-Nachrichten zur Referenzierung verwendet wird. Falls ein Fehler aufgetreten ist, kann die Nachricht auch einen Nicht-Verstanden-Fehler (120), internen Serverfehler (130) oder Parameterfehler (240, 241) enthalten.
 
 \input{xml/generated/reservation-subscribe-response.tex}
 
 \subsection{Aktualisierung der Buchungsinformationen}
+Eine Aktualisierung der Buchungsinformationen erfolgt durch Nachrichten vom Typ ReservationUpdate. Wenn sich die Buchung geändert hat, enthält die Nachricht die veränderte Version der Buchung. Die Buchungs-ID darf sich dabei nicht ändern. Wenn die Buchung entfernt wurde, enthält die Nachricht nur eine Referenz auf die Buchung in Form der Buchungs-ID. Der Inhalt des entfernten Buchung wird nicht erneut übertragen.
 
 \input{xml/generated/reservation-update.tex}
 
 \subsection{Kündigung eine Buchungs-Abos}
+Zur Kündigung eines Buchungsabonnements wird vom RIS eine Nachricht vom Typ ReservationUpdateCancelRequest verwendet. Diese enthält eine Referenz auf das Abo in Form einer Abo-ID.
 
 \input{xml/generated/reservation-update-cancel-request.tex}
 
 \subsection{Bestätigung der Kündigung}
+Eine Nachricht zur Kündigung eines Buchungsabonnements wird vom FVS mit einer Nachricht vom Typ ReservationUpdateCancelResponse bestätigt. Die Nachricht kann anstelle einer Bestätigung auch einen Nicht-Verstanden-Fehler (120), internen Serverfehler (130) oder Parameterfehler (240) enthalten.
 
 \input{xml/generated/reservation-update-cancel-response.tex}
 
@@ -280,14 +280,22 @@ Nachrichten vom Typ ReservationSubscribeResponse enthalten einen Buchungsinforma
 \TODO{Ergänzen}
 
 \section{Ebene 3 -- Auftrag zur Stornierung einer Buchung}
+Das RIS kann die Stornierung einer Buchung beim FVS durchführen. Dazu sendet zunächst das RIS eine Nachricht vom Typ ReservationCancelRequest mit der Bezeichnung „reservation-cancel-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ ReservationCancelResponse mit der Bezeichnung „reservation-cancel-response“.
 
 \input{xml/generated/reservation-cancel-messages.tex}
 
 \subsection{Anfrage Stornierung}
+Eine Nachricht vom Typ ReservationCancelRequest wird zur Anfrage für die Durchführung einer Stornierung einer Buchung verwendet. Die Nachricht enthält:
+\begin{itemize}
+\item eine Betreiber-ID und Buchungs-ID zur eindeutigen Identifizierung der zu stornierenden Buchung,
+\item eine User-ID als Referenz auf den Benutzer, für den die Stornierung durchgeführt werden soll
+\item und ein Authentifizierungs-Token, zur Authentifizierung des Benutzers.
+\end{itemize}
 
 \input{xml/generated/reservation-cancel-request.tex}
 
 \subsection{Antwort Stornierung}
+Eine Nachricht vom Typ ReservationResponse dient zur Bestätigung der Durchführung der Stornierung einer Buchung durch das FVS. Falls ein Fehler aufgetreten ist, kann die Nachricht auch einen Nicht-Verstanden-Fehler (120), internen Serverfehler (130), Parameterfehler (240), Benutzer-Token-Fehler (260) oder Stornierungsfehler (272) enthalten.
 
 \input{xml/generated/reservation-cancel-response.tex}
 
@@ -295,14 +303,26 @@ Nachrichten vom Typ ReservationSubscribeResponse enthalten einen Buchungsinforma
 \TODO{Ergänzen}
 
 \section{Ebene 4 -- Auftrag zu Umbuchung einer Buchung}
+Das RIS kann eine Buchungsänderung beim FVS durchführen. Dazu sendet zunächst das RIS eine Nachricht vom Typ ReservationChangeRequest mit der Bezeichnung „reservation-change-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ ReservationChangeResponse mit der Bezeichnung „reservation-change-response“.
 
 \input{xml/generated/reservation-change-messages.tex}
 
 \subsection{Anfrage Umbuchung}
+Eine Nachricht vom Typ ReservationChangeRequest wird zur Anfrage für die Durchführung einer Buchungänderung verwendet. Die Nachricht enthält:
+\begin{itemize}
+\item eine Betreiber-ID und Buchungs-ID zur eindeutigen Identifizierung der zu stornierenden Buchung,
+\item eine User-ID als Referenz auf den Benutzer, für den die Buchungsänderung durchgeführt werden soll,
+\item ein Authentifizierungs-Token, zur Authentifizierung des Benutzers,
+\item eine optionale Tarif-ID als Referenz auf den Tarif, falls dieser geändert werden soll,
+\item eine optionale Buchungsziel-ID als Referenz auf das Buchungsziel, falls dieses geändert werden soll,
+\item einen optionalen Zeitbereich, falls dieser geändert werden soll
+\item und ein optionales Ziel an dem das Fahrzeug zurückgegeben werden soll, falls dieses geändert werden soll.
+\end{itemize}
 
 \input{xml/generated/reservation-change-request.tex}
 
 \subsection{Antwort Umbuchung}
+Eine Nachricht vom Typ ReservationChangeResponse dient zur Bestätigung der Durchführung einer Buchungsänderung und zur einmaligen Übermittlung der neuen Buchungsinformationen vom FVS zum RIS. Sie enthält einen Buchungsinformationsdatensatz. Die Informationen des Datensatzes müssen den Informationen die in der zugehörigen Anfrage angegeben wurden entsprechen. Insbesondere muss die Buchungs-ID des Buchungsinformationsdatensatzes der in der Anfrage angegebenen Buchungs-ID entsprechen. Falls ein Fehler aufgetreten ist, kann die Nachricht auch einen Nicht-Verstanden-Fehler (120), internen Serverfehler (130), Parameterfehler (240), Benutzer-Token-Fehler (260), Buchungsfehler (271) oder Stornierungsfehler (272) enthalten.
 
 \input{xml/generated/reservation-change-response.tex}
 

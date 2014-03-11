@@ -64,7 +64,7 @@ strict
 
 % \usepackage{enumitem}
 % within paragraphs
-\usepackage[svgnames]{xcolor}
+\usepackage[svgnames,table]{xcolor}
 
 
 %---- Floats - Tables, Figures ----------------------------
@@ -216,6 +216,16 @@ caption=false,
   morecomment=[l]{//},
   escapeinside={(*}{*)},
   captionpos=b,
+}
+
+\lstset{literate=%
+{Ö}{{\"O}}1 
+{Ä}{{\"A}}1 
+{Ü}{{\"U}}1 
+{ß}{{\ss}}2 
+{ü}{{\"u}}1 
+{ä}{{\"a}}1 
+{ö}{{\"o}}1
 }
 
 \lstdefinestyle{XML-style} {
@@ -375,4 +385,9 @@ Stand \thisdate~\thistime ~-- Version \thisversion
 
 
 \renewcommand*{\chapterpagestyle}{scrheadings}
+
+% ------ Datenmodelle
+
+\newcommand*{\xmlexample}[1]{\begin{minipage}{\textwidth}\lstinputlisting[style=xml-style]{xml/examples/#1.xml}\end{minipage}}
+
 % ------
