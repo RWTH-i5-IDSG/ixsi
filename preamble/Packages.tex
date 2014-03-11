@@ -208,7 +208,7 @@ caption=false,
   aboveskip=8pt,
   belowskip=8pt,
   numbers=left,
-  numberstyle=\tiny,
+  numberstyle=\tiny\color{Black},
   stepnumber=1,
   numbersep=0.5em,
   % xleftmargin=0.5em,
@@ -289,6 +289,11 @@ caption=false,
 \newcommand*{\sra}{\ensuremath{\shortrightarrow}\xspace}
 \newcommand*{\sla}{\ensuremath{\shortleftarrow}\xspace}
 
+% Interaktionsprotokollbilder
+\newcommand{\interactiongraphics}[1]{\begin{center}
+\includegraphics[width=11cm]{graphics/#1.pdf}
+\end{center}}
+
 
 \newcolumntype{M}[1]{
   >{\RaggedRight\arraybackslash\hspace{0pt}}m{#1}%
@@ -363,8 +368,8 @@ caption=false,
 % \foot{\thispublishers ~- \textbf{\thistitleshort}}
 % \lofoot{Stand \thisdate ~ \thistime ~- Version \thisversion}
 
-\ifoot{\thispublishers ~- \textbf{\thistitleshort} \\
-Stand \thisdate ~ \thistime ~- Version \thisversion
+\ifoot{\thispublishers ~-- \textbf{\thistitleshort} \\
+Stand \thisdate~\thistime ~-- Version \thisversion
 }
 
 

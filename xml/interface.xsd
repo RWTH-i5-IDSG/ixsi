@@ -56,6 +56,12 @@
 	<xs:element name="protocol-level-select-handshake" type="ProtocolLevelSelectHandshake" />
 	<xs:element name="finish-handshake" type="FinishHandshake" />
 
+	<!-- ooooooooooooo -->
+	<!-- Error Element -->
+	<!-- ooooooooooooo -->
+
+	<xs:element name="error" type="Error" />
+
 	<!-- ooooooooooooooo -->
 	<!-- Operation Types -->
 	<!-- ooooooooooooooo -->
@@ -290,7 +296,6 @@
 						<xs:element name="version" type="xs:string" />
 						<xs:element name="operator-list" type="OperatorList" />
 					</xs:sequence>
-					<xs:element name="error" type="Error" />
 					<xs:element name="no-change" type="NoChange" />
 				</xs:choice>
 			</xs:extension>
@@ -305,7 +310,6 @@
 						<xs:element name="version" type="xs:string" />
 						<xs:element name="station-list" type="StationList" />
 					</xs:sequence>
-					<xs:element name="error" type="Error" />
 					<xs:element name="no-change" type="NoChange" />
 				</xs:choice>
 			</xs:extension>
@@ -315,13 +319,10 @@
 	<xs:complexType name="ReservationTargetResponse">
 		<xs:complexContent>
 			<xs:extension base="Response">
-				<xs:choice>
-					<xs:sequence>
-						<xs:element name="abo-id" type="xs:string" />
-						<xs:element name="reservation-target-list" type="ReservationTargetList" />
-					</xs:sequence>
-					<xs:element name="error" type="Error" />
-				</xs:choice>
+				<xs:sequence>
+					<xs:element name="abo-id" type="xs:string" />
+					<xs:element name="reservation-target-list" type="ReservationTargetList" />
+				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -329,12 +330,9 @@
 	<xs:complexType name="ReservationTargetUpdateCancelResponse">
 		<xs:complexContent>
 			<xs:extension base="Response">
-				<xs:choice>
-					<xs:sequence>
-						<xs:element name="confirmation" type="Confirmation" />
-					</xs:sequence>
-					<xs:element name="error" type="Error" />
-				</xs:choice>
+				<xs:sequence>
+					<xs:element name="confirmation" type="Confirmation" />
+				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -347,7 +345,6 @@
 						<xs:element name="version" type="xs:string" />
 						<xs:element name="area-list" type="TargetAreaList" />
 					</xs:sequence>
-					<xs:element name="error" type="Error" />
 					<xs:element name="no-change" type="NoChange" />
 				</xs:choice>
 			</xs:extension>
@@ -362,7 +359,6 @@
 						<xs:element name="version" type="xs:string" maxOccurs="1" minOccurs="1" />
 						<xs:element name="tariff-list" type="TariffList" />
 					</xs:sequence>
-					<xs:element name="error" type="Error" />
 					<xs:element name="no-change" type="NoChange" />
 				</xs:choice>
 			</xs:extension>
@@ -372,12 +368,9 @@
 	<xs:complexType name="AuthenticationResponse">
 		<xs:complexContent>
 			<xs:extension base="Response">
-				<xs:choice>
-					<xs:sequence>
-						<xs:element name="user" type="User" />
-					</xs:sequence>
-					<xs:element name="error" type="Error" />
-				</xs:choice>
+				<xs:sequence>
+					<xs:element name="user" type="User" />
+				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -385,10 +378,9 @@
 	<xs:complexType name="PriceInfoResponse">
 		<xs:complexContent>
 			<xs:extension base="Response">
-				<xs:choice>
+				<xs:sequence>
 					<xs:element name="price-info" type="PriceInfo" />
-					<xs:element name="error" type="Error" />
-				</xs:choice>
+				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -396,12 +388,9 @@
 	<xs:complexType name="AvailabilityResponse">
 		<xs:complexContent>
 			<xs:extension base="Response">
-				<xs:choice>
-					<xs:sequence>
-						<xs:element name="availability" type="Availability" />
-					</xs:sequence>
-					<xs:element name="error" type="Error" />
-				</xs:choice>
+				<xs:sequence>
+					<xs:element name="availability" type="Availability" />
+				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -409,12 +398,9 @@
 	<xs:complexType name="ReservationResponse">
 		<xs:complexContent>
 			<xs:extension base="Response">
-				<xs:choice>
-					<xs:sequence>
-						<xs:element name="reservation" type="Reservation" />
-					</xs:sequence>
-					<xs:element name="error" type="Error" />
-				</xs:choice>
+				<xs:sequence>
+					<xs:element name="reservation" type="Reservation" />
+				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -422,13 +408,10 @@
 	<xs:complexType name="ReservationSubscribeResponse">
 		<xs:complexContent>
 			<xs:extension base="Response">
-				<xs:choice>
-					<xs:sequence>
-						<xs:element name="abo-id" type="xs:string" />
-						<xs:element name="reservation" type="Reservation" />
-					</xs:sequence>
-					<xs:element name="error" type="Error" />
-				</xs:choice>
+				<xs:sequence>
+					<xs:element name="abo-id" type="xs:string" />
+					<xs:element name="reservation" type="Reservation" />
+				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -436,12 +419,9 @@
 	<xs:complexType name="ReservationUpdateCancelResponse">
 		<xs:complexContent>
 			<xs:extension base="Response">
-				<xs:choice>
-					<xs:sequence>
-						<xs:element name="confirmation" type="Confirmation" />
-					</xs:sequence>
-					<xs:element name="error" type="Error" />
-				</xs:choice>
+				<xs:sequence>
+					<xs:element name="confirmation" type="Confirmation" />
+				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -449,12 +429,9 @@
 	<xs:complexType name="ReservationCancelResponse">
 		<xs:complexContent>
 			<xs:extension base="Response">
-				<xs:choice>
-					<xs:sequence>
-						<xs:element name="confirmation" type="Confirmation" />
-					</xs:sequence>
-					<xs:element name="error" type="Error" />
-				</xs:choice>
+				<xs:sequence>
+					<xs:element name="confirmation" type="Confirmation" />
+				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -462,12 +439,9 @@
 	<xs:complexType name="ReservationChangeResponse">
 		<xs:complexContent>
 			<xs:extension base="Response">
-				<xs:choice>
-					<xs:sequence>
-						<xs:element name="confirmation" type="Confirmation" />
-					</xs:sequence>
-					<xs:element name="error" type="Error" />
-				</xs:choice>
+				<xs:sequence>
+					<xs:element name="confirmation" type="Confirmation" />
+				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -505,10 +479,9 @@
 	<xs:complexType name="ProtocolVersionListHandshake">
 		<xs:complexContent>
 			<xs:extension base="Handshake">
-				<xs:choice>
+				<xs:sequence>
 					<xs:element name="version" type="xs:string" />
-					<xs:element name="error" type="Error" />
-				</xs:choice>
+				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -526,10 +499,9 @@
 	<xs:complexType name="ProtocolLevelMaxHandshake">
 		<xs:complexContent>
 			<xs:extension base="Handshake">
-				<xs:choice>
+				<xs:sequence>
 					<xs:element name="level-max" type="xs:string" />
-					<xs:element name="error" type="Error" />
-				</xs:choice>
+				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -547,10 +519,9 @@
 	<xs:complexType name="FinishHandshake">
 		<xs:complexContent>
 			<xs:extension base="Handshake">
-				<xs:choice>
+				<xs:sequence>
 					<xs:element name="confirmation" type="Confirmation" />
-					<xs:element name="error" type="Error" />
-				</xs:choice>
+				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -644,11 +615,19 @@
 	</xs:complexType>
 
 	<xs:complexType name="Error">
-		<xs:sequence>
-			<xs:element name="code" type="xs:int" />
-			<xs:element name="short-message" type="xs:string" />
-			<xs:element name="long-message" type="xs:string" />
-		</xs:sequence>
+		<xs:complexContent>
+			<xs:extension base="Message">
+				<xs:sequence>
+					<xs:choice minOccurs="0">
+						<xs:element name="abo-id" type="xs:string" />
+						<xs:element name="transaction-id" type="xs:string" />
+					</xs:choice>
+					<xs:element name="code" type="xs:int" />
+					<xs:element name="short-message" type="xs:string" />
+					<xs:element name="long-message" type="xs:string" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 
 	<xs:complexType name="Address">
@@ -812,7 +791,7 @@
 			<xs:element name="feature-list" type="FeatureList" minOccurs="0" />
 			<xs:element name="vehicle-category" type="VehicleCategory" />
 			<xs:element name="min-range" type="xs:int" minOccurs="0" />
-			<xs:element name="billing-token" type="xs:string" minOccurs="0"/>
+			<xs:element name="billing-token" type="xs:string" minOccurs="0" />
 			<xs:element name="user-id" type="xs:string" />
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:string" use="required" />

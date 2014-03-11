@@ -8,8 +8,8 @@ ls *.snippet | while read in; do
 	
 	cat "${bname}.snippet" | awk \
 'BEGIN { print "<?xml version=\"1.0\" encoding=\"UTF-8\"?><xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xsl:output method=\"xml\" indent=\"no\" omit-xml-declaration=\"yes\" /><xsl:template match=\"/\">"}
-/^.*-.*$/ { print "<xsl:copy-of select=\"/xs:schema/xs:element[@name='\''" $1 "'\'']\" />"; next }
-/^.*$/ { print "<xsl:copy-of select=\"//xs:complexType[@name='\''" $1 "'\'']\" />"}
+/^[A-Z].*$/ { print "<xsl:copy-of select=\"//xs:complexType[@name='\''" $1 "'\'']\" />"; next}
+{ print "<xsl:copy-of select=\"/xs:schema/xs:element[@name='\''" $1 "'\'']\" />" }
 END { print "</xsl:template></xsl:stylesheet>" }' > "generated/${bname}.xslt" 2>&1
 
 	if [ $? -ne 0 ]; then
@@ -38,8 +38,8 @@ END { print "</xsl:template></xsl:stylesheet>" }' > "generated/${bname}.xslt" 2>
 	echo -ne > generated/${bname}.tex
 	
 	cat "${bname}.snippet" | awk \
-'/^.*-.*$/ { next }
-/^.*$/ { printf "\\index{"$1"}" }' >> generated/${bname}.tex 2>&1
+'/^[A-Z].*$/ { printf "\\index{"$1"}" }
+{}' >> generated/${bname}.tex 2>&1
 
 	if [ $? -ne 0 ]; then
 		echo "failed"
