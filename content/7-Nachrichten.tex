@@ -5,36 +5,44 @@ Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf vi
 \input{xml/generated/messages.tex}
 
 \section{Fehler}
-Die Nachrichten des Nachrichtentyps Response können alternativ zu ihrem sonstigen Inhalt einen Fehler enthalten. Ein Fehler besteht aus eine Fehlernummer, die den Typ des Fehlers definiert, einem kurzen und einem langen Fehlertext.
-
-\TODO{An neues Fehlermodell anpassen}
+Das FVS kann alternativ zu den normalen Response-, Update- und Handshake-Nachrichten auch im Fall eines Fehlers Fehlernachrichten an das RIS schicken. Eine Fehlernachricht besteht aus einer Fehlernummer, die den Typ des Fehlers definiert, einem kurzen und einem langen Fehlertext.
 
 \input{xml/generated/error.tex}
 
 \subsection{Fehlernummern}
 Die Fehlernummern stellen die unterschiedlichen Typen von Fehlern dar und sind dreistellig. Die Fehlertypen spalten sich in zwei Gruppen. Kritische Fehler treten nur auf, wenn sich einer der beiden Interaktionspartner nicht Protokollkonform verhalten hat. Die Fehlernummer kritischer Fehler liegt zwischen 100 und 199. Die Nummern nicht kritischer Fehler liegen zwischen 200 und 299. Das FVS bricht, nachdem ein kritischer Fehler übertragen wurde, immer die entsprechende Verbindung zum RIS ab. Bei einem nicht kritischen Fehler ist nur die entsprechende Interaktion fehlgeschlagen und wird abgebrochen. Die Verbindung wird dadurch nicht beeinflusst und steht für weitere Interaktionen zur Verfügung.
 
-110	Allgemeiner Autorisierungsfehler: Das RIS ist nicht autorisiert eine Verbindung zum FVS aufzubauen.
-111	Verbindungslimit erreicht: Das RIS hält bereits zu viele geöffnete Verbindungen zum FVS.
-112	IP nicht zugelassen: Die IP des RIS, unter der es versucht eine Verbindung zum FVS aufzubauen, ist nicht zugelassen.
-120	Nicht Verstanden: Die Anfrage des RIS konnte nicht verarbeitet werden, da sie keine korrekte Form hatte.
-130	Interner Serverfehler: Bei der Verarbeitung der Anfrage ist im FVS ein Fehler aufgetreten.
-140, 240	Parameter Fehlerhaft: Die Parameter der Nachricht waren nicht im akzeptablen Bereich.
-241	Versions-ID ungültig: Die Versions-ID der Anfrage konnte keiner existierenden Liste zugeordnet werden.
-250	Benutzerauthentifizierung fehlgeschlagen: Der Benutzer konnte aus unbekannten Gründen nicht authentifiziert werden.
-251	Benutzerauthentifizierung fehlgeschlagen (ungültige Daten): Der Benutzer konnte aufgrund ungültiger Authentifizierungsdaten nicht authentifiziert werden.
-252	Benutzerauthentifizierung fehlgeschlagen (gesperrt): Der Benutzer konnte nicht authentifiziert werden, da sein Account gesperrt ist.
-260	Benutzer-Token abgelaufen: Die Aktion konnte nicht durchgeführt werden, da das übermittelte Benutzer-Token nicht mehr gültig ist.
-271	Stornierung fehlgeschlagen: Die Stornierung konnte nicht durchgeführt werden.
-272	Buchung fehlgeschlagen: Die Buchung konnte nicht durchgeführt werden.
+\begin{flushleft}
+\rowcolors{1}{}{gray!25}
+\begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}X} 
+\toprule
+110	& Allgemeiner Autorisierungsfehler: Das RIS ist nicht autorisiert eine Verbindung zum FVS aufzubauen. \\
+111	& Verbindungslimit erreicht: Das RIS hält bereits zu viele geöffnete Verbindungen zum FVS. \\
+112	& IP nicht zugelassen: Die IP des RIS, unter der es versucht eine Verbindung zum FVS aufzubauen, ist nicht zugelassen. \\
+120	& Nicht Verstanden: Die Anfrage des RIS konnte nicht verarbeitet werden, da sie keine korrekte Form hatte. \\
+130	& Interner Serverfehler: Bei der Verarbeitung der Anfrage ist im FVS ein Fehler aufgetreten. \\
+140, 240 & Parameter Fehlerhaft: Die Parameter der Nachricht waren nicht im akzeptablen Bereich. \\
+241	& Versions-ID ungültig: Die Versions-ID der Anfrage konnte keiner existierenden Liste zugeordnet werden. \\
+250	& Benutzerauthentifizierung fehlgeschlagen: Der Benutzer konnte aus unbekannten Gründen nicht authentifiziert werden. \\
+251	& Benutzerauthentifizierung fehlgeschlagen (ungültige Daten): Der Benutzer konnte aufgrund ungültiger Authentifizierungsdaten nicht authentifiziert werden. \\
+252	& Benutzerauthentifizierung fehlgeschlagen (gesperrt): Der Benutzer konnte nicht authentifiziert werden, da sein Account gesperrt ist. \\
+260	& Benutzer-Token abgelaufen: Die Aktion konnte nicht durchgeführt werden, da das übermittelte Benutzer-Token nicht mehr gültig ist. \\
+271	& Stornierung fehlgeschlagen: Die Stornierung konnte nicht durchgeführt werden. \\
+272	& Buchung fehlgeschlagen: Die Buchung konnte nicht durchgeführt werden. \\
+\bottomrule
+\end{tabularx}
+\end{flushleft}
 
-\subsection{XML Beispiel}
-\TODO{Ergänzen}
+\TODO{XML Beispiel}
 
 \section{Ebene 0 -- Handshake}
-Der Handshake besteht aus fünf Nachrichtentypen. Diese sind alle abgeleitet vom abstrakten Nachrichtentyp Handshake.
+Der Handshake zwischen dem RIS und FVS besteht aus einer Folge von fünf Nachrichten. Nach dem Verbindungsaufbau durch das RIS sendet das FVS zunächst die unterstützen Protokollversionen in einer Nachricht vom Typ ProtocolVersionListHandshake mit der Bezeichnung ,,protocol-version-list-handshake''. Darauf antwortet das RIS mit der Auswahl einer Protokollversion in einer Nachricht vom Typ ProtocolVersionSelectHandshake mit der Bezeichnung ,,protocol-version-select-handshake''. Das FVS sendet nun den maximale unterstützte Dienstebene in einer Nachricht vom Typ ProtocolLevelMaxHandshake mit der Bezeichnung ,,protocol-level-max-handshake''. Das RIS antwortet darauf mit der ausgewählten Dienstebene in einer Nachricht vom Typ ProtocolLevelSelectHandshake mit der Bezeichnung ,,protocol-level-select-handshake''. Das FVS schließt den Handshake mit einer Nachricht vom Typ FinishHandshake und der Bezeichnung ,,finish-handshake'' ab. Alle Nachrichtentypen des Handshakes sind abgeleitet vom abstrakten Nachrichtentyp Handshake.
+\TODO{Anpassen an neue Aufteilung!}
+
+\input{xml/generated/handshake-messages.tex}
 
 \subsection{Liste der unterstützten Protokollversionen}
+Eine Nachricht vom Typ ProtocolVersionListHandshake dient zur Übermittlung ...
 Nach dem Verbindungsaufbau durch das RIS sendet das FVS eine Nachricht vom Typ ProtocolVersionListHandshake mit der Bezeichnung „protocol-version-list-handshake“ mit einer Liste der von Protokollversionen. Diese Liste sollte alle Versionen des Protokolls enthalten mit denen mit dem FVS kommuniziert werden kann. Anstelle der Liste kann ggf. ein Autorisierungsfehler (110, 111, 112) oder ein interner Serverfehler (130) in der Nachricht enthalten sein.
 
 \input{xml/generated/protocol-version-list-handshake.tex}
@@ -59,8 +67,7 @@ Um den Handshake abzuschließen, sendet das FVS nach erhalt der Nachricht zur Au
 
 \input{xml/generated/finish-handshake.tex}
 
-\subsection{XML Beispiel}
-\TODO{Ergänzen}
+\TODO{XML Beispiel}
 
 \section{Ebene 0 -- Abfrage der Betreiber}
 Das RIS kann eine Liste der Betreiber vom FVS abfragen. Dazu sendet zunächst das RIS eine Nachricht vom Typ OperatorListRequest mit der Bezeichnung „operator-list-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ OperatorListResponse mit der Bezeichnung „operator-list-response“.
@@ -77,8 +84,7 @@ Der Nachrichtentyp OperatorListResponse dient zur Übermittlung einer Betreiberl
 
 \input{xml/generated/operator-list-response.tex}
 
-\subsection{XML Beispiel}
-\TODO{Ergänzen}
+\TODO{XML Beispiel}
 
 \section{Ebene 0 -- Abfrage der Stationen}
 Das RIS kann eine Liste der Stationen vom FVS abfragen. Dazu sendet zunächst das RIS eine Nachricht vom Typ StationListRequest mit der Bezeichnung „station-list-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ StationListResponse mit der Bezeichnung „station-list-response“.
@@ -95,8 +101,24 @@ Der Nachrichtentyp StationListResponse dient zur Übermittlung einer Stationslis
 
 \input{xml/generated/station-list-response.tex}
 
-\subsection{XML Beispiel}
-\TODO{Ergänzen}
+\TODO{XML Beispiel}
+
+\section{Ebene 1 -- Abfrage der Zielgebiete}
+Das RIS kann eine Liste der Zielgebiete vom FVS abfragen. Dazu sendet zunächst das RIS eine Nachricht vom Typ TargetAreaListResponse mit der Bezeichnung „target-area-list-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ TargetAreaListResponse mit der Bezeichnung „target-area-list-response“.
+
+\input{xml/generated/target-area-messages.tex}
+
+\subsection{Anfrage Zielgebietliste}
+Der Nachrichtentyp TargetAreaListRequest wird zur Anfrage von Zielgebietslisten verwendet. Nachrichten dieses Typs müssen eine Betreiber-ID enthalten. Diese legt den Betreiber fest, dessen Zielgebiete abgefragt werden sollen. Die Nachrichten können die Versions-ID einer aktuell bereits vorhandenen Zielgebietsliste enthalten.
+
+\input{xml/generated/target-area-request.tex}
+
+\subsection{Antwort Zielgebietliste}
+Der Nachrichtentyp TargetAreaListResponse dient zur Übermittlung einer Zielgebietsliste vom FVS zu RIS. Er enthält eine Zielgebietsliste und eine zugehörige Versions-ID. Alternativ kann eine Nachricht dieses Typs auch ein „no-change“ Element enthalten, falls sich die aktuelle Zielgebietsliste nicht von der Liste mit der in der Anfrage gegebenen Versions-ID  unterscheidet. Die Liste muss genau die Zielgebiete des in der Anfrage gegebenen Betreibers enthalten. Falls ein Fehler aufgetreten ist, kann die Nachricht auch einen Nicht-Verstanden-Fehler (120), internen Serverfehler (130) oder Parameterfehler (240, 241) enthalten.
+
+\input{xml/generated/target-area-response.tex}
+
+\TODO{XML Beispiel}
 
 \section{Ebene 1 -- Abfrage der Buchungsziele}
 Das RIS kann eine Liste der Buchungsziele vom FVS abfragen. Diese wird nach der Übertragung des aktuellen Standes durch Update-Nachrichten aktualisiert. Dazu sendet zunächst das RIS eine Nachricht vom Typ ReservationTargetRequest mit der Bezeichnung „reservation-target-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ ReservationTargetResponse mit der Bezeichnung „reservation-target-response“. Aktualisierungen sendet das FVS als Nachrichten vom Typ ReservationTargetUpdate mit der Bezeichnung „reservation-target-update“. Ein bestehendes Aktualisierungsabonnement kann durch das RIS mit einer Nachricht vom Typ ReservationTargetUpdateCancelRequest mit der Bezeichnung „reservation-target-update-cancel-request“. Diese wird durch eine Nachricht vom Typ ReservationTargetUpdateCancelResponse mit der Bezeichnung „reservation-target-update-cancel-response“ vom FVS bestätigt.
@@ -128,8 +150,7 @@ Eine Nachricht zur Kündigung eines Buchungszielabonnements wird vom FVS mit ein
 
 \input{xml/generated/reservation-target-update-cancel-response.tex}
 
-\subsection{XML Beispiel}
-\TODO{Ergänzen}
+\TODO{XML Beispiel}
 
 \section{Ebene 2 -- Abfrage der Tarifliste}
 Das RIS kann eine Liste der Tarife vom FVS abfragen. Dazu sendet zunächst das RIS eine Nachricht vom Typ TariffListRequest mit der Bezeichnung „tariff-list-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ TariffListResponse mit der Bezeichnung „tariff-list-response“.
@@ -146,8 +167,7 @@ Der Nachrichtentyp TariffListResponse dient zur Übermittlung einer Tarifliste v
 
 \input{xml/generated/tariff-list-response.tex}
 
-\subsection{XML Beispiel}
-\TODO{Ergänzen}
+\TODO{XML Beispiel}
 
 \section{Ebene 3 -- Authentifizierung eines Benutzers}
 Das RIS kann die Authentifizierung eines Benutzers beim FVS anfordern. Dazu sendet zunächst das RIS eine Nachricht vom Typ AuthenticationRequest mit der Bezeichnung „authentication-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ AuthenticationResponse mit der Bezeichnung „authentication-response“.
@@ -164,8 +184,7 @@ Eine Nachricht vom Typ AuthenticationResponse dient zur Übermittlung von Benutz
 
 \input{xml/generated/authentication-response.tex}
 
-\subsection{XML Beispiel}
-\TODO{Ergänzen}
+\TODO{XML Beispiel}
 
 \section{Ebene 3 -- Abfrage einer Preisauskunft}
 Das RIS kann eine Preisauskunft vom FVS abfragen. Dazu sendet zunächst das RIS eine Nachricht vom Typ PriceinfoRequest mit der Bezeichnung „price-info-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ PriceInfoResponse mit der Bezeichnung „price-info-response“.
@@ -191,8 +210,7 @@ Eine Nachricht vom Typ PriceInfoResponse dient zur Übermittlung von Preisinform
 
 \input{xml/generated/price-info-response.tex}
 
-\subsection{XML Beispiel}
-\TODO{Ergänzen}
+\TODO{XML Beispiel}
 
 \section{Ebene 3 -- Anfrage zur genauen Verfügbarkeit}
 Das RIS kann eine Verfügbarkeitsauskunft vom FVS abfragen. Dazu sendet zunächst das RIS eine Nachricht vom Typ AvailabilityRequest mit der Bezeichnung „availability-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ AvailabilityResponse mit der Bezeichnung „availability-response“.
@@ -216,8 +234,7 @@ Eine Nachricht vom Typ AvailabilityResponse dient zur Übermittlung von Verfügb
 
 \input{xml/generated/availability-response.tex}
 
-\subsection{XML Beispiel}
-\TODO{Ergänzen}
+\TODO{XML Beispiel}
 
 \section{Ebene 3 -- Auftrag zur Buchung}
 Das RIS kann eine Buchung beim FVS durchführen. Dazu sendet zunächst das RIS eine Nachricht vom Typ ReservationRequest mit der Bezeichnung „reservation-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ ReservationResponse mit der Bezeichnung „reservation-response“.
@@ -243,8 +260,7 @@ Eine Nachricht vom Typ ReservationResponse dient zur Bestätigung der Durchführ
 
 \input{xml/generated/reservation-response.tex}
 
-\subsection{XML Beispiel}
-\TODO{Ergänzen}
+\TODO{XML Beispiel}
 
 \section{Ebene 3 -- Anfrage für Aktualisierungen zu einer Buchung}
 Das RIS kann Aktualisierungen zu einer Buchung vom FVS abonnieren. Dazu sendet zunächst das RIS eine Nachricht vom Typ ReservationSubscribeRequest mit der Bezeichnung ,,reservation-subscribe-request''. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ ReservationSubscribeResponse mit der Bezeichnung ,,reservation-subscribe-response''. Aktualisierungen sendet das FVS als Nachrichten vom Typ ReservationUpdate mit der Bezeichnung ,,reservation-update''. Ein bestehendes Aktualisierungsabonnement kann durch das RIS mit einer Nachricht vom Typ ReservationUpdateCancelRequest mit der Bezeichnung „reservation-update-cancel-request“. Diese wird durch eine Nachricht vom Typ ReservationUpdateCancelResponse mit der Bezeichnung „reservation-update-cancel-response“ vom FVS bestätigt.
@@ -276,8 +292,7 @@ Eine Nachricht zur Kündigung eines Buchungsabonnements wird vom FVS mit einer N
 
 \input{xml/generated/reservation-update-cancel-response.tex}
 
-\subsection{XML Beispiel}
-\TODO{Ergänzen}
+\TODO{XML Beispiel}
 
 \section{Ebene 3 -- Auftrag zur Stornierung einer Buchung}
 Das RIS kann die Stornierung einer Buchung beim FVS durchführen. Dazu sendet zunächst das RIS eine Nachricht vom Typ ReservationCancelRequest mit der Bezeichnung „reservation-cancel-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ ReservationCancelResponse mit der Bezeichnung „reservation-cancel-response“.
@@ -299,8 +314,7 @@ Eine Nachricht vom Typ ReservationResponse dient zur Bestätigung der Durchführ
 
 \input{xml/generated/reservation-cancel-response.tex}
 
-\subsection{XML Beispiel}
-\TODO{Ergänzen}
+\TODO{XML Beispiel}
 
 \section{Ebene 4 -- Auftrag zu Umbuchung einer Buchung}
 Das RIS kann eine Buchungsänderung beim FVS durchführen. Dazu sendet zunächst das RIS eine Nachricht vom Typ ReservationChangeRequest mit der Bezeichnung „reservation-change-request“. Das FVS antwortet auf diese Nachricht mit einer Nachricht vom Typ ReservationChangeResponse mit der Bezeichnung „reservation-change-response“.
@@ -326,5 +340,4 @@ Eine Nachricht vom Typ ReservationChangeResponse dient zur Bestätigung der Durc
 
 \input{xml/generated/reservation-change-response.tex}
 
-\subsection{XML Beispiel}
-\TODO{Ergänzen}
+\TODO{XML Beispiel}

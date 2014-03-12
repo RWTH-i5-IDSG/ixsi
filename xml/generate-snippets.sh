@@ -1,13 +1,13 @@
 #!/bin/bash
 
-in=$1
+#in=$1
 
-if [ "$in" = "" ]; then
-	echo "Usage: $0 [FILENAME]"
-	exit
-fi
+#if [ "$in" = "" ]; then
+#	echo "Usage: $0 [FILENAME]"
+#	exit
+#fi
 
-#ls *.snippet | while read in; do
+ls *.snippet | while read in; do
 
 	bname=$(basename $in .snippet)
 
@@ -61,4 +61,4 @@ END { print "</xsl:template></xsl:stylesheet>" }' > "generated/${bname}.xslt" 2>
 	
 	echo "done"
 
-#done
+done

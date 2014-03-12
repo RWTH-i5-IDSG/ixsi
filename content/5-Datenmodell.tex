@@ -50,6 +50,26 @@ Bild URL & optional & URL unter der eine Bild der Station geladen werden kann \\
 \subsection{XML Beispiel}
 \xmlexample{station}
 
+\section{Ebene 1 -- Zielgebiet}
+Die Zielgebiete in denen freefloating Fahrzeuge abgestellt werden können. Ein Zielgebiet ist immer genau einem Betreiber zugeordnet. Ein Gebiet wird durch zwei Menge GPS-Polygone definiert. Die erste Menge von GPS-Polygonen beschreibt die Umrisse des Gebiets. Die zweite Menge von GPS-Polygonen beschreibt die Umrisse von Gebieten, die innerhalb der durch die erste Menge beschriebenen Gebiete liegen und nicht zum zu beschreibenden Zielgebiet gehören. Jede Polygon der zweiten Menge muss vollständig in einem Polygon der ersten Menge liegen und die Polygone jeder Menge dürfen sich nicht mit Polygonen der selben Menge überschneiden.
+
+\begin{flushleft}
+\rowcolors{1}{}{gray!25}
+\begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}l>{\raggedright\arraybackslash}X} 
+\toprule
+ID & & Für eine Kombination von RIS und FVS eindeutiges Identifikationsmerkmal des Zielgebiets \\
+Betreiber & & Referenz (ID) auf den Betreiber, zu dem der Benutzer gehört \\
+GPS Gebiete & & Menge von GPS-Polygonen, welche das Gebiet definieren \\
+ausgenommen GPS Gebiete & optional & Menge von GPS-Polygonen, welche ausgenommene Bereiche definieren \\
+\bottomrule
+\end{tabularx}
+\end{flushleft}
+
+\subsection{XML Schema}
+\input{xml/generated/target-area.tex}
+
+\TODO{XML Beispiel}
+
 \section{Ebene 1 -- Buchungsziel}
 Ein Buchungsziel beschreibt eine Menge von Fahrzeugen mit gemeinsamen Eigenschaften und Verfügbarkeiten. Dadurch ist es dem FVS möglich zu bestimmen wie viel der internen Informationen dem RIS zur Verfügung gestellt werden. Ein Buchungsziel stellt nur einen Rahmen der Verfügbarkeiten dar. Somit wird keine Verfügbarkeit garantiert, sondern lediglich festgestellt, dass wenn kein passendes Buchungsziel für eine Suche existiert, auch kein Fahrzeug zur Verfügung steht. Eine genaue Verfügbarkeit wird einzeln beim FVS angefragt. Die Anfragelast beim FVS lässt sich durch einen möglichst hohen Detailgrad bei den Buchungszielen reduzieren.
 
@@ -74,13 +94,12 @@ Minimale Reichweite & optional & Minimale Reichweite des Fahrzeugs des Buchungsz
 \end{flushleft}
 
 \subsection{XML Schema}
-\input{xml/generated/targetarea.tex}
+\input{xml/generated/reservation-target.tex}
 
-\subsection{XML Beispiel}
-\TODO{Ergänzen}
+\TODO{XML Beispiel}
 
 \section{Ebene 2 -- Tarif}
-\TODO{Ergänzen}
+Ein Tarif beschreibt ein Preismodell. Ein Zielgebiet ist immer genau einem Betreiber zugeordnet. Wenn Dienstebene 3 nicht verwendet wird, sind alle Tarife öffentlich. Daher können sie jedem Nutzer des RIS angezeigt werden. Wenn Dienstebene 3 verwendet wird, können Tarife als öffentlich markiert werden. Nicht öffentlich markierte Tarife werden nur Nutzern angezeigt, die beim FVS autorisiert sind und in deren Benutzerdatensatz der entsprechende Tarif referenziert ist.
 
 \begin{flushleft}
 \rowcolors{1}{}{gray!25}
@@ -92,8 +111,8 @@ Name & & Kurzer Name \\
 Beschreibung & & Beschreibungstext \\
 Betreiber & & Referenz (ID) auf den Betreiber des Tarifs \\
 URL Logo & optional & URL unter der ein Logo geladen werden kann \\
-Zeiteinheit & & Kleinste abgerechnete Zeiteinheit in s \\
-Distanzeinheit & & Kleinste abgerechnete Distanzeinheit in m \\
+Zeiteinheit & & Kleinste abgerechnete Zeiteinheit in Sekunden \\
+Distanzeinheit & & Kleinste abgerechnete Distanzeinheit in Metern \\
 Währung & & ISO Abkürzung für die Währung (z.B. EUR, oder USD) \\
 Preis pro Zeiteinheit & & Preis in der angegebenen Währung für die angegebenen Zeiteinheit \\
 Preis pro Distanzeinheit & & Preis in der angegebenen Währung für die angegebene Distanzeinheit \\
@@ -106,8 +125,7 @@ Zeitbereiche & optional & Absolute Zeitperioden in denen dieser Tarif gültig is
 \subsection{XML Schema}
 \input{xml/generated/tariff.tex}
 
-\subsection{XML Beispiel}
-\TODO{Ergänzen}
+\TODO{XML Beispiel}
 
 \section{Ebene 3 -- Benutzer}
 Ein Benutzer bezogen auf einen FV-Betreiber. Daher können einem Benutzer eines RIS mehrere Benutzer unterschiedlicher FV-Betreiber zugeordnet werden.
@@ -128,8 +146,7 @@ Tarife & optional & Liste von Referenzen (IDs) auf Tarife, die der Benutzer nutz
 \subsection{XML Schema}
 \input{xml/generated/user.tex}
 
-\subsection{XML Beispiel}
-\TODO{Ergänzen}
+\TODO{XML Beispiel}
 
 \section{Ebene 3 -- Buchung}
 Bei einer Buchung handelt es sich um eine Reservierung für einen Benutzer. Dabei muss sie sich wie auch bei den Buchungszielen nicht auf eine konkretes Fahrzeug, sondern kann sich auch auf ein Fahrzeug einer Gruppe, die bestimmte gemeinsame Eigenschaften hat, beziehen.
@@ -160,5 +177,4 @@ Minimale Reichweite & optional & siehe Buchungsziel \\
 \subsection{XML Schema}
 \input{xml/generated/reservation.tex}
 
-\subsection{XML Beispiel}
-\TODO{Ergänzen}
+\TODO{XML Beispiel}

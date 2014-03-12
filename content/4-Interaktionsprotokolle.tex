@@ -17,6 +17,10 @@ Die Stationen eines FVS, an denen Fahrzeuge stehen können, ist eine grundlegend
 
 \section{Ebene 1 -- Verfügbarkeitsauskunft}
 
+\subsection{Abfrage der Zielgebiete}
+\interactiongraphics{Level1Zielgebiete}
+\TODO{Text}
+
 \subsection{Abfrage der Buchungsziele}
 \interactiongraphics{Level1Buchungsziel}
  Um eine Auskunft über die zur Verfügung stehenden Fahrzeuge zu realisieren werden die Fahrzeuge als Buchungsziele abgebildet. Es handelt sich hierbei nicht zwingend um eine eins-zu-eins Beziehung. Die Anfrage der Buchungsziele muss durch die Angabe einer Betreiber-ID auf einen Betreiber eingeschränkt erfolgen. Optional können analog zum Abruf der Stationsinformationen eine PLZ-Bereich oder eine Station (im Fall eines Betreibers von Freefloating-Fahrzeugeverleih, ein Polygon bestehend aus GPS-Positionen) zur Filterung der Buchungsziele angegeben werden. Das FVS antwortet zunächst mit einer vollständigen Liste aller den Filterkriterien entsprechenden Buchungsziele. Buchungsziele sind im Gegensatz zu Stations- und Betreiberinformationen dynamische Informationen die sich häufig ändern. Daher werden nach der Übertragung der Liste der Buchungsziele kontinuierlich Aktualisierungen übertragen, sobald sich die Ergebnisliste der Anfrage ändert. Bei der Änderung eines Buchungsziels wird dieses neu übertragen, wobei die Buchungsziel-ID übereinstimmen muss. Zur Löschung eines Buchungsziels wird eine Löschmitteilung mit der Buchungsziel-ID übertragen. Buchungsziele die zur Ergebnisliste hinzukommen werden mit einer neuen eindeutigen Buchungsziel-ID übertragen. Wenn für eine Anfrage keine weiteren Aktualisierungen benötigt werden, kann diese unter Angaben der bei der Übertragung der vollständigen Liste mitgelieferten Abo-ID beendet werden.
