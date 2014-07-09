@@ -1,11 +1,8 @@
 \chapter{Interaktionsprotokolle}
 \label{sec:Interaktionsprotokolle}
 
-\section{Ebene 0 -- Stationsinformationen}
+\section{Ebene 1 -- Statische Daten}
 
-\subsection{Handshake}
-\interactiongraphics{Level0Handshake}
-Um die Version und die Ebene des Protokolls mit der das RIS und das FVS miteinander kommunizieren festzulegen, wird direkt nach dem Verbindungsaufbau ein Handshake durchgeführt. Dabei teilt das FVS dem Reiseinformationssystem, die unterstützten Protokollversionen und die maximale unterstützte Protokollebene mit. Das RIS wählt daraus die gewünschte Dienstebene aus und teilt sie dem FVS mit.
 
 \subsection{Abfrage der Betreiber}
 \interactiongraphics{Level0Betreiber}
@@ -14,65 +11,65 @@ Da über eine Verbindung Informationen über mehrere FV Betreiber ausgetauscht w
 Als Parameter der Abfrage muss die Versions-ID verwendet werden, falls bereits eine Betreiberliste vorliegt.
 Wenn bei einer Anfrage durch das RIS eine Versions-ID angegeben wurde, muss das FVS prüfen, ob sich die Versions-ID der aktuellen Betreiberliste des FVS von der gegebenen Versions-ID unterscheidet. Falls sich die Versions-IDs unterscheiden oder keine Versions-ID als Parameter angegeben wurde, antwortet das FVS mit der aktuellen Betreiberliste und ihrer Versions-ID. Falls die Versions-IDs gleich sind, informiert das FVS das RIS darüber, dass sich die Betreiberliste nicht verändert hat.
 
-\subsection{Abfrage der Stationen}
-\interactiongraphics{Level0Stationen}
-Die Stationen eines FVS beschreiben Standorte an denen Fahrzeuge ausgeliehen und zurückgegeben werden können. Eine Liste von Stationen bezieht sich immer auf genau einen Betreiber, welcher in einer Anfrage anhand seiner Betreiber-ID identifiziert wird. Es ist möglich die Auswahl der Stationen durch die Angabe eines PLZ-Bereichs einzuschränken. Analog zur Abfrage der Betreiber wird eine Versions-ID verwendet.
-Die Antwort des FVS muss genau alle Stationen enthalten, die den Anfragekriterien (Betreiber-ID, PLZ-Bereich) entsprechen.
+% \subsection{Abfrage der Stationen}
+% \interactiongraphics{Level0Stationen}
+% Die Stationen eines FVS beschreiben Standorte an denen Fahrzeuge ausgeliehen und zurückgegeben werden können. Eine Liste von Stationen bezieht sich immer auf genau einen Betreiber, welcher in einer Anfrage anhand seiner Betreiber-ID identifiziert wird. Es ist möglich die Auswahl der Stationen durch die Angabe eines PLZ-Bereichs einzuschränken. Analog zur Abfrage der Betreiber wird eine Versions-ID verwendet.
+% Die Antwort des FVS muss genau alle Stationen enthalten, die den Anfragekriterien (Betreiber-ID, PLZ-Bereich) entsprechen.
 
-\section{Ebene 1 -- Verfügbarkeitsauskunft}
-
-\subsection{Abfrage der Zielgebiete}
-\interactiongraphics{Level1Zielgebiete}
-Zielgebiete dienen der Auskunft eines Free-Floating-Fahrzeugverleihs. Ein Zielgebiet ist ein Bereich, in denen ein Verleihvorgang eines Fahrzeugs beendet werden kann.
-Eine Liste von Zielgebieten bezieht sich immer auf genau einen Betreiber, der bei der Anfrage durch seine Betreiber-ID identifiziert wird. Analog zur Abfrage der Betreiber wird eine Versions-ID verwendet. Die Antwort des FVS muss genau alle Zielgebiete des angegebenen Betreibers enthalten.
-
-\subsection{Abfrage der Buchungsziele}
-\interactiongraphics{Level1Buchungsziel}
-Um eine Auskunft über die zur Verfügung stehenden Fahrzeuge zu realisieren, werden die Fahrzeuge als Buchungsziele abgebildet. Es handelt sich hierbei nicht zwingend um eine eins-zu-eins Beziehung zwischen Fahrzeug und Buchungsziel. Die Anfrage der Buchungsziele muss durch die Angabe einer Betreiber-ID auf einen Betreiber eingeschränkt erfolgen. Optional können analog zum Abruf der Stationsinformationen ein PLZ-Bereich oder eine Stations-ID (im Fall eines Betreibers von Free-Floating-Fahrzeugeverleih, ein Polygon bestehend aus GPS-Positionen) zur Filterung der Buchungsziele angegeben werden. Das FVS antwortet zunächst mit einer vollständigen Liste aller den Filterkriterien entsprechenden Buchungsziele und einer für das FVS eindeutigen Abo-ID. Die Abo-ID wird für die Zuordnung nachfolgender Aktualisierungsnachrichten verwendet. Buchungsziele werden durch ihre Buchungsziel-ID zeitunabhängig eindeutig identifiziert.
-Buchungsziele sind im Gegensatz zu Stations- und Betreiberinformationen dynamische Informationen, die sich häufig ändern. Daher werden diese kontinuierlich aktualisiert.
-Bei der Änderung eines Buchungsziels im FVS wird dieses erneut an das RIS übertragen, wobei die Buchungsziel-ID übereinstimmen muss.
-Zur Löschung eines Buchungsziels wird eine Löschmitteilung mit der Buchungsziel-ID übertragen.
-Buchungsziele, die zur Ergebnisliste hinzukommen, werden mit einer neuen eindeutigen Buchungsziel-ID übertragen. Wenn für eine Anfrage keine weiteren Aktualisierungen benötigt werden, kann diese unter Angaben der Abo-ID beendet werden.
- 
-\section{Ebene 2 -- Tarifauskunft}
-
-\subsection{Abfrage der Tarifliste}
-\interactiongraphics{Level2Tarife}
-Die Tarife eines FVS beschreiben vereinfachte Vertragskonditionen zu denen Fahrzeuge aus Buchungszielen angemietet werden können.
-Eine Liste von Tarifen bezieht sich immer auf genau einen Betreiber, welcher in einer Anfrage anhand seiner Betreiber-ID identifiziert wird. Analog zur Abfrage der Betreiber wird eine Versions-ID verwendet.
-Die Antwort des FVS muss genau die Tarife des gewählten Betreibers enthalten.
-Werden nur die Dienstebenen 0 bis 2 der Schnittstelle verwendet, wird nur die Liste der öffentlich zugänglichen Tarife vom FVS dem RIS bereitgestellt.
-
-\section{Ebene 3 -- Buchung}
-
-\subsection{Authentifizierung eines Benutzers}
-\interactiongraphics{Level3Authentifizierung}
-Buchungen durch das RIS im Namen eines Nutzers erfordern dessen Authentifizierung beim FVS.
-Hierfür wird eine Betreiber-ID zur Auswahl des Betreibers, ein Benutzeridentifikationsmerkmal (z.B. Benutzername, Email, ...) und das Passwort des Benutzers benötigt. Das FVS prüft diese Informationen auf Korrektheit und erzeugt bei Erfolg ein Authentifizierungs-Token. Dieses wird bei allen weiteren benutzerbezogenen Operation zur Authentifizierung des Benutzers verwendet. Die sicherere Speicherung des Authentifizierungs-Tokens liegt in der Verantwortung des RIS. Es kann auf dem Endgerät des Benutzers oder im Benutzerprofil im RIS gespeichert werden.
-
-\subsection{Abfrage einer Preisauskunft}
-\interactiongraphics{Level3Preisauskunft}
-Eine Preisauskunft durch das RIS und die preisoptimierte Konstruktion von intermodalen Reiseketten erfordern eine Auskunft durch das FVS über den zu erwartenden Preis der Buchung eines Fahrzeugs.
-Dazu werden bei der Anfrage neben der Betreiber-ID, die Buchungsziel-ID, ein Zeitfenster für die geplante Buchung, die Tarif-ID des anzuwendenden Tarifs, die erwartete Wegstrecke und das Identifikationsmerkmal des Benutzers angegeben. Das FVS antwortet mit einer Preisauskunft, in welcher der zu erwartende Preis aufgeteilt ist, in die Komponenten Grundbetrag, Zeitkosten, Distanzkosten und sonstige Kosten angegeben.
- 
-\subsection{Anfrage zur genauen Verfügbarkeit}
-\interactiongraphics{Level3Verfuegbarkeit}
-Buchungsziele müssen nicht eins-zu-eins jedes Fahrzeug des FVS Betreibers abbilden, sondern können auch nur eine maximale Verfügbarkeit darstellen. Daher können die Buchungsziele nur genutzt werden um sicher festzustellen, wann kein Fahrzeug mit bestimmten Parametern zur Verfügung steht. Um festzustellen, ob ein Fahrzeug zur Verfügung steht, wird eine Anfrage zur Verfügbarkeit eines Fahrzeugs an das FVS gestellt. Bei der Anfrage werden die Betreiber-ID, Buchungsziel-ID, ein Zeitfenster für welche die Verfügbarkeit geprüft werden soll und das Identifikationsmerkmal des Benutzers für den die Auskunft genutzt werden soll angegeben. Im Fall von Stationsflexiblem oder Free-Floating FV wird eine Zielstation bzw. ein Zielbereich durch ihre entsprechend ID angegeben. Wenn für die gegebenen Parameter ein Fahrzeug zur Verfügung steht antwortet das FVS mit einer Zeitspanne für die ein Fahrzeug zur Verfügung und einer Liste der anwendbaren Tarife. Die Zeitspanne muss größer oder gleich der bei der Anfrage angegebenen Zeitspanne sein. Falls kein Fahrzeug zur Verfügung steht, informiert das FVS das RIS in der Antwort.
-
-\subsection{Auftrag zur Buchung}
-\interactiongraphics{Level3Buchung}
-Ein Buchungsauftrag enthält zusätzlich zu allen Informationen die auch bei einer Verfügbarkeitsanfrage übertragen werden das Benutzer-Token und die Tarif-ID des gewählten Tarifs. Das FVS prüft die Durchführbarkeit der Buchung und antwortet nach durchgeführter Buchung mit den Buchungsinformationen oder andernfalls mit einer Fehlermeldung, die Aufschluss über den Grund gibt, warum die Buchung nicht durchgeführt werden konnte.
-
-\subsection{Anfrage für Aktualisierungen zu einer Buchung}
-\interactiongraphics{Level3Buchungsaktualisierungen}
-Anpassungen einer Reisekette durch das RIS bei Änderungen einer Buchung erfordern die Übertragung von Buchungsänderungen vom FVS zum RIS. Änderungen einer Buchung können durch das RIS beim FVS abonniert werden. Dazu sendet das RIS eine Anfrage mit der Betreiber-ID und Buchungs-ID an das FVS. Diese wird durch das FVS mit einer für das FVS eindeutigen Abo-ID und dem aktuellen Stand der Buchung bestätigt. Nachfolgende Änderungen der Buchung werden unter Verwendung der Abo-ID durch das FVS an das RIS gesendet. Wenn das Ende der Buchung erreicht wurde, die Buchung storniert wurde oder das RIS eine Anfrage zur Beendigung des Abonnements mit der Abo-ID, werden folgende Änderungen der Buchung nicht mehr an das RIS übertragen.
-
-\subsection{Auftrag zur Stornierung einer Buchung}
-\interactiongraphics{Level3Stornierung}
-Der Auftrag zur Stornierung einer Buchung enthält die Betreiber-ID, die Buchungs-ID der zu stornierenden Buchung und zur Authentifizierung das Benutzer-Token. Das FVS bestätigt dem RIS die Durchführung der Stornierung.
-
-\section{Ebene 4 -- Umbuchung}
-
-\subsection{Auftrag zur Umbuchung}
-\interactiongraphics{Level4Umbuchung} 
-Eine Umbuchung erlaubt in einem Schritt eine Buchung zu verändern oder durch eine neue Buchung zu ersetzen. Dabei muss durch das FVS sichergestellt werden, dass bei einem Fehler die ursprüngliche Buchung bestehen bleibt.
+% \section{Ebene 1 -- Verfügbarkeitsauskunft}
+% 
+% \subsection{Abfrage der Zielgebiete}
+% \interactiongraphics{Level1Zielgebiete}
+% Zielgebiete dienen der Auskunft eines Free-Floating-Fahrzeugverleihs. Ein Zielgebiet ist ein Bereich, in denen ein Verleihvorgang eines Fahrzeugs beendet werden kann.
+% Eine Liste von Zielgebieten bezieht sich immer auf genau einen Betreiber, der bei der Anfrage durch seine Betreiber-ID identifiziert wird. Analog zur Abfrage der Betreiber wird eine Versions-ID verwendet. Die Antwort des FVS muss genau alle Zielgebiete des angegebenen Betreibers enthalten.
+% 
+% \subsection{Abfrage der Buchungsziele}
+% \interactiongraphics{Level1Buchungsziel}
+% Um eine Auskunft über die zur Verfügung stehenden Fahrzeuge zu realisieren, werden die Fahrzeuge als Buchungsziele abgebildet. Es handelt sich hierbei nicht zwingend um eine eins-zu-eins Beziehung zwischen Fahrzeug und Buchungsziel. Die Anfrage der Buchungsziele muss durch die Angabe einer Betreiber-ID auf einen Betreiber eingeschränkt erfolgen. Optional können analog zum Abruf der Stationsinformationen ein PLZ-Bereich oder eine Stations-ID (im Fall eines Betreibers von Free-Floating-Fahrzeugeverleih, ein Polygon bestehend aus GPS-Positionen) zur Filterung der Buchungsziele angegeben werden. Das FVS antwortet zunächst mit einer vollständigen Liste aller den Filterkriterien entsprechenden Buchungsziele und einer für das FVS eindeutigen Abo-ID. Die Abo-ID wird für die Zuordnung nachfolgender Aktualisierungsnachrichten verwendet. Buchungsziele werden durch ihre Buchungsziel-ID zeitunabhängig eindeutig identifiziert.
+% Buchungsziele sind im Gegensatz zu Stations- und Betreiberinformationen dynamische Informationen, die sich häufig ändern. Daher werden diese kontinuierlich aktualisiert.
+% Bei der Änderung eines Buchungsziels im FVS wird dieses erneut an das RIS übertragen, wobei die Buchungsziel-ID übereinstimmen muss.
+% Zur Löschung eines Buchungsziels wird eine Löschmitteilung mit der Buchungsziel-ID übertragen.
+% Buchungsziele, die zur Ergebnisliste hinzukommen, werden mit einer neuen eindeutigen Buchungsziel-ID übertragen. Wenn für eine Anfrage keine weiteren Aktualisierungen benötigt werden, kann diese unter Angaben der Abo-ID beendet werden.
+%  
+% \section{Ebene 2 -- Tarifauskunft}
+% 
+% \subsection{Abfrage der Tarifliste}
+% \interactiongraphics{Level2Tarife}
+% Die Tarife eines FVS beschreiben vereinfachte Vertragskonditionen zu denen Fahrzeuge aus Buchungszielen angemietet werden können.
+% Eine Liste von Tarifen bezieht sich immer auf genau einen Betreiber, welcher in einer Anfrage anhand seiner Betreiber-ID identifiziert wird. Analog zur Abfrage der Betreiber wird eine Versions-ID verwendet.
+% Die Antwort des FVS muss genau die Tarife des gewählten Betreibers enthalten.
+% Werden nur die Dienstebenen 0 bis 2 der Schnittstelle verwendet, wird nur die Liste der öffentlich zugänglichen Tarife vom FVS dem RIS bereitgestellt.
+% 
+% \section{Ebene 3 -- Buchung}
+% 
+% \subsection{Authentifizierung eines Benutzers}
+% \interactiongraphics{Level3Authentifizierung}
+% Buchungen durch das RIS im Namen eines Nutzers erfordern dessen Authentifizierung beim FVS.
+% Hierfür wird eine Betreiber-ID zur Auswahl des Betreibers, ein Benutzeridentifikationsmerkmal (z.B. Benutzername, Email, ...) und das Passwort des Benutzers benötigt. Das FVS prüft diese Informationen auf Korrektheit und erzeugt bei Erfolg ein Authentifizierungs-Token. Dieses wird bei allen weiteren benutzerbezogenen Operation zur Authentifizierung des Benutzers verwendet. Die sicherere Speicherung des Authentifizierungs-Tokens liegt in der Verantwortung des RIS. Es kann auf dem Endgerät des Benutzers oder im Benutzerprofil im RIS gespeichert werden.
+% 
+% \subsection{Abfrage einer Preisauskunft}
+% \interactiongraphics{Level3Preisauskunft}
+% Eine Preisauskunft durch das RIS und die preisoptimierte Konstruktion von intermodalen Reiseketten erfordern eine Auskunft durch das FVS über den zu erwartenden Preis der Buchung eines Fahrzeugs.
+% Dazu werden bei der Anfrage neben der Betreiber-ID, die Buchungsziel-ID, ein Zeitfenster für die geplante Buchung, die Tarif-ID des anzuwendenden Tarifs, die erwartete Wegstrecke und das Identifikationsmerkmal des Benutzers angegeben. Das FVS antwortet mit einer Preisauskunft, in welcher der zu erwartende Preis aufgeteilt ist, in die Komponenten Grundbetrag, Zeitkosten, Distanzkosten und sonstige Kosten angegeben.
+%  
+% \subsection{Anfrage zur genauen Verfügbarkeit}
+% \interactiongraphics{Level3Verfuegbarkeit}
+% Buchungsziele müssen nicht eins-zu-eins jedes Fahrzeug des FVS Betreibers abbilden, sondern können auch nur eine maximale Verfügbarkeit darstellen. Daher können die Buchungsziele nur genutzt werden um sicher festzustellen, wann kein Fahrzeug mit bestimmten Parametern zur Verfügung steht. Um festzustellen, ob ein Fahrzeug zur Verfügung steht, wird eine Anfrage zur Verfügbarkeit eines Fahrzeugs an das FVS gestellt. Bei der Anfrage werden die Betreiber-ID, Buchungsziel-ID, ein Zeitfenster für welche die Verfügbarkeit geprüft werden soll und das Identifikationsmerkmal des Benutzers für den die Auskunft genutzt werden soll angegeben. Im Fall von Stationsflexiblem oder Free-Floating FV wird eine Zielstation bzw. ein Zielbereich durch ihre entsprechend ID angegeben. Wenn für die gegebenen Parameter ein Fahrzeug zur Verfügung steht antwortet das FVS mit einer Zeitspanne für die ein Fahrzeug zur Verfügung und einer Liste der anwendbaren Tarife. Die Zeitspanne muss größer oder gleich der bei der Anfrage angegebenen Zeitspanne sein. Falls kein Fahrzeug zur Verfügung steht, informiert das FVS das RIS in der Antwort.
+% 
+% \subsection{Auftrag zur Buchung}
+% \interactiongraphics{Level3Buchung}
+% Ein Buchungsauftrag enthält zusätzlich zu allen Informationen die auch bei einer Verfügbarkeitsanfrage übertragen werden das Benutzer-Token und die Tarif-ID des gewählten Tarifs. Das FVS prüft die Durchführbarkeit der Buchung und antwortet nach durchgeführter Buchung mit den Buchungsinformationen oder andernfalls mit einer Fehlermeldung, die Aufschluss über den Grund gibt, warum die Buchung nicht durchgeführt werden konnte.
+% 
+% \subsection{Anfrage für Aktualisierungen zu einer Buchung}
+% \interactiongraphics{Level3Buchungsaktualisierungen}
+% Anpassungen einer Reisekette durch das RIS bei Änderungen einer Buchung erfordern die Übertragung von Buchungsänderungen vom FVS zum RIS. Änderungen einer Buchung können durch das RIS beim FVS abonniert werden. Dazu sendet das RIS eine Anfrage mit der Betreiber-ID und Buchungs-ID an das FVS. Diese wird durch das FVS mit einer für das FVS eindeutigen Abo-ID und dem aktuellen Stand der Buchung bestätigt. Nachfolgende Änderungen der Buchung werden unter Verwendung der Abo-ID durch das FVS an das RIS gesendet. Wenn das Ende der Buchung erreicht wurde, die Buchung storniert wurde oder das RIS eine Anfrage zur Beendigung des Abonnements mit der Abo-ID, werden folgende Änderungen der Buchung nicht mehr an das RIS übertragen.
+% 
+% \subsection{Auftrag zur Stornierung einer Buchung}
+% \interactiongraphics{Level3Stornierung}
+% Der Auftrag zur Stornierung einer Buchung enthält die Betreiber-ID, die Buchungs-ID der zu stornierenden Buchung und zur Authentifizierung das Benutzer-Token. Das FVS bestätigt dem RIS die Durchführung der Stornierung.
+% 
+% \section{Ebene 4 -- Umbuchung}
+% 
+% \subsection{Auftrag zur Umbuchung}
+% \interactiongraphics{Level4Umbuchung} 
+% Eine Umbuchung erlaubt in einem Schritt eine Buchung zu verändern oder durch eine neue Buchung zu ersetzen. Dabei muss durch das FVS sichergestellt werden, dass bei einem Fehler die ursprüngliche Buchung bestehen bleibt.

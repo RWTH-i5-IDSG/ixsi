@@ -1,60 +1,122 @@
-\chapter{Dienstebenen}
+\chapter{Hierachiemodell}
 \label{sec:Dienstebenen}
-Die Dienstebenen beschreiben unterschiedliche Qualitäten der Informationskopplung, die im Folgenden weiter erläutert werden und aufeinander aufbauen. Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens die Dienstebene 0 zum Austausch der Stations- und Betreiberinformationen von beiden Interaktionspartnern unterstützt werden. Das Ebenen-Modell ist streng hierarchisch aufgebaut, somit setzt jede Dienstebene die Realisierung und Verwendung aller vorhergehenden Ebenen voraus.
+Das Hierachiemodell beschreibt unterschiedliche Qualitäten der Informationskopplung basierend auf Dienstgruppen und dient als Empfehlung für unterschiedliche Ausbaustufen der Implementierung.
+Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst 1 Statische Daten (static data) von beiden Interaktionspartnern unterstützt werden. In \cref{fig:depend} sind die Abhängigkeiten zwiscchen den Diensten dargestellt.
 
-\interactiongraphics{levelRIS-CS}
- 
-\section{Ebene 0 -- Stationsinformationen}
-Die Dienstebene 0 dient der Initialisierung der Informationskopplung und bietet Funktionen, um eine gemeinsame Festlegung der zu verwendenden Dienstebene zwischen den Interaktionspartnern (RIS und FVS) zu ermöglichen und die Stations- und Betreiberinformationen vom FVS zum RIS zu übertragen. 
+% \interactiongraphics{levelRIS-CS}
 
-Dienstebene 0 kann beispielsweise dafür verwendet werden, um nur Hinweise zu vorhandenen Stationen eines FVS-Betreibers in einem RIS anzuzeigen.
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+  % Dienste
+  \node[circleTX](s1) {Dienst 1};
+  \node[circleTX, below left of=s1](s3) {Dienst 3};
+  \node[circleTX, left of=s3](s2) {Dienst 2};
+  \node[circleTX, below right of=s1](s4) {Dienst 4};
+  \node[circleTX, right of=s4](s6) {Dienst 6};
+  \node[circleTX, below of=s4](s5) {Dienst 5};
+
+  arrows
+  \draw (s2) edge[->,thick=1cm] (s1);
+  \draw (s3) edge[->,thick=1cm] (s1);
+  \draw (s4) edge[->,thick=1cm] (s1);
+  \draw (s5) edge[->,thick=1cm] (s4);
+  \draw (s6) edge[->,thick=1cm] (s1);
+  \end{tikzpicture}
+  \label{fig:depend}
+  \caption{Dienstabhängigkeiten}
+\end{figure}
+
+\section{Dienst 1 -- Statische Daten (static data)}
+Dienst 1 dient dem Austausch von Inforomationen über Anbieter und statischen Daten von Buchungszielen. Hierzu gehören Anbieter, Standort- und Fahrzeugdaten.
+
+Dienst 1 kann beispielsweise dafür verwendet werden, um nur Hinweise zu vorhandenen Stationen eines FVS-Betreibers in einem RIS anzuzeigen.
 \subsection*{Funktionen}
 \begin{itemize}
-\item Aushandlung der zu verwendenden Protokollversion und Dienstebene
-\item Abruf der Stations- und Betreiberinformationen
+\item Abruf von Buchungsziel- und Betreiberinformationen
 \end{itemize}
 
-\section{Ebene 1 -- Verfügbarkeitsauskunft}
-Die Dienstebene 1 dient der Übermittelung von Informationen über die Verfügbarkeit von Fahrzeugen vom FVS zum RIS.
+\subsection*{Abhängigkeiten}
+keine 
 
-Die Verfügbarkeitsinformationen können vom RIS abonniert werden. Diese werden daraufhin durch das FVS in Form von Buchungszielen bereitgestellt und bei Änderungen aktualisiert. Buchungsziele stellen nur eine informative (unverbindliche) Verfügbarkeit von Fahrzeugen dar, da dabei nicht sichergestellt wird, dass ein Fahrzeug real zur Verfügung steht. Es wird dabei nur die Möglichkeit einer Verfügbarkeit dargestellt. Die genaue Verfügbarkeit kann vom RIS beim FVS durch eine zusätzliche Anfrage ermittelt werden. Das RIS darf davon ausgehen, dass in Abwesenheit eines Buchungsziels keine entsprechenden Fahrzeuge zur Verfügung stehen, so dass keine unnötigen Verfügbarkeitsanfragen an das FVS gestellt werden.
+\section{Dienst 2 -- Verfügbarkeitsauskunft (availability query) }
+Dienst 2 dient dem synchronen Abruf von Verfügbarkeitsinformationen.
+
+Die tatsächliche Verfügbarkeitszeiten von über Dienst 1 ausgetauschen Buchungszielen wird während der Reiseauskunft durch das RIS beim FVS abgerufen. 
 
 \subsection*{Funktionen}
 \begin{itemize}
-\item Abrufen und Aktualisierung der Buchungsziele
-\item Abfrage von Fahrzeugverfügbarkeiten
+\item Abruf von Verfügbarkeiten
 \end{itemize}
 
-\section{Ebene 2 -- Tarifauskunft}
-Die Dienstebene 2 dient der Übermittlung von Informationen über die Tarife und Preise für die Miete von Fahrzeugen der FV-Betreiber.
+\subsection*{Abhängigkeiten}
+\begin{itemize}
+\item Dienst 1
+\end{itemize}
 
-Tarifinformationen können vom RIS beim FVS abgerufen werden. Dienstebene 2 erweitert die Buchungsziele aus Dienstebene 1 um Referenzen auf die anwendbaren Tarife. Die Tarife führen nicht zu einer verbindlichen Preisauskunft, sondern dienen nur zu einer Abschätzung der dem Nutzer für eine Miete entstehenden Kosten. Eine genaue Preisauskunft kann vom RIS beim FVS durch eine zusätzliche Anfrage ermittelt werden.
+\section{Dienst 3 -- Verfügbarkeitsabonnement (availability subscription) }
+Dienst 2 dient dem asynchronen Austausch von Verfügbarkeitsinformationen.
+
+Um die Reiseauskunft zu beschleunigen kann das RIS Verfügbarkeitszeiträume von Buchungszielen abonnieren um eine Abfrage während der Reiseauskunft zu vermeiden. Nach dem Abonnement einer Menge von Buchungszielen informiert das FVS fortlaufend über Änderungen an Verfügbarkeitszeiträumen.
 
 \subsection*{Funktionen}
 \begin{itemize}
-\item Abrufen der Tarifinformationen
-\item Anfrage eines Preises
+\item Abonnement von Verfügbarkeiten
+\item Verfügbarkeitsinformation (push)
 \end{itemize}
 
-\section{Ebene 3 -- Buchung}
-Die Dienstebene 3 dient zur Durchführung von Buchungen von Fahrzeugen durch das RIS im Auftrag eines Kunden des FVS.
+\subsection*{Abhängigkeiten}
+\begin{itemize}
+\item Dienst 1
+\end{itemize}
 
-Für die Buchung eines Fahrzeuges ist es notwendig, dass der Kunde sich gegenüber dem FVS authentifiziert. Dazu werden die Authentifizierungsinformationen vom RIS an das FVS weitergeleitet. Das Geheimnis (Passwort, PIN, etc.) des Kunden darf vom RIS aus Sicherheitsgründen nicht gespeichert werden. Das RIS erhält bei erfolgreicher Authentifizierung eines Kunden für diesen ein Authentifizierungs-Token. Dieser kann entweder im RIS oder auf dem Endgerät des Kunden gespeichert werden. Unter Verwendung des Authentifizierungs-Tokens kann das RIS Anfragen zur Buchung und Stornierung von Buchungen durchführen. Das RIS kann Informationen zu einer Buchung abonnieren. Daraufhin werden durch das FVS die Buchungsinformationen bei Änderungen aktualisiert. Buchungen, die durch das RIS gebucht wurden, müssen durch das RIS abonniert und storniert werden können.
+
+\section{Dienst 4 -- Buchung (booking)}
+Dienst 4 dient der Buchung, Umbuchungen und Stornierung von Fahrzeugen durch das RIS im Auftrag eines Kunden des FVS.
+
+Für die Buchung eines Fahrzeuges ist es notwendig, dass der Kunde sich gegenüber dem FVS authentifiziert. Dazu werden die Authentifizierungsinformationen vom RIS an das FVS weitergeleitet. Das Geheimnis (Passwort, PIN, etc.) des Kunden darf vom RIS aus Sicherheitsgründen nicht gespeichert werden. Das RIS erhält bei erfolgreicher Authentifizierung eines Kunden für diesen ein Authentifizierungs-Token. Dieser kann entweder im RIS oder auf dem Endgerät des Kunden gespeichert werden. Unter Verwendung des Authentifizierungs-Tokens kann das RIS Anfragen zur Buchung und Stornierung von Buchungen durchführen. 
+Um den Nutzer zu ermöglichen eine Buchung zu ändern kann eine Buchung durch eine Umbuchungsanfrage des RIS durch eine neue Buchung ersetzt werden. Dabei muss sichergestellt werden, dass im Fall, dass keine neue Buchung möglich ist, die alte Buchung ihre Gültigkeit behält.
 
 \subsection*{Funktionen}
 \begin{itemize}
 \item Authentifizierung von Nutzern gegenüber dem FVS.
 \item Anfrage zur Buchung
-\item Anfrage zur Stornierung
-\item Kontinuierliche Aktualisierung der Buchungen
+\item Anfrage zur Buchungsänderung / Stornierung
 \end{itemize}
 
-\section{Ebene 4 -- Umbuchung}
-Die Dienstebene 4 dient zur Durchführungen von Buchungsänderungen durch das RIS im Auftrag eines Kunden des FVS.
+\subsection*{Abhängigkeiten}
+\begin{itemize}
+\item Dienst 1
+\end{itemize}
 
-Um den Nutzer zu ermöglichen eine Buchung zu ändern kann eine Buchung durch eine Umbuchungsanfrage des RIS durch eine neue Buchung ersetzt werden. Dabei muss sichergestellt werden, dass im Fall, dass keine neue Buchung möglich ist, die alte Buchung ihre Gültigkeit behält.
+\section{Dienst 5 -- Buchungsabonnement (booking subscription)}
+Dienst 5 dient dem Abonnement von Buchungsänderungen.
+
+Das RIS kann durchgeführte Buchungen beim FVS abbonnieren um bei Änderungen (z.B. durch ein defektes Fahrzeug) an diesen den Benutzer informieren zu können.
+\subsection*{Funktionen}
+\begin{itemize}
+\item Buchungsabonnement
+\item Buchungsalarm (Push)
+\end{itemize}
+
+\subsection*{Abhängigkeiten}
+\begin{itemize}
+\item Dienst 4
+\end{itemize}
+
+\section{Dienst 6 -- Preisauskunft (price information)}
+Dienst 6 dient der Preisauskunft von Verleihdienstleistungen. 
+
+Durch die Übermittlung von Start-, Zielort und Startzeitpunkt und Endzeitpunkt der Fahrt kann das RIS beim FVS eine unverbindliche Preisauskunft zur Information des Benutzers einhohlen. Das FVS antwortet mit einem Preis und ggfs. Einzelposten.
 
 \subsection*{Funktionen}
 \begin{itemize}
-\item Anfrage zur Umbuchung
+\item Anfrage eines Preises
 \end{itemize}
+
+\subsection*{Abhängigkeiten}
+\begin{itemize}
+\item Dienst 1
+\end{itemize}
+
+

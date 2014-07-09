@@ -1,180 +1,180 @@
 \chapter{Datenmodell}
 \label{sec:Datenmodell}
 
-\section{Ebene 0 -- Betreiber}
-Ein Betreiber von einem Fahrzeugverleih. Es können sich mehrere Betreiber ein FVS teilen. Um die Integration zu vereinfachen, werden hier grundlegenden Informationen übertragen. Falls zusätzliche Informationen benötigt werden, sollten diese Out-of-band übertragen werden.
-
-\begin{flushleft}
-\rowcolors{1}{}{gray!25}
-\begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}l>{\raggedright\arraybackslash}X} 
-\toprule
-ID & & Für eine Kombination von RIS und FVS eindeutiges Identifikationsmerkmal des Betreibers \\
-Name & & Kurzer Name \\
-Beschreibung & & Beschreibungstext \\
-Logo URL & optional & URL unter der eine Logo des Betreibers geladen werden kann \\
-Homepage URL & optional & URL unter der die Homepage des Betreibers erreicht werden kann \\
-Anmeldungs URL & optional & URL unter der die Anmeldung für neue Benutzer des Betreibers erreicht werden kann \\
-Buchungs URL & optional & URL unter der Fahrzeuge gebucht werden können \\
-Tel. Service & optional & Telefonnummer unter welcher der Betreiber bei Problemen durch Benutzer erreichbar ist \\
-\bottomrule
-\end{tabularx}
-\end{flushleft}
-
-\subsection{XML Schema}
-\input{xml/generated/operator.tex}
-
-\subsection{XML Beispiel}
-\xmlexample{operator}
-
-\section{Ebene 0 -- Station}
-Die Stationen an denen Fahrzeuge ausgeliehen und zurückgegeben werden können. Eine Station ist immer genau einem Betreiber zugeordnet.
-
-\begin{flushleft}
-\rowcolors{1}{}{gray!25}
-\begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}l>{\raggedright\arraybackslash}X} 
-\toprule
-ID & & Für eine Kombination von RIS und FVS eindeutiges Identifikationsmerkmal der Station \\
-Name & & Kurzer Name \\
-Beschreibung & & Beschreibungstext \\
-Betreiber & & Referenz (ID) auf den Betreibers der Station \\
-Position & optional & GPS Koordinaten der Station \\
-Adresse & & Adresse der Station (Straße, Nr., PLZ, Ort, Land) \\
-Bild URL & optional & URL unter der eine Bild der Station geladen werden kann \\
-\bottomrule
-\end{tabularx}
-\end{flushleft}
-
-\subsection{XML Schema}
-\input{xml/generated/station.tex}
-
-\subsection{XML Beispiel}
-\xmlexample{station}
-
-\section{Ebene 1 -- Zielgebiet}
-Die Zielgebiete in denen freefloating Fahrzeuge abgestellt werden können. Ein Zielgebiet ist immer genau einem Betreiber zugeordnet. Ein Gebiet wird durch zwei Menge GPS-Polygone definiert. Die erste Menge von GPS-Polygonen beschreibt die Umrisse des Gebiets. Die zweite Menge von GPS-Polygonen beschreibt die Umrisse von Gebieten, die innerhalb der durch die erste Menge beschriebenen Gebiete liegen und nicht zum zu beschreibenden Zielgebiet gehören. Jede Polygon der zweiten Menge muss vollständig in einem Polygon der ersten Menge liegen und die Polygone jeder Menge dürfen sich nicht mit Polygonen der selben Menge überschneiden.
-
-\begin{flushleft}
-\rowcolors{1}{}{gray!25}
-\begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}l>{\raggedright\arraybackslash}X} 
-\toprule
-ID & & Für eine Kombination von RIS und FVS eindeutiges Identifikationsmerkmal des Zielgebiets \\
-Betreiber & & Referenz (ID) auf den Betreiber, zu dem der Benutzer gehört \\
-GPS Gebiete & & Menge von GPS-Polygonen, welche das Gebiet definieren \\
-ausgenommen GPS Gebiete & optional & Menge von GPS-Polygonen, welche ausgenommene Bereiche definieren \\
-\bottomrule
-\end{tabularx}
-\end{flushleft}
-
-\subsection{XML Schema}
-\input{xml/generated/target-area.tex}
-
-\TODO{XML Beispiel}
-
-\section{Ebene 1 -- Buchungsziel}
-Ein Buchungsziel beschreibt eine Menge von Fahrzeugen mit gemeinsamen Eigenschaften und Verfügbarkeiten. Dadurch ist es dem FVS möglich zu bestimmen wie viel der internen Informationen dem RIS zur Verfügung gestellt werden. Ein Buchungsziel stellt nur einen Rahmen der Verfügbarkeiten dar. Somit wird keine Verfügbarkeit garantiert, sondern lediglich festgestellt, dass wenn kein passendes Buchungsziel für eine Suche existiert, auch kein Fahrzeug zur Verfügung steht. Eine genaue Verfügbarkeit wird einzeln beim FVS angefragt. Die Anfragelast beim FVS lässt sich durch einen möglichst hohen Detailgrad bei den Buchungszielen reduzieren.
-
-\begin{flushleft}
-\rowcolors{1}{}{gray!25}
-\begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}l>{\raggedright\arraybackslash}X} 
-\toprule
-ID & & Für eine Kombination von RIS und FVS eindeutiges Identifikationsmerkmal des Buchungsziel \\
-Typ & & Verleihart des Buchungziels (Stationsgebunden, Stationsflexibel, Freefloating) \\
-Zeitbereiche & & Menge von Zeitbereichen in denen das Buchungsziel zur Verfügung stehen kann. \\
-Tarif & Ebene 2 & Referenz (ID) auf den Tarif mit dem das Buchungsziel zur Verfügung steht \\
-Station & & Typ ist nicht Freefloating	Station an der die Fahrzeuge zur Verfügung stehen \\
-Position & & Typ ist Freefloating	Position an der die Fahrzeuge zur Verfügung stehen \\
-Zielstation & & Typ ist Stationsflexibel	Stationen an denen die Fahrzeuge zurückgegeben werden kann \\
-Zielgebiet & & Typ ist Freefloating	Gebiet an denen die Fahrzeuge zurückgegeben werden kann \\
-Eigenschaften & optional & Eigenschaften der Fahrzeuge \\
-Fahrzeugkategorie	 & & Kategorie der Fahrzeuge \\
-Fahrzeugzahl & optional & Anzahl der Fahrzeuge, die den Daten dieses Buchungsziel entsprechen \\
-Minimale Reichweite & optional & Minimale Reichweite des Fahrzeugs des Buchungsziels mit der maximalen Reichweite \\
-\bottomrule
-\end{tabularx}
-\end{flushleft}
-
-\subsection{XML Schema}
-\input{xml/generated/reservation-target.tex}
-
-\TODO{XML Beispiel}
-
-\section{Ebene 2 -- Tarif}
-Ein Tarif beschreibt ein Preismodell. Ein Zielgebiet ist immer genau einem Betreiber zugeordnet. Wenn Dienstebene 3 nicht verwendet wird, sind alle Tarife öffentlich. Daher können sie jedem Nutzer des RIS angezeigt werden. Wenn Dienstebene 3 verwendet wird, können Tarife als öffentlich markiert werden. Nicht öffentlich markierte Tarife werden nur Nutzern angezeigt, die beim FVS autorisiert sind und in deren Benutzerdatensatz der entsprechende Tarif referenziert ist.
-
-\begin{flushleft}
-\rowcolors{1}{}{gray!25}
-\begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}l>{\raggedright\arraybackslash}X} 
-\toprule
-ID & & Für eine Kombination von RIS und FVS eindeutiges Identifikationsmerkmal Identifikationsmerkmal des Tarifs \\
-Öffentlich & Ebene 3 & Öffentliche Tarife werden jedem nicht dem FVS gegenüber authentifizierten Benutzer angezeigt \\
-Name & & Kurzer Name \\
-Beschreibung & & Beschreibungstext \\
-Betreiber & & Referenz (ID) auf den Betreiber des Tarifs \\
-URL Logo & optional & URL unter der ein Logo geladen werden kann \\
-Zeiteinheit & & Kleinste abgerechnete Zeiteinheit in Sekunden \\
-Distanzeinheit & & Kleinste abgerechnete Distanzeinheit in Metern \\
-Währung & & ISO Abkürzung für die Währung (z.B. EUR, oder USD) \\
-Preis pro Zeiteinheit & & Preis in der angegebenen Währung für die angegebenen Zeiteinheit \\
-Preis pro Distanzeinheit & & Preis in der angegebenen Währung für die angegebene Distanzeinheit \\
-Basispreis & & Grundpreis, der für jede Nutzung zu zahlen ist \\
-Zeitbereiche & optional & Absolute Zeitperioden in denen dieser Tarif gültig ist mit Zeithorizont 3 Monate. \\
-\bottomrule
-\end{tabularx}
-\end{flushleft}
-
-\subsection{XML Schema}
-\input{xml/generated/tariff.tex}
-
-\TODO{XML Beispiel}
-
-\section{Ebene 3 -- Benutzer}
-Ein Benutzer bezogen auf einen FV-Betreiber. Daher können einem Benutzer eines RIS mehrere Benutzer unterschiedlicher FV-Betreiber zugeordnet werden.
-
-Vom FVS zum RIS werden nur die systemspezifischen Benutzerinformationen übertragen, da die Stammdaten des Nutzers für die Abwicklung der Interaktionen der beiden Systeme nicht notwendig sind und separat erhoben werden sollten.
-
-\begin{flushleft}
-\rowcolors{1}{}{gray!25}
-\begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}l>{\raggedright\arraybackslash}X} 
-\toprule
-ID & & Für eine Kombination von RIS und FVS eindeutiges Identifikationsmerkmal des Benutzers \\
-Betreiber & & Referenz (ID) auf den Betreiber, zu dem der Benutzer gehört \\
-Tarife & optional & Liste von Referenzen (IDs) auf Tarife, die der Benutzer nutzen kann. Wenn keine Tarife angegeben werden, werden automatisch alle öffentlichen Tarife verwendet. \\
-\bottomrule
-\end{tabularx}
-\end{flushleft}
-
-\subsection{XML Schema}
-\input{xml/generated/user.tex}
-
-\TODO{XML Beispiel}
-
-\section{Ebene 3 -- Buchung}
-Bei einer Buchung handelt es sich um eine Reservierung für einen Benutzer. Dabei muss sie sich wie auch bei den Buchungszielen nicht auf eine konkretes Fahrzeug, sondern kann sich auch auf ein Fahrzeug einer Gruppe, die bestimmte gemeinsame Eigenschaften hat, beziehen.
-
-\begin{flushleft}
-\rowcolors{1}{}{gray!25}
-\begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}l>{\raggedright\arraybackslash}X} 
-\toprule
-ID & & Für eine Kombination von RIS und FVS eindeutiges Identifikationsmerkmal der Buchung \\
-Zeitbereich & & Zeitbereich für den das Fahrzeug reserviert ist \\
-Betreiber & & Referenz (ID) auf den Betreiber, zu dem die Buchung gehört \\
-Benutzer & & Referenz (ID) auf den Benutzer, für den die Buchung gilt \\
-Abrechnungstoken & & \\
-Fahrzeugkategorie & & siehe Buchungsziel \\
-Typ & & siehe Buchungsziel \\
-Tarif & & siehe Buchungsziel \\
-Station & Typ ist nicht Freefloating & siehe Buchungsziel \\
-Position & Typ ist Freefloating & siehe Buchungsziel \\
-Zielstation & Typ ist Stationsflexibel & siehe Buchungsziel \\
-Zielgebiet & Typ ist Freefloating & siehe Buchungsziel \\
-Eigenschaften & optional & siehe Buchungsziel \\
-Minimale Reichweite & optional & siehe Buchungsziel \\
-\bottomrule
-\end{tabularx}
-\end{flushleft}
-
-
-\subsection{XML Schema}
-\input{xml/generated/reservation.tex}
-
-\TODO{XML Beispiel}
+% \section{Ebene 0 -- Betreiber}
+% Ein Betreiber von einem Fahrzeugverleih. Es können sich mehrere Betreiber ein FVS teilen. Um die Integration zu vereinfachen, werden hier grundlegenden Informationen übertragen. Falls zusätzliche Informationen benötigt werden, sollten diese Out-of-band übertragen werden.
+% 
+% \begin{flushleft}
+% \rowcolors{1}{}{gray!25}
+% \begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}l>{\raggedright\arraybackslash}X} 
+% \toprule
+% ID & & Für eine Kombination von RIS und FVS eindeutiges Identifikationsmerkmal des Betreibers \\
+% Name & & Kurzer Name \\
+% Beschreibung & & Beschreibungstext \\
+% Logo URL & optional & URL unter der eine Logo des Betreibers geladen werden kann \\
+% Homepage URL & optional & URL unter der die Homepage des Betreibers erreicht werden kann \\
+% Anmeldungs URL & optional & URL unter der die Anmeldung für neue Benutzer des Betreibers erreicht werden kann \\
+% Buchungs URL & optional & URL unter der Fahrzeuge gebucht werden können \\
+% Tel. Service & optional & Telefonnummer unter welcher der Betreiber bei Problemen durch Benutzer erreichbar ist \\
+% \bottomrule
+% \end{tabularx}
+% \end{flushleft}
+% 
+% \subsection{XML Schema}
+% \input{xml/generated/operator.tex}
+% 
+% \subsection{XML Beispiel}
+% \xmlexample{operator}
+% 
+% \section{Ebene 0 -- Station}
+% Die Stationen an denen Fahrzeuge ausgeliehen und zurückgegeben werden können. Eine Station ist immer genau einem Betreiber zugeordnet.
+% 
+% \begin{flushleft}
+% \rowcolors{1}{}{gray!25}
+% \begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}l>{\raggedright\arraybackslash}X} 
+% \toprule
+% ID & & Für eine Kombination von RIS und FVS eindeutiges Identifikationsmerkmal der Station \\
+% Name & & Kurzer Name \\
+% Beschreibung & & Beschreibungstext \\
+% Betreiber & & Referenz (ID) auf den Betreibers der Station \\
+% Position & optional & GPS Koordinaten der Station \\
+% Adresse & & Adresse der Station (Straße, Nr., PLZ, Ort, Land) \\
+% Bild URL & optional & URL unter der eine Bild der Station geladen werden kann \\
+% \bottomrule
+% \end{tabularx}
+% \end{flushleft}
+% 
+% \subsection{XML Schema}
+% \input{xml/generated/station.tex}
+% 
+% \subsection{XML Beispiel}
+% \xmlexample{station}
+% 
+% \section{Ebene 1 -- Zielgebiet}
+% Die Zielgebiete in denen freefloating Fahrzeuge abgestellt werden können. Ein Zielgebiet ist immer genau einem Betreiber zugeordnet. Ein Gebiet wird durch zwei Menge GPS-Polygone definiert. Die erste Menge von GPS-Polygonen beschreibt die Umrisse des Gebiets. Die zweite Menge von GPS-Polygonen beschreibt die Umrisse von Gebieten, die innerhalb der durch die erste Menge beschriebenen Gebiete liegen und nicht zum zu beschreibenden Zielgebiet gehören. Jede Polygon der zweiten Menge muss vollständig in einem Polygon der ersten Menge liegen und die Polygone jeder Menge dürfen sich nicht mit Polygonen der selben Menge überschneiden.
+% 
+% \begin{flushleft}
+% \rowcolors{1}{}{gray!25}
+% \begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}l>{\raggedright\arraybackslash}X} 
+% \toprule
+% ID & & Für eine Kombination von RIS und FVS eindeutiges Identifikationsmerkmal des Zielgebiets \\
+% Betreiber & & Referenz (ID) auf den Betreiber, zu dem der Benutzer gehört \\
+% GPS Gebiete & & Menge von GPS-Polygonen, welche das Gebiet definieren \\
+% ausgenommen GPS Gebiete & optional & Menge von GPS-Polygonen, welche ausgenommene Bereiche definieren \\
+% \bottomrule
+% \end{tabularx}
+% \end{flushleft}
+% 
+% \subsection{XML Schema}
+% \input{xml/generated/target-area.tex}
+% 
+% \TODO{XML Beispiel}
+% 
+% \section{Ebene 1 -- Buchungsziel}
+% Ein Buchungsziel beschreibt eine Menge von Fahrzeugen mit gemeinsamen Eigenschaften und Verfügbarkeiten. Dadurch ist es dem FVS möglich zu bestimmen wie viel der internen Informationen dem RIS zur Verfügung gestellt werden. Ein Buchungsziel stellt nur einen Rahmen der Verfügbarkeiten dar. Somit wird keine Verfügbarkeit garantiert, sondern lediglich festgestellt, dass wenn kein passendes Buchungsziel für eine Suche existiert, auch kein Fahrzeug zur Verfügung steht. Eine genaue Verfügbarkeit wird einzeln beim FVS angefragt. Die Anfragelast beim FVS lässt sich durch einen möglichst hohen Detailgrad bei den Buchungszielen reduzieren.
+% 
+% \begin{flushleft}
+% \rowcolors{1}{}{gray!25}
+% \begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}l>{\raggedright\arraybackslash}X} 
+% \toprule
+% ID & & Für eine Kombination von RIS und FVS eindeutiges Identifikationsmerkmal des Buchungsziel \\
+% Typ & & Verleihart des Buchungziels (Stationsgebunden, Stationsflexibel, Freefloating) \\
+% Zeitbereiche & & Menge von Zeitbereichen in denen das Buchungsziel zur Verfügung stehen kann. \\
+% Tarif & Ebene 2 & Referenz (ID) auf den Tarif mit dem das Buchungsziel zur Verfügung steht \\
+% Station & & Typ ist nicht Freefloating	Station an der die Fahrzeuge zur Verfügung stehen \\
+% Position & & Typ ist Freefloating	Position an der die Fahrzeuge zur Verfügung stehen \\
+% Zielstation & & Typ ist Stationsflexibel	Stationen an denen die Fahrzeuge zurückgegeben werden kann \\
+% Zielgebiet & & Typ ist Freefloating	Gebiet an denen die Fahrzeuge zurückgegeben werden kann \\
+% Eigenschaften & optional & Eigenschaften der Fahrzeuge \\
+% Fahrzeugkategorie	 & & Kategorie der Fahrzeuge \\
+% Fahrzeugzahl & optional & Anzahl der Fahrzeuge, die den Daten dieses Buchungsziel entsprechen \\
+% Minimale Reichweite & optional & Minimale Reichweite des Fahrzeugs des Buchungsziels mit der maximalen Reichweite \\
+% \bottomrule
+% \end{tabularx}
+% \end{flushleft}
+% 
+% \subsection{XML Schema}
+% \input{xml/generated/reservation-target.tex}
+% 
+% \TODO{XML Beispiel}
+% 
+% \section{Ebene 2 -- Tarif}
+% Ein Tarif beschreibt ein Preismodell. Ein Zielgebiet ist immer genau einem Betreiber zugeordnet. Wenn Dienstebene 3 nicht verwendet wird, sind alle Tarife öffentlich. Daher können sie jedem Nutzer des RIS angezeigt werden. Wenn Dienstebene 3 verwendet wird, können Tarife als öffentlich markiert werden. Nicht öffentlich markierte Tarife werden nur Nutzern angezeigt, die beim FVS autorisiert sind und in deren Benutzerdatensatz der entsprechende Tarif referenziert ist.
+% 
+% \begin{flushleft}
+% \rowcolors{1}{}{gray!25}
+% \begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}l>{\raggedright\arraybackslash}X} 
+% \toprule
+% ID & & Für eine Kombination von RIS und FVS eindeutiges Identifikationsmerkmal Identifikationsmerkmal des Tarifs \\
+% Öffentlich & Ebene 3 & Öffentliche Tarife werden jedem nicht dem FVS gegenüber authentifizierten Benutzer angezeigt \\
+% Name & & Kurzer Name \\
+% Beschreibung & & Beschreibungstext \\
+% Betreiber & & Referenz (ID) auf den Betreiber des Tarifs \\
+% URL Logo & optional & URL unter der ein Logo geladen werden kann \\
+% Zeiteinheit & & Kleinste abgerechnete Zeiteinheit in Sekunden \\
+% Distanzeinheit & & Kleinste abgerechnete Distanzeinheit in Metern \\
+% Währung & & ISO Abkürzung für die Währung (z.B. EUR, oder USD) \\
+% Preis pro Zeiteinheit & & Preis in der angegebenen Währung für die angegebenen Zeiteinheit \\
+% Preis pro Distanzeinheit & & Preis in der angegebenen Währung für die angegebene Distanzeinheit \\
+% Basispreis & & Grundpreis, der für jede Nutzung zu zahlen ist \\
+% Zeitbereiche & optional & Absolute Zeitperioden in denen dieser Tarif gültig ist mit Zeithorizont 3 Monate. \\
+% \bottomrule
+% \end{tabularx}
+% \end{flushleft}
+% 
+% \subsection{XML Schema}
+% \input{xml/generated/tariff.tex}
+% 
+% \TODO{XML Beispiel}
+% 
+% \section{Ebene 3 -- Benutzer}
+% Ein Benutzer bezogen auf einen FV-Betreiber. Daher können einem Benutzer eines RIS mehrere Benutzer unterschiedlicher FV-Betreiber zugeordnet werden.
+% 
+% Vom FVS zum RIS werden nur die systemspezifischen Benutzerinformationen übertragen, da die Stammdaten des Nutzers für die Abwicklung der Interaktionen der beiden Systeme nicht notwendig sind und separat erhoben werden sollten.
+% 
+% \begin{flushleft}
+% \rowcolors{1}{}{gray!25}
+% \begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}l>{\raggedright\arraybackslash}X} 
+% \toprule
+% ID & & Für eine Kombination von RIS und FVS eindeutiges Identifikationsmerkmal des Benutzers \\
+% Betreiber & & Referenz (ID) auf den Betreiber, zu dem der Benutzer gehört \\
+% Tarife & optional & Liste von Referenzen (IDs) auf Tarife, die der Benutzer nutzen kann. Wenn keine Tarife angegeben werden, werden automatisch alle öffentlichen Tarife verwendet. \\
+% \bottomrule
+% \end{tabularx}
+% \end{flushleft}
+% 
+% \subsection{XML Schema}
+% \input{xml/generated/user.tex}
+% 
+% \TODO{XML Beispiel}
+% 
+% \section{Ebene 3 -- Buchung}
+% Bei einer Buchung handelt es sich um eine Reservierung für einen Benutzer. Dabei muss sie sich wie auch bei den Buchungszielen nicht auf eine konkretes Fahrzeug, sondern kann sich auch auf ein Fahrzeug einer Gruppe, die bestimmte gemeinsame Eigenschaften hat, beziehen.
+% 
+% \begin{flushleft}
+% \rowcolors{1}{}{gray!25}
+% \begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}l>{\raggedright\arraybackslash}X} 
+% \toprule
+% ID & & Für eine Kombination von RIS und FVS eindeutiges Identifikationsmerkmal der Buchung \\
+% Zeitbereich & & Zeitbereich für den das Fahrzeug reserviert ist \\
+% Betreiber & & Referenz (ID) auf den Betreiber, zu dem die Buchung gehört \\
+% Benutzer & & Referenz (ID) auf den Benutzer, für den die Buchung gilt \\
+% Abrechnungstoken & & \\
+% Fahrzeugkategorie & & siehe Buchungsziel \\
+% Typ & & siehe Buchungsziel \\
+% Tarif & & siehe Buchungsziel \\
+% Station & Typ ist nicht Freefloating & siehe Buchungsziel \\
+% Position & Typ ist Freefloating & siehe Buchungsziel \\
+% Zielstation & Typ ist Stationsflexibel & siehe Buchungsziel \\
+% Zielgebiet & Typ ist Freefloating & siehe Buchungsziel \\
+% Eigenschaften & optional & siehe Buchungsziel \\
+% Minimale Reichweite & optional & siehe Buchungsziel \\
+% \bottomrule
+% \end{tabularx}
+% \end{flushleft}
+% 
+% 
+% \subsection{XML Schema}
+% \input{xml/generated/reservation.tex}
+% 
+% \TODO{XML Beispiel}
