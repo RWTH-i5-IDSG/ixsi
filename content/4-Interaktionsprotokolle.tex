@@ -1,7 +1,7 @@
 \chapter{Interaktionsprotokolle}
 \label{sec:Interaktionsprotokolle}
 
-\section{Dienst 1 -- Statische Daten}
+\section{Dienst 1 -- Statische Daten (static data)}
 
 
 \subsection{Abfrage Buchungsziele}
@@ -57,13 +57,56 @@ Um nichtintervallweise alle Buchungszielinformationen übertragen zu müssen kan
 \newthread{ris}{:RIS}
 \newinst[7]{fvs}{:FVS}
 
-\begin{sdblock}{BookingTargetsInfo}{}
+\begin{sdblock}{AvailabilityRequest}{}
 
-\begin{call}{ris}{BookingTargetID, TimePeriod}{fvs}{BookingTargetList}
+\begin{call}{ris}{BookingTargetList/Circle/GeoRectangle, TimePeriod}{fvs}{BookingTargetList}
 \end{call}
 
 \end{sdblock}
 
 \end{sequencediagram}
 \end{center}
+
+Um die konkreten Verfügbarkeiten abzufragen sendet das RIS eine Anfrage die entweder eine Liste mit Buchungszielen oder ein Geographisches Gebiet in Form einer Umgebungssuche (Circle) oder eines Rechtecks  (GeoRectangle) und eine geünschte Zeitperiode enthält. Ohne Angabe wird die Verfügbarkeit von allen Buchungszielen zurück gegeben. Als Antwort sendet das FVS eine Liste mit Buchungszielen und deren Verfügbarkeiten zurück.
+
+
+\subsection{Abfrage aktuelle Stationskapazität (Dienst 2a)}
+
+\begin{center}
+\begin{sequencediagram}
+\newthread{ris}{:RIS}
+\newinst[7]{fvs}{:FVS}
+
+\begin{sdblock}{PlaceAvailability}{}
+
+\begin{call}{ris}{PlaceIDList/Circle/GeoRectangle}{fvs}{PlaceAvailabilityList}
+\end{call}
+
+\end{sdblock}
+
+\end{sequencediagram}
+\end{center}
+Das RIS kann z.B. zur Kartendarstellung, die aktuellen Kapazitäten von Verleihstation anfragen. Hierzu wird eine Liste mit Stations IDs oder ein Gebiet übermittelt und eine Liste mit Stationen und deren aktuelle Anzahl verfügbarer Fahrzeuge zurück gegeben.
+
+
+\section{Dienst 3 -- Verfügbarkeitsabonnement (availability subscription) }
+
+\subsection{Abfrage Verfügbarkeit}
+
+\begin{center}
+\begin{sequencediagram}
+\newthread{ris}{:RIS}
+\newinst[7]{fvs}{:FVS}
+
+\begin{sdblock}{AvailabilityRequest}{}
+
+\begin{call}{ris}{BookingTargetList/Circle/GeoRectangle, TimePeriod}{fvs}{BookingTargetList}
+\end{call}
+
+\end{sdblock}
+
+\end{sequencediagram}
+\end{center}
+
+Um die konkreten Verfügbarkeiten abzufragen sendet das RIS eine Anfrage die entweder eine Liste mit Buchungszielen oder ein Geographisches Gebiet in Form einer Umgebungssuche (Circle) oder eines Rechtecks  (GeoRectangle) und eine geünschte Zeitperiode enthält. Ohne Angabe wird die Verfügbarkeit von allen Buchungszielen zurück gegeben. Als Antwort sendet das FVS eine Liste mit Buchungszielen und deren Verfügbarkeiten zurück.
 

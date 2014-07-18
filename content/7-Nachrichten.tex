@@ -2,12 +2,12 @@
 \label{sec:Nachrichten}
 Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf vier Nachrichtengrundtypen: Handshake, Request, Response und Update. Vom Typ Handshake sind nur die Nachrichten, die während der Handshake-Interaktion auf Dienstebene 0 ausgetauscht werden. Alle Nachrichten vom RIS an das FVS stellen Anfragen dar und sind daher vom Typ Request. Der Typ Response wird für direkte Antworten des FVS auf Anfragen des RIS verwendet. Um eine Zuordnung der Response-Nachrichten zu den zugehörigen Request-Nachrichten zu erlauben, wird jede Request-Nachrichte mit einer eindeutigen Transaction-ID markiert, die in der zugehörigen Response-Nachricht wieder mitgegeben werden muss. Eine Response-Nachricht kann anstelle ihres normalen Inhalts auch einen Fehler enthalten. Der letzte Nachrichtentyp „Update“ findet in den Fällen Verwendung, wenn das RIS fortlaufende Aktualisierungen vom FVS angefordert hat. Dazu wird dem RIS in der Antwort auf die Anfrage der fortlaufenden Aktualisierungen eine Abo-ID mitgeteilt, die in jeder zugehörigen Update-Nachricht mitgegeben wird.
 
-\input{xml/generated/messages.tex}
+% \input{xml/generated/messages.tex}
 
 \section{Fehler}
 Das FVS kann alternativ zu den normalen Response-, Update- und Handshake-Nachrichten auch im Fall eines Fehlers Fehlernachrichten an das RIS schicken. Eine Fehlernachricht besteht aus einer Fehlernummer, die den Typ des Fehlers definiert, einem kurzen und einem langen Fehlertext.
 
-\input{xml/generated/error.tex}
+% \input{xml/generated/error.tex}
 
 \subsection{Fehlercodes}
 Fehlercodes werden im Datentyp ErrorCodeType gespeichert.
