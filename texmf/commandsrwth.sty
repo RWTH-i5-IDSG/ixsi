@@ -1,0 +1,74 @@
+% Provide useful commands for checking if packages are loaded or
+% commands are defined
+%
+% Copyright (c) Alexander Zimmermann, 2009
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3b
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+% http://www.latex-project.org/lppl.txt
+% and version 1.3b or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+% 
+% This work has the LPPL maintenance status `Alexander Zimmermann'.
+% 
+% This work consists of the file rwthcommands.sty only.
+%
+\def\rwthcommands@version{0.4}
+\def\rwthcommands@date{2010/04/19}
+\def\rwthcommands@msg{rwthcommands: Provide useful commands for checking\MessageBreak
+  if packages are loaded or commands are defined}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{commandsrwth}[\rwthcommands@date. v.\MessageBreak
+  \rwthcommands@version. \rwthcommands@msg]
+\RequirePackage{ifthen}
+
+\newcommand{\IfDraft}[1]{\ifx\@draft\@undefined \else #1 \fi}
+\newcommand{\IfNotDraft}[1]{\ifx\@draft\@undefined #1 \fi}
+\newcommand{\IfNotDraftElse}[2]{\ifx\@draft\@undefined #1 \else #2 \fi}
+
+\providecommand{\IfClass}[2]{\@ifclassloaded{#1}{#2}{}}
+\providecommand{\IfNotClass}[2]{\@ifclassloaded{#1}{}{#2}}
+\providecommand{\IfElseClass}[3]{\@ifclassloaded{#1}{#2}{#3}}
+
+\providecommand{\IfPackage}[2]{\@ifpackageloaded{#1}{#2}{}}
+\providecommand{\IfNotPackage}[2]{\@ifpackageloaded{#1}{}{#2}}
+\providecommand{\IfElsePackage}[3]{\@ifpackageloaded{#1}{#2}{#3}}
+
+\providecommand{\IfDef}[1]{%
+  \ifcsname #1\endcsname
+		\expandafter\ifx\csname #1\endcsname\relax
+			\expandafter\expandafter\expandafter\@gobble
+		\else
+			\expandafter\expandafter\expandafter\@firstofone
+		\fi
+	\else
+		\expandafter\@gobble
+	\fi
+}
+
+\providecommand{\IfNotDef}[1]{%
+  \ifcsname #1\endcsname
+		\expandafter\ifx\csname #1\endcsname\relax
+			\expandafter\expandafter\expandafter\@firstofone
+		\else
+			\expandafter\expandafter\expandafter\@gobble
+		\fi
+	\else
+		\expandafter\@gobble
+	\fi
+}
+
+\providecommand{\IfElseDef}[1]{%
+  \ifcsname #1\endcsname
+		\expandafter\ifx\csname #1\endcsname\relax
+			\expandafter\expandafter\expandafter\@secondoftwo
+		\else
+			\expandafter\expandafter\expandafter\@firstoftwo
+		\fi
+	\else
+		\expandafter\@gobble
+	\fi
+}

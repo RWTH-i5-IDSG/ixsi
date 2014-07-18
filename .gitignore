@@ -33,7 +33,6 @@ talk/*.pdf
 *.tan
 *.tvn
 *.xdy
-texmf
 .DS_Store
 *.idx
 *.ilg
