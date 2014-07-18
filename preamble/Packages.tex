@@ -82,8 +82,13 @@ strict
 \usepackage{float}
 \floatstyle{plaintop}
 \restylefloat{table}
+
+% tikz styles
+\usepackage[underline=false,rounded corners=false]{texmf/pgf-umlsd} % for interactions graphs
 \usepackage{tikz-er2}
 \tikzstyle{circleTX} = [draw, circle, minimum height=1.2cm, node
+distance=3cm]
+  \tikzstyle{rectangleTX} = [draw, rectangle, minimum height=1.2cm, node
 distance=3cm]
 % flafter forces float to be placed after referenced
 % \usepackage{flafter} 
@@ -100,68 +105,47 @@ caption=false,
 
 \graphicspath{{./graphics/}}
 
+% remove identation
+\usepackage{parskip}
 
 % permissive float placement
-\IfNotClass{beamer}{%
-  \setcounter{topnumber}{4}
-  \setcounter{bottomnumber}{4}
-  \setcounter{totalnumber}{10}
-  \renewcommand{\textfraction}{0.15}
-  \renewcommand{\topfraction}{0.85}
-  \renewcommand{\bottomfraction}{0.70}
-  \renewcommand{\floatpagefraction}{0.66}
-}
+\setcounter{topnumber}{4}
+\setcounter{bottomnumber}{4}
+\setcounter{totalnumber}{10}
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.70}
+\renewcommand{\floatpagefraction}{0.66}
 
 
-%---- misc ----------------------------------------------
-
-\IfNotClass{beamer}{
-  \usepackage[noadjust]{cite}
-  \usepackage{paralist}
-  \usepackage[hyphens]{url}
-  \usepackage{imakeidx}                    % Indexerstellung 
-  \usepackage{ftnright} % Fussnoten nur rechts
-}
-
-\IfClass{beamer}{%
-  \usepackage[accumulated]{beamerseminar}
-  \usepackage[absolute,overlay]{textpos}
-  \usepackage{pgfpages}                   % Ermöglicht eine Two-Screen Präsentation
-  \usepackage{textpos}                    % Absolute Positionierung von Texten/Graphiken
-}
-
-% balance columns use for IEEE/ACM
-% \usepackage{flushend} 
-% \usepackage{balance} 
 
 
 %---- hyperref --------------------------------------------
-\IfNotClass{beamer}{%
-  \usepackage[
-  %   draft,
-  %   final,
-  breaklinks=true,
-  linktocpage=true,
-  hyperfootnotes=true,
+\usepackage[
+%   draft,
+%   final,
+breaklinks=true,
+linktocpage=true,
+hyperfootnotes=true,
 %   pagebackref=true,
-  plainpages=false,
-  naturalnames=true,
-  pageanchor=true,
-  bookmarks=true,
+plainpages=false,
+naturalnames=true,
+pageanchor=true,
+bookmarks=true,
 %   hidelinks,
-  colorlinks=false,
-  linkcolor=blue,
-  urlcolor=blue,
-  citecolor=blue,
-  bookmarks=true,
-  bookmarksnumbered=true,
-  pdfpagemode=UseOutlines,
-  pdfpagelabels=true,
-  pdfencoding=auto,
+colorlinks=false,
+linkcolor=blue,
+urlcolor=blue,
+citecolor=blue,
+bookmarks=true,
+bookmarksnumbered=true,
+pdfpagemode=UseOutlines,
+pdfpagelabels=true,
+pdfencoding=auto,
 %  psdextra,
-  pdfstartview={FitH},
-  unicode
-  ]{hyperref}
+pdfstartview={FitH},
+unicode
+]{hyperref}
 
 % not usefull for pdflatex
 %\usepackage[hyphenbreaks]{breakurl}
@@ -174,10 +158,9 @@ caption=false,
   description,
   nonumberlist
 ]{glossaries}
-% \renewcommand*{\glspostdescription}{}
+\renewcommand*{\glspostdescription}{}
 
-
-} %if Until here
+\usepackage{makeidx}
 
 %----------------------------------------------------------
 %---- Settings --------------------------------------------
@@ -303,11 +286,6 @@ caption=false,
 \newcommand*{\sra}{\ensuremath{\shortrightarrow}\xspace}
 \newcommand*{\sla}{\ensuremath{\shortleftarrow}\xspace}
 
-% Interaktionsprotokollbilder
-\newcommand{\interactiongraphics}[1]{\begin{center}
-\includegraphics[width=11cm]{graphics/#1.pdf}
-\end{center}}
-
 
 \newcolumntype{M}[1]{
   >{\RaggedRight\arraybackslash\hspace{0pt}}m{#1}%
@@ -342,34 +320,6 @@ caption=false,
 \newcommand*{\subfigureautorefname}{\figureautorefname}
 
 
-%---- listings --------------------------------------------
-% add \lineref command for listing enviroment
-%\newcommand*{\lineref}[2][]{%
-%\ifthenelse{\equal{#1}{}}{%
-%\hyperref[{#2}]{line~\ref*{#2}}%
-%}{%
-%\hyperref[{#2}]{\begin{NoHyper}line~\ref{#1}--\ref{#2}\end{NoHyper}}%
-%}\xspace%
-%}
-
-
-%----- Beamer settings --------------------------------------
-\IfClass{beamer}{
-  \usetheme{rwth}
-  \setbeamercovered{transparent}                                  % Versteckter Text ist transparent
-  \setbeamertemplate{caption}{\insertcaption}             % Only text as caption
-  \setbeamerfont{caption}{size={\footnotesize}}           % Caption size
-}
-
-% tweak footnote line
-\renewcommand{\footnoterule}{%
-  \kern -3pt
-  \hrule width 1.5in
-  \kern 2.6pt
-}
-
-% superscript footnote number
-% \deffootnote{0em}{1.6em}{\textsuperscript{\thefootnotemark}}
 
 \usepackage{scrpage2}
 

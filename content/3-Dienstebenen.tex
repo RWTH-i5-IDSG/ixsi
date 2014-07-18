@@ -1,7 +1,7 @@
 \chapter{Hierachiemodell}
 \label{sec:Dienstebenen}
 Das Hierachiemodell beschreibt unterschiedliche Qualitäten der Informationskopplung basierend auf Dienstgruppen und dient als Empfehlung für unterschiedliche Ausbaustufen der Implementierung.
-Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst 1 Statische Daten (static data) von beiden Interaktionspartnern unterstützt werden. In \cref{fig:depend} sind die Abhängigkeiten zwiscchen den Diensten dargestellt.
+Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst 1 Statische Daten (static data) von beiden Interaktionspartnern unterstützt werden. In \cref{fig:depend} sind die Abhängigkeiten zwischen den Diensten dargestellt.
 
 % \interactiongraphics{levelRIS-CS}
 
@@ -9,14 +9,15 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
   \centering
   \begin{tikzpicture}
   % Dienste
-  \node[circleTX](s1) {Dienst 1};
-  \node[circleTX, below left of=s1](s3) {Dienst 3};
-  \node[circleTX, left of=s3](s2) {Dienst 2};
-  \node[circleTX, below right of=s1](s4) {Dienst 4};
-  \node[circleTX, right of=s4](s6) {Dienst 6};
-  \node[circleTX, below of=s4](s5) {Dienst 5};
+  \tikzstyle{ann} = [draw=none,fill=none,right]
+  \node[rectangleTX](s1) {Dienst 1};
+  \node[rectangleTX, below left of=s1](s3) {Dienst 3};
+  \node[rectangleTX, left of=s3](s2) {Dienst 2};
+  \node[rectangleTX, below right of=s1](s4) {Dienst 4};
+  \node[rectangleTX, right of=s4](s6) {Dienst 6};
+  \node[rectangleTX, below of=s4](s5) {Dienst 5};
 
-  arrows
+%   arrows
   \draw (s2) edge[->,thick=1cm] (s1);
   \draw (s3) edge[->,thick=1cm] (s1);
   \draw (s4) edge[->,thick=1cm] (s1);
@@ -28,7 +29,7 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
 \end{figure}
 
 \section{Dienst 1 -- Statische Daten (static data)}
-Dienst 1 dient dem Austausch von Inforomationen über Anbieter und statischen Daten von Buchungszielen. Hierzu gehören Anbieter, Standort- und Fahrzeugdaten.
+Dienst 1 dient dem Austausch von Informationen über Anbieter und statischen Daten von Buchungszielen. Hierzu gehören Anbieter, Standort- und Fahrzeugdaten.
 
 Dienst 1 kann beispielsweise dafür verwendet werden, um nur Hinweise zu vorhandenen Stationen eines FVS-Betreibers in einem RIS anzuzeigen.
 \subsection*{Funktionen}
@@ -42,7 +43,7 @@ keine
 \section{Dienst 2 -- Verfügbarkeitsauskunft (availability query) }
 Dienst 2 dient dem synchronen Abruf von Verfügbarkeitsinformationen.
 
-Die tatsächliche Verfügbarkeitszeiten von über Dienst 1 ausgetauschen Buchungszielen wird während der Reiseauskunft durch das RIS beim FVS abgerufen. 
+Die tatsächliche Verfügbarkeitszeiten von Buchungszielen wird während der Reiseauskunft durch das RIS beim FVS abgerufen. 
 
 \subsection*{Funktionen}
 \begin{itemize}
@@ -92,7 +93,7 @@ Um den Nutzer zu ermöglichen eine Buchung zu ändern kann eine Buchung durch ei
 \section{Dienst 5 -- Buchungsabonnement (booking subscription)}
 Dienst 5 dient dem Abonnement von Buchungsänderungen.
 
-Das RIS kann durchgeführte Buchungen beim FVS abbonnieren um bei Änderungen (z.B. durch ein defektes Fahrzeug) an diesen den Benutzer informieren zu können.
+Das RIS kann durchgeführte Buchungen beim FVS abbonnieren, um bei Änderungen (z.B. durch ein defektes Fahrzeug) an diesen den Benutzer informieren zu können.
 \subsection*{Funktionen}
 \begin{itemize}
 \item Buchungsabonnement
