@@ -6,6 +6,9 @@
 #	echo "Usage: $0 [FILENAME]"
 #	exit
 #fi
+command -v xsltproc >/dev/null 2>&1 || { echo >&2 "I require xsltproc but it's not installed.  Aborting."; exit 1; }
+command -v tidy >/dev/null 2>&1 || { echo >&2 "I require tidy but it's not installed.  Aborting."; exit 1; }
+command -v awk >/dev/null 2>&1 || { echo >&2 "I require awk but it's not installed.  Aborting."; exit 1; }
 
 ls *.snippet | while read in; do
 
