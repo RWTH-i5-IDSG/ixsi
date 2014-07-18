@@ -15,8 +15,8 @@ ls *.snippet | while read in; do
 	
 	cat "${bname}.snippet" | awk \
 'BEGIN { print "<?xml version=\"1.0\" encoding=\"UTF-8\"?><xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"><xsl:output method=\"xml\" indent=\"no\" omit-xml-declaration=\"yes\" /><xsl:template match=\"/\">"}
-/^[A-Z].*$/ { print "<xsl:copy-of select=\"//xs:complexType[@name='\''" $1 "'\'']\" />"; next}
-{ print "<xsl:copy-of select=\"/xs:schema/xs:element[@name='\''" $1 "'\'']\" />" }
+/^type:(.*)$/ { sub(/^type:/, "", $1); print "<xsl:copy-of select=\"//xs:complexType[@name='\''" $1 "'\'']\" />"; next}
+/^element:(.*)$/ { sub(/^element:/, "", $1); print "<xsl:copy-of select=\"//xs:element[@name='\''" $1 "'\'']\" />" }
 END { print "</xsl:template></xsl:stylesheet>" }' > "generated/${bname}.xslt" 2>&1
 
 	if [ $? -ne 0 ]; then
