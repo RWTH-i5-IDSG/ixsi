@@ -19,12 +19,10 @@
 *.brf
 .directory
 *.ttn
-Literature-old.bib
 *.nav
 *.snm
 *.toc
 *.vrb
-talk/*.pdf
 *.bcf
 *.gnn
 *.lof
@@ -40,3 +38,4 @@ talk/*.pdf
 *.make
 *.temp
 report.d
+*.tmproj
