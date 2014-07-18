@@ -28,7 +28,7 @@ END { print "</xsl:template></xsl:stylesheet>" }' > "generated/${bname}.xslt" 2>
 		
 	echo -ne "Generating ${bname}.xmlsnippet from ${bname}.xslt..."
 
-	xsltproc "generated/${bname}.xslt" interface.xsd | \
+	xsltproc "generated/${bname}.xslt" IXSI.xsd | \
 		awk '/^[ \t]*$/ { print "<blank-line />"; next } { print }'| \
 		tidy --input-xml true --indent yes --indent-spaces 4 -wrap 100 2>/dev/null | \
 		awk '/^<blank-line \/>$/ { print ""; next } { print }'> "generated/${bname}.xmlsnippet"
