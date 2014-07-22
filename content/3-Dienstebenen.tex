@@ -65,11 +65,13 @@ Um die Reiseauskunft zu beschleunigen kann das RIS Verfügbarkeitszeiträume von
 \begin{itemize}
 \item Abonnement von Verfügbarkeiten
 \item Verfügbarkeitsinformation (push)
+\item Abonnement von Stationskapazitäten (Dienst 3a)
 \end{itemize}
 
 \subsection*{Abhängigkeiten}
 \begin{itemize}
 \item Dienst 1
+\item Basisdienst B
 \end{itemize}
 
 
@@ -104,6 +106,7 @@ Das RIS kann durchgeführte Buchungen beim FVS abbonnieren, um bei Änderungen (
 \subsection*{Abhängigkeiten}
 \begin{itemize}
 \item Dienst 4
+\item Basisdienst B
 \end{itemize}
 
 \section{Dienst 6 -- Preisauskunft (price information)}
@@ -121,4 +124,60 @@ Durch die Übermittlung von Start-, Zielort und Startzeitpunkt und Endzeitpunkt 
 \item Dienst 1
 \end{itemize}
 
+
+\section{Dienst 6 -- Preisauskunft (price information)}
+Dienst 6 dient der Preisauskunft von Verleihdienstleistungen. 
+
+Durch die Übermittlung von Start-, Zielort und Startzeitpunkt und Endzeitpunkt der Fahrt kann das RIS beim FVS eine unverbindliche Preisauskunft zur Information des Benutzers einhohlen. Das FVS antwortet mit einem Preis und ggfs. Einzelposten.
+
+\subsection*{Funktionen}
+\begin{itemize}
+\item Anfrage eines Preises
+\end{itemize}
+
+\subsection*{Abhängigkeiten}
+\begin{itemize}
+\item Dienst 1
+\end{itemize}
+
+
+\section{Bassisdienst A -- Sitzungen (session handling)}
+Dienst A dient der Authentifizierung von Endkunden gegenüber dem FVS.
+
+\subsection*{Funktionen}
+\begin{itemize}
+\item Sitzung öffnen / schließen
+\end{itemize}
+
+\subsection*{Abhängigkeiten}
+\begin{itemize}
+\item -
+\end{itemize}
+
+
+\section{Bassisdienst B -- Abonnements (subscription handling)}
+Dienst B enthält eine Funktion zur Überprüfung des Status einer Abonnementverbindung (heartbeat)
+
+\subsection*{Funktionen}
+\begin{itemize}
+\item Heartbeat
+\end{itemize}
+
+\subsection*{Abhängigkeiten}
+\begin{itemize}
+\item -
+\end{itemize}
+
+\section{Bassisdienst C -- tokens}
+Dienst C enthält eine Funktion zur Erstellung von Authentifizierungstokens für Endkunden, die anstelle von Klartextpasswörtern gespeichert / übertragen werden können.
+
+\subsection*{Funktionen}
+\begin{itemize}
+\item Erstellung von Tokens
+\end{itemize}
+
+\subsection*{Abhängigkeiten}
+\begin{itemize}
+\item -
+\end{itemize}
 
