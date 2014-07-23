@@ -16,7 +16,7 @@ type="Typ"
 comment="Kommentar"
 optional="optional"
 multivalue="mehrwertig"
-
+empty="(leer)"
 command -v xsltproc >/dev/null 2>&1 || { echo >&2 "I require xsltproc but it's not installed.  Aborting."; exit 1; }
 
 mkdir -p generated
@@ -46,26 +46,32 @@ xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; d
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 <xsl:output omit-xml-declaration="yes" />
 <xsl:template match="/">
+<xsl:text disable-output-escaping="yes">\\begin{samepage}</xsl:text>
 <xsl:text disable-output-escaping="yes">\\emph{$x}\\index{$x}: </xsl:text>
 <xsl:value-of select="//xs:complexType[@name='$x']/xs:annotation/xs:documentation"/>
-<xsl:text disable-output-escaping="yes"><![CDATA[\begin{flushleft}
-\rowcolors{1}{}{gray!25}
+<xsl:text>\\ \smallskip</xsl:text>
+<xsl:text disable-output-escaping="yes"><![CDATA[
+\begin{flushleft}
+\rowcolors{1}{}{gray!10}
 \begin{tabularx}{\linewidth}{ll>{\raggedright\arraybackslash}X} 
 \toprule
 $element  & $type & $comment \\\\
 \midrule ]]>
 </xsl:text>
 <xsl:for-each select="//xs:complexType[@name='$x']//xs:element">
-<xsl:text>\texttt{</xsl:text><xsl:value-of select="@name"/><xsl:text  disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
-<xsl:value-of select="@type"/><xsl:text  disable-output-escaping="yes"><![CDATA[ & ]]></xsl:text>
-<xsl:if test="@minOccurs = 0"><xsl:text> \\emph{$optional} </xsl:text></xsl:if>
-<xsl:if test="@maxOccurs='unbounded'"><xsl:text> \\emph{$multivalue} </xsl:text></xsl:if>
+<xsl:text>\emph{</xsl:text><xsl:value-of select="@name"/><xsl:text disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
+<xsl:text>\texttt{</xsl:text><xsl:value-of select="@type"/><xsl:text  disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
+<xsl:if test="@minOccurs = 0"><xsl:text> \\textit{$optional} </xsl:text></xsl:if>
+<xsl:if test="@maxOccurs='unbounded'"><xsl:text> \\textit{$multivalue} </xsl:text></xsl:if>
 <xsl:value-of select="xs:annotation/xs:documentation"/>
 <xsl:text>\\\\
 </xsl:text>
 </xsl:for-each>
+<xsl:if test="not(//xs:complexType[@name='$x']//xs:element)">
+<xsl:text disable-output-escaping="yes"><![CDATA[ \textit{$empty} & & \\\\ ]]></xsl:text>
+</xsl:if>
 <xsl:text>\bottomrule 
-\end{tabularx} \end{flushleft}</xsl:text>
+\end{tabularx}\end{flushleft}\end{samepage}\medskip</xsl:text>
 </xsl:template>
 </xsl:stylesheet>
 EOF

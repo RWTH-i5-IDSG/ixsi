@@ -344,4 +344,11 @@ Stand \thisdate~\thistime ~-- Version \thisversion
 
 \newcommand*{\xmlexample}[1]{\lstinputlisting[style=xml-style]{xml/examples/#1.xml}}
 
+
+%  emph and texttt are automatically index, used textit isntead to prevent it
+\let\OldTexttt\texttt
+\renewcommand{\texttt}[1]{\OldTexttt{{#1}}\index{#1}}
+\let\OldEmph\emph
+\renewcommand{\emph}[1]{\OldEmph{{#1}}\index{#1}}
+
 % ------
