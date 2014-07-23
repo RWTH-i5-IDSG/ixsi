@@ -9,34 +9,7 @@ Das FVS kann alternativ zu den normalen Response-, Update- und Handshake-Nachric
 
 % \input{xml/generated/error.tex}
 
-\subsection{Fehlercodes}
-Fehlercodes werden im Datentyp ErrorCodeType gespeichert.
-\begin{flushleft}
-\rowcolors{1}{}{gray!25}
-\begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}X} 
-\toprule
-Wert & Bedeutung\\
-auth\_provider\_unknown & Authentifizierung: Unbekannte Provider-ID\\
-auth\_invalid\_password & Authentifizierung: User-Passwort-Kombination ungültig\\
-auth\_invalid\_token & Authentifizierung: User-Token-Kombination ungültig\\
-auth\_session\_invalid & Authentifizierung: Session ist ungültig/abgelaufen\\
-auth\_anon\_not\_allowed & Authentifizierung: Anonymer User nicht erlaubt\\
-auth\_not\_authorized & Autorisation: Nutzer ist zu dieser Anfrage nicht berechtigt\\
-sys\_backend\_failed & System: Hintergrundsystem antwortet nicht\\
-sys\_unknown\_failure & System: unbekannter Fehler\\
-sys\_not\_implemented & System: Request nicht implementiert\\
-sys\_request\_not\_plausible & System: Request ist nicht plausibel. Dieser Wert sollte stets verwendet werden, wenn inhaltlich Fehler im Request enthalten sind.\\
-booking\_target\_unknown & Buchungsziel unbekannt\\
-price\_info\_not\_available & Preisinformationen nicht verfügbar\\
-booking\_too\_short & Buchungsdauer zu kurz\\
-booking\_too\_long & Buchungsdauer zu lang\\
-booking\_target\_not\_available & Buchungsziel im gegebenen Zeitraum nicht buchbar\\
-booking\_change\_not\_possible & Buchungsänderung kann nicht durchgeführt werden\\
-booking\_id\_unknown & Unbekannte Buchungs-ID. Dieser Wert sollte auch verwendet werden, wenn die Buchungs-ID einem anderen User zugeordnet ist.\\
-language\_not\_supported & Angefragte Sprache nicht vollständig unterstützt, andere Sprache geliefert.\\
-\bottomrule
-\end{tabularx}
-\end{flushleft}
+
 
 % \TODO{XML Beispiel}
 % 
