@@ -61,6 +61,7 @@ $element  & $type & $comment \\\\
 <xsl:text>\texttt{</xsl:text><xsl:value-of select="@name"/><xsl:text  disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
 <xsl:value-of select="@type"/><xsl:text  disable-output-escaping="yes"><![CDATA[ & ]]></xsl:text>
 <xsl:if test="@minOccurs = 0"><xsl:text> \\emph{$optional} </xsl:text></xsl:if>
+<xsl:if test="@maxOccurs > 1"><xsl:text> \\emph{$multivalue} </xsl:text></xsl:if>
 <xsl:value-of select="xs:annotation/xs:documentation"/>
 <xsl:text>\\\\
 </xsl:text>
