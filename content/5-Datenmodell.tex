@@ -1,39 +1,91 @@
 \chapter{Datenmodell}
 \label{sec:Datenmodell}
 
+\section{Basisdatentypen}
+\label{subsec:Datenmodell:Basis}
+
+\subsection*{Text}
+\input{xml/generated/TextType}
+
+\subsection*{Ortskoordinaten}
+\input{xml/generated/CoordType}
+
+\subsection*{Kreis}
+\input{xml/generated/GeoCircleType}
+
+\subsection*{Rechteck}
+\input{xml/generated/GeoRectangleType}
+
+\subsection*{Gebiet}
+\input{xml/generated/GeoAreaType}
+
+\subsection*{Zeitrahmen}
+\input{xml/generated/TimePeriodType}
+
+\subsection*{Zeitrahmen (Vorschlag)}
+\input{xml/generated/TimePeriodProposalType}
+
+
 \section{Dienst 1}
 \label{subsec:Datenmodell:Dienst1}
 
 \subsection*{Buchungsziel}
+\input{xml/generated/BookingTargetType}
 
-\input{xml/generated/BookingTargetType-docu}
-% \TODO{XML Beispiel}
 
 \subsection*{Verleihstation}
+\input{xml/generated/PlaceType}
 
-\input{xml/generated/PlaceType-docu}
-% \TODO{XML Beispiel}
+\subsection*{Gruppe von Verleihstationen}
+\input{xml/generated/PlaceGroupType}
 
 \subsection*{Provider}
+\input{xml/generated/ProviderType}
 
-\input{xml/generated/ProviderType-docu}
-% \TODO{XML Beispiel}
 
 \subsection*{Fahrzeugeigenschaft}
+\input{xml/generated/AttributeType}
 
-\input{xml/generated/AttributeType-docu}
-% \TODO{XML Beispiel}
-
+\subsection*{Freefloating Gebiet}
+\input{xml/generated/FloatingAreaType}
 
 \section{Dienst 2}
-\label{subsec:Datenmodell:Dienst1}
+\label{subsec:Datenmodell:Dienst2}
 
 \subsection*{Buchungszieleigenschaften}
+\input{xml/generated/BookingTargetPropertiesType}
 
-\input{xml/generated/BookingTargetPropertiesType-docu}
-% \TODO{XML Beispiel}
 
-\subsection*{Zeitrahmen}
 
-\input{xml/generated/TimePeriodType-docu}
-% \TODO{XML Beispiel}
+
+\section{Dienst 4}
+\label{subsec:Datenmodell:Dienst4}
+
+\subsection*{Fahrzeugverfügbarkeit}
+\input{xml/generated/BookingTargetChangeAvailabilityType}
+
+\subsection*{Stationskapazität}
+\input{xml/generated/PlaceAvailabilityType}
+
+
+\section{Dienst 5}
+\label{subsec:Datenmodell:Dienst5}
+
+\subsection*{Buchungsverfügbarkeit}
+\input{xml/generated/BookingChangeType}
+
+
+\section{Dienst 6}
+\label{subsec:Datenmodell:Dienst6}
+
+\subsection*{Preisinformation}
+\input{xml/generated/TariffType}
+
+
+
+\section{Authentifizierung}
+\subsection*{Authentifizierung}
+\input{xml/generated/AuthType}
+
+\subsection*{Benutzeridentifikation}
+\input{xml/generated/UserInfoType}

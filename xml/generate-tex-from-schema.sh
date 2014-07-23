@@ -23,26 +23,24 @@ mkdir -p generated
 
 rm generated/*
 
-
+# generate xslt to parse types
 cat << EOF >getalltypes.xslt
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
         <xsl:output omit-xml-declaration="yes" />
         <xsl:template match="/">
                 <xsl:for-each select="//xs:complexType">
-                        <xsl:value-of select="@name"/><xsl:text>
-</xsl:text>
+                        <xsl:value-of select="@name"/><xsl:text>&#xa;</xsl:text>
                 </xsl:for-each>
         </xsl:template>
 </xsl:stylesheet>
 EOF
 
-
+#iterate ofer list of types
 xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; do
 
 	echo -ne "Generating generated/${x}.tex..."
-	
-
+#generate xslt per type
 	cat << EOF >generated/${x}.xslt
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -61,7 +59,7 @@ $element  & $type & $comment \\\\
 <xsl:text>\texttt{</xsl:text><xsl:value-of select="@name"/><xsl:text  disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
 <xsl:value-of select="@type"/><xsl:text  disable-output-escaping="yes"><![CDATA[ & ]]></xsl:text>
 <xsl:if test="@minOccurs = 0"><xsl:text> \\emph{$optional} </xsl:text></xsl:if>
-<xsl:if test="@maxOccurs > 1"><xsl:text> \\emph{$multivalue} </xsl:text></xsl:if>
+<xsl:if test="@maxOccurs='unbounded'"><xsl:text> \\emph{$multivalue} </xsl:text></xsl:if>
 <xsl:value-of select="xs:annotation/xs:documentation"/>
 <xsl:text>\\\\
 </xsl:text>
@@ -71,7 +69,6 @@ $element  & $type & $comment \\\\
 </xsl:template>
 </xsl:stylesheet>
 EOF
-
 
 	xsltproc "generated/${x}.xslt" IXSI.xsd >generated/${x}.tex
 	if [ $? -ne 0 ]; then
