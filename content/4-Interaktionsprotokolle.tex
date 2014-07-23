@@ -1,7 +1,7 @@
 \chapter{Interaktionsprotokolle}
 \label{sec:Interaktionsprotokolle}
 
-\section{Dienst 1 -- Statische Daten (static data)}
+\section{Dienst 1 -- Statische Daten}
 
 
 \subsection{Abfrage Buchungsziele}
@@ -48,7 +48,7 @@ Als Basis für die Informationskopplung dient der Austausch von sogenannten Buch
 
 Um nichtintervallweise alle Buchungszielinformationen übertragen zu müssen kann mit dem Aufruf \texttt{ChangedProviders} angefragt werden bei welchem Anbieter sich Änderungen seit einem bestimmten Zeitpunkt, vorgegeben durch den Parameter \texttt{timestamp}, ergeben haben. Rückgegeben wird eine \texttt{ProviderID} die wiederum bei \texttt{BookingTargetsInfo} als Parameter übergeben werden kann.
 
-\section{Dienst 2 -- Verfügbarkeitsauskunft (availability query) }
+\section{Dienst 2 -- Verfügbarkeitsauskunft}
 
 \subsection{Abfrage Verfügbarkeit}
 
@@ -91,7 +91,7 @@ Um die konkreten Verfügbarkeiten abzufragen sendet das RIS eine Anfrage die ent
 Das RIS kann z.B. zur Kartendarstellung, die aktuellen Kapazitäten von Verleihstation anfragen. Hierzu wird eine Liste mit Stations IDs oder ein Gebiet übermittelt und eine Liste mit Stationen und deren aktuelle Anzahl verfügbarer Fahrzeuge zurück gegeben.
 
 
-\section{Dienst 3 -- Verfügbarkeitsabonnement (availability subscription) }
+\section{Dienst 3 -- Verfügbarkeitsabonnement}
 
 \subsection{Verfügbarkeitsabonnement}
 \label{subsec:Interaktionsprotokolle:Dienst3}
@@ -190,7 +190,7 @@ Zur anfänglichen Synchronsierung aller verfügbarkeiten kann das RIS die Funkti
 Das RIS kann die Kapazitätsinformation von Stationen abonnieren. Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3}.
 
 
-\section{Dienst 4 -- Buchung / Buchungsänderung (booking) }
+\section{Dienst 4 -- Buchung / Buchungsänderung}
 \label{sec:Interaktionsprotokolle:Dienst4}
 
 \begin{center}
@@ -235,7 +235,7 @@ Das RIS kann die Kapazitätsinformation von Stationen abonnieren. Der Interaktio
 Um im Kundenaufauftrag ein Fahrzeug zu Buchen ist es erfoderlich, dass das RIS den Kunden gegenüber dem FVS authentifizert. Hierzu gibt im drei Möglichkeiten die in \cref{sec:Interaktionsprotokolle:DienstA} genauer dargestellt sind. In diesem Beispiel wird explizit eine Session mit \texttt{OpenSession} geöffnet und im Anschluss der Transkation durch \texttt{CloseSession} wieder geschlossen. Danach kann eine Buchung durch den Aufruf von \texttt{Booking} mit Angabe der entsprechenden Buchungsziel ID und einem Vorschlag für einen Zeitraum durchgeführt. \blockquote{Vorschlag} deshalb, da das FVS z.B. den Zeitraum auf das verwendete Buchungsraster ändern kann. Als Antwort wird die verwendete Buchungs ID (\emph{nicht Buchungsziel ID!}) und der tatsächliche Buchungszeitraum zurück gegeben. Die Buchungs ID kann zur Überwachung der Buchung verwendet werden (vgl. \cref{sec:Interaktionsprotokolle:Dienst5}). Zur Änderung des Buchungszeitraum oder zur Stornierung kann \texttt{ChangeBooking} aufgerufen werden. Bei Änderung des Buchungsziels ist eine Stornierung und Neubuchung erforderlich. 
 
 
-\section{Dienst 5 --  Buchungsabonnement (booking subscription)}
+\section{Dienst 5 --  Buchungsabonnement}
 \label{sec:Interaktionsprotokolle:Dienst5}
 
 \begin{center}
@@ -280,7 +280,7 @@ Das RIS kann Änderungen an Buchung abonnieren um diese Informationen dem Kunden
 Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3}.
 
 
-\section{Dienst 6 -- Preisauskunft (price information)}
+\section{Dienst 6 -- Preisauskunft}
 
 
 % \subsection{Abfrage Preis}
