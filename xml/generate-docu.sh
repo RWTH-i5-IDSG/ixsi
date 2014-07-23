@@ -1,29 +1,43 @@
 #!/bin/bash
 
-#in=$1
+# Script to  parse all Types from a e.g. WSDL file and generate tex tables accordingly.
+# 
+# By Christoph Terwelp <terwelp@dbis.rwth-aachen.de>
+#    Christian Samsel <samsel@dbis.rwth-aachen.de>
 
-#if [ "$in" = "" ]; then
-#	echo "Usage: $0 [FILENAME]"
-#	exit
-#fi
 command -v xsltproc >/dev/null 2>&1 || { echo >&2 "I require xsltproc but it's not installed.  Aborting."; exit 1; }
+
+mkdir -p generated
 
 rm generated/*
 
-ls *.snippet | while read in; do
 
-	bname=$(basename $in .snippet)
-	ename=`cat ${bname}.snippet`
-	
-	echo -ne "Generating ${bname}-docu.xslt form ${bname}.snippet...."
+cat << EOF >generated/getalltypes.xslt
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <xsl:output omit-xml-declaration="yes" />
+        <xsl:template match="/">
+                <xsl:for-each select="//xs:complexType">
+                        <xsl:value-of select="@name"/><xsl:text>
+</xsl:text>
+                </xsl:for-each>
+        </xsl:template>
+</xsl:stylesheet>
+EOF
+
+
+xsltproc "generated/getalltypes.xslt" IXSI.xsd  | uniq | sort | grep -v '^$' | while read type; do
+
+	echo -ne "Generating ${type}-docu.xslt..."
 	
 
-	cat << EOF >generated/${bname}-docu.xslt
+	cat << EOF >generated/${type}-docu.xslt
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 <xsl:output omit-xml-declaration="yes" />
 <xsl:template match="/">
-<xsl:value-of select="$ename/xs:annotation/xs:documentation"/>
+<xsl:text disable-output-escaping="yes">\\emph{$type}\\index{$type}: </xsl:text>
+<xsl:value-of select="//xs:complexType[@name='$type']/xs:annotation/xs:documentation"/>
 <xsl:text disable-output-escaping="yes"><![CDATA[\begin{flushleft}
 \rowcolors{1}{}{gray!25}
 \begin{tabularx}{\linewidth}{ll>{\raggedright\arraybackslash}X} 
@@ -31,9 +45,10 @@ ls *.snippet | while read in; do
 Element & Typ & Kommentar\\\\
 \midrule ]]>
 </xsl:text>
-<xsl:for-each select="$ename//xs:element">
+<xsl:for-each select="//xs:complexType[@name='$type']//xs:element">
 <xsl:text>\texttt{</xsl:text><xsl:value-of select="@name"/><xsl:text  disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
 <xsl:value-of select="@type"/><xsl:text  disable-output-escaping="yes"><![CDATA[ & ]]></xsl:text>
+<xsl:if test="@minOccurs = 0"><xsl:text> \\emph{optional} </xsl:text></xsl:if>
 <xsl:value-of select="xs:annotation/xs:documentation"/>
 <xsl:text>\\\\
 </xsl:text>
@@ -46,8 +61,8 @@ EOF
 
 	echo "done"
 
-	echo -ne "Generating ${bname}-docu.tex from ${bname}-docu.xslt..."
-	xsltproc "generated/${bname}-docu.xslt" IXSI.xsd >generated/${bname}-docu.tex
+	echo -ne "Generating ${type}-docu.tex from ${bname}-docu.xslt..."
+	xsltproc "generated/${type}-docu.xslt" IXSI.xsd >generated/${type}-docu.tex
 	echo "done"
 
 done
