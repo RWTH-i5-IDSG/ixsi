@@ -126,8 +126,7 @@ xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; d
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 <xsl:output omit-xml-declaration="yes" indent="yes"/>
 <xsl:template match="/">
-<xsl:text disable-output-escaping="yes"><![CDATA[
-\begin{samepage}
+<xsl:text disable-output-escaping="yes"><![CDATA[\begin{samepage}
 \noindent $schema: \index{$x}
 \begin{lstlisting}[style=XML-style]]]>
 </xsl:text>
@@ -150,5 +149,5 @@ EOF
 done
 
 echo -ne "cleanup..."
-# rm $file-stripped stripannotations.xslt getalltypes.xslt
+rm $file-stripped stripannotations.xslt getalltypes.xslt
 echo "done"

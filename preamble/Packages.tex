@@ -86,10 +86,11 @@ strict
 % tikz styles
 \usepackage[underline=false,rounded corners=false]{texmf/pgf-umlsd} % for interactions graphs
 \usepackage{texmf/tikz-er2}
+\usetikzlibrary{positioning}
 \tikzstyle{circleTX} = [draw, circle, minimum height=1.2cm, node
 distance=3cm]
-  \tikzstyle{rectangleTX} = [draw, rectangle, minimum height=1.2cm, node
-distance=3cm]
+  \tikzstyle{rectangleTX} = [draw, rectangle, minimum height=1.2cm, minimum width=2cm, node
+  distance=3cm, align=left]
 % flafter forces float to be placed after referenced
 % \usepackage{flafter} 
 

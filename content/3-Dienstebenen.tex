@@ -3,19 +3,17 @@
 Das Hierachiemodell beschreibt unterschiedliche Qualitäten der Informationskopplung basierend auf Dienstgruppen und dient als Empfehlung für unterschiedliche Ausbaustufen der Implementierung.
 Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst 1 Statische Daten (static data) von beiden Interaktionspartnern unterstützt werden. In \cref{fig:depend} sind die Abhängigkeiten zwischen den Diensten dargestellt.
 
-% \interactiongraphics{levelRIS-CS}
-
 \begin{figure}[h]
   \centering
   \begin{tikzpicture}
   % Dienste
   \tikzstyle{ann} = [draw=none,fill=none,right]
-  \node[rectangleTX](s1) {Dienst 1};
-  \node[rectangleTX, below left of=s1](s3) {Dienst 3};
-  \node[rectangleTX, left of=s3](s2) {Dienst 2};
-  \node[rectangleTX, below right of=s1](s4) {Dienst 4};
-  \node[rectangleTX, right of=s4](s6) {Dienst 6};
-  \node[rectangleTX, below of=s4](s5) {Dienst 5};
+  \node[rectangleTX](s1) {Dienst 1\\Statische Daten};
+  \node[rectangleTX, below left of=s1](s3) {Dienst 3\\Verfügbarkeitsabonnement};
+  \node[rectangleTX, left= 1cm of s3](s2) {Dienst 2\\Verfügbarkeitsauskunft};
+  \node[rectangleTX, below right of=s1](s4) {Dienst 4\\Buchung};
+  \node[rectangleTX, right= 1cm of s4](s6) {Dienst 6\\Preisauskunft};
+  \node[rectangleTX, below= 1cm of s4](s5) {Dienst 5\\Buchungsabonnement};
 
 %   arrows
   \draw (s2) edge[->,thick=1cm] (s1);
