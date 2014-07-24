@@ -26,25 +26,52 @@ $\boxbox$ Mehrwertig (\verb|maxOccurs=0|)\\
 \subsection*{Gebiet}
 \input{xml/generated/GeoAreaType}
 
+\subsection*{Gebiet (Einschluss / Ausschluss)}
+\input{xml/generated/IncExcGeoAreaType}
+
+
 \subsection*{Zeitrahmen}
 \input{xml/generated/TimePeriodType}
 
 \subsection*{Zeitrahmen (Vorschlag)}
 \input{xml/generated/TimePeriodProposalType}
 
+\section{Basisgruppen}
+
+\subsection*{Station oder Gebiet}
+\input{xml/generated/PlaceOrAreaGroup}
+
+\subsection*{Dauer}
+\input{xml/generated/DurationGroup}
 
 \section{Dienst 1}
 \label{subsec:Datenmodell:Dienst1}
 
-\subsection*{Buchungsziel}
-\input{xml/generated/BookingTargetType}
+\subsection*{Verknüpfung zum ÖPNV}
+\input{xml/generated/StopLinkType}
 
+\subsection*{Fahrzeugattribut}
+\input{xml/generated/AttributeType}
 
 \subsection*{Verleihstation}
 \input{xml/generated/PlaceType}
 
+
+\subsection*{Gebiet mit Dichteangabe}
+\input{xml/generated/DensityAreaType}
+
+\subsection*{Freefloating Gebiet}
+\input{xml/generated/FloatingAreaType}
+
 \subsection*{Gruppe von Verleihstationen}
 \input{xml/generated/PlaceGroupType}
+
+\subsection*{Station oder Freefloatinggebiet}
+\input{xml/generated/PlaceOrAreaGroup}
+
+\subsection*{Buchungsziel}
+\input{xml/generated/BookingTargetType}
+
 
 \subsection*{Provider}
 \input{xml/generated/ProviderType}
@@ -89,6 +116,8 @@ $\boxbox$ Mehrwertig (\verb|maxOccurs=0|)\\
 \input{xml/generated/TariffType}
 
 \section{Gruppen}
+
+\subsection*{Benutzer-initiert}
 \input{xml/generated/UserTriggeredRequestGroup}
 \input{xml/generated/UserTriggeredResponseGroup}
 

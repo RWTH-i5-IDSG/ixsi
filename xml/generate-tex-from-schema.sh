@@ -20,6 +20,8 @@ multivalue="mehrwertig"
 choice="auswahl"
 empty="(leer)"
 schema="XML Schema"
+group="Gruppenzugehoerigkeit"
+basetype="Basistyp"
 
 command -v xsltproc >/dev/null 2>&1 || { echo >&2 "I require xsltproc but it's not installed.  Aborting."; exit 1; }
 
@@ -56,10 +58,18 @@ xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; d
 <xsl:text disable-output-escaping="yes">\\begin{samepage}</xsl:text>
 <xsl:text disable-output-escaping="yes">\\emph{$x}\\index{$x}: </xsl:text>
 <xsl:value-of select="//*[@name='$x']/xs:annotation/xs:documentation"/>
-<xsl:text>\\ \smallskip</xsl:text>
+<xsl:text>\\\\ \smallskip</xsl:text>
 <xsl:if test="//*[@name='$x']//xs:extension">
-<xsl:text>\\\\&#xa;Basisklasse: \\emph{</xsl:text><xsl:value-of select="//*[@name='$x']//xs:extension/@base"/>
-<xsl:text>}.</xsl:text>
+<xsl:text>&#xa;$basetype: \\emph{</xsl:text><xsl:value-of select="//*[@name='$x']//xs:extension/@base"/>
+<xsl:text>}\\\\&#xa;</xsl:text>
+</xsl:if>
+<xsl:if test="//*[@name='$x']//xs:group">
+<xsl:text>&#xa;$group: </xsl:text>
+<xsl:for-each select="//*[@name='$x']//xs:group">
+<xsl:text>\\emph{</xsl:text><xsl:value-of select="@ref"/>
+<xsl:text>} </xsl:text>
+</xsl:for-each>
+<xsl:text>\\\\&#xa;</xsl:text>
 </xsl:if>
 <xsl:text disable-output-escaping="yes"><![CDATA[
 \begin{flushleft}
