@@ -32,6 +32,9 @@ cat << EOF >getalltypes.xslt
                 <xsl:for-each select="//xs:complexType">
                         <xsl:value-of select="@name"/><xsl:text>&#xa;</xsl:text>
                 </xsl:for-each>
+                <xsl:for-each select="//xs:group">
+                        <xsl:value-of select="@name"/><xsl:text>&#xa;</xsl:text>
+                </xsl:for-each>
         </xsl:template>
 </xsl:stylesheet>
 EOF
@@ -48,8 +51,12 @@ xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; d
 <xsl:template match="/">
 <xsl:text disable-output-escaping="yes">\\begin{samepage}</xsl:text>
 <xsl:text disable-output-escaping="yes">\\emph{$x}\\index{$x}: </xsl:text>
-<xsl:value-of select="//xs:complexType[@name='$x']/xs:annotation/xs:documentation"/>
+<xsl:value-of select="//*[@name='$x']/xs:annotation/xs:documentation"/>
 <xsl:text>\\ \smallskip</xsl:text>
+<xsl:if test="//*[@name='$x']//xs:extension">
+<xsl:text>\\\\&#xa;Basisklasse: \\emph{</xsl:text><xsl:value-of select="//*[@name='$x']//xs:extension/@base"/>
+<xsl:text>}.</xsl:text>
+</xsl:if>
 <xsl:text disable-output-escaping="yes"><![CDATA[
 \begin{flushleft}
 \rowcolors{1}{}{gray!10}
@@ -58,7 +65,7 @@ xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; d
 $element  & $type & $comment \\\\
 \midrule ]]>
 </xsl:text>
-<xsl:for-each select="//xs:complexType[@name='$x']//xs:element">
+<xsl:for-each select="//*[@name='$x']//xs:element">
 <xsl:text>\emph{</xsl:text><xsl:value-of select="@name"/><xsl:text disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
 <xsl:text>\texttt{</xsl:text><xsl:value-of select="@type"/><xsl:text  disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
 <xsl:if test="@minOccurs = 0"><xsl:text> \\textit{$optional} </xsl:text></xsl:if>
@@ -67,7 +74,7 @@ $element  & $type & $comment \\\\
 <xsl:text>\\\\
 </xsl:text>
 </xsl:for-each>
-<xsl:if test="not(//xs:complexType[@name='$x']//xs:element)">
+<xsl:if test="not(//*[@name='$x']//xs:element)">
 <xsl:text disable-output-escaping="yes"><![CDATA[ \textit{$empty} & & \\\\ ]]></xsl:text>
 </xsl:if>
 <xsl:text>\bottomrule 
