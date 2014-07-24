@@ -17,6 +17,7 @@ type="Typ"
 comment="Kommentar"
 optional="optional"
 multivalue="mehrwertig"
+choice="auswahl"
 empty="(leer)"
 schema="XML Schema"
 
@@ -63,16 +64,18 @@ xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; d
 <xsl:text disable-output-escaping="yes"><![CDATA[
 \begin{flushleft}
 \rowcolors{1}{}{gray!10}
-\begin{tabularx}{\linewidth}{ll>{\raggedright\arraybackslash}X} 
+\begin{tabularx}{\linewidth}{lll>{\raggedright\arraybackslash}X} 
 \toprule
-$element  & $type & $comment \\\\
+ & $element  & $type & $comment \\\\
 \midrule ]]>
 </xsl:text>
 <xsl:for-each select="//*[@name='$x']//xs:element">
+<xsl:if test="name(..) = 'xs:choice'"><xsl:text> \$\medcircle\$ </xsl:text></xsl:if>
+<xsl:if test="@minOccurs = 0"><xsl:text> \$\medsquare\$ </xsl:text></xsl:if>
+<xsl:if test="@maxOccurs='unbounded'"><xsl:text> \$\boxbox\$ </xsl:text></xsl:if>
+<xsl:text disable-output-escaping="yes"><![CDATA[ & ]]></xsl:text>
 <xsl:text>\emph{</xsl:text><xsl:value-of select="@name"/><xsl:text disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
 <xsl:text>\texttt{</xsl:text><xsl:value-of select="@type"/><xsl:text  disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
-<xsl:if test="@minOccurs = 0"><xsl:text> \\textit{$optional} </xsl:text></xsl:if>
-<xsl:if test="@maxOccurs='unbounded'"><xsl:text> \\textit{$multivalue} </xsl:text></xsl:if>
 <xsl:value-of select="xs:annotation/xs:documentation"/>
 <xsl:text>\\\\
 </xsl:text>
