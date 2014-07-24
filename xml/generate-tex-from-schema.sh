@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Script to  parse all Types from a e.g. WSDL file and generate tex tables accordingly.
+# Script to  parse all types and groups from a e.g. WSDL file and 
+# generate tex tables source snippets accordingly.
 # 
 # By Christoph Terwelp <terwelp@dbis.rwth-aachen.de>
 #    Christian Samsel <samsel@dbis.rwth-aachen.de>
@@ -17,6 +18,8 @@ comment="Kommentar"
 optional="optional"
 multivalue="mehrwertig"
 empty="(leer)"
+schema="XML Schema"
+
 command -v xsltproc >/dev/null 2>&1 || { echo >&2 "I require xsltproc but it's not installed.  Aborting."; exit 1; }
 
 mkdir -p generated
@@ -39,7 +42,7 @@ cat << EOF >getalltypes.xslt
 </xsl:stylesheet>
 EOF
 
-#iterate ofer list of types
+#iterate over list of types
 xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; do
 
 	echo -ne "Generating generated/${x}.tex..."
@@ -83,7 +86,7 @@ $element  & $type & $comment \\\\
 </xsl:stylesheet>
 EOF
 
-	xsltproc "generated/${x}.xslt" IXSI.xsd >generated/${x}.tex
+	xsltproc "generated/${x}.xslt" $file >generated/${x}.tex
 	if [ $? -ne 0 ]; then
         	echo "failed"
 	        exit 1
@@ -93,4 +96,59 @@ EOF
 
 done
 
-rm "getalltypes.xslt"
+
+echo "generating stripped $file..."
+
+# generate xslt to strip annotations
+cat << EOF >stripannotations.xslt
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsl:output omit-xml-declaration="yes"/>
+<xsl:strip-space elements="*"/>
+    <xsl:template match="node()|@*">
+      <xsl:copy>
+         <xsl:apply-templates select="node()|@*"/>
+      </xsl:copy>
+    </xsl:template>
+    <xsl:template match="//xs:annotation" />
+</xsl:stylesheet>
+EOF
+
+xsltproc stripannotations.xslt $file | awk NF > $file-stripped
+
+# iterate over all types again
+xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; do
+
+        echo -ne "Generating generated/${x}-schema.tex..."
+#generate xslt per type
+        cat << EOF >generated/${x}-schema.xslt
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsl:output omit-xml-declaration="yes" indent="yes"/>
+<xsl:template match="/">
+<xsl:text disable-output-escaping="yes"><![CDATA[
+\begin{samepage}
+\noindent $schema: \index{$x}
+\begin{lstlisting}[style=XML-style]]]>
+</xsl:text>
+<xsl:copy-of select="//*[@name='$x']"/>
+<xsl:text>\end{lstlisting}
+\end{samepage}\medskip</xsl:text>
+</xsl:template>
+</xsl:stylesheet>
+EOF
+
+
+        xsltproc "generated/${x}-schema.xslt" $file-stripped >generated/${x}-schema.tex
+        if [ $? -ne 0 ]; then
+                echo "failed"
+                exit 1
+        fi
+        rm "generated/${x}-schema.xslt"
+        echo "done"
+
+done
+
+echo -ne "cleanup..."
+# rm $file-stripped stripannotations.xslt getalltypes.xslt
+echo "done"
