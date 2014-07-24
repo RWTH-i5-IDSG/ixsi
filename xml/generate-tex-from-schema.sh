@@ -64,7 +64,7 @@ xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; d
 <xsl:text disable-output-escaping="yes"><![CDATA[
 \begin{flushleft}
 \rowcolors{1}{}{gray!10}
-\begin{tabularx}{\linewidth}{lll>{\raggedright\arraybackslash}X} 
+\begin{tabularx}{\linewidth}{cll>{\raggedright\arraybackslash}X} 
 \toprule
  & $element  & $type & $comment \\\\
 \midrule ]]>
