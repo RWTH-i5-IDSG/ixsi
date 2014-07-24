@@ -12,6 +12,7 @@
 file="IXSI.xsd"
 
 # Headings
+name="Name"
 element="Element"
 type="Typ"
 comment="Kommentar"
@@ -27,9 +28,42 @@ command -v xsltproc >/dev/null 2>&1 || { echo >&2 "I require xsltproc but it's n
 
 mkdir -p generated
 
-rm generated/*
+rm generated/*.tex
 
-# generate xslt to parse types
+# generate table of simpleTypes
+cat << EOF >simpletypes.xslt
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsl:output omit-xml-declaration="yes" />
+<xsl:template match="/">
+<xsl:text disable-output-escaping="yes"><![CDATA[\begin{flushleft}
+\rowcolors{1}{}{gray!10}
+\begin{tabularx}{\linewidth}{ll>{\raggedright\arraybackslash}X} 
+\toprule
+$name & $basetype & $comment \\\\
+\midrule ]]>
+</xsl:text>
+<xsl:for-each select="//xs:simpleType[@name]">
+<xsl:sort select="@name"/>
+<xsl:text>\emph{</xsl:text><xsl:value-of select="@name"/><xsl:text disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
+<xsl:text>\texttt{</xsl:text><xsl:value-of select="xs:restriction/@base"/><xsl:text disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
+<xsl:value-of select="xs:annotation/xs:documentation"/><xsl:text>\\\\&#xa;</xsl:text>
+</xsl:for-each>
+<xsl:text>\bottomrule 
+\end{tabularx}\end{flushleft}\medskip</xsl:text>
+</xsl:template>
+</xsl:stylesheet>
+EOF
+
+echo -ne "Generating simpleTypes.tex"
+xsltproc "simpletypes.xslt" $file >generated/simpleTypes.tex
+if [ $? -ne 0 ]; then
+	echo "failed"
+exit 1
+fi
+
+echo "done"
+
+# generate xslt to parse complexTypes
 cat << EOF >getalltypes.xslt
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -162,5 +196,5 @@ EOF
 done
 
 echo -ne "cleanup..."
-rm $file-stripped stripannotations.xslt getalltypes.xslt
+rm $file-stripped stripannotations.xslt getalltypes.xslt simpletypes.xslt
 echo "done"
