@@ -91,7 +91,7 @@ xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; d
 </xsl:text>
 </xsl:for-each>
 <xsl:if test="not(//*[@name='$x']//xs:element)">
-<xsl:text disable-output-escaping="yes"><![CDATA[ \textit{$empty} & & \\\\ ]]></xsl:text>
+<xsl:text disable-output-escaping="yes"><![CDATA[ & \textit{$empty} & & \\\\ ]]></xsl:text>
 </xsl:if>
 <xsl:text>\bottomrule 
 \end{tabularx}\end{flushleft}\end{samepage}\medskip</xsl:text>
