@@ -15,6 +15,7 @@ $\boxbox$ Mehrwertig (\verb|maxOccurs=0|)\\
 Einfache Basistypen sind Aliasnamen für vorhandenen Datentypen um eine sematische Unterscheidung zu erlauben.
 \input{xml/generated/simpleTypes}
 \input{xml/generated/simpleTypes-schema}
+Erlaubte Werte für die Aufzählungen \emph{ClassType}, \emph{EngineType}, \emph{AttributeClassType} und \emph{ErrorCodeType} sind in \autoref{cha:CodeTabellen} dargestellt.
 
 \subsection*{Text}
 \input{xml/generated/TextType}
@@ -35,7 +36,6 @@ Einfache Basistypen sind Aliasnamen für vorhandenen Datentypen um eine sematisc
 \subsection*{Gebiet}
 \input{xml/generated/GeoAreaType}
 \input{xml/generated/GeoAreaType-schema}
-
 
 \subsection*{Gebiet (Einschluss / Ausschluss)}
 \input{xml/generated/IncExcGeoAreaType}
@@ -156,33 +156,3 @@ Einfache Basistypen sind Aliasnamen für vorhandenen Datentypen um eine sematisc
 \subsection*{Fehler}
 \input{xml/generated/ErrorType}
 \input{xml/generated/ErrorType-schema}
-
-\subsection*{Fehlercodes}
-Das FVS kann alternativ zu den normalen Response-, Update- und Handshake-Nachrichten auch im Fall eines Fehlers Fehlernachrichten an das RIS schicken. Fehlercodes werden im Datentyp ErrorCodeType gespeichert.
-\begin{flushleft}
-\rowcolors{1}{}{gray!10}
-\begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}X} 
-\toprule
-Wert & Bedeutung\\
-\midrule
-\verb|auth_provider_unknown| & Authentifizierung: Unbekannte Provider-ID\\
-\verb|auth_invalid_password| & Authentifizierung: User-Passwort-Kombination ungültig\\
-\verb|auth_invalid_token| & Authentifizierung: User-Token-Kombination ungültig\\
-\verb|auth_session_invalid| & Authentifizierung: Session ist ungültig/abgelaufen\\
-\verb|auth_anon_not_allowed| & Authentifizierung: Anonymer User nicht erlaubt\\
-\verb|auth_not_authorized| & Autorisation: Nutzer ist zu dieser Anfrage nicht berechtigt\\
-\verb|sys_backend_failed| & System: Hintergrundsystem antwortet nicht\\
-\verb|sys_unknown_failure| & System: unbekannter Fehler\\
-\verb|sys_not_implemented| & System: Request nicht implementiert\\
-\verb|sys_request_not_plausible| & System: Request ist nicht plausibel. Dieser Wert sollte stets verwendet werden, wenn inhaltlich Fehler im Request enthalten sind.\\
-\verb|booking_target_unknown| & Buchungsziel unbekannt\\
-\verb|price_info_not_available| & Preisinformationen nicht verfügbar\\
-\verb|booking_too_short| & Buchungsdauer zu kurz\\
-\verb|booking_too_long| & Buchungsdauer zu lang\\
-\verb|booking_target_not_available| & Buchungsziel im gegebenen Zeitraum nicht buchbar\\
-\verb|booking_change_not_possible| & Buchungsänderung kann nicht durchgeführt werden\\
-\verb|booking_id_unknown| & Unbekannte Buchungs-ID. Dieser Wert sollte auch verwendet werden, wenn die Buchungs-ID einem anderen User zugeordnet ist.\\
-\verb|language_not_supported| & Angefragte Sprache nicht vollständig unterstützt, andere Sprache geliefert.\\
-\bottomrule
-\end{tabularx}
-\end{flushleft}

@@ -13,7 +13,7 @@
 
 \begin{sdblock}{BookingTargetsInfo}{}
 
-\begin{call}{ris}{BookingTargetsInfoRequest(ProviderID*)}{fvs}{BookingTargetsInfos}
+\begin{call}{ris}{BookingTargetsInfoRequest(Provider*)}{fvs}{BookingTargetsInfos}
 
 \end{call}
 
@@ -24,7 +24,7 @@
 \end{center}
 \smallskip
 
-Als Basis für die Informationskopplung dient der Austausch von sogenannten Buchungszielen. Buchungsziele sind eine logische Repräsentation von einem oder mehreren Fahrzeugen mit gemeinsamen Eingeschaften, wie z.B. vom gleichen Anbieter bereitgestellt, gleicher Fahrzeugtyp und gleiche Verleihstation. Diese Eigenschaften sind statisch. Um nur Informationen zu Buchungszielen eines bestimmten Anbieters zu erhalten, kann nach \texttt{ProviderID} gefiltert werden.
+Als Basis für die Informationskopplung dient der Austausch von sogenannten Buchungszielen. Buchungsziele sind eine logische Repräsentation von einem oder mehreren Fahrzeugen mit gemeinsamen Eingeschaften, wie z.B. vom gleichen Anbieter bereitgestellt, gleicher Fahrzeugtyp und gleiche Verleihstation. Diese Eigenschaften sind statisch. Um nur Informationen zu Buchungszielen eines bestimmten Anbieters zu erhalten, kann nach Provider gefiltert werden. Die Übertragung wird vom RIS ausgelöst.
 
 \subsection{Abfrage Änderungen Buchungszielen}
 
@@ -35,7 +35,7 @@ Als Basis für die Informationskopplung dient der Austausch von sogenannten Buch
 
 \begin{sdblock}{ChangedProviders}{}
 
-\begin{call}{ris}{ChangedProvidersRequest}{fvs}{ChangedProvidersIDs}
+\begin{call}{ris}{ChangedProvidersRequest}{fvs}{Changed Providers}
 \end{call}
 
 % \begin{messcall}{ris}{Asynchrone Nachricht}{fvs}
@@ -46,7 +46,7 @@ Als Basis für die Informationskopplung dient der Austausch von sogenannten Buch
 \end{center}
 \smallskip
 
-Um nicht-intervallweise alle Buchungszielinformationen übertragen zu müssen, kann mit dem Aufruf \texttt{ChangedProviders} angefragt werden, bei welchem Anbieter sich Änderungen seit einem bestimmten Zeitpunkt, vorgegeben durch den Parameter \texttt{timestamp}, ergeben haben. Rückgegeben wird eine \texttt{ProviderID}, die wiederum bei \texttt{BookingTargetsInfo} als Parameter übergeben werden kann.
+Um nicht intervallweise alle Buchungszielinformationen übertragen zu müssen, kann mit dem Aufruf \texttt{ChangedProviders} angefragt werden, bei welchem Anbieter sich Änderungen seit einem bestimmten Zeitpunkt, vorgegeben durch den Parameter \texttt{timestamp}, ergeben haben. Rückgegeben wird eine Providerreferenz, die wiederum bei beim Funktionsaufruf \texttt{BookingTargetsInfo} als Parameter übergeben werden kann.
 
 \section{Dienst 2 -- Verfügbarkeitsauskunft}
 \label{sec:Interaktionsprotokolle:Dienst2}
@@ -60,7 +60,7 @@ Um nicht-intervallweise alle Buchungszielinformationen übertragen zu müssen, k
 
 \begin{sdblock}{AvailabilityRequest}{}
 
-\begin{call}{ris}{BookingTargetList/Circle/GeoRectangle, TimePeriod}{fvs}{BookingTargetList}
+\begin{call}{ris}{Buchungsziele/Gebiet, Zeitraum}{fvs}{Buchungsziele}
 \end{call}
 
 \end{sdblock}
@@ -69,7 +69,7 @@ Um nicht-intervallweise alle Buchungszielinformationen übertragen zu müssen, k
 \end{center}
 \smallskip
 
-Um die konkreten Verfügbarkeiten abzufragen, sendet das RIS eine Anfrage die entweder eine Liste mit Buchungszielen oder ein geographisches Gebiet in Form einer Umgebungssuche (Circle) oder eines Rechtecks  (GeoRectangle) und eine geünschte Zeitperiode enthält. Ohne Angabe wird die Verfügbarkeit von allen Buchungszielen zurückgegeben. Als Antwort sendet das FVS eine Liste mit Buchungszielen und deren Verfügbarkeiten zurück.
+Um die konkreten Verfügbarkeiten abzufragen, sendet das RIS eine Anfrage die entweder eine Liste mit Buchungszielen oder ein geographisches Gebiet in Form einer Umgebungssuche oder als Rechteck und eine geünschte Zeitperiode enthält. Ohne Angabe wird die Verfügbarkeit von allen Buchungszielen zurückgegeben. Als Antwort sendet das FVS eine Liste mit Buchungszielen und deren Verfügbarkeiten zurück.
 
 
 \subsection{Abfrage aktuelle Stationskapazität (Dienst 2a)}
@@ -105,7 +105,7 @@ Das RIS kann die aktuellen Kapazitäten, bspw. zur Kartendarstellung, von Verlei
 
 \begin{sdblock}{AvailabilitySubscription}{}
 
-\begin{call}{ris}{BookingTargetID, (Unsubscription)*, EventHorizon}{fvs}{}
+\begin{call}{ris}{Buchungsziel, (Kündigung)*, Zeithorizont}{fvs}{}
 \end{call}
 
 \end{sdblock}
@@ -126,7 +126,7 @@ Das RIS kann die aktuellen Kapazitäten, bspw. zur Kartendarstellung, von Verlei
 
 \begin{sdblock}{CompleteAvailability}{}
 
-\begin{call}{ris}{MaxTargets}{fvs}{MessageBlockID, (Last)*, BookingTargetList}
+\begin{call}{ris}{Maximale Anzahl Objekte}{fvs}{Buchungsziele}
 \end{call}
 
 \end{sdblock}
@@ -139,7 +139,7 @@ Das RIS kann die aktuellen Kapazitäten, bspw. zur Kartendarstellung, von Verlei
 
 Das RIS kann Informationen zu Buchungszielen abonnieren, um unmittelbar über Änderungen von Verfügbarkeiten informiert zu werden. Dies dient im Wesentlichen dazu, Reiseauskünfte ohne zusätzliche (synchrone) Anfrage an das FVS beantworten zu können. 
 
-Durch die initiale Anfrage \texttt{AvailabilitySubscriptionRequest} wird ein Abonnment (subscription) begonnen. Hierzu übergibt das RIS die entsprechende Buchungsziel ID (BookingTargetID). Durch das Setzten des Flags \texttt{Unsubscription}, kann ein Abonnement storniert werden. Bei Änderungen an Verfügbarkeiten überträgt das FVS asynchron \texttt{AvailabilityPushMessage}s. Diese werden über den gleichen Kommunikationskanal geliefert über den das Abonnement erstellt wurde. Beim Beenden des Kommunikationskanals werden alle Abonnements hinfällig.
+Durch die initiale Anfrage \texttt{AvailabilitySubscriptionRequest} wird ein Abonnment (subscription) begonnen. Hierzu übergibt das RIS die entsprechende Buchungszielreferenz. Durch das Setzen des Flags Kündigung kann ein Abonnement storniert werden. Bei Änderungen an Verfügbarkeiten überträgt das FVS asynchron \texttt{AvailabilityPushMessage}s. Diese werden über den gleichen Kommunikationskanal geliefert über den das Abonnement erstellt wurde. Beim Beenden des Kommunikationskanals werden alle Abonnements hinfällig.
 
 Zur anfänglichen Synchronsierung aller Verfügbarkeiten kann das RIS die Funktion \texttt{CompleteAvailabilityRequest} aufrufen. 
 
@@ -157,19 +157,19 @@ Zur anfänglichen Synchronsierung aller Verfügbarkeiten kann das RIS die Funkti
 
 \begin{sdblock}{PlaceAvailabilitySubscription}{}
 
-\begin{call}{ris}{PlaceID, (Unsubscription)*}{fvs}{}
+\begin{call}{ris}{Stationsreferenz, (Kündigung)*}{fvs}{}
 \end{call}
 
 \end{sdblock}
 
 \begin{sdblock}{PlaceAvailabilityPushMessage}{}
 
-\begin{mess}{fvs}{PlaceAvailability}{ris}
+\begin{mess}{fvs}{Stationsverfügbarkeit}{ris}
 \end{mess}
 
-\begin{mess}{fvs}{PlaceAvailability}{ris}
+\begin{mess}{fvs}{Stationsverfügbarkeit}{ris}
 \end{mess}
-\begin{mess}{fvs}{PlaceAvailability}{ris}
+\begin{mess}{fvs}{Stationsverfügbarkeit}{ris}
 \end{mess}
 \begin{mess}{fvs}{...}{ris}
 \end{mess}
@@ -178,7 +178,7 @@ Zur anfänglichen Synchronsierung aller Verfügbarkeiten kann das RIS die Funkti
 
 \begin{sdblock}{CompletePlaceAvailability}{}
 
-\begin{call}{ris}{MaxPlaces}{fvs}{MessageBlockID, (Last)*, PlaceAvailabilityList}
+\begin{call}{ris}{}{fvs}{Stationsverfügbarkeiten}
 \end{call}
 
 \end{sdblock}
@@ -200,7 +200,7 @@ Das RIS kann die Kapazitätsinformation von Stationen abonnieren. Der Interaktio
 \newthread{ris}{:RIS}
 \newinst[8]{fvs}{:FVS}
 
-\begin{sdblock}{OpenSession*}{}
+\begin{sdblock}{Sitzung öffnen*}{}
 
 \begin{call}{ris}{}{fvs}{}
 \end{call}
@@ -210,7 +210,7 @@ Das RIS kann die Kapazitätsinformation von Stationen abonnieren. Der Interaktio
 
 \begin{sdblock}{Booking}{}
 
-\begin{call}{ris}{BookingTargetID, TimePeriodProposal}{fvs}{BookingID, TimePeriod}
+\begin{call}{ris}{Buchungszielreferenz, Zeitraumvorschlag}{fvs}{Buchungsreferenz, Zeitraum}
 \end{call}
 
 \end{sdblock}
@@ -218,12 +218,12 @@ Das RIS kann die Kapazitätsinformation von Stationen abonnieren. Der Interaktio
 
 \begin{sdblock}{ChangeBooking*}{}
 
-\begin{call}{ris}{NewTimePeriodProposal / Cancel}{fvs}{TimePeriod}
+\begin{call}{ris}{Vorschlag für neuen Zeitraum / Stornierung}{fvs}{Zeitraum}
 \end{call}
 
 \end{sdblock}
 
-\begin{sdblock}{CloseSession*}{}
+\begin{sdblock}{Sitzung schließen*}{}
 
 \begin{call}{ris}{}{fvs}{}
 \end{call}
@@ -234,7 +234,7 @@ Das RIS kann die Kapazitätsinformation von Stationen abonnieren. Der Interaktio
 \end{center}
 \smallskip
 
-Um im Kundenaufauftrag ein Fahrzeug zu Buchen, ist es erfoderlich, dass das RIS den Kunden gegenüber dem FVS authentifizert. Hierzu gibt es drei Möglichkeiten die in \cref{sec:Datenmodell:Auth} genauer dargestellt sind. In diesem Beispiel wird explizit eine Session mit \texttt{OpenSession} geöffnet und im Anschluss der Transkation durch \texttt{CloseSession} wieder geschlossen. Danach kann eine Buchung durch den Aufruf von \texttt{Booking} mit Angabe der entsprechenden Buchungsziel ID und einem Vorschlag für einen Zeitraum durchgeführt werden. \blockquote{Vorschlag} deshalb, da das FVS z.B. den Zeitraum auf das verwendete Buchungsraster ändern kann. Als Antwort wird die verwendete Buchungs ID (\emph{nicht Buchungsziel ID!}) und der tatsächliche Buchungszeitraum zurückgegeben. Die Buchungs ID kann zur Überwachung der Buchung verwendet werden (vgl. \cref{sec:Interaktionsprotokolle:Dienst5}). Zur Änderung des Buchungszeitraum oder zur Stornierung, kann \texttt{ChangeBooking} aufgerufen werden. Bei Änderung des Buchungsziels ist eine Stornierung und Neubuchung erforderlich. 
+Um im Kundenaufauftrag ein Fahrzeug zu Buchen, ist es erfoderlich, dass das RIS den Kunden gegenüber dem FVS authentifizert. Hierzu gibt es drei Möglichkeiten die in \cref{sec:Datenmodell:Auth} genauer dargestellt sind. In diesem Beispiel wird explizit eine Sitzung geöffnet und im Anschluss der Transaktion wieder geschlossen. Danach kann eine Buchung durch den Aufruf von \texttt{Booking} mit Angabe der entsprechenden Buchungsziel ID und einem Vorschlag für einen Zeitraum durchgeführt werden. \blockquote{Vorschlag} deshalb, da das FVS z.B. den Zeitraum auf das verwendete Buchungsraster ändern kann. Als Antwort wird die verwendete Buchungsreferenz und der tatsächliche Buchungszeitraum zurückgegeben. Die Buchungsreferenz kann zur Überwachung der Buchung verwendet werden (vgl. \cref{sec:Interaktionsprotokolle:Dienst5}). Zur Änderung des Buchungszeitraum oder zur Stornierung, kann \texttt{ChangeBooking} aufgerufen werden. Bei Änderung des Buchungsziels ist eine Stornierung und Neubuchung erforderlich. 
 
 
 \section{Dienst 5 --  Buchungsabonnement}
@@ -254,12 +254,12 @@ Um im Kundenaufauftrag ein Fahrzeug zu Buchen, ist es erfoderlich, dass das RIS 
 
 \begin{sdblock}{BookingAlertPushMessage}{}
 
-\begin{mess}{fvs}{BookingChange}{ris}
+\begin{mess}{fvs}{Buchungsänderung}{ris}
 \end{mess}
 
-\begin{mess}{fvs}{BookingChange}{ris}
+\begin{mess}{fvs}{Buchungsänderung}{ris}
 \end{mess}
-\begin{mess}{fvs}{BookingChange}{ris}
+\begin{mess}{fvs}{Buchungsänderung}{ris}
 \end{mess}
 \begin{mess}{fvs}{...}{ris}
 \end{mess}
@@ -268,7 +268,7 @@ Um im Kundenaufauftrag ein Fahrzeug zu Buchen, ist es erfoderlich, dass das RIS 
 
 \begin{sdblock}{CompleteBookingAlert}{}
 
-\begin{call}{ris}{MaxResults}{fvs}{MessageBlockID, (Last)*, BookingChangeList}
+\begin{call}{ris}{}{fvs}{Buchungsänderungen}
 \end{call}
 
 \end{sdblock}

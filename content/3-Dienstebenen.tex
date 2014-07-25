@@ -1,5 +1,5 @@
 \chapter{Hierachiemodell}
-\label{sec:Dienstebenen}
+\label{cha:Hierachiemodell}
 Das Hierachiemodell beschreibt unterschiedliche Qualitäten der Informationskopplung, basierend auf Dienstgruppen und dient als Empfehlung für unterschiedliche Ausbaustufen der Implementierung.
 Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst 1 Statische Daten (static data) von beiden Interaktionspartnern unterstützt werden. In \cref{fig:depend} sind die Abhängigkeiten zwischen den Diensten dargestellt.
 
@@ -27,7 +27,7 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
 \end{figure}
 
 \section{Dienst 1 -- Statische Daten (static data)}
-Dienst 1 dient dem Austausch von Informationen über Anbieter und statischen Daten von Buchungszielen. Hierzu gehören Anbieter, Standort- und Fahrzeugdaten.
+Dienst 1 dient dem Austausch von Informationen über Fahrzeugverleihanbietern und statischen Daten von Buchungszielen. Hierzu gehören Anbieter, Standort- und Fahrzeugdaten. 
 
 Dienst 1 kann beispielsweise dafür verwendet werden, um nur Hinweise zu vorhandenen Stationen eines FVS-Betreibers in einem RIS anzuzeigen.
 \subsection*{Funktionen}
@@ -151,7 +151,7 @@ Dienst B enthält eine Funktion zur Überprüfung des Status einer Abonnementver
 \end{itemize}
 
 \section{Bassisdienst C -- tokens}
-Dienst C enthält eine Funktion zur Erstellung von Authentifizierungstokens für Endkunden, die anstelle von Klartextpasswörtern gespeichert / übertragen werden können.
+Dienst C enthält eine Funktion zur Erstellung von Authentifizierungstokens für Endkunden, die an Stelle von Klartextpasswörtern gespeichert / übertragen werden können.
 
 \subsection*{Funktionen}
 \begin{itemize}
