@@ -123,34 +123,7 @@ caption=false,
 
 
 
-%---- hyperref --------------------------------------------
-\usepackage[
-%   draft,
-%   final,
-breaklinks=true,
-linktocpage=true,
-hyperfootnotes=true,
-%   pagebackref=true,
-plainpages=false,
-naturalnames=true,
-pageanchor=true,
-bookmarks=true,
-%   hidelinks,
-colorlinks=false,
-linkcolor=blue,
-urlcolor=blue,
-citecolor=blue,
-bookmarks=true,
-bookmarksnumbered=true,
-pdfpagemode=UseOutlines,
-pdfpagelabels=true,
-pdfencoding=auto,
-%  psdextra,
-pdfstartview={FitH},
-unicode
-]{hyperref}
 
-\usepackage{cleveref}
 
 % not usefull for pdflatex
 %\usepackage[hyphenbreaks]{breakurl}
@@ -173,12 +146,7 @@ unicode
 
 
     
-%--- hyperref meta data -----------------------------------
-\hypersetup{%
-%   pdfauthor={\author},
-% %   pdfkeywords={\thiskeywords},
-%   pdftitle={\title},
-}
+
 
 
 
@@ -359,3 +327,40 @@ Stand \thisdate~\thistime ~-- Version \thisversion
 \renewcommand{\emph}[1]{\OldEmph{{#1}}\index{#1}}
 
 % ------
+
+
+% %---- hyperref --------------------------------------------
+\usepackage[
+%   draft,
+%   final,
+breaklinks=true,
+linktocpage=true,
+hyperfootnotes=true,
+%   pagebackref=true,
+plainpages=false,
+% naturalnames=true,
+pageanchor=true,
+bookmarks=true,
+%   hidelinks,
+colorlinks=false,
+linkcolor=blue,
+urlcolor=blue,
+citecolor=blue,
+bookmarks=true,
+bookmarksnumbered=true,
+pdfpagemode=UseOutlines,
+pdfpagelabels=true,
+pdfencoding=auto,
+%  psdextra,
+pdfstartview={FitH},
+unicode
+]{hyperref}
+% 
+% %--- hyperref meta data -----------------------------------
+% \hypersetup{%
+%   %   pdfauthor={\author},
+%   % %   pdfkeywords={\thiskeywords},
+%   %   pdftitle={\title},
+% }
+
+\usepackage{cleveref}
