@@ -9,7 +9,7 @@
 # Configuration
 
 # Schema file to parse
-file="IXSI.xsd"
+file="IXSI-ger.xsd"
 
 # Headings
 name="Name"
