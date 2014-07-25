@@ -30,6 +30,26 @@ mkdir -p generated
 
 rm generated/*.tex
 
+echo "generating stripped $file..."
+
+# generate xslt to strip annotations
+cat << EOF >stripannotations.xslt
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsl:output omit-xml-declaration="yes"/>
+<xsl:strip-space elements="*"/>
+    <xsl:template match="node()|@*">
+      <xsl:copy>
+         <xsl:apply-templates select="node()|@*"/>
+      </xsl:copy>
+    </xsl:template>
+    <xsl:template match="//xs:annotation" />
+</xsl:stylesheet>
+EOF
+
+xsltproc stripannotations.xslt $file | awk NF > $file-stripped
+
+
 # generate table of simpleTypes
 cat << EOF >simpletypes.xslt
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -54,10 +74,36 @@ $name & $basetype & $comment \\\\
 </xsl:stylesheet>
 EOF
 
-echo -ne "Generating simpleTypes.tex"
+echo -ne "Generating simpleTypes.tex ..."
 xsltproc "simpletypes.xslt" $file >generated/simpleTypes.tex
 if [ $? -ne 0 ]; then
 	echo "failed"
+exit 1
+fi
+
+echo "done"
+
+# generate simple types schema
+cat << EOF >simpletypesschema.xslt
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsl:output omit-xml-declaration="yes" indent="yes"/>
+<xsl:template match="/">
+<xsl:text disable-output-escaping="yes"><![CDATA[\begin{samepage}
+\noindent $schema:
+\begin{lstlisting}[style=XML-style]]]>
+</xsl:text>
+<xsl:copy-of select="//xs:simpleType[@name]"/>
+<xsl:text>\end{lstlisting}
+\end{samepage}\medskip</xsl:text>
+</xsl:template>
+</xsl:stylesheet>
+EOF
+
+echo -ne "Generating simpleTypes-schema.tex ..."
+xsltproc "simpletypesschema.xslt" $file-stripped >generated/simpleTypes-schema.tex
+if [ $? -ne 0 ]; then
+        echo "failed"
 exit 1
 fi
 
@@ -144,24 +190,6 @@ EOF
 done
 
 
-echo "generating stripped $file..."
-
-# generate xslt to strip annotations
-cat << EOF >stripannotations.xslt
-<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-<xsl:output omit-xml-declaration="yes"/>
-<xsl:strip-space elements="*"/>
-    <xsl:template match="node()|@*">
-      <xsl:copy>
-         <xsl:apply-templates select="node()|@*"/>
-      </xsl:copy>
-    </xsl:template>
-    <xsl:template match="//xs:annotation" />
-</xsl:stylesheet>
-EOF
-
-xsltproc stripannotations.xslt $file | awk NF > $file-stripped
 
 # iterate over all types again
 xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; do
