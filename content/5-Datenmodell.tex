@@ -14,94 +14,115 @@ $\boxbox$ Mehrwertig (\verb|maxOccurs=0|)\\
 \subsection*{Simple Basistypen}
 \input{xml/generated/simpleTypes}
 
-
 \subsection*{Text}
 \input{xml/generated/TextType}
+\input{xml/generated/TextType-schema}
 
 \subsection*{Ortskoordinaten}
 \input{xml/generated/CoordType}
+\input{xml/generated/CoordType-schema}
 
 \subsection*{Kreis}
 \input{xml/generated/GeoCircleType}
+\input{xml/generated/GeoCircleType-schema}
 
 \subsection*{Rechteck}
 \input{xml/generated/GeoRectangleType}
+\input{xml/generated/GeoRectangleType-schema}
 
 \subsection*{Gebiet}
 \input{xml/generated/GeoAreaType}
+\input{xml/generated/GeoAreaType-schema}
+
 
 \subsection*{Gebiet (Einschluss / Ausschluss)}
 \input{xml/generated/IncExcGeoAreaType}
+\input{xml/generated/IncExcGeoAreaType-schema}
 
 \subsection*{Zeitrahmen}
 \input{xml/generated/TimePeriodType}
+\input{xml/generated/TimePeriodType-schema}
 
 \subsection*{Zeitrahmen (Vorschlag)}
 \input{xml/generated/TimePeriodProposalType}
+\input{xml/generated/TimePeriodProposalType-schema}
 
 \subsection*{Herkunft/Ziel}
 \input{xml/generated/OriginDestType}
+\input{xml/generated/OriginDestType-schema}
+
 
 \section{Basisgruppen}
 
 \subsection*{Station oder Gebiet}
 \input{xml/generated/PlaceOrAreaGroup}
+\input{xml/generated/PlaceOrAreaGroup-schema}
 
 \subsection*{Dauer}
 \input{xml/generated/DurationGroup}
+\input{xml/generated/DurationGroup-schema}
 
 \section{Dienst 1}
 \label{subsec:Datenmodell:Dienst1}
 
 \subsection*{Buchungsziel ID}
 \input{xml/generated/BookingTargetIDType}
+\input{xml/generated/BookingTargetIDType-schema}
 
 \subsection*{Verleihstations ID}
 \input{xml/generated/ProviderPlaceIDType}
+\input{xml/generated/ProviderPlaceIDType-schema}
 
 \subsection*{Verknüpfung zum ÖPNV}
 \input{xml/generated/StopLinkType}
+\input{xml/generated/StopLinkType-schema}
 
 \subsection*{Fahrzeugattribut}
 \input{xml/generated/AttributeType}
+\input{xml/generated/AttributeType-schema}
 
 \subsection*{Verleihstation}
 \input{xml/generated/PlaceType}
-
+\input{xml/generated/PlaceType-schema}
 
 \subsection*{Gebiet mit Dichteangabe}
 \input{xml/generated/DensityAreaType}
+\input{xml/generated/DensityAreaType-schema}
 
 \subsection*{Freefloating Gebiet}
 \input{xml/generated/FloatingAreaType}
+\input{xml/generated/FloatingAreaType-schema}
 
 \subsection*{Gruppe von Verleihstationen}
 \input{xml/generated/PlaceGroupType}
+\input{xml/generated/PlaceGroupType-schema}
 
 \subsection*{Station oder Freefloatinggebiet}
 \input{xml/generated/PlaceOrAreaGroup}
+\input{xml/generated/PlaceOrAreaGroup-schema}
 
 \subsection*{Buchungsziel}
 \input{xml/generated/BookingTargetType}
-
+\input{xml/generated/BookingTargetType-schema}
 
 \subsection*{Provider}
 \input{xml/generated/ProviderType}
-
+\input{xml/generated/PlaceOrAreaGroup-schema}
 
 \subsection*{Fahrzeugeigenschaft}
 \input{xml/generated/AttributeType}
+\input{xml/generated/PlaceOrAreaGroup-schema}
 
 \subsection*{Freefloating Gebiet}
 \input{xml/generated/FloatingAreaType}
+\input{xml/generated/PlaceOrAreaGroup-schema}
 
 \section{Dienst 2}
 \label{subsec:Datenmodell:Dienst2}
 
 \subsection*{Buchungszieleigenschaften}
 \input{xml/generated/BookingTargetPropertiesType}
-
-
+\input{xml/generated/BookingTargetPropertiesType-schema}
 
 
 \section{Dienst 4}
@@ -109,40 +130,39 @@ $\boxbox$ Mehrwertig (\verb|maxOccurs=0|)\\
 
 \subsection*{Fahrzeugverfügbarkeit}
 \input{xml/generated/BookingTargetChangeAvailabilityType}
+\input{xml/generated/BookingTargetChangeAvailabilityType-schema}
 
 \subsection*{Stationskapazität}
 \input{xml/generated/PlaceAvailabilityType}
-
+\input{xml/generated/PlaceAvailabilityType-schema}
 
 \section{Dienst 5}
 \label{subsec:Datenmodell:Dienst5}
 
 \subsection*{Buchungsverfügbarkeit}
 \input{xml/generated/BookingChangeType}
-
+\input{xml/generated/BookingChangeType-schema}
 
 \section{Dienst 6}
 \label{subsec:Datenmodell:Dienst6}
 
 \subsection*{Preisinformation}
 \input{xml/generated/TariffType}
-
-\section{Gruppen}
-
-\subsection*{Benutzer-initiert}
-\input{xml/generated/UserTriggeredRequestGroup}
-\input{xml/generated/UserTriggeredResponseGroup}
+\input{xml/generated/TariffType-schema}
 
 \section{Authentifizierung}
 \subsection*{Authentifizierung}
 \input{xml/generated/AuthType}
+\input{xml/generated/AuthType-schema}
 
 \subsection*{Benutzeridentifikation}
 \input{xml/generated/UserInfoType}
+\input{xml/generated/UserInfoType-schema}
 
 \section{Fehlerbehandlung}
 \subsection*{Fehler}
 \input{xml/generated/ErrorType}
+\input{xml/generated/ErrorType-schema}
 
 \subsection*{Fehlercodes}
 Das FVS kann alternativ zu den normalen Response-, Update- und Handshake-Nachrichten auch im Fall eines Fehlers Fehlernachrichten an das RIS schicken. Fehlercodes werden im Datentyp ErrorCodeType gespeichert.

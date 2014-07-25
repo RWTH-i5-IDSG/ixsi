@@ -7,19 +7,27 @@ Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf vi
 
 \subsection*{Basisklasse}
 \input{xml/generated/IxsiMessageType}
+\input{xml/generated/IxsiMessageType-schema}
 
 \subsection*{Basisantwort (baseresponse)}
 \input{xml/generated/AbstractBaseResponseType}
-
+\input{xml/generated/AbstractBaseResponseType-schema}
 \medskip
 
 \textit{Eine Basisklasse für einen Request ist nicht vorhanden, da nicht erforderlich.}
+
+\subsection*{Benutzer-initiert}
+\input{xml/generated/UserTriggeredRequestGroup}
+\input{xml/generated/UserTriggeredRequestGroup-schema}
+\input{xml/generated/UserTriggeredResponseGroup}
+\input{xml/generated/UserTriggeredResponseGroup-schema}
 
 \section{Basisgruppen}
 \label{sec:Nachrichten:Basisgruppen}
 
 \subsection*{Herkunft/Zielangabe}
 \input{xml/generated/OriginDestGroup}
+\input{xml/generated/OriginDestGroup-schema}
 
 \section{Dienst 1}
 \label{sec:Nachrichten:Dienst1}
@@ -34,7 +42,9 @@ Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf vi
 \subsection*{Abfrage Änderungen Buchungszielen}
 \label{subsec:Nachrichten:Dienst1:ChangeProviders}
 \input{xml/generated/ChangedProvidersRequestType}
+\input{xml/generated/ChangedProvidersRequestType-schema}
 \input{xml/generated/ChangedProvidersResponseType}
+\input{xml/generated/ChangedProvidersResponseType-schema}
 
 \section{Dienst 2}
 \label{subsec:Nachrichten:Dienst2}
@@ -42,12 +52,16 @@ Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf vi
 \subsection*{Abfrage Verfügbarkeiten}
 \label{subsec:Nachrichten:Dienst2:Availability}
 \input{xml/generated/AvailabilityRequestType}
+\input{xml/generated/AvailabilityRequestType-schema}
 \input{xml/generated/AvailabilityResponseType}
+\input{xml/generated/AvailabilityResponseType-schema}
 
 \subsection*{Abfrage Stationskapazitäten (Dienst 2a)}
 \label{subsec:Nachrichten:Dienst2:PlaceAvailability}
 \input{xml/generated/PlaceAvailabilityRequestType}
+\input{xml/generated/PlaceAvailabilityRequestType-schema}
 \input{xml/generated/PlaceAvailabilityResponseType}
+\input{xml/generated/PlaceAvailabilityResponseType-schema}
 
 \section{Dienst 3}
 \label{subsec:Nachrichten:Dienst3}
@@ -55,26 +69,34 @@ Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf vi
 \subsection*{Verfügbarkeitsabonnement}
 \label{subsec:Nachrichten:Dienst3:AvailabilitySubscription}
 \input{xml/generated/AvailabilitySubscriptionRequestType}
+\input{xml/generated/AvailabilitySubscriptionRequestType-schema}
 \input{xml/generated/AvailabilitySubscriptionResponseType}
+\input{xml/generated/AvailabilitySubscriptionResponseType-schema}
 \input{xml/generated/AvailabilityPushMessageType}
+\input{xml/generated/AvailabilityPushMessageType-schema}
 
 \subsection*{Vollständige Verfügbarkeitsabonnementinformation}
 \label{subsec:Nachrichten:Dienst3:CompleteAvailability}
 \input{xml/generated/CompleteAvailabilityRequestType}
+\input{xml/generated/CompleteAvailabilityRequestType-schema}
 \input{xml/generated/CompleteAvailabilityResponseType}
-
+\input{xml/generated/CompleteAvailabilityResponseType-schema}
 
 \subsection*{Stationskapazitätsabonnement (Dienst 3a)}
 \label{subsec:Nachrichten:Dienst3:PlaceAvailabilitySubscription}
 \input{xml/generated/PlaceAvailabilitySubscriptionRequestType}
+\input{xml/generated/PlaceAvailabilitySubscriptionRequestType-schema}
 \input{xml/generated/PlaceAvailabilitySubscriptionResponseType}
+\input{xml/generated/PlaceAvailabilitySubscriptionResponseType-schema}
 \input{xml/generated/PlaceAvailabilityPushMessageType}
+\input{xml/generated/PlaceAvailabilityPushMessageType-schema}
 
 \subsection*{Vollständige Stationskapazitätsabonnementinformation (Dienst 3a)}
 \label{subsec:Nachrichten:Dienst3:CompletePlaceAvailability}
 \input{xml/generated/CompletePlaceAvailabilityRequestType}
+\input{xml/generated/CompletePlaceAvailabilityRequestType-schema}
 \input{xml/generated/CompletePlaceAvailabilityResponseType}
-
+\input{xml/generated/CompletePlaceAvailabilityResponseType-schema}
 
 \section{Dienst 4}
 \label{subsec:Nachrichten:Dienst4}
@@ -82,13 +104,16 @@ Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf vi
 \subsection*{Buchung}
 \label{subsec:Nachrichten:Dienst4:Booking}
 \input{xml/generated/BookingRequestType}
+\input{xml/generated/BookingRequestType-schema}
 \input{xml/generated/BookingResponseType}
+\input{xml/generated/BookingResponseType-schema}
 
 \subsection*{Buchungsänderung}
 \label{subsec:Nachrichten:Dienst4:ChangeBooking}
 \input{xml/generated/ChangeBookingRequestType}
+\input{xml/generated/ChangeBookingRequestType-schema}
 \input{xml/generated/ChangeBookingResponseType}
-
+\input{xml/generated/ChangeBookingResponseType-schema}
 
 \section{Dienst 5}
 \label{subsec:Nachrichten:Dienst5}
@@ -96,13 +121,18 @@ Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf vi
 \subsection*{Buchungsabonnement}
 \label{subsec:Nachrichten:Dienst5:BookingAlertSubscription}
 \input{xml/generated/BookingAlertSubscriptionRequestType}
+\input{xml/generated/BookingAlertSubscriptionRequestType-schema}
 \input{xml/generated/BookingAlertSubscriptionResponseType}
+\input{xml/generated/BookingAlertSubscriptionResponseType-schema}
 \input{xml/generated/BookingAlertPushMessageType}
+\input{xml/generated/BookingAlertPushMessageType-schema}
 
 \subsection*{Vollständige Buchungsabonnementinformation (Dienst 3a)}
 \label{subsec:Nachrichten:Dienst5:CompleteBookingAlert}
 \input{xml/generated/CompleteBookingAlertRequestType}
+\input{xml/generated/CompleteBookingAlertRequestType-schema}
 \input{xml/generated/CompleteBookingAlertResponseType}
+\input{xml/generated/CompleteBookingAlertResponseType-schema}
 
 \section{Dienst 6}
 \label{subsec:Nachrichten:Dienst6}
@@ -110,7 +140,9 @@ Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf vi
 \subsection*{Preisinformation}
 \label{subsec:Nachrichten:Dienst6:PriceInformation}
 \input{xml/generated/PriceInformationRequestType}
+\input{xml/generated/PriceInformationRequestType-schema}
 \input{xml/generated/PriceInformationResponseType}
+\input{xml/generated/PriceInformationResponseType-schema}
 
 \section{Dienst A}
 \label{subsec:Nachrichten:DienstA}
@@ -118,11 +150,16 @@ Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf vi
 \subsection*{Session öffnen}
 \label{subsec:Nachrichten:DienstA:OpenSession}
 \input{xml/generated/OpenSessionRequestType}
+\input{xml/generated/OpenSessionRequestType-schema}
 \input{xml/generated/OpenSessionResponseType}
+\input{xml/generated/OpenSessionResponseType-schema}
+
 \subsection*{Session schließen}
 \label{subsec:Nachrichten:DienstA:CloseSession}
 \input{xml/generated/CloseSessionRequestType}
+\input{xml/generated/CloseSessionRequestType-schema}
 \input{xml/generated/CloseSessionResponseType}
+\input{xml/generated/CloseSessionResponseType-schema}
 
 \section{Dienst B}
 \label{subsec:Nachrichten:DienstB}
@@ -130,8 +167,9 @@ Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf vi
 \subsection*{Heartbeat}
 \label{subsec:Nachrichten:DienstB:HeartBeat}
 \input{xml/generated/HeartBeatRequestType}
+\input{xml/generated/HeartBeatRequestType-schema}
 \input{xml/generated/HeartBeatResponseType}
-
+\input{xml/generated/HeartBeatResponseType-schema}
 
 \section{Dienst C}
 \label{subsec:Nachrichten:DienstC}
@@ -139,4 +177,6 @@ Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf vi
 \subsection*{Tokengenerierung}
 \label{subsec:Nachrichten:DienstC:HeartBeat}
 \input{xml/generated/TokenGenerationRequestType}
+\input{xml/generated/TokenGenerationRequestType-schema}
 \input{xml/generated/TokenGenerationResponseType}
+\input{xml/generated/TokenGenerationResponseType-schema}
