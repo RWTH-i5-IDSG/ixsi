@@ -36,7 +36,7 @@ echo "generating stripped $file..."
 cat << EOF >stripannotations.xslt
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-<xsl:output omit-xml-declaration="yes"/>
+<xsl:output/>
 <xsl:strip-space elements="*"/>
     <xsl:template match="node()|@*">
       <xsl:copy>
@@ -55,7 +55,7 @@ cat << EOF >simpletypes.xslt
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 <xsl:output omit-xml-declaration="yes" />
 <xsl:template match="/">
-<xsl:text disable-output-escaping="yes"><![CDATA[\begin{flushleft}
+<xsl:text disable-output-escaping="yes"><![CDATA[\begin{samepage}\begin{flushleft}
 \rowcolors{1}{}{gray!10}
 \begin{tabularx}{\linewidth}{ll>{\raggedright\arraybackslash}X} 
 \toprule
@@ -69,7 +69,7 @@ $name & $basetype & $comment \\\\
 <xsl:value-of select="xs:annotation/xs:documentation"/><xsl:text>\\\\&#xa;</xsl:text>
 </xsl:for-each>
 <xsl:text>\bottomrule 
-\end{tabularx}\end{flushleft}\medskip</xsl:text>
+\end{tabularx}\end{flushleft}\end{samepage}\medskip</xsl:text>
 </xsl:template>
 </xsl:stylesheet>
 EOF
@@ -86,7 +86,7 @@ echo "done"
 # generate simple types schema
 cat << EOF >simpletypesschema.xslt
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs">
 <xsl:output omit-xml-declaration="yes" indent="yes"/>
 <xsl:template match="/">
 <xsl:text disable-output-escaping="yes"><![CDATA[\begin{samepage}
@@ -198,7 +198,7 @@ xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; d
 #generate xslt per type
         cat << EOF >generated/${x}-schema.xslt
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs">
 <xsl:output omit-xml-declaration="yes" indent="yes"/>
 <xsl:template match="/">
 <xsl:text disable-output-escaping="yes"><![CDATA[\begin{samepage}
@@ -224,5 +224,5 @@ EOF
 done
 
 echo -ne "cleanup..."
-rm $file-stripped stripannotations.xslt getalltypes.xslt simpletypes.xslt
+rm $file-stripped stripannotations.xslt getalltypes.xslt simpletypes.xslt simpletypesschema.xslt
 echo "done"
