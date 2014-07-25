@@ -176,6 +176,7 @@ caption=false,
   escapeinside={(*}{*)},
   captionpos=b,
 }
+\renewcommand{\lstlistingname}{XML Quellcode} 
 
 \lstset{literate=%
 {Ö}{{\"O}}1 
@@ -200,7 +201,7 @@ postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}}
   keywordstyle=\color{MediumBlue},
   commentstyle=\color{gray}\slshape,
   morekeywords={xmlns:xsi,xmlns:xsd,xmlns:soap,xmlns,version,type,name,minOccurs,maxOccurs,value,base,
-    elementFormDefault,targetNamespace,sex}% list your attributes here
+    elementFormDefault,targetNamespace,xmlns:xs}% list your attributes here
   }
   
   \lstdefinestyle{JSON-style} {
@@ -220,7 +221,7 @@ postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}}
     keywordstyle=\color{MediumBlue},
     commentstyle=\color{gray}\slshape,
     morekeywords={xmlns:xsi,xmlns:xsd,xmlns:soap,xmlns,version,type,name,minOccurs,maxOccurs,value,base,
-      elementFormDefault,targetNamespace,sex},% list your attributes here
+      elementFormDefault,targetNamespace},% list your attributes here
       numbers=none
     }
     
@@ -314,10 +315,6 @@ Stand \thisdate~\thistime ~-- Version \thisversion
 
 
 \renewcommand*{\chapterpagestyle}{scrheadings}
-
-% ------ Datenmodelle
-
-\newcommand*{\xmlexample}[1]{\lstinputlisting[style=xml-style]{xml/examples/#1.xml}}
 
 
 %  emph and texttt are automatically index, used textit isntead to prevent it

@@ -65,7 +65,7 @@ $name & $basetype & $comment \\\\
 <xsl:for-each select="//xs:simpleType[@name]">
 <xsl:sort select="@name"/>
 <xsl:text>\emph{</xsl:text><xsl:value-of select="@name"/><xsl:text disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
-<xsl:text>\emph{</xsl:text><xsl:value-of select="xs:restriction/@base"/><xsl:text disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
+<xsl:text>\texttt{</xsl:text><xsl:value-of select="xs:restriction/@base"/><xsl:text disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
 <xsl:value-of select="xs:annotation/xs:documentation"/><xsl:text>\\\\&#xa;</xsl:text>
 </xsl:for-each>
 <xsl:text>\bottomrule 
@@ -90,8 +90,8 @@ cat << EOF >simpletypesschema.xslt
 <xsl:output omit-xml-declaration="yes" indent="yes"/>
 <xsl:template match="/">
 <xsl:text disable-output-escaping="yes"><![CDATA[\begin{samepage}
-\noindent $schema:
-\begin{lstlisting}[style=XML-style]]]>
+\noindent 
+\begin{lstlisting}[style=XML-style,caption={Baisdatentypen},label=lst:SimpleTypesSchema]]]>
 </xsl:text>
 <xsl:copy-of select="//xs:simpleType[@name]"/>
 <xsl:text>\end{lstlisting}
