@@ -13,7 +13,7 @@ Da die Schnittstelle neben dem Anfrage und Antwort Schema auch ein asynchrones A
 \section{Authentifizierung}
 IXSI ist als B2B-Schnittstelle konzipiert und enthält deswegen keinen eigenen Authentifizierungsmechanismus. Falls Erfoderlich können die Kommunikationspartner vorhandenen Mechanismen wie ein SSL-Zertifikatsauthentifizierung (empfohlen), VPN oder HTTP Authentifizierung verwenden.
 
-\subsection{Endkunde}
+\subsection*{Endkunde}
 Da per IXSI auch nutzergesteuerte Requests von System zu System geschickt werden, istes nötig, dass sich ein Nutzer gegenüber dem FVS authentifizieren kann. Dies geschieht normalerweise über das Tripel Anbieter Referenz/Nutzer Referenz/Passwort. Um das  Passwort nicht im Klartext speichern zu müssen, kann alternativ zum Passwort ein Token 
 verwendet werden, welches über die Funktion TokenGeneration (vgl. \cref{subsec:Nachrichten:DienstC:Tokengenerierung}) vom FVS generiert werden kann. So muss der Nutzer zwar initial sein Passwort einmalig eingeben, anschließend kann er sich aber über das daraus generierte, gespeicherte Tokenauthentifizieren. Dieses kann z.B. auf dem Endgerät des Nutzers gespeichert werden.
 
