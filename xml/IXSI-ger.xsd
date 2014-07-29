@@ -505,7 +505,6 @@
 			<xs:element name="ProviderID" type="ProviderIDType">
 				<xs:annotation>
 					<xs:documentation>Provider-ID, zu welcher der Standort oder das Areal gehört.</xs:documentation>
-					<xs:documentation>Provider-ID, zu welcher der Platz oder das Areal gehört.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
@@ -621,7 +620,7 @@
 			<xs:choice>
 				<xs:element name="PlaceID" type="PlaceIDType">
 					<xs:annotation>
-						<xs:documentation>Platz-ID, auf dem der Bookee platziert ist. Muss mit stationsbasierten Buchungszielen befüllt werden.</xs:documentation>
+						<xs:documentation>Standard-ID, auf dem der Bookee platziert ist. Muss mit stationsbasierten Buchungszielen befüllt werden.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="PlaceGroupID" type="PlaceGroupIDType">
