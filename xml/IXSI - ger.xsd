@@ -75,7 +75,7 @@
 	</xs:annotation>
 	<xs:simpleType name="EuroPriceType">
 		<xs:annotation>
-			<xs:documentation>Typ für Lagerpreise in Euro-Cents.</xs:documentation>
+			<xs:documentation>Typ für Preise in Euro-Cents.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:nonNegativeInteger"/>
 	</xs:simpleType>
