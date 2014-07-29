@@ -18,19 +18,19 @@
 	</xs:annotation>
 	<xs:simpleType name="AreaIDType">
 		<xs:annotation>
-			<xs:documentation>Typ für Areal-IDs.</xs:documentation>
+			<xs:documentation>Typ für Gebiet-IDs.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:NMTOKEN"/>
 	</xs:simpleType>
 	<xs:simpleType name="PlaceIDType">
 		<xs:annotation>
-			<xs:documentation>Typ für Ort-IDs.</xs:documentation>
+			<xs:documentation>Typ für Standort-IDs.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:NMTOKEN"/>
 	</xs:simpleType>
 	<xs:simpleType name="PlaceGroupIDType">
 		<xs:annotation>
-			<xs:documentation>Typ für Ortsgruppen-IDs.</xs:documentation>
+			<xs:documentation>Typ für Standortgruppen-IDs.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:NMTOKEN"/>
 	</xs:simpleType>
@@ -164,26 +164,26 @@
 	</xs:complexType>
 	<xs:complexType name="GeoAreaType">
 		<xs:annotation>
-			<xs:documentation>Typ für geographische Areale.</xs:documentation>
+			<xs:documentation>Typ für geographische Gebiete.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="PolyPoint" type="CoordType" minOccurs="3" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Geopositionen der nahegelegensten Polygongrenze des Areals.</xs:documentation>
+					<xs:documentation>Geopositionen der nahegelegensten Polygongrenze des Gebiets.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="IncExcGeoAreaType">
 		<xs:annotation>
-			<xs:documentation>Typ für geographische Areale mit Ausschlusswahrscheinlichkeit.</xs:documentation>
+			<xs:documentation>Typ für geographische Gebiete mit Ausschlusswahrscheinlichkeit.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="GeoAreaType">
 				<xs:sequence>
 					<xs:element name="Exclude" type="xs:boolean" default="false" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Nur im Falle von "wahr" definiert diese Arealdefinition einen Ausschluss.</xs:documentation>
+							<xs:documentation>Nur im Falle von "wahr" definiert diese Gebietdefinition einen Ausschluss.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -209,12 +209,12 @@
 	</xs:group>
 	<xs:complexType name="DensityAreaType">
 		<xs:annotation>
-			<xs:documentation>Typ für geograohischen Areale mit wahrscheinlicher Zeit um ein Vehikel zu erhalten.</xs:documentation>
+			<xs:documentation>Typ für geograohischen Gebiete mit wahrscheinlicher Zeit um ein Fahrzeug zu erhalten.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Area" type="GeoAreaType">
 				<xs:annotation>
-					<xs:documentation>Definition des geographischen Areals.</xs:documentation>
+					<xs:documentation>Definition des geographischen Gebiets.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:group ref="DurationGroup"/>
@@ -438,14 +438,14 @@
 	</xs:complexType>
 	<xs:complexType name="StopLinkType">
 		<xs:annotation>
-			<xs:documentation>Typ für eine Verbindung von einem Car-Sharing Standort zu einem Stop.</xs:documentation>
+			<xs:documentation>Typ für eine Verbindung von einem Verleihstandort zu einer Haltestelle.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="StopID" type="xs:NMTOKEN"/>
 			<xs:group ref="DurationGroup"/>
 			<xs:element name="Distance" type="xs:nonNegativeInteger" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Distanz des Fußweges für diese Verbindung in Metern. Für den Fall von Arealen ist dies die wahrscheinliche Distanz des Fußweges um ein Vehikel zu erreichen.</xs:documentation>
+					<xs:documentation>Distanz des Fußweges für diese Verbindung in Metern. Für den Fall von Gebieten ist dies die wahrscheinliche Distanz des Fußweges um ein Fahrzeug zu erreichen.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -494,17 +494,17 @@
 	</xs:complexType>
 	<xs:group name="PlaceOrAreaGroup">
 		<xs:annotation>
-			<xs:documentation>Gruppe für Informationen, welche für Standorte und Free-Floating-Areale verwendet werden.</xs:documentation>
+			<xs:documentation>Gruppe für Informationen, welche für Standorte und Free-Floating-Gebiete verwendet werden.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Name" type="TextType" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Druckbare Namen des Standortes oder Areals.</xs:documentation>
+					<xs:documentation>Druckbare Namen des Standortes oder Gebiets.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ProviderID" type="ProviderIDType">
 				<xs:annotation>
-					<xs:documentation>Provider-ID, zu welcher der Standort oder das Areal gehört.</xs:documentation>
+					<xs:documentation>Provider-ID, zu welcher der Standort oder das Gebiet gehört.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
@@ -515,7 +515,7 @@
 			</xs:element>
 			<xs:element name="AttributeID" type="AttributeIDType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Zusätzliche Informationen zu diesem Standort oder Areal.</xs:documentation>
+					<xs:documentation>Zusätzliche Informationen zu diesem Standort oder Gebiet.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -580,24 +580,24 @@
 	</xs:complexType>
 	<xs:complexType name="FloatingAreaType">
 		<xs:annotation>
-			<xs:documentation>Typ für Free-Floating-Areale.</xs:documentation>
+			<xs:documentation>Typ für Free-Floating-Gebiete.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="ID" type="AreaIDType">
 				<xs:annotation>
-					<xs:documentation>Areal-ID.</xs:documentation>
+					<xs:documentation>Gebiet-ID.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Area" type="IncExcGeoAreaType" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Geographische Areale, abgedeckt durch Free-Floaters. Ein Punkt gehört zum Free-Floating-Areal, falls dieser zumindest einer der gegebenen Inklusionsareale und nicht einer der Exlusionsareale ist.</xs:documentation>
+					<xs:documentation>Geographische Gebiete, abgedeckt durch Free-Floaters. Ein Punkt gehört zum Free-Floating-Gebiet, falls dieser zumindest einer der gegebenen Inklusionsareale und nicht einer der Exlusionsareale ist.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:group ref="PlaceOrAreaGroup"/>
 			<xs:group ref="DurationGroup"/>
 			<xs:element name="SubArea" type="DensityAreaType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Sub-Areale des Free-Floating-Areals. Für jedes Sub-Areal ist eine geschätzte Zeit (und dessen Varianz) gegeben, um ein Free-Floating-Buchungsziel zu erhalten. Für Stops, die mehr als ein Sub-Areal abdecken, wird die Mindestdauer verwendet.</xs:documentation>
+					<xs:documentation>Sub-Gebiete des Free-Floating-Gebiets. Für jedes Sub-Gebiet ist eine geschätzte Zeit (und dessen Varianz) gegeben, um ein Free-Floating-Buchungsziel zu erhalten. Für Stops, die mehr als ein Sub-Gebiet abdecken, wird die Mindestdauer verwendet.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -625,12 +625,12 @@
 				</xs:element>
 				<xs:element name="PlaceGroupID" type="PlaceGroupIDType">
 					<xs:annotation>
-						<xs:documentation>Standort-Gruppen-ID dieses Bookees, falls er nicht zu einem fixierten Standort gehört.</xs:documentation>
+						<xs:documentation>Standort-Gruppen-ID dieses Bookees, falls er nicht zu einem festen Standort gehört.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="AreaID" type="AreaIDType">
 					<xs:annotation>
-						<xs:documentation>Areal-ID dieses Bookees. Muss mit Free-Floating-Buchungszielen befüllt werden.</xs:documentation>
+						<xs:documentation>Gebiet-ID dieses Bookees. Muss mit Free-Floating-Buchungszielen befüllt werden.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -717,7 +717,7 @@
 			</xs:element>
 			<xs:element name="CurrentDrivingRange" type="xs:nonNegativeInteger" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Aktuelle Reichweite des Buchungsziels in Metern, gegeben einer nahezu flachen Route. Falls nicht gegeben, wird für das Vehikel einen unbegrenzte Reichweite angenommen.</xs:documentation>
+					<xs:documentation>Aktuelle Reichweite des Buchungsziels in Metern, gegeben einer nahezu flachen Route. Falls nicht gegeben, wird für das Fahrzeug einen unbegrenzte Reichweite angenommen.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -739,7 +739,7 @@
 			</xs:element>
 			<xs:element name="GeoPosition" type="CoordType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Für neu verfügbare Vehikel, welche nicht an einen spezifischen Standort gebunden sind, sollte die Position zurückgegeben werden.</xs:documentation>
+					<xs:documentation>Für neu verfügbare Fahrzeug, welche nicht an einen spezifischen Standort gebunden sind, sollte die Position zurückgegeben werden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
@@ -1848,7 +1848,7 @@
 			</xs:element>
 			<xs:element name="CalcTime" type="xs:duration">
 				<xs:annotation>
-					<xs:documentation>Realtime benötigt um die beinhalteten Resultate zu kalkulieren.</xs:documentation>
+					<xs:documentation>Benötigte Zeit um die beinhaltete Resultate zu berechnen.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
@@ -1864,7 +1864,7 @@
 		<xs:sequence>
 			<xs:element name="Transaction" type="TransactionType">
 				<xs:annotation>
-					<xs:documentation>Transaktions-Identifier, gesetzt vom Anforderer.</xs:documentation>
+					<xs:documentation>Transaktions-Identifier, gesetzt vom Client.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
@@ -1886,7 +1886,7 @@
 			</xs:element>
 			<xs:element name="CalcTime" type="xs:duration">
 				<xs:annotation>
-					<xs:documentation>Realtime benötigt um die beinhalteten Resultate zu kalkulieren.</xs:documentation>
+					<xs:documentation>Benötigte Zeit um die beinhaltete Resultate zu berechnen.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
@@ -1913,7 +1913,7 @@
 		<xs:choice>
 			<xs:element name="Request" type="QueryRequestType" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Unabhängige Resultate im Anfrageschema. </xs:documentation>
+					<xs:documentation>Unabhängige Resultate im Anfrageschema.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Response" type="QueryResponseType" maxOccurs="unbounded">
