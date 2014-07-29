@@ -14,7 +14,7 @@
 	<!--This interface specification is licensed according to: CC BY-ND 3.0 DE (Creative Commons Namensnennung-Keine Bearbeitung 3.0 Deutschland), http://creativecommons.org/licenses/by-nd/3.0/de/-->
 	<!--*******************************************************************-->
 	<xs:annotation>
-		<xs:documentation>**** ID type definitions ****</xs:documentation>
+		<xs:documentation>**** ID Typ-Definitionen ****</xs:documentation>
 	</xs:annotation>
 	<xs:simpleType name="AreaIDType">
 		<xs:annotation>
@@ -75,7 +75,7 @@
 	</xs:annotation>
 	<xs:simpleType name="EuroPriceType">
 		<xs:annotation>
-			<xs:documentation>Typ für Lagerpreise in Euro cents.</xs:documentation>
+			<xs:documentation>Typ für Lagerpreise in Euro-Cents.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:nonNegativeInteger"/>
 	</xs:simpleType>
@@ -494,17 +494,17 @@
 	</xs:complexType>
 	<xs:group name="PlaceOrAreaGroup">
 		<xs:annotation>
-			<xs:documentation>Gruppe für Informationen, welche für Plätze und free floating-Areale verwendet werden.</xs:documentation>
+			<xs:documentation>Gruppe für Informationen, welche für Standorte und Free-Floating-Areale verwendet werden.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Name" type="TextType" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Druckbare Namen des Platzes oder Areals.</xs:documentation>
+					<xs:documentation>Druckbare Namen des Standortes oder Areals.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ProviderID" type="ProviderIDType">
 				<xs:annotation>
-					<xs:documentation>Provider-ID, zu welcher der Platz oder das Areal gehört.</xs:documentation>
+					<xs:documentation>Provider-ID, zu welcher der Standort oder das Areal gehört.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
@@ -515,29 +515,29 @@
 			</xs:element>
 			<xs:element name="AttributeID" type="AttributeIDType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Zusätzliche Informationen zu diesem Platz oder Areal.</xs:documentation>
+					<xs:documentation>Zusätzliche Informationen zu diesem Standort oder Areal.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:group>
 	<xs:complexType name="PlaceType">
 		<xs:annotation>
-			<xs:documentation>Typ für Platzinformationen.</xs:documentation>
+			<xs:documentation>Typ für Standortinformationen.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="ID" type="PlaceIDType">
 				<xs:annotation>
-					<xs:documentation>Platz-ID.</xs:documentation>
+					<xs:documentation>Standort-ID.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Coord" type="CoordType">
 				<xs:annotation>
-					<xs:documentation>Geoposition des Platzes.</xs:documentation>
+					<xs:documentation>Geoposition des Standortes.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Capacity" type="xs:nonNegativeInteger" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Kapazität des Platzes zum Zurückweisen von Buchungszielen.</xs:documentation>
+					<xs:documentation>Kapazität des Standortes zum Zurückweisen von Buchungszielen.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:group ref="PlaceOrAreaGroup"/>
@@ -545,35 +545,35 @@
 	</xs:complexType>
 	<xs:complexType name="ProbabilityPlaceIDType">
 		<xs:annotation>
-			<xs:documentation>Typ für eine Platz-ID mit einer Wahrscheinlichkeit, ein Buchungsziel zu erhalten.</xs:documentation>
+			<xs:documentation>Typ für eine Standort-ID mit einer Wahrscheinlichkeit, ein Buchungsziel zu erhalten.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="ID" type="PlaceIDType">
 				<xs:annotation>
-					<xs:documentation>Platz-ID.</xs:documentation>
+					<xs:documentation>Standort-ID.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Probability" type="PercentType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Durchschnittliche Wahrscheilichkeit, ein Buchungsziel auf diesem Platz zu erhalten. Verwendbar nur für Plätze innerhalb von Platz-Gruppen.</xs:documentation>
+					<xs:documentation>Durchschnittliche Wahrscheilichkeit, ein Buchungsziel auf diesem Standort zu erhalten. Verwendbar nur für Standorte innerhalb von Standort-Gruppen.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="PlaceGroupType">
 		<xs:annotation>
-			<xs:documentation>Typ für Platz-Gruppen.</xs:documentation>
+			<xs:documentation>Typ für Standort-Gruppen.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="ID" type="PlaceGroupIDType">
 				<xs:annotation>
-					<xs:documentation>Platz-Gruppen-ID</xs:documentation>
+					<xs:documentation>Standort-Gruppen-ID</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="PlaceID" type="ProbabilityPlaceIDType" maxOccurs="unbounded"/>
 			<xs:element name="Probability" type="PercentType">
 				<xs:annotation>
-					<xs:documentation>Durchschnittliche Wahrscheinlichkeit, ein Buchungsziel auf einem spezifischen Platz, innerhalb dieser Platz-Gruppe zu erhalten. Gilt nur für solche Plätze, für die ein spezieller Wert hinterlegt ist.</xs:documentation>
+					<xs:documentation>Durchschnittliche Wahrscheinlichkeit, ein Buchungsziel auf einem spezifischen Standort, innerhalb dieser Standort-Gruppe, zu erhalten. Gilt nur für solche Standorte, für die ein spezieller Wert hinterlegt ist.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -625,7 +625,7 @@
 				</xs:element>
 				<xs:element name="PlaceGroupID" type="PlaceGroupIDType">
 					<xs:annotation>
-						<xs:documentation>Platz-Gruppen-ID dieses Bookees, falls er nicht zu einem fixierten Platz gehört.</xs:documentation>
+						<xs:documentation>Standort-Gruppen-ID dieses Bookees, falls er nicht zu einem fixierten Standort gehört.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="AreaID" type="AreaIDType">
@@ -697,12 +697,12 @@
 			<xs:element name="ID" type="BookingTargetIDType"/>
 			<xs:element name="PlaceID" type="PlaceIDType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Für aktuell verfügbare Buchungsziele, welche nicht an einen spezifischen Platz gebunden sind, sollte der aktuelle Platz zurückgegeben werden.</xs:documentation>
+					<xs:documentation>Für aktuell verfügbare Buchungsziele, die nicht an einen spezifischen Standort gebunden sind, sollte der aktuelle Standort zurückgegeben werden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="GeoPosition" type="CoordType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Für aktuell verfügbare Buchungsziele, welche nicht an einen spezifischen Platz gebunden sind, sollte die aktuelle Position zurückgegeben werden.</xs:documentation>
+					<xs:documentation>Für aktuell verfügbare Buchungsziele, welche nicht an einen spezifischen Standort gebunden sind, sollte die aktuelle Position zurückgegeben werden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Inavailability" type="TimePeriodType" minOccurs="0" maxOccurs="unbounded">
@@ -734,12 +734,12 @@
 			</xs:element>
 			<xs:element name="PlaceID" type="PlaceIDType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Für aktuell verfügbare Buchungsziele, welche nicht an einen spezifischen Platz gebunden sind, sollte der aktuelle Platz zurückgegeben werden.</xs:documentation>
+					<xs:documentation>Für aktuell verfügbare Buchungsziele, welche nicht an einen spezifischen Standort gebunden sind, sollte der aktuelle Standort zurückgegeben werden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="GeoPosition" type="CoordType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Für neu verfügbare Vehikel, welche nicht an einen spezifischen Platz gebunden sind, sollte die Position zurückgegeben werden.</xs:documentation>
+					<xs:documentation>Für neu verfügbare Vehikel, welche nicht an einen spezifischen Standort gebunden sind, sollte die Position zurückgegeben werden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
@@ -758,7 +758,7 @@
 	</xs:complexType>
 	<xs:complexType name="PlaceAvailabilityType">
 		<xs:annotation>
-			<xs:documentation>Typ für die verfügbare Kapazität eines Platzes.</xs:documentation>
+			<xs:documentation>Typ für die verfügbare Kapazität eines Standortes.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="ID" type="ProviderPlaceIDType"/>
@@ -788,7 +788,7 @@
 				</xs:element>
 				<xs:element name="Notification" type="xs:boolean">
 					<xs:annotation>
-						<xs:documentation>Die Buchung ist noch valide, allerdings gibt es Informationen für den User betreffend der Buchung.</xs:documentation>
+						<xs:documentation>Die Buchung ist noch valide, allerdings gibt es Informationen für den User, betreffend der Buchung.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="Impossible" type="xs:boolean">
@@ -942,23 +942,23 @@
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:annotation>
-		<xs:documentation>**** Basisservice (C) : Token Generierung ****</xs:documentation>
+		<xs:documentation>**** Basisservice (C) : Token-Generierung ****</xs:documentation>
 	</xs:annotation>
 	<xs:complexType name="TokenGenerationRequestType">
 		<xs:annotation>
-			<xs:documentation>Request for generating a token for a user.</xs:documentation>
+			<xs:documentation>Anfrage für eine Tokengenerierung für einen User.</xs:documentation>
 		</xs:annotation>
 	</xs:complexType>
 	<xs:complexType name="TokenGenerationResponseType">
 		<xs:annotation>
-			<xs:documentation>Response for generating a token for a user.</xs:documentation>
+			<xs:documentation>Antwort für eine Tokengenerierung für einen User.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
 					<xs:element name="Token" type="xs:token" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Token for the user. Can be used in future instead of the password for authentication.</xs:documentation>
+							<xs:documentation>Token für einen User. Kann zukünftig anstelle eines Passwortes für die Athentifizierung verwendet werden.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -966,30 +966,30 @@
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:annotation>
-		<xs:documentation>**** Service (1) : Static data ****</xs:documentation>
+		<xs:documentation>**** Service (1) : Statische Daten ****</xs:documentation>
 	</xs:annotation>
 	<xs:complexType name="BookingTargetsInfoRequestType">
 		<xs:annotation>
-			<xs:documentation>Request for getting all infos for all booking targets.</xs:documentation>
+			<xs:documentation>Anfrage um alle Informationen zu allen Buchungszielen zu erhalten.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="ProviderFilter" type="ProviderIDType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>If set, the filter contains those providers, data is requested for. If not set, data for all providers is requested.</xs:documentation>
+					<xs:documentation>Falls gesetzt, beinhaltet der Filter jene Provider, für die Daten angefragt sind. Falls nicht gesetzt, sind Daten für alle Provider angefragt.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="BookingTargetsInfoResponseType">
 		<xs:annotation>
-			<xs:documentation>Response for getting all infos for all booking targets.</xs:documentation>
+			<xs:documentation>Antwort um alle Informationen für alle Buchungsziele zu erhalten.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
 					<xs:element name="Timestamp" type="xs:dateTime" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Timestamp of this data delivery. The delivering system should be able to identify changes compared to this delivery by this timestamp.</xs:documentation>
+							<xs:documentation>Zeitstempel dieser Datenlieferung. Das liefernde System sollte in der Lage sein, Änderungen durch diesen Zeitstempel zu identifizieren.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="Bookee" type="BookingTargetType" minOccurs="0" maxOccurs="unbounded"/>
@@ -1004,26 +1004,26 @@
 	</xs:complexType>
 	<xs:complexType name="ChangedProvidersRequestType">
 		<xs:annotation>
-			<xs:documentation>Request for getting those providers with changed static data.</xs:documentation>
+			<xs:documentation>Anfrage um jene Anbieter mit veränderter statischer Daten zu erhalten.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Timestamp" type="xs:dateTime">
 				<xs:annotation>
-					<xs:documentation>Timestamp of the static data delivery, the changes are requested for.</xs:documentation>
+					<xs:documentation>Zeitstempel der satischen Datenlieferung, für welche die Änderungen angefordert wurden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ChangedProvidersResponseType">
 		<xs:annotation>
-			<xs:documentation>Repsonse for getting those providers with changed static data.</xs:documentation>
+			<xs:documentation>Antwort um Anbieter mit veränderter statischer Daten zu erhalten.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
 					<xs:element name="Provider" type="ProviderIDType" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation>List of providers, which have changes in their static data.</xs:documentation>
+							<xs:documentation> Liste von Anbietern mit Änderungen in deren statischer Daten.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -1031,11 +1031,11 @@
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:annotation>
-		<xs:documentation>**** Service (2) : Availability query ****</xs:documentation>
+		<xs:documentation>**** Service (2) : Verfügbarkeitsanfrage ****</xs:documentation>
 	</xs:annotation>
 	<xs:complexType name="AvailabilityRequestType">
 		<xs:annotation>
-			<xs:documentation>Synchronous request for availabilities of booking targets.</xs:documentation>
+			<xs:documentation>Synchrone Anfrage von Verfügbarkeiten von Buchungszielen.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:choice>
@@ -1045,21 +1045,21 @@
 			</xs:choice>
 			<xs:element name="TimePeriod" type="TimePeriodType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Interesting time period, for which availabilities of the given booking targets shall be returned. If no given, currently available booking targets should be returned.</xs:documentation>
+					<xs:documentation>Relevante Zeitperiode, für diese Verfügbarkeiten der gegebenen Buchungsziele zurückgegeben werden sollen. Falls nicht gegeben, sollten aktuell verfügbare Buchungsziele ausgegeben werden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="AvailabilityResponseType">
 		<xs:annotation>
-			<xs:documentation>Synchronous response for availabilites of booking targets.</xs:documentation>
+			<xs:documentation>Synchrone Antwort für die Verfügbarkeit von Buchungszielen.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
 					<xs:element name="BookingTarget" type="BookingTargetAvailabilityType" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation>List of booking targets and their availabilities. Not listed booking targets are considered to be either unknown to the car sharing system or not available at all in the requested time period.</xs:documentation>
+							<xs:documentation>Liste von Buchungszielen und deren Verfügbarkeiten. Nicht gelistete Buchungsziele sind dem Car-Sharing-System entweder nicht bekannt, oder nicht in der angefragten Zeitperiode verfügbar.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -1067,11 +1067,11 @@
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:annotation>
-		<xs:documentation>**** Service (2a) : Available places query ****</xs:documentation>
+		<xs:documentation>**** Service (2a) : Standortverfügbarkeitsanfrage ****</xs:documentation>
 	</xs:annotation>
 	<xs:complexType name="PlaceAvailabilityRequestType">
 		<xs:annotation>
-			<xs:documentation>Synchronous request for the available capacity of places.</xs:documentation>
+			<xs:documentation>Synchrone Anfrage für verfügbare Kapazität der Standorte.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:choice>
@@ -1083,14 +1083,14 @@
 	</xs:complexType>
 	<xs:complexType name="PlaceAvailabilityResponseType">
 		<xs:annotation>
-			<xs:documentation>Synchronous response for the available capacity of places..</xs:documentation>
+			<xs:documentation>Synchrone Antwort für verfügbare Kapazität der Standorte.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
 					<xs:element name="Place" type="PlaceAvailabilityType" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation>List of places and their available capacity. Not listed places are considered to be either unknown to the car sharing system or not available at all.</xs:documentation>
+							<xs:documentation>Liste der Standorte und deren verfügbare Kapazität. Nicht gelistete Standorte sind dem Car-Sharing-System entweder nicht bekannt, oder nicht in der angefragten Zeitperiode verfügbar.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -1098,33 +1098,33 @@
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:annotation>
-		<xs:documentation>**** Service (3) : Availability subscription ****</xs:documentation>
+		<xs:documentation>**** Service (3) : Verfügbarkeitsabonnement ****</xs:documentation>
 	</xs:annotation>
 	<xs:complexType name="AvailabilitySubscriptionRequestType">
 		<xs:annotation>
-			<xs:documentation>Request for subscribing to availabilities of given booking targets.</xs:documentation>
+			<xs:documentation>Anfrage zum Abonnement von Verfügbarkeiten von gegeben Buchungszielen.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="BookingTargetID" type="BookingTargetIDType" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Booking tragets to subscribe/unsubscribe.</xs:documentation>
+					<xs:documentation>Buchungsziele abonnieren/ Abo kündigen.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Unsubscription" type="xs:boolean" default="false" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>If set, unsubcribe from the given booking targets. Otherwise subscribe to them.</xs:documentation>
+					<xs:documentation>Falls gesetzt, Abo von gegebenen Buchungszielen kündigen. Andernfalls abonnieren..</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="EventHorizon" type="xs:duration" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>If set, the event horizon defines the time in future, for wich the subscription is valid. This value is used for all subscribed booking targets. This duration is relative to the current time.</xs:documentation>
+					<xs:documentation>Falls gesetzt, beschreibt der Ereignishorizont die Zeit in der Zukunft, für diese das Abo valide ist. Der Wert wird für alle abonnierten Buchungsziele verwendet.Diese Dauer ist relativ zur aktuellen Zeit.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="AvailabilitySubscriptionResponseType">
 		<xs:annotation>
-			<xs:documentation>Response for subscribing to availabilities of given booking targets.</xs:documentation>
+			<xs:documentation>Antwort für Abo von Verfügbarkeiten für ein gegebenes Buchungsziel.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType"/>
@@ -1132,19 +1132,19 @@
 	</xs:complexType>
 	<xs:complexType name="AvailabilitySubscriptionStatusRequest">
 		<xs:annotation>
-			<xs:documentation>Request for getting all subsribed booking targets.</xs:documentation>
+			<xs:documentation>Anfrage um alle abonnierten Buchungsziele zu erhalten.</xs:documentation>
 		</xs:annotation>
 	</xs:complexType>
 	<xs:complexType name="AvailabilitySubscriptionStatusResponse">
 		<xs:annotation>
-			<xs:documentation>Response for getting all subscribed booking targets.</xs:documentation>
+			<xs:documentation>Antwort um alle abonnierten Buchungsziele zu erhalten.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
 					<xs:element name="BookingTargetID" type="BookingTargetIDType" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation>Subscribed booking targets.</xs:documentation>
+							<xs:documentation>Abonnierte Buchungsziele.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -1153,31 +1153,31 @@
 	</xs:complexType>
 	<xs:complexType name="CompleteAvailabilityRequestType">
 		<xs:annotation>
-			<xs:documentation>Request for getting the complete current status of subscribed availabilities.</xs:documentation>
+			<xs:documentation>Anfrage um den vollständigen aktuellen Status von abonnierten Verfügbarkeiten zu erhalten.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="MaxTargets" type="xs:integer" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Defines the maximum number of targets to be returned in one message.</xs:documentation>
+					<xs:documentation>Definiert die maximale Anzahl von Zielen, die in einer Nachricht zurückgegeben werden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="CompleteAvailabilityResponseType">
 		<xs:annotation>
-			<xs:documentation>Response for getting the complete current status of subscribed abailabilities. Several such responses may belong to one single request.</xs:documentation>
+			<xs:documentation>Antwort um den vollständigen aktuellen Status der Verfügbarkeiten zu erhalten. Einiege solcher Antworten können zu einer einzigen Anfrage gehören.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
 					<xs:element name="MessageBlockID" type="xs:NMTOKEN">
 						<xs:annotation>
-							<xs:documentation>ID of the block, this message belongs to. All messages of one block have the same ID.</xs:documentation>
+							<xs:documentation> ID des Blocks, zu dem diese Nachricht gehört. Alle Nachrichten des Blocks haben die selbe ID.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="Last" type="xs:boolean" default="false" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>If set, this message is the last one in the corresponding block. Otherwise more messages of the same block will follow.</xs:documentation>
+							<xs:documentation>Falls gesetzt, ist die Nachricht die letzte des korrespondierenden Blocks. Andernfalls werden mehr Nachrichten des selben Blocks folgen.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="BookingTarget" type="BookingTargetAvailabilityType" minOccurs="0" maxOccurs="unbounded"/>
@@ -1187,35 +1187,35 @@
 	</xs:complexType>
 	<xs:complexType name="AvailabilityPushMessageType">
 		<xs:annotation>
-			<xs:documentation>Push message containing changes in availability of subscribed booking targets.</xs:documentation>
+			<xs:documentation>Push-Nachricht, die Änderungen in der Verfügbarkeit von abonnierten Buchungszielen beinhaltet.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="AvailabilityChange" type="BookingTargetChangeAvailabilityType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:annotation>
-		<xs:documentation>**** Service (3a) : Available places subscription ****</xs:documentation>
+		<xs:documentation>**** Service (3a) : Standortverfügbarkeitsabonnement ****</xs:documentation>
 	</xs:annotation>
 	<xs:complexType name="PlaceAvailabilitySubscriptionRequestType">
 		<xs:annotation>
-			<xs:documentation>Request for subscribing to available capacity of places.</xs:documentation>
+			<xs:documentation>Anfrage zum Abonnieren von verfügbaren Kapazitäten von Standorten.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="PlaceID" type="ProviderPlaceIDType" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Places to subscribe/unsubscribe.</xs:documentation>
+					<xs:documentation>Standorte zu abonnieren/ Abo kündigen.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Unsubscription" type="xs:boolean" default="false" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>If set, unsubcribe from the given booking targets. Otherwise subscribe to them.</xs:documentation>
+					<xs:documentation>Falls gesetzt, kündigen der Abos gegebener Buchungsziele. Andernfalls abonnieren.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="PlaceAvailabilitySubscriptionResponseType">
 		<xs:annotation>
-			<xs:documentation>Response for subscribing to available capacity of places.</xs:documentation>
+			<xs:documentation>Antwort zum abonnieren der verfügbaren Kapazität von Standorten.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType"/>
@@ -1223,19 +1223,19 @@
 	</xs:complexType>
 	<xs:complexType name="PlaceAvailabilitySubscriptionStatusRequest">
 		<xs:annotation>
-			<xs:documentation>Request for getting all subsribed places.</xs:documentation>
+			<xs:documentation>Anfrage um alle abonnierten Standorte zu erhalten.</xs:documentation>
 		</xs:annotation>
 	</xs:complexType>
 	<xs:complexType name="PlaceAvailabilitySubscriptionStatusResponse">
 		<xs:annotation>
-			<xs:documentation>Response for getting all subscribed places.</xs:documentation>
+			<xs:documentation>Antwort um alle abonnierten Standorte zu erhalten</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
 					<xs:element name="PlaceID" type="ProviderPlaceIDType" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation>Subscribed places.</xs:documentation>
+							<xs:documentation>Abonnierte Standorte.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -1244,31 +1244,31 @@
 	</xs:complexType>
 	<xs:complexType name="CompletePlaceAvailabilityRequestType">
 		<xs:annotation>
-			<xs:documentation>Request for getting the complete current status of subscribed places.</xs:documentation>
+			<xs:documentation>Anfrage um den vollständigen aktuellen Status abonnierter Standorte zu erhalten.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="MaxPlaces" type="xs:integer" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Defines the maximum number of places to be returned in one message.</xs:documentation>
+					<xs:documentation>Definiert die maximale Anzahl an Standorten, die in einer Nachricht zurückgegeben werden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="CompletePlaceAvailabilityResponseType">
 		<xs:annotation>
-			<xs:documentation>Response for getting the complete current status of subscribed places. Several such responses may belong to one single request.</xs:documentation>
+			<xs:documentation>Antwort um den vollständigen aktuellen Status abonnierter Standorte zu erhalten. Verschiedene solcher Antworten können zu einer einzelnen Anfrage gehören.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
 					<xs:element name="MessageBlockID" type="xs:NMTOKEN">
 						<xs:annotation>
-							<xs:documentation>ID of the block, this message belongs to. All messages of one block have the same ID.</xs:documentation>
+							<xs:documentation> ID des Blocks, zu dem die Nachricht gehört. Alle Nachrichten eines Blocks haben die selbe ID.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="Last" type="xs:boolean" default="false" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>If set, this message is the last one in the corresponding block. Otherwise more messages of the same block will follow.</xs:documentation>
+							<xs:documentation>Falls gesetzt, ist diese Nachricht die Letzte des korrespondierenden Blocks. Andernfalls werden mehr Nachrichten des selben Blocks folgen.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="PlaceAvailability" type="PlaceAvailabilityType" minOccurs="0" maxOccurs="unbounded"/>
@@ -1278,24 +1278,24 @@
 	</xs:complexType>
 	<xs:complexType name="PlaceAvailabilityPushMessageType">
 		<xs:annotation>
-			<xs:documentation>Push message containing changes in availability of subscribed places.</xs:documentation>
+			<xs:documentation>Push-Nachricht, die Änderungen in der Verfügbarkeit von abonnierten Standorten enthält.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="PlaceAvailability" type="PlaceAvailabilityType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:annotation>
-		<xs:documentation>**** Service (4) : Booking ****</xs:documentation>
+		<xs:documentation>**** Service (4) : Buchen ****</xs:documentation>
 	</xs:annotation>
 	<xs:complexType name="BookingRequestType">
 		<xs:annotation>
-			<xs:documentation>Request for booking a booking target.</xs:documentation>
+			<xs:documentation>Anfrage zum Buchen eines Buchungsziel.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="BookingTargetID" type="BookingTargetIDType"/>
 			<xs:element name="TimePeriodProposal" type="TimePeriodProposalType">
 				<xs:annotation>
-					<xs:documentation>Proposed time period for the usage of the booking target.</xs:documentation>
+					<xs:documentation>Vorgeschlagene Zeitperiode für die Nutzung eines Buchungsziels.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:group ref="OriginDestGroup"/>
@@ -1303,7 +1303,7 @@
 	</xs:complexType>
 	<xs:complexType name="BookingResponseType">
 		<xs:annotation>
-			<xs:documentation>Response for booking a booking target.</xs:documentation>
+			<xs:documentation>Antwort zur Buchung eines Buchungsziels.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
@@ -1311,7 +1311,7 @@
 					<xs:element name="BookingID" type="BookingIDType" minOccurs="0"/>
 					<xs:element name="TimePeriod" type="TimePeriodType" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Actual time period of the booking, eventually adapted to the booking time grid.</xs:documentation>
+							<xs:documentation>Aktuelle Zeitperiode der Buchung. Eventuell adaptiert zum Buchungszeitraster.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -1320,23 +1320,23 @@
 	</xs:complexType>
 	<xs:complexType name="ChangeBookingRequestType">
 		<xs:annotation>
-			<xs:documentation>Request for changing a booking.</xs:documentation>
+			<xs:documentation>Anfrage zur Änderung einer Buchung.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="BookingID" type="BookingIDType">
 				<xs:annotation>
-					<xs:documentation>Booking to change.</xs:documentation>
+					<xs:documentation>Zu ändernde Buchung.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
 				<xs:element name="NewTimePeriodProposal" type="TimePeriodProposalType">
 					<xs:annotation>
-						<xs:documentation>New time period proposal for changing the booking.</xs:documentation>
+						<xs:documentation>Neuer Zeitperioden-Vorschlag um die Buchung zu ändern.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="Cancel" type="xs:boolean">
 					<xs:annotation>
-						<xs:documentation>The booking shall be cancelled.</xs:documentation>
+						<xs:documentation>Die Buchung soll abgebrochen werden.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -1344,14 +1344,14 @@
 	</xs:complexType>
 	<xs:complexType name="ChangeBookingResponseType">
 		<xs:annotation>
-			<xs:documentation>Response for changing a booking.</xs:documentation>
+			<xs:documentation>Antwort für eine Buchungsänderung.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
 					<xs:element name="TimePeriod" type="TimePeriodType" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Actiual time period of booking, eventually adapted to the booking time grid.</xs:documentation>
+							<xs:documentation>Aktuelle Zeitperiode, eventuell adaptiert zum Buchungszeitraster.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -1359,28 +1359,28 @@
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:annotation>
-		<xs:documentation>**** Service (5) : Booking alerts subscription ****</xs:documentation>
+		<xs:documentation>**** Service (5) : Buchungsalarm-Abonnement ****</xs:documentation>
 	</xs:annotation>
 	<xs:complexType name="BookingAlertSubscriptionRequestType">
 		<xs:annotation>
-			<xs:documentation>Request for subscribing to alerts for given bookings.</xs:documentation>
+			<xs:documentation>Anfrage um Alarmmeldungen für gegebene Buchungen zu abonnieren.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="BookingID" type="BookingIDType" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Bookings to subscribe/unsubscribe.</xs:documentation>
+					<xs:documentation>Buchungen zu abonnieren/ kündigen.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Unsubscription" type="xs:boolean" default="false" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>If set, unsubcribe from the given bookings. Otherwise subscribe to them.</xs:documentation>
+					<xs:documentation>Falls gesetzt, gegebene Abos der Buchungen kündigen. Andernfalls abonnieren.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="BookingAlertSubscriptionResponseType">
 		<xs:annotation>
-			<xs:documentation>Response for subscribing to alerts for given bookings.</xs:documentation>
+			<xs:documentation>Antwort um Alarmmeldungen für gegebene Buchungen zu abonnieren.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType"/>
@@ -1388,19 +1388,19 @@
 	</xs:complexType>
 	<xs:complexType name="BookingAlertSubscriptionStatusRequestType">
 		<xs:annotation>
-			<xs:documentation>Request for getting all subscribed bookings.</xs:documentation>
+			<xs:documentation>Anfrage um alle abonnierten Buchungen zu erhalten.</xs:documentation>
 		</xs:annotation>
 	</xs:complexType>
 	<xs:complexType name="BookingAlertSubscriptionStatusResponseType">
 		<xs:annotation>
-			<xs:documentation>Response for getting all subscribed bookings.</xs:documentation>
+			<xs:documentation>Antwort um alle abonnierten Buchungen zu erhalten.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
 					<xs:element name="BookingID" type="BookingIDType" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation>Subscribed bookings.</xs:documentation>
+							<xs:documentation>Abonnierte Buchungen.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -1409,31 +1409,31 @@
 	</xs:complexType>
 	<xs:complexType name="CompleteBookingAlertRequestType">
 		<xs:annotation>
-			<xs:documentation>Request for getting the complete current status of subscribed booking alerts.</xs:documentation>
+			<xs:documentation>Anfrage um den vollständigen aktuellen Status abonnierter Buchungsalarmmeldungen zu erhalten.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="MaxResults" type="xs:integer" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Defines the maximum number of results to be returned in one message.</xs:documentation>
+					<xs:documentation>Definiert die maximale Anzahl Resultate, die in einer Nachricht zurückgegeben werden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="CompleteBookingAlertResponseType">
 		<xs:annotation>
-			<xs:documentation>Message for getting the complete current status of subscribed bookings. Several such responses may belong to one single request.</xs:documentation>
+			<xs:documentation>Nachricht um den vollständigen aktuellen Status abonnierter Buchungen zu erhalten. Verschiedene solcher Antworten können zu einer einzigen Anfrage gehören.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
 					<xs:element name="MessageBlockID" type="xs:NMTOKEN">
 						<xs:annotation>
-							<xs:documentation>ID of the block, this message belongs to. All messages of one block have the same ID.</xs:documentation>
+							<xs:documentation>ID des Blocks, zu dem diese Nachricht gehört. Alle Nachrichten eines Blockes haben die selbe ID.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="Last" type="xs:boolean" default="false" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>If set, this message is the last one in the corresponding block. Otherwise more messages of the same block will follow.</xs:documentation>
+							<xs:documentation>Falls gesetzt, ist diese Nachricht die Letzte im korrespondierenden Block. Andernfalls folgen mehr Nachrichten des selben Blocks.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="BookingChange" type="BookingChangeType" minOccurs="0" maxOccurs="unbounded"/>
@@ -1443,29 +1443,29 @@
 	</xs:complexType>
 	<xs:complexType name="BookingAlertPushMessageType">
 		<xs:annotation>
-			<xs:documentation>Push message containing alerts for subscribed bookings.</xs:documentation>
+			<xs:documentation>Push-Nachricht, die Alarmmeldungen für abonnierte Buchungen enthält.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="BookingChange" type="BookingChangeType" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:annotation>
-		<xs:documentation>**** Service (6) : Price Information ****</xs:documentation>
+		<xs:documentation>**** Service (6) : Preisinformation ****</xs:documentation>
 	</xs:annotation>
 	<xs:complexType name="PriceInformationRequestType">
 		<xs:annotation>
-			<xs:documentation>Request for getting a price.</xs:documentation>
+			<xs:documentation>Anfrage um einen Preis zu erhalten.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="BookingTargetID" type="BookingTargetIDType"/>
 			<xs:element name="TimePeriodProposal" type="TimePeriodProposalType">
 				<xs:annotation>
-					<xs:documentation>Proposed time period for the usage of the booking target.</xs:documentation>
+					<xs:documentation>Vorgeschlagene Zeitperiode für die Nutzung des Buchungsziels.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Distance" type="xs:nonNegativeInteger">
 				<xs:annotation>
-					<xs:documentation>Distance to drive in meters.</xs:documentation>
+					<xs:documentation>Distanz zu Fahren in Metern.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:group ref="OriginDestGroup"/>
@@ -1473,7 +1473,7 @@
 	</xs:complexType>
 	<xs:complexType name="PriceInformationResponseType">
 		<xs:annotation>
-			<xs:documentation>Response for getting a price.</xs:documentation>
+			<xs:documentation>Antwort um einen Preis zu erhalten.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
@@ -1484,62 +1484,62 @@
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:annotation>
-		<xs:documentation>**** Message container ****</xs:documentation>
+		<xs:documentation>**** Nachrichtencontainer ****</xs:documentation>
 	</xs:annotation>
 	<xs:group name="UserTriggeredRequestGroup">
 		<xs:annotation>
-			<xs:documentation>Requests which are directly triggered through a user interaction.</xs:documentation>
+			<xs:documentation>Anfragen, die direkt durch Userinteraktion ausgelößt werden.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Language" type="xs:language" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Requested language for the results. All texts returned in the respective responses should be in this language.</xs:documentation>
+					<xs:documentation>Angefragte Sprache für die Resultate. Alle Texte zurückgegeben in den betreffenden Antworten, sollten in dieser Sprache sein.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Auth" type="AuthType">
 				<xs:annotation>
-					<xs:documentation>Authentication information.</xs:documentation>
+					<xs:documentation>Authentifikationsinformationen.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
 				<xs:element name="OpenSession" type="OpenSessionRequestType">
 					<xs:annotation>
-						<xs:documentation>Open a session for a user.</xs:documentation>
+						<xs:documentation>Öffnen einer Session für einen User.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="CloseSession" type="CloseSessionRequestType">
 					<xs:annotation>
-						<xs:documentation>Explicitely close a session.</xs:documentation>
+						<xs:documentation>Explizietes Schließen einer Session.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="TokenGeneration" type="TokenGenerationRequestType">
 					<xs:annotation>
-						<xs:documentation>Generate a token for a user which replaces his password.</xs:documentation>
+						<xs:documentation>Generieren eines Tokens für einen User, der sein Passwort ersetzt.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="Availability" type="AvailabilityRequestType">
 					<xs:annotation>
-						<xs:documentation>Get the availability for the given booking targets.</xs:documentation>
+						<xs:documentation>Die Verfügbarkeit für gegebene Buchungsziele erhalten.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="PlaceAvailability" type="PlaceAvailabilityRequestType">
 					<xs:annotation>
-						<xs:documentation>Get the availabile capacity for the given places.</xs:documentation>
+						<xs:documentation>Die verfügbare Kapazität für gegebene Standorte erhalten.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="PriceInformation" type="PriceInformationRequestType">
 					<xs:annotation>
-						<xs:documentation>Get a price information.</xs:documentation>
+						<xs:documentation>Beziehen von Preisinformationen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="Booking" type="BookingRequestType">
 					<xs:annotation>
-						<xs:documentation>Book a booking target.</xs:documentation>
+						<xs:documentation>Buchung eines Buchungsziels.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="ChangeBooking" type="ChangeBookingRequestType">
 					<xs:annotation>
-						<xs:documentation>Change a booking.</xs:documentation>
+						<xs:documentation>Ändern einer Buchung.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -1547,58 +1547,58 @@
 	</xs:group>
 	<xs:group name="UserTriggeredResponseGroup">
 		<xs:annotation>
-			<xs:documentation>Responses, which are directly triggered through a user interaction.</xs:documentation>
+			<xs:documentation>Antworten, die direkt durch einer Userinteraktion ausgelößt werden.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="SessionID" type="SessionIDType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>If returned, a session for the user was opened. This session ID can be reused for authentication in the next request.</xs:documentation>
+					<xs:documentation>Falls zurückgegeben wurde eine Session für einen User geöffnet.Diese Session-ID kann für Athentifizierung in der nächsten Anfrage verwendet werden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="SessionTimeout" type="xs:duration" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Inactivity timeout of the session. If a period of inactivity on this session exceeds this value, the session timeouts.</xs:documentation>
+					<xs:documentation>Inaktivitäts-Timeout einer Session. Wenn eine Zeitspanne von Inaktivität für diese Session diesen Wert übersteigt, läuft die Session ab.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
 				<xs:element name="OpenSession" type="OpenSessionResponseType">
 					<xs:annotation>
-						<xs:documentation>Open a session for the user.</xs:documentation>
+						<xs:documentation>Öffnen einer Session für den User.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="CloseSession" type="CloseSessionResponseType">
 					<xs:annotation>
-						<xs:documentation>Explicitely close a session.</xs:documentation>
+						<xs:documentation>Explizietes Schließen einer Session.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="TokenGeneration" type="TokenGenerationResponseType">
 					<xs:annotation>
-						<xs:documentation>Generate a token for a user which replaces his password.</xs:documentation>
+						<xs:documentation>Generieren eines Tokens für einen User, der sein Passwort ersetzt.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="Availability" type="AvailabilityResponseType">
 					<xs:annotation>
-						<xs:documentation>Get the availability for the given booking targets.</xs:documentation>
+						<xs:documentation>Beziehen der Verfügbarkeit der gegebenen Buchungsziele.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="PlaceAvailability" type="PlaceAvailabilityResponseType">
 					<xs:annotation>
-						<xs:documentation>Get the availabile capacity for the given places.</xs:documentation>
+						<xs:documentation>Beziehen der verfügbaren Kapazitäten für gegebene Standorte.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="PriceInformation" type="PriceInformationResponseType">
 					<xs:annotation>
-						<xs:documentation>Get a price information.</xs:documentation>
+						<xs:documentation>Beziehen einer Preisinformation.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="Booking" type="BookingResponseType">
 					<xs:annotation>
-						<xs:documentation>Book a booking target.</xs:documentation>
+						<xs:documentation>Buchen eines Buchungsziels.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="ChangeBooking" type="ChangeBookingResponseType">
 					<xs:annotation>
-						<xs:documentation>Change a booking.</xs:documentation>
+						<xs:documentation>Ändern einer Buchung.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -1606,18 +1606,18 @@
 	</xs:group>
 	<xs:group name="StaticDataRequestGroup">
 		<xs:annotation>
-			<xs:documentation>Requests for static data.</xs:documentation>
+			<xs:documentation>Anfragen für statische Daten.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:choice>
 				<xs:element name="BookingTargetsInfo" type="BookingTargetsInfoRequestType">
 					<xs:annotation>
-						<xs:documentation>Get static data for all booking targets.</xs:documentation>
+						<xs:documentation>Beziehen statischer Daten für alle Buchungsziele.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="ChangedProviders" type="ChangedProvidersRequestType">
 					<xs:annotation>
-						<xs:documentation>Get providers with changes in their static data since the given timestamp.</xs:documentation>
+						<xs:documentation>Beziehen von Anbietern mit Änderungen in deren statischer Daten seit dem gegeben Timestamp.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -1625,18 +1625,18 @@
 	</xs:group>
 	<xs:group name="StaticDataResponseGroup">
 		<xs:annotation>
-			<xs:documentation>Responses containing static data.</xs:documentation>
+			<xs:documentation> Antworten, die statische Daten beinhalten.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:choice>
 				<xs:element name="BookingTargetsInfo" type="BookingTargetsInfoResponseType">
 					<xs:annotation>
-						<xs:documentation>Get the static data for all booking targets.</xs:documentation>
+						<xs:documentation>Beziehen statischer Daten für alle Buchungsziele.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="ChangedProviders" type="ChangedProvidersResponseType">
 					<xs:annotation>
-						<xs:documentation>Get providers with changes in their static data since the given timestamp.</xs:documentation>
+						<xs:documentation>Beziehen von Anbietern mit Änderungen in deren statischer Daten seit dem gegebenen Zeitstempel.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -1644,13 +1644,13 @@
 	</xs:group>
 	<xs:group name="SubscriptionAdministrationRequestGroup">
 		<xs:annotation>
-			<xs:documentation>Requests for administrating subscription connections. Each request is answered by exactly one response.</xs:documentation>
+			<xs:documentation>Anfragen für das Verwalten von Abonnementverbindungen. Jede Anfrage wird exakt von einer Antwort beantwortet.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:choice>
 				<xs:element name="HeartBeat" type="HeartBeatRequestType">
 					<xs:annotation>
-						<xs:documentation>Check a connection.</xs:documentation>
+						<xs:documentation>Prüfen einer Verbindung.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -1658,13 +1658,13 @@
 	</xs:group>
 	<xs:group name="SubscriptionAdministrationResponseGroup">
 		<xs:annotation>
-			<xs:documentation>Responses for administrating subscription connections. Each response corresponds to exactly one request.</xs:documentation>
+			<xs:documentation>Antworten für das Verwalten von Abonnementverbindungen. Jede Anfrage wird exakt von einer Antwort beantwortet.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:choice>
 				<xs:element name="HeartBeat" type="HeartBeatResponseType">
 					<xs:annotation>
-						<xs:documentation>Check a connection.</xs:documentation>
+						<xs:documentation>Prüfen einer Verbindung.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -1678,32 +1678,32 @@
 			<xs:choice>
 				<xs:element name="AvailabilitySubscription" type="AvailabilitySubscriptionRequestType">
 					<xs:annotation>
-						<xs:documentation>Subscribe for availabilities of booking targets.</xs:documentation>
+						<xs:documentation>Abo von Verfügbarkeiten von Buchungszielen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="AvailabilitySubscriptionStatus" type="AvailabilitySubscriptionStatusRequest">
 					<xs:annotation>
-						<xs:documentation>Check availability subscriptions.</xs:documentation>
+						<xs:documentation>Prüfen von Verfügbarkeitsabonnements.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="PlaceAvailabilitySubscription" type="PlaceAvailabilitySubscriptionRequestType">
 					<xs:annotation>
-						<xs:documentation>Subscribe for available capacities of places.</xs:documentation>
+						<xs:documentation>Abonnieren von verfügbaren Standortkapazitäten.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="PlaceAvailabilitySubscriptionStatus" type="PlaceAvailabilitySubscriptionStatusRequest">
 					<xs:annotation>
-						<xs:documentation>Check places subscriptions.</xs:documentation>
+						<xs:documentation>Prüfen von Standortabonnements.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="BookingAlertSubscription" type="BookingAlertSubscriptionRequestType">
 					<xs:annotation>
-						<xs:documentation>Subscribe to booking changes.</xs:documentation>
+						<xs:documentation>Abonnieren von Buchungsänderungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="BookingAlertSubscriptionStatus" type="BookingAlertSubscriptionStatusRequestType">
 					<xs:annotation>
-						<xs:documentation>Check booking subscriptions.</xs:documentation>
+						<xs:documentation>Prüfen von Buchungsabonnements.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -1711,38 +1711,38 @@
 	</xs:group>
 	<xs:group name="SubscriptionResponseGroup">
 		<xs:annotation>
-			<xs:documentation>Responses for subscriptions. Each response corresponds to exactly one request.</xs:documentation>
+			<xs:documentation>Antworten für Abonnements. Jede Antwort korrespondiert exakt mit einer Anfrage.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:choice>
 				<xs:element name="AvailabilitySubscription" type="AvailabilitySubscriptionResponseType">
 					<xs:annotation>
-						<xs:documentation>Subscribe for availabilities of booking targets.</xs:documentation>
+						<xs:documentation>Abo von Verfügbarkeiten von Buchungszielen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="AvailabilitySubscriptionStatus" type="AvailabilitySubscriptionStatusResponse">
 					<xs:annotation>
-						<xs:documentation>Check availability subscriptions.</xs:documentation>
+						<xs:documentation>Prüfen von Verfügbarkeitsabos.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="PlaceAvailabilitySubscription" type="PlaceAvailabilitySubscriptionResponseType">
 					<xs:annotation>
-						<xs:documentation>Subscribe for available capacities of places.</xs:documentation>
+						<xs:documentation>Abonnieren von verfügbaren Kapazitäten von Standorten.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="PlaceAvailabilitySubscriptionStatus" type="PlaceAvailabilitySubscriptionStatusResponse">
 					<xs:annotation>
-						<xs:documentation>Check places subscriptions.</xs:documentation>
+						<xs:documentation>Prüfen von Standortabos.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="BookingAlertSubscription" type="BookingAlertSubscriptionResponseType">
 					<xs:annotation>
-						<xs:documentation>Subscribe to booking changes.</xs:documentation>
+						<xs:documentation>Abonieren von Buchungsänderungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="BookingAlertSubscriptionStatus" type="BookingAlertSubscriptionStatusResponseType">
 					<xs:annotation>
-						<xs:documentation>Check booking subscriptions.</xs:documentation>
+						<xs:documentation>Prüfen von Buchungsabos.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -1750,23 +1750,23 @@
 	</xs:group>
 	<xs:group name="RequestMessageGroup">
 		<xs:annotation>
-			<xs:documentation>Requests for getting subscribed information. Each requests is answered by at least one response.</xs:documentation>
+			<xs:documentation>Anfrage um abonnierte Informationen zu erhalten.Jede Anfrage wird mindestens durch eine Antwort beantwortet.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:choice>
 				<xs:element name="CompleteAvailability" type="CompleteAvailabilityRequestType">
 					<xs:annotation>
-						<xs:documentation>Get all subscribed availability information.</xs:documentation>
+						<xs:documentation>Beziehen aller abonnierten Verfügbarkeitsinformationen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="CompletePlaceAvailability" type="CompletePlaceAvailabilityRequestType">
 					<xs:annotation>
-						<xs:documentation>Get all subscribed places information.</xs:documentation>
+						<xs:documentation>Beziehen aller abonnierten Standortinformationen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="CompleteBookingAlert" type="CompleteBookingAlertRequestType">
 					<xs:annotation>
-						<xs:documentation>Get all subscribed booking changes.</xs:documentation>
+						<xs:documentation>Beziehen aller abonnierten Buchungsänderungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -1774,23 +1774,23 @@
 	</xs:group>
 	<xs:group name="ResponseMessageGroup">
 		<xs:annotation>
-			<xs:documentation>Responses for getting subscribed information. Each response corresponds to exactly one request.</xs:documentation>
+			<xs:documentation>Antworten um abonnierte Informationen. Jede Antwort korrespondiert exakt mit einer Anfrage.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:choice>
 				<xs:element name="CompleteAvailability" type="CompleteAvailabilityResponseType">
 					<xs:annotation>
-						<xs:documentation>Get all subscribed availability information.</xs:documentation>
+						<xs:documentation>Beziehen aller abonnierten Verfügbarkeitsinformationen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="CompletePlaceAvailability" type="CompletePlaceAvailabilityResponseType">
 					<xs:annotation>
-						<xs:documentation>Get all subscribed places information.</xs:documentation>
+						<xs:documentation>Beziehen aller abonnierten Standortinformationen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="CompleteBookingAlert" type="CompleteBookingAlertResponseType">
 					<xs:annotation>
-						<xs:documentation>Get all subscribed booking changes.</xs:documentation>
+						<xs:documentation>Beziehen aller abonnierten Buchungsänderungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -1798,23 +1798,23 @@
 	</xs:group>
 	<xs:group name="PushMessageGroup">
 		<xs:annotation>
-			<xs:documentation>Messages for getting subscribed information. Messages do not correspond to any request or response.</xs:documentation>
+			<xs:documentation>Nachrichten um abonnierte Informationen zu erhalten. Nachrichten korrespondieren nicht mit irgendeiner Anfrage oder Anmtwort.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:choice>
 				<xs:element name="AvailabilityPush" type="AvailabilityPushMessageType">
 					<xs:annotation>
-						<xs:documentation>Push message for availabilities.</xs:documentation>
+						<xs:documentation>Push-Nachrichten für Verfügbarkeiten.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="PlaceAvailabilityPush" type="PlaceAvailabilityPushMessageType">
 					<xs:annotation>
-						<xs:documentation>Push message for places.</xs:documentation>
+						<xs:documentation>Push-Nachrichten für Standorte.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="BookingAlertPush" type="BookingAlertPushMessageType">
 					<xs:annotation>
-						<xs:documentation>Push message for booking changes.</xs:documentation>
+						<xs:documentation>Push-Nachrichten für Buchungsänderungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -1822,12 +1822,12 @@
 	</xs:group>
 	<xs:complexType name="QueryRequestType">
 		<xs:annotation>
-			<xs:documentation>Request messages in query scheme.</xs:documentation>
+			<xs:documentation>Anfragenachrichten in Anfrageschema.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Transaction" type="TransactionType">
 				<xs:annotation>
-					<xs:documentation>Transaction identifier, set by the requestor.</xs:documentation>
+					<xs:documentation>Transaktions-Identifier, gesetzt vom Anforderer.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
@@ -1838,17 +1838,17 @@
 	</xs:complexType>
 	<xs:complexType name="QueryResponseType">
 		<xs:annotation>
-			<xs:documentation>Response messages in query scheme.</xs:documentation>
+			<xs:documentation>Antwortnachrichten in Anfrageschema.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Transaction" type="TransactionType">
 				<xs:annotation>
-					<xs:documentation>Transaction identifier, copied from the corresponding request.</xs:documentation>
+					<xs:documentation>Transaktions-Identifier, kopiert von der korrespondierenden Anfrage.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="CalcTime" type="xs:duration">
 				<xs:annotation>
-					<xs:documentation>Real time needed for calculating the contained results.</xs:documentation>
+					<xs:documentation>Realtime benötigt um die beinhalteten Resultate zu kalkulieren.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
@@ -1859,12 +1859,12 @@
 	</xs:complexType>
 	<xs:complexType name="SubscriptionRequestType">
 		<xs:annotation>
-			<xs:documentation>Request messages in subscription scheme.</xs:documentation>
+			<xs:documentation>Anfragenachricht in Abonnementschema.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Transaction" type="TransactionType">
 				<xs:annotation>
-					<xs:documentation>Transaction identifier, set by the requestor.</xs:documentation>
+					<xs:documentation>Transaktions-Identifier, gesetzt vom Anforderer.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
@@ -1876,17 +1876,17 @@
 	</xs:complexType>
 	<xs:complexType name="SubscriptionResponseType">
 		<xs:annotation>
-			<xs:documentation>Response messages in subscription scheme.</xs:documentation>
+			<xs:documentation>Anfragenachrichten in Abonnementschema.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Transaction" type="TransactionType">
 				<xs:annotation>
-					<xs:documentation>Transaction identifier, copied from the corresponding request.</xs:documentation>
+					<xs:documentation>Transaktions-Identifier, kopiert von der korrespondierenden Anfrage.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="CalcTime" type="xs:duration">
 				<xs:annotation>
-					<xs:documentation>Real time needed for calculating the contained results.</xs:documentation>
+					<xs:documentation>Realtime benötigt um die beinhalteten Resultate zu kalkulieren.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
@@ -1898,7 +1898,7 @@
 	</xs:complexType>
 	<xs:complexType name="SubscriptionMessageType">
 		<xs:annotation>
-			<xs:documentation>Delivery messages in subscription scheme.</xs:documentation>
+			<xs:documentation>Übertragungsnachricht in Abonnementschema.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:choice>
@@ -1908,39 +1908,39 @@
 	</xs:complexType>
 	<xs:complexType name="IxsiMessageType">
 		<xs:annotation>
-			<xs:documentation>Type for all IXSI messages.</xs:documentation>
+			<xs:documentation>Typ für all IXSI-Nachrichten.</xs:documentation>
 		</xs:annotation>
 		<xs:choice>
 			<xs:element name="Request" type="QueryRequestType" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Independent requests in query scheme. </xs:documentation>
+					<xs:documentation>Unabhängige Resultate im Anfrageschema. </xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Response" type="QueryResponseType" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Independent responses in query scheme.</xs:documentation>
+					<xs:documentation>Unabhängige Antworten in Anfrageschema.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="SubscriptionRequest" type="SubscriptionRequestType">
 				<xs:annotation>
-					<xs:documentation>Request in subscription scheme. Each request leads to at least one response.</xs:documentation>
+					<xs:documentation>Anfrage in Abonnementschema. Jede Anfrage führt zu mindestens einer Anfrage.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="SubscriptionResponse" type="SubscriptionResponseType">
 				<xs:annotation>
-					<xs:documentation>Response in subscription scheme. Each response corresponds to exactly one request.</xs:documentation>
+					<xs:documentation>Antwort im Abonnementschema. Jede Antwort korrespondiert exakt mit einer Anfrage.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="SubscriptionMessage" type="SubscriptionMessageType">
 				<xs:annotation>
-					<xs:documentation>Push message in subscription scheme.</xs:documentation>
+					<xs:documentation>Push-Nachricht in Abonnementschema.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:choice>
 	</xs:complexType>
 	<xs:element name="Ixsi" type="IxsiMessageType">
 		<xs:annotation>
-			<xs:documentation>Root element for all IXSI messages. IXSI = Interface for X-Sharing Information.</xs:documentation>
+			<xs:documentation>Rootelement für alle IXSI-Nachrichten. IXSI = Interface für X-Sharing Information.</xs:documentation>
 		</xs:annotation>
 	</xs:element>
 </xs:schema>
