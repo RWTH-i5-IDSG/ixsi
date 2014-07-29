@@ -7,7 +7,7 @@
   footsepline=true,
   toc=bib,indent,
   fontsize=12pt % Standardschriftgröße, default = 11pt
-]{scrbook}
+]{scrreprt}
 \usepackage[utf8]{inputenc}
 
 
@@ -50,12 +50,14 @@
 \input{content/5-Datenmodell.tex}
 \input{content/6-TechnischeRealisierung.tex}
 \input{content/7-Nachrichten.tex}
+\appendix
+% \addchap{Anhang}
 \input{content/8-Codetabellen.tex}
 
-%\appendix
-%\input{content/X-Appendix.tex}
 
-% \addchap{Index}                                      
+
+
+
 \setglossarysection{section}
 \printglossary[type=\acronymtype,style=long]
 
@@ -63,6 +65,7 @@
 \lstlistoflistings
 
 \renewcommand{\indexname}{Stichwortverzeichnis}
+% \addchap{\indexname}
 \printindex
 
 % \bibliographystyle{plain}

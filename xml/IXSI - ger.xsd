@@ -494,17 +494,29 @@
 	</xs:complexType>
 	<xs:group name="PlaceOrAreaGroup">
 		<xs:annotation>
+<<<<<<< HEAD
 			<xs:documentation>Gruppe für Informationen, welche für Standorte und Free-Floating-Areale verwendet werden.</xs:documentation>
+=======
+			<xs:documentation>Gruppe für Informationen, welche für Plätze und free floating-Areale verwendet werden.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Name" type="TextType" maxOccurs="unbounded">
 				<xs:annotation>
+<<<<<<< HEAD
 					<xs:documentation>Druckbare Namen des Standortes oder Areals.</xs:documentation>
+=======
+					<xs:documentation>Druckbare Namen des Platzes oder Areals.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="ProviderID" type="ProviderIDType">
 				<xs:annotation>
+<<<<<<< HEAD
 					<xs:documentation>Provider-ID, zu welcher der Standort oder das Areal gehört.</xs:documentation>
+=======
+					<xs:documentation>Provider-ID, zu welcher der Platz oder das Areal gehört.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Description" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
@@ -515,29 +527,49 @@
 			</xs:element>
 			<xs:element name="AttributeID" type="AttributeIDType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
+<<<<<<< HEAD
 					<xs:documentation>Zusätzliche Informationen zu diesem Standort oder Areal.</xs:documentation>
+=======
+					<xs:documentation>Zusätzliche Informationen zu diesem Platz oder Areal.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:group>
 	<xs:complexType name="PlaceType">
 		<xs:annotation>
+<<<<<<< HEAD
 			<xs:documentation>Typ für Standortinformationen.</xs:documentation>
+=======
+			<xs:documentation>Typ für Platzinformationen.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="ID" type="PlaceIDType">
 				<xs:annotation>
+<<<<<<< HEAD
 					<xs:documentation>Standort-ID.</xs:documentation>
+=======
+					<xs:documentation>Platz-ID.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Coord" type="CoordType">
 				<xs:annotation>
+<<<<<<< HEAD
 					<xs:documentation>Geoposition des Standortes.</xs:documentation>
+=======
+					<xs:documentation>Geoposition des Platzes.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Capacity" type="xs:nonNegativeInteger" minOccurs="0">
 				<xs:annotation>
+<<<<<<< HEAD
 					<xs:documentation>Kapazität des Standortes zum Zurückweisen von Buchungszielen.</xs:documentation>
+=======
+					<xs:documentation>Kapazität des Platzes zum Zurückweisen von Buchungszielen.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 				</xs:annotation>
 			</xs:element>
 			<xs:group ref="PlaceOrAreaGroup"/>
@@ -545,35 +577,59 @@
 	</xs:complexType>
 	<xs:complexType name="ProbabilityPlaceIDType">
 		<xs:annotation>
+<<<<<<< HEAD
 			<xs:documentation>Typ für eine Standort-ID mit einer Wahrscheinlichkeit, ein Buchungsziel zu erhalten.</xs:documentation>
+=======
+			<xs:documentation>Typ für eine Platz-ID mit einer Wahrscheinlichkeit, ein Buchungsziel zu erhalten.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="ID" type="PlaceIDType">
 				<xs:annotation>
+<<<<<<< HEAD
 					<xs:documentation>Standort-ID.</xs:documentation>
+=======
+					<xs:documentation>Platz-ID.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Probability" type="PercentType" minOccurs="0">
 				<xs:annotation>
+<<<<<<< HEAD
 					<xs:documentation>Durchschnittliche Wahrscheilichkeit, ein Buchungsziel auf diesem Standort zu erhalten. Verwendbar nur für Standorte innerhalb von Standort-Gruppen.</xs:documentation>
+=======
+					<xs:documentation>Durchschnittliche Wahrscheilichkeit, ein Buchungsziel auf diesem Platz zu erhalten. Verwendbar nur für Plätze innerhalb von Platz-Gruppen.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="PlaceGroupType">
 		<xs:annotation>
+<<<<<<< HEAD
 			<xs:documentation>Typ für Standort-Gruppen.</xs:documentation>
+=======
+			<xs:documentation>Typ für Platz-Gruppen.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="ID" type="PlaceGroupIDType">
 				<xs:annotation>
+<<<<<<< HEAD
 					<xs:documentation>Standort-Gruppen-ID</xs:documentation>
+=======
+					<xs:documentation>Platz-Gruppen-ID</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="PlaceID" type="ProbabilityPlaceIDType" maxOccurs="unbounded"/>
 			<xs:element name="Probability" type="PercentType">
 				<xs:annotation>
+<<<<<<< HEAD
 					<xs:documentation>Durchschnittliche Wahrscheinlichkeit, ein Buchungsziel auf einem spezifischen Standort, innerhalb dieser Standort-Gruppe, zu erhalten. Gilt nur für solche Standorte, für die ein spezieller Wert hinterlegt ist.</xs:documentation>
+=======
+					<xs:documentation>Durchschnittliche Wahrscheinlichkeit, ein Buchungsziel auf einem spezifischen Platz, innerhalb dieser Platz-Gruppe zu erhalten. Gilt nur für solche Plätze, für die ein spezieller Wert hinterlegt ist.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -625,7 +681,11 @@
 				</xs:element>
 				<xs:element name="PlaceGroupID" type="PlaceGroupIDType">
 					<xs:annotation>
+<<<<<<< HEAD
 						<xs:documentation>Standort-Gruppen-ID dieses Bookees, falls er nicht zu einem fixierten Standort gehört.</xs:documentation>
+=======
+						<xs:documentation>Platz-Gruppen-ID dieses Bookees, falls er nicht zu einem fixierten Platz gehört.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="AreaID" type="AreaIDType">
@@ -697,12 +757,20 @@
 			<xs:element name="ID" type="BookingTargetIDType"/>
 			<xs:element name="PlaceID" type="PlaceIDType" minOccurs="0">
 				<xs:annotation>
+<<<<<<< HEAD
 					<xs:documentation>Für aktuell verfügbare Buchungsziele, die nicht an einen spezifischen Standort gebunden sind, sollte der aktuelle Standort zurückgegeben werden.</xs:documentation>
+=======
+					<xs:documentation>Für aktuell verfügbare Buchungsziele, welche nicht an einen spezifischen Platz gebunden sind, sollte der aktuelle Platz zurückgegeben werden.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="GeoPosition" type="CoordType" minOccurs="0">
 				<xs:annotation>
+<<<<<<< HEAD
 					<xs:documentation>Für aktuell verfügbare Buchungsziele, welche nicht an einen spezifischen Standort gebunden sind, sollte die aktuelle Position zurückgegeben werden.</xs:documentation>
+=======
+					<xs:documentation>Für aktuell verfügbare Buchungsziele, welche nicht an einen spezifischen Platz gebunden sind, sollte die aktuelle Position zurückgegeben werden.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Inavailability" type="TimePeriodType" minOccurs="0" maxOccurs="unbounded">
@@ -734,12 +802,20 @@
 			</xs:element>
 			<xs:element name="PlaceID" type="PlaceIDType" minOccurs="0">
 				<xs:annotation>
+<<<<<<< HEAD
 					<xs:documentation>Für aktuell verfügbare Buchungsziele, welche nicht an einen spezifischen Standort gebunden sind, sollte der aktuelle Standort zurückgegeben werden.</xs:documentation>
+=======
+					<xs:documentation>Für aktuell verfügbare Buchungsziele, welche nicht an einen spezifischen Platz gebunden sind, sollte der aktuelle Platz zurückgegeben werden.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="GeoPosition" type="CoordType" minOccurs="0">
 				<xs:annotation>
+<<<<<<< HEAD
 					<xs:documentation>Für neu verfügbare Vehikel, welche nicht an einen spezifischen Standort gebunden sind, sollte die Position zurückgegeben werden.</xs:documentation>
+=======
+					<xs:documentation>Für neu verfügbare Vehikel, welche nicht an einen spezifischen Platz gebunden sind, sollte die Position zurückgegeben werden.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
@@ -758,7 +834,11 @@
 	</xs:complexType>
 	<xs:complexType name="PlaceAvailabilityType">
 		<xs:annotation>
+<<<<<<< HEAD
 			<xs:documentation>Typ für die verfügbare Kapazität eines Standortes.</xs:documentation>
+=======
+			<xs:documentation>Typ für die verfügbare Kapazität eines Platzes.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="ID" type="ProviderPlaceIDType"/>
@@ -788,7 +868,11 @@
 				</xs:element>
 				<xs:element name="Notification" type="xs:boolean">
 					<xs:annotation>
+<<<<<<< HEAD
 						<xs:documentation>Die Buchung ist noch valide, allerdings gibt es Informationen für den User, betreffend der Buchung.</xs:documentation>
+=======
+						<xs:documentation>Die Buchung ist noch valide, allerdings gibt es Informationen für den User betreffend der Buchung.</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="Impossible" type="xs:boolean">
@@ -942,7 +1026,11 @@
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:annotation>
+<<<<<<< HEAD
 		<xs:documentation>**** Basisservice (C) : Token-Generierung ****</xs:documentation>
+=======
+		<xs:documentation>**** Basisservice (C) : Token Generierung ****</xs:documentation>
+>>>>>>> c6363fb6c6dad02464386fb291bd7547729f0f11
 	</xs:annotation>
 	<xs:complexType name="TokenGenerationRequestType">
 		<xs:annotation>
