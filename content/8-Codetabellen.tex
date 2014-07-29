@@ -3,6 +3,7 @@
 Die syntaktische Definition für IXSI enthält keine konkreten Werte (Enumerations) für beispielsweise Fahrzeugtypen oder Fehlercodes. Stattdessen werden diese Werte in den nachfolgenden Codetabellen festgelegt. Nur die hier festgelegten Werte dürfen innerhalb von IXSI verwendet werden.
 
 \section{Fahrzeugklassen}
+\label{sec:CodeTabellen:ClassType}
 Für die Auswahl \emph{ClassType} können folgende Werte verwendet werden:
 
 \begin{flushleft}
@@ -25,6 +26,7 @@ Wert & Bedeutung\\
 \end{flushleft}
 
 \section{Antriebsklassen}
+\label{sec:CodeTabellen:EngineType}
 Für die Auswahl \emph{EngineType} können folgende Werte verwendet werden:
 
 \begin{flushleft}
@@ -47,7 +49,8 @@ Wert & Bedeutung\\
 
 Hinweis: Ein Pedelec kann als Kombination Fahrzeugklasse \verb|bike| und Antriebsklasse \verb|electric| dargestellt werden.
 
-\section{Antriebsklassen}
+\section{Fahrzeugeigenschaften}
+\label{sec:CodeTabellen:AttributeClass}
 Attribute und Eigenschaften eines Buchungsziels oder einer Station können klassifiziert werden, um sie automatisch interpretieren zu können. Dazu werden Attributsklassen verwendet. Attributsklassen werden in IXSI im Datentyp \emph{AttributeClassType} gespeichert. Folgende Werte sind dabei erlaubt:
 
 \begin{flushleft}
@@ -77,6 +80,7 @@ Wert & Bedeutung\\
 \end{flushleft}
 
 \section{Fehlercodes}
+\label{sec:CodeTabellen:ErrorCode}
 Das FVS kann alternativ zu den normalen Response-, Update- und Handshake-Nachrichten auch im Fall eines Fehlers Fehlernachrichten an das RIS schicken. Fehlercodes werden im Datentyp \emph{ErrorCodeType} gespeichert.
 \begin{flushleft}
 \rowcolors{1}{}{gray!10}

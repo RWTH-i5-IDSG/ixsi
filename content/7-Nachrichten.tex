@@ -15,7 +15,7 @@ Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf vi
 \input{xml/generated/AbstractBaseResponseType-schema}
 \medskip
 
-\textit{Eine Basisklasse für einen Request ist nicht vorhanden, da nicht erforderlich.}
+\textit{Eine abstrakte Basisklasse für einen Request ist nicht vorhanden, da nicht erforderlich.}
 
 \subsection*{Transaktionsdaten}
 \input{xml/generated/TransactionType}
@@ -57,7 +57,7 @@ Anmerkung: Im XML Schema sind weitere Gruppen definiert die jedoch nur der Organ
 \rowcolors{1}{}{gray!10}
 \begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}X} 
 \toprule
-Name &  Kommentar\\
+Name &  Kommentar \label{tab:miscGroups}\\
 \midrule 
 \texttt{StaticDataRequestGroup} & \\
 \texttt{StaticDataResponseGroup}& \\
@@ -69,7 +69,6 @@ Name &  Kommentar\\
 \texttt{ResponseMessageGroup}& \\
 \texttt{PushMessageGroup}& \\
 \bottomrule 
-\label{tab:miscGroups}
 \end{tabularx}\end{flushleft}\end{samepage}
 
 \section{Dienst 1}

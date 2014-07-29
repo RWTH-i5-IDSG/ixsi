@@ -9,7 +9,7 @@
 # Configuration
 
 # Schema file to parse
-file="IXSI-ger.xsd"
+file="IXSI.xsd"
 
 # Headings
 name="Name"
@@ -55,9 +55,9 @@ cat << EOF >simpletypes.xslt
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 <xsl:output omit-xml-declaration="yes" />
 <xsl:template match="/">
-<xsl:text disable-output-escaping="yes"><![CDATA[\begin{samepage}\begin{flushleft}
+<xsl:text disable-output-escaping="yes"><![CDATA[\begin{flushleft}
 \rowcolors{1}{}{gray!10}
-\begin{tabularx}{\linewidth}{ll>{\raggedright\arraybackslash}X} 
+\begin{tabularx}{\linewidth}{ll>{\raggedright\arraybackslash}X}
 \toprule
 $name & $basetype & $comment \\\\
 \midrule ]]>
@@ -69,7 +69,7 @@ $name & $basetype & $comment \\\\
 <xsl:value-of select="xs:annotation/xs:documentation"/><xsl:text>\\\\&#xa;</xsl:text>
 </xsl:for-each>
 <xsl:text>\bottomrule 
-\end{tabularx}\end{flushleft}\end{samepage}\medskip</xsl:text>
+\end{tabularx}\end{flushleft}\medskip</xsl:text>
 </xsl:template>
 </xsl:stylesheet>
 EOF
@@ -89,13 +89,12 @@ cat << EOF >simpletypesschema.xslt
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs">
 <xsl:output omit-xml-declaration="yes" indent="yes"/>
 <xsl:template match="/">
-<xsl:text disable-output-escaping="yes"><![CDATA[\begin{samepage}
-\noindent 
+<xsl:text disable-output-escaping="yes"><![CDATA[
 \begin{lstlisting}[style=XML-style,caption={Baisdatentypen},label=lst:SimpleTypesSchema]]]>
 </xsl:text>
 <xsl:copy-of select="//xs:simpleType[@name]"/>
 <xsl:text>\end{lstlisting}
-\end{samepage}\medskip</xsl:text>
+\medskip</xsl:text>
 </xsl:template>
 </xsl:stylesheet>
 EOF
@@ -135,7 +134,6 @@ xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; d
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 <xsl:output omit-xml-declaration="yes" />
 <xsl:template match="/">
-<xsl:text disable-output-escaping="yes">\\begin{samepage}</xsl:text>
 <xsl:text disable-output-escaping="yes">\\emph{$x}\\index{$x}: </xsl:text>
 <xsl:value-of select="//*[@name='$x']/xs:annotation/xs:documentation"/>
 <xsl:text>\\\\ \smallskip</xsl:text>
@@ -156,7 +154,7 @@ xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; d
 \rowcolors{1}{}{gray!10}
 \begin{tabularx}{\linewidth}{cll>{\raggedright\arraybackslash}X} 
 \toprule
- & $element  & $type & $comment \\\\
+ & $element  & $type & $comment \label{tab:${x}} \\\\
 \midrule ]]>
 </xsl:text>
 <xsl:for-each select="//*[@name='$x']//xs:element">
@@ -173,8 +171,8 @@ xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; d
 <xsl:if test="not(//*[@name='$x']//xs:element)">
 <xsl:text disable-output-escaping="yes"><![CDATA[ & \textit{$empty} & & \\\\ ]]></xsl:text>
 </xsl:if>
-<xsl:text>\bottomrule 
-\end{tabularx}\end{flushleft}\end{samepage}\medskip</xsl:text>
+<xsl:text>\bottomrule
+\end{tabularx}\end{flushleft}\medskip</xsl:text>
 </xsl:template>
 </xsl:stylesheet>
 EOF
@@ -201,14 +199,13 @@ xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; d
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs">
 <xsl:output omit-xml-declaration="yes" indent="yes"/>
 <xsl:template match="/">
-<xsl:text disable-output-escaping="yes"><![CDATA[\begin{samepage}
-\index{$x}
+<xsl:text disable-output-escaping="yes"><![CDATA[\index{$x}
 \begin{lstlisting}[style=XML-style,caption={$x},label=lst:${x}Schema]]]>
 </xsl:text>
 <xsl:copy-of select="//*[@name='$x']"/>
 <xsl:text>
 \end{lstlisting}
-\end{samepage}\medskip</xsl:text>
+\medskip</xsl:text>
 </xsl:template>
 </xsl:stylesheet>
 EOF
