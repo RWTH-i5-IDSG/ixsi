@@ -39,3 +39,5 @@
 *.temp
 report.d
 *.tmproj
+*.lol
+*.kilepr
