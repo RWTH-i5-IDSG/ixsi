@@ -1,6 +1,7 @@
 \chapter{Nachrichten}
 \label{cha:Nachrichten}
 Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf vier Nachrichtengrundtypen: Request, Response und Push. Alle Nachrichten vom RIS an das FVS stellen Anfragen dar und sind daher vom Typ Request. Der Typ Response wird für direkte Antworten des FVS auf Anfragen des RIS verwendet. Um eine Zuordnung der Response-Nachrichten zu den zugehörigen Request-Nachrichten zu erlauben, wird jede Request-Nachrichte mit einer eindeutigen Transaction-ID markiert, die in der zugehörigen Response-Nachricht wieder mitgegeben werden muss. Eine Response-Nachricht kann anstelle ihres normalen Inhalts auch einen Fehler enthalten. Der letzte Nachrichtentyp Push findet in den Fällen Verwendung, wenn das RIS fortlaufende Aktualisierungen (Abonnement) FVS angefordert hat. 
+\TODO{Beispiel Nachrichten einfügen}
 
 \section{Basisnachrichten}
 \label{sec:Nachrichten:Basisnachrichten}
@@ -16,18 +17,60 @@ Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf vi
 
 \textit{Eine Basisklasse für einen Request ist nicht vorhanden, da nicht erforderlich.}
 
+\subsection*{Transaktionsdaten}
+\input{xml/generated/TransactionType}
+\input{xml/generated/TransactionType-schema}
+
+\subsection*{Query Request}
+\input{xml/generated/QueryRequestType}
+\input{xml/generated/QueryRequestType-schema}
+
+\subsection*{Query Response}
+\input{xml/generated/QueryResponseType}
+\input{xml/generated/QueryResponseType-schema}
+
+\subsection*{Subscription Request}
+\input{xml/generated/SubscriptionRequestType}
+\input{xml/generated/SubscriptionRequestType-schema}
+
+\subsection*{Subscription Response}
+\input{xml/generated/SubscriptionResponseType}
+\input{xml/generated/SubscriptionResponseType-schema}
+
+\section{Basisgruppen}
+\label{sec:Nachrichten:Basisgruppen}
+
 \subsection*{Benutzer-initiert}
 \input{xml/generated/UserTriggeredRequestGroup}
 \input{xml/generated/UserTriggeredRequestGroup-schema}
 \input{xml/generated/UserTriggeredResponseGroup}
 \input{xml/generated/UserTriggeredResponseGroup-schema}
 
-\section{Basisgruppen}
-\label{sec:Nachrichten:Basisgruppen}
-
 \subsection*{Herkunft/Zielangabe}
 \input{xml/generated/OriginDestGroup}
 \input{xml/generated/OriginDestGroup-schema}
+
+\subsection*{Gruppen rein zur Organisation}
+Anmerkung: Im XML Schema sind weitere Gruppen definiert die jedoch nur der Organisation dienen und keinen Einfluss auf das Nachrichtenformat haben und deshalb hier nicht aufgelistet sind.
+\begin{samepage}
+\begin{flushleft}
+\rowcolors{1}{}{gray!10}
+\begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}X} 
+\toprule
+Name &  Kommentar\\
+\midrule 
+\texttt{StaticDataRequestGroup} & \\
+\texttt{StaticDataResponseGroup}& \\
+\texttt{SubscriptionAdministrationRequestGroup} & \\
+\texttt{SubscriptionAdministrationResponseGroup}& \\
+\texttt{SubscriptionRequestGroup} & \\
+\texttt{SubscriptionResponseGroup}& \\
+\texttt{RequestMessageGroup}& \\
+\texttt{ResponseMessageGroup}& \\
+\texttt{PushMessageGroup}& \\
+\bottomrule 
+\label{tab:miscGroups}
+\end{tabularx}\end{flushleft}\end{samepage}
 
 \section{Dienst 1}
 \label{sec:Nachrichten:Dienst1}
