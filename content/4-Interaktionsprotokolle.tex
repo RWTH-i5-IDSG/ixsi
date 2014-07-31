@@ -72,7 +72,7 @@ Um nicht intervallweise alle Buchungszielinformationen übertragen zu müssen, k
 Um die konkreten Verfügbarkeiten abzufragen, sendet das RIS eine Anfrage die entweder eine Liste mit Buchungszielen oder ein geographisches Gebiet in Form einer Umgebungssuche oder als Rechteck und eine geünschte Zeitperiode enthält. Ohne Angabe wird die Verfügbarkeit von allen Buchungszielen zurückgegeben. Als Antwort sendet das FVS eine Liste mit Buchungszielen und deren Verfügbarkeiten zurück.
 
 
-\subsection{Abfrage aktuelle Stationskapazität (Dienst 2a)}
+\subsection{Abfrage aktuelle Stationkapazität (Dienst 2a)}
 
 \begin{center}
 \begin{sequencediagram}
@@ -89,7 +89,7 @@ Um die konkreten Verfügbarkeiten abzufragen, sendet das RIS eine Anfrage die en
 \end{sequencediagram}
 \end{center}
 \smallskip
-Das RIS kann die aktuellen Kapazitäten, bspw. zur Kartendarstellung, von Verleihstation anfragen. Hierzu wird eine Liste mit Stations IDs oder ein Gebiet übermittelt und eine Liste mit Stationen und deren aktuelle Anzahl verfügbarer Fahrzeuge zurückgegeben.
+Das RIS kann die aktuellen Kapazitäten, bspw. zur Kartendarstellung, von Verleihstation anfragen. Hierzu wird eine Liste mit Standort IDs oder ein Gebiet übermittelt und eine Liste mit Standorten und deren aktuelle Anzahl verfügbarer Fahrzeuge zurückgegeben.
 
 
 \section{Dienst 3 -- Verfügbarkeitsabonnement}
@@ -147,7 +147,7 @@ Zur anfänglichen Synchronsierung aller Verfügbarkeiten kann das RIS die Funkti
 
 
 
-\subsection{Stationskapazitätabonement (Dienst 3a)}
+\subsection{Standortkapazitätabonement (Dienst 3a)}
 \label{subsec:Interaktionsprotokolle:Dienst3a}
 
 \begin{center}
@@ -157,19 +157,19 @@ Zur anfänglichen Synchronsierung aller Verfügbarkeiten kann das RIS die Funkti
 
 \begin{sdblock}{PlaceAvailabilitySubscription}{}
 
-\begin{call}{ris}{Stationsreferenz, (Kündigung)*}{fvs}{}
+\begin{call}{ris}{Standortreferenz, (Kündigung)*}{fvs}{}
 \end{call}
 
 \end{sdblock}
 
 \begin{sdblock}{PlaceAvailabilityPushMessage}{}
 
-\begin{mess}{fvs}{Stationsverfügbarkeit}{ris}
+\begin{mess}{fvs}{Standortverfügbarkeit}{ris}
 \end{mess}
 
-\begin{mess}{fvs}{Stationsverfügbarkeit}{ris}
+\begin{mess}{fvs}{Standortverfügbarkeit}{ris}
 \end{mess}
-\begin{mess}{fvs}{Stationsverfügbarkeit}{ris}
+\begin{mess}{fvs}{Standortverfügbarkeit}{ris}
 \end{mess}
 \begin{mess}{fvs}{...}{ris}
 \end{mess}
@@ -178,7 +178,7 @@ Zur anfänglichen Synchronsierung aller Verfügbarkeiten kann das RIS die Funkti
 
 \begin{sdblock}{CompletePlaceAvailability}{}
 
-\begin{call}{ris}{}{fvs}{Stationsverfügbarkeiten}
+\begin{call}{ris}{}{fvs}{Standortverfügbarkeiten}
 \end{call}
 
 \end{sdblock}
@@ -189,7 +189,7 @@ Zur anfänglichen Synchronsierung aller Verfügbarkeiten kann das RIS die Funkti
 \end{center}
 \smallskip
 
-Das RIS kann die Kapazitätsinformation von Stationen abonnieren. Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3}.
+Das RIS kann die Kapazitätsinformation von Standorten abonnieren. Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3}.
 
 
 \section{Dienst 4 -- Buchung / Buchungsänderung}
