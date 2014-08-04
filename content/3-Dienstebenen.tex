@@ -25,6 +25,48 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
   \caption{Dienstabhängigkeiten \label{fig:depend}}
 \end{figure}
 
+
+\section{Basisdienst A -- Sitzungen (session handling)}
+Dienst A dient der Authentifizierung von Endkunden gegenüber dem FVS.
+
+\subsection*{Funktionen}
+\begin{itemize}
+\item Sitzung öffnen / schließen
+\end{itemize}
+
+\subsection*{Abhängigkeiten}
+\begin{itemize}
+\item -
+\end{itemize}
+
+
+\section{Basisdienst B -- Abonnements (subscription handling)}
+Dienst B enthält eine Funktion zur Überprüfung des Status einer Abonnementverbindung (heartbeat)
+
+\subsection*{Funktionen}
+\begin{itemize}
+\item Heartbeat
+\end{itemize}
+
+\subsection*{Abhängigkeiten}
+\begin{itemize}
+\item -
+\end{itemize}
+
+\section{Basisdienst C -- tokens}
+Dienst C enthält eine Funktion zur Erstellung von Authentifizierungstokens für Endkunden, die an Stelle von Klartextpasswörtern gespeichert / übertragen werden können.
+
+\subsection*{Funktionen}
+\begin{itemize}
+\item Erstellung von Tokens
+\end{itemize}
+
+\subsection*{Abhängigkeiten}
+\begin{itemize}
+\item -
+\end{itemize}
+
+
 \section{Dienst 1 -- Statische Daten (static data)}
 Dienst 1 dient dem Austausch von Informationen über Fahrzeugverleihanbietern und statischen Daten von Buchungszielen. Hierzu gehören Anbieter, Standort- und Fahrzeugdaten. 
 
@@ -122,43 +164,4 @@ Durch die Übermittlung von Start-, Zielort und Startzeitpunkt und Endzeitpunkt 
 \end{itemize}
 
 
-\section{Bassisdienst A -- Sitzungen (session handling)}
-Dienst A dient der Authentifizierung von Endkunden gegenüber dem FVS.
-
-\subsection*{Funktionen}
-\begin{itemize}
-\item Sitzung öffnen / schließen
-\end{itemize}
-
-\subsection*{Abhängigkeiten}
-\begin{itemize}
-\item -
-\end{itemize}
-
-
-\section{Bassisdienst B -- Abonnements (subscription handling)}
-Dienst B enthält eine Funktion zur Überprüfung des Status einer Abonnementverbindung (heartbeat)
-
-\subsection*{Funktionen}
-\begin{itemize}
-\item Heartbeat
-\end{itemize}
-
-\subsection*{Abhängigkeiten}
-\begin{itemize}
-\item -
-\end{itemize}
-
-\section{Bassisdienst C -- tokens}
-Dienst C enthält eine Funktion zur Erstellung von Authentifizierungstokens für Endkunden, die an Stelle von Klartextpasswörtern gespeichert / übertragen werden können.
-
-\subsection*{Funktionen}
-\begin{itemize}
-\item Erstellung von Tokens
-\end{itemize}
-
-\subsection*{Abhängigkeiten}
-\begin{itemize}
-\item -
-\end{itemize}
 
