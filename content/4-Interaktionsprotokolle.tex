@@ -1,5 +1,125 @@
 \chapter{Interaktionsprotokolle}
 \label{cha:Interaktionsprotokolle}
+Dieser Abschnitt gibt einen Überblick über die in IXSI verwendeten Interaktionsschemata. Zur Vereinfachung werden die Interaktionsschemata in den Sequenzdiagramm informell ohne Verwendung der technischen Bezeichnungen der Funktionsaufrufe beschrieben. Grundsätzlich werden werden zwei Typen von Interaktionen verwendet: Das einfache und wohlbekannte Request/Response- bzw. Query-Interaktionsschema bei dem auf jedee Anfrage des Clients (in diesem Fall das RIS) genau eine Antwort des Servers folgt (FVS). Weiterhin das Subscription-Schema bei dem einmalig ein Objekt durch den Client abonniert wird und dann Aktualisierungen an diesem Objekt laufend durch den Server geliefert werden. Hierbei bleibt der Kommunikationskanal die ganze Zeit über geöffnet. 
+
+
+\section{Überblick}
+Das folgende Sequenzdiagramm gibt einen Überblick über eine beispielhafte Informationskopplung wie sie durch IXSI realisiert werden kann. Die im einzelnen verwendeten Dienste werden in den folgenden Abschnitt genauer beschrieben. In diesem Anwendungsfall hohlt eine Kunde beim RIS eine Reiseauskunft ein, bucht eine entsprechende Reise und lässt sich über Änderungen an der Buchung benachrichtigen. 
+
+Im ersten Block \emph{Austausch Buchungsziele} werden die vom \index{FVS} zur Verfügung gestellten Buchungsziele mit dem \index{RIS} ausgetauscht und relevante Buchungsziele abonniert (vl. \cref{sec:Interaktionsprotokolle:Dienst1,sec:Interaktionsprotokolle:Dienst3}). Die geschieht proaktiv ohne Involvierung eines Kunden. 
+Im Block \emph{Reiseauskunft} führt ein Kunde, z.B. mit einem Mobilgerät, eine Reiseauskunft beim RIS durch. Hierbei kommen mehrere Leihfahrzeuge in Frage deren Verfügbarkeit dann synchron beim FVS abgefragt wird. Für die verfügbaren Fahrzeuge fragt das RIS zusätzlich eine Preisauskunft an. Als Ergebnis gibt das RIS eine Auswahl an möglichen Reiserouten / Verbindungen an den Kunden zurück. Da es sich um durch einen Kunden ausgelöste Kommunikation handelt wird impliziert eine Sitzung erstellt in deren Kontext die Abfragen ausgeführt werden. Da sich der Kunde nicht auf seinem Gerät eingeloggt hat, wird eine anonyme Sitzung verwendet.
+Im Block \emph{Reisebuchung} hat sich der Kunde für eine Reiseroute entschieden und möchte diese buchen. Hierzu loggt er sich auf seinem Mobilgerät ein wodurch ein Token generiert wird (Block \emph{Anmeldung}. Mit diesem Token wird eine (nicht anonyme) Sitzung erstellt in welcher der Buchungsvorgang durchgeführt wird. Hierzu übergibt das RIS die Buchungszielreferenz und einen Zeitvorschlag an das FVS. Das sendet eine Buchungsbestätigung welche vom RIS an den Kunden weitergegeben wird. Zusätzlich abboniert das RIS die entsprechende Buchung beim FVS.
+Im letzten Block \emph{Reiseüberwachung} wird der Kunde vom über Änderungen an der Buchung die das RIS vom FVS erhält, benachrichtigt.
+\begin{center}
+\begin{sequencediagram}
+
+
+\newthread{kunde}{:Kunde}
+\newthread{ris}{:RIS}
+\newinst[8]{fvs}{:FVS}
+
+
+\begin{sdblock}{Austausch Buchungsziele}{Dienst 1, Diesnt 3}
+
+  \begin{call}{ris}{Anfrage}{fvs}{Liste Buchungsziele}
+  \end{call}
+
+  \begin{call}{ris}{Abonnement Buchungsziele}{fvs}{}
+  \end{call}
+  
+  \begin{mess}{fvs}{Buchungszieländerung}{ris}
+  \end{mess}
+\end{sdblock}
+\postlevel
+
+\begin{sdblock}{Reiseauskunft}{}
+  \begin{call}{kunde}{Reiseauskunft}{ris}{mögliche Reiserouten}
+
+    \begin{sdblock}{Sitzung (anonym)}{Basisdienst A}
+        
+        \begin{sdblock}{Verfügbarkeitsauskunft}{Dienst 2}
+          \begin{call}{ris}{Verfügbarkeitsauskunft Buchungsziele, Zeitraum}{fvs}{mögliche Buchungsziele}
+          \end{call}
+        \end{sdblock}
+
+        \begin{sdblock}{Preisauskunft}{Dienst 6}
+          \begin{call}{ris}{Preisauskunft Buchungsziele, Zeitraum, Distanz}{fvs}{Preis}
+          \end{call}
+        \end{sdblock}
+      
+    \end{sdblock}
+  \end{call}
+\end{sdblock}
+
+\end{sequencediagram}
+
+\smallskip
+
+
+\begin{sequencediagram}
+\newthread{kunde}{:Kunde}
+\newthread{ris}{:RIS}
+\newinst[8]{fvs}{:FVS}
+
+\begin{sdblock}{Anmeldung}{}
+
+  \begin{call}{kunde}{Anmeldung}{ris}{Token}
+        
+    \begin{sdblock}{Tokengenerierung}{Basisdienst C}
+
+
+      \begin{call}{ris}{Benutzername, Passwort}{fvs}{Token}
+      \end{call}
+
+    \end{sdblock}
+
+  \end{call}
+\end{sdblock}
+\postlevel
+
+\begin{sdblock}{Reisebuchung}{}
+
+  \begin{call}{kunde}{Auswahl Reiseroute, Token}{ris}{Buchungsbestätigung}
+    \begin{sdblock}{Sitzung}{Basisdienst A}
+
+      \begin{sdblock}{Fahrzeugbuchung}{Dienst 4}
+        \begin{call}{ris}{Buchungszielreferenz, Zeitraumvorschlag}{fvs}{Buchungsreferenz, Zeitraum}
+        \end{call}
+      \end{sdblock}
+      
+    \end{sdblock}
+    
+  \end{call}
+    
+    \begin{sdblock}{Buchungsabonnement}{Dienst 5}
+
+      \begin{call}{ris}{Buchungszielreferenz}{fvs}{}
+      \end{call}
+
+    \end{sdblock}
+
+
+
+\end{sdblock}
+
+\postlevel
+
+\begin{sdblock}{Reiseüberwachung}{Dienst 5}
+\postlevel
+  \begin{mess}{fvs}{Buchungsänderung}{ris}
+  \end{mess}
+
+  \begin{mess}{ris}{Buchungsänderung}{kunde}
+  \end{mess}
+  
+\end{sdblock}
+
+\end{sequencediagram}
+\end{center}
+\smallskip
+
+
+
 
 \section{Dienst 1 -- Statische Daten}
 \label{sec:Interaktionsprotokolle:Dienst1}
@@ -109,21 +229,20 @@ Das RIS kann die aktuellen Kapazitäten, bspw. zur Kartendarstellung, von Verlei
 \end{call}
 
 \end{sdblock}
-
+\postlevel
 \begin{sdblock}{AvailabilityPushMessage}{}
 
-\begin{mess}{fvs}{AvailabilityChange}{ris}
+\begin{mess}{fvs}{Verfügbarkeitsaktualisierung}{ris}
 \end{mess}
-
-\begin{mess}{fvs}{AvailabilityChange}{ris}
+\begin{mess}{fvs}{Verfügbarkeitsaktualisierung}{ris}
 \end{mess}
-\begin{mess}{fvs}{AvailabilityChange}{ris}
+\begin{mess}{fvs}{Verfügbarkeitsaktualisierung}{ris}
 \end{mess}
 \begin{mess}{fvs}{...}{ris}
 \end{mess}
 \end{sdblock}
 
-
+\postlevel
 \begin{sdblock}{CompleteAvailability}{}
 
 \begin{call}{ris}{Maximale Anzahl Objekte}{fvs}{Buchungsziele}
@@ -161,7 +280,7 @@ Zur anfänglichen Synchronsierung aller Verfügbarkeiten kann das RIS die Funkti
 \end{call}
 
 \end{sdblock}
-
+\postlevel
 \begin{sdblock}{PlaceAvailabilityPushMessage}{}
 
 \begin{mess}{fvs}{Standortverfügbarkeit}{ris}
@@ -174,7 +293,7 @@ Zur anfänglichen Synchronsierung aller Verfügbarkeiten kann das RIS die Funkti
 \begin{mess}{fvs}{...}{ris}
 \end{mess}
 \end{sdblock}
-
+\postlevel
 
 \begin{sdblock}{CompletePlaceAvailability}{}
 
@@ -200,12 +319,12 @@ Das RIS kann die Kapazitätsinformation von Standorten abonnieren. Der Interakti
 \newthread{ris}{:RIS}
 \newinst[8]{fvs}{:FVS}
 
-\begin{sdblock}{OpenSession*}{}
-
-\begin{call}{ris}{}{fvs}{}
-\end{call}
-
-\end{sdblock}
+% \begin{sdblock}{OpenSession*}{}
+% 
+% \begin{call}{ris}{}{fvs}{}
+% \end{call}
+% 
+% \end{sdblock}
 
 
 \begin{sdblock}{Booking}{}
@@ -214,7 +333,7 @@ Das RIS kann die Kapazitätsinformation von Standorten abonnieren. Der Interakti
 \end{call}
 
 \end{sdblock}
-
+\postlevel
 
 \begin{sdblock}{ChangeBooking*}{}
 
@@ -223,12 +342,12 @@ Das RIS kann die Kapazitätsinformation von Standorten abonnieren. Der Interakti
 
 \end{sdblock}
 
-\begin{sdblock}{CloseSession*}{}
-
-\begin{call}{ris}{}{fvs}{}
-\end{call}
-
-\end{sdblock}
+% \begin{sdblock}{CloseSession*}{}
+% 
+% \begin{call}{ris}{}{fvs}{}
+% \end{call}
+% 
+% \end{sdblock}
 
 \end{sequencediagram}
 \end{center}
@@ -251,7 +370,7 @@ Um im Kundenaufauftrag ein Fahrzeug zu Buchen, ist es erfoderlich, dass das RIS 
 \end{call}
 
 \end{sdblock}
-
+\postlevel
 \begin{sdblock}{BookingAlertPushMessage}{}
 
 \begin{mess}{fvs}{Buchungsänderung}{ris}
@@ -264,7 +383,7 @@ Um im Kundenaufauftrag ein Fahrzeug zu Buchen, ist es erfoderlich, dass das RIS 
 \begin{mess}{fvs}{...}{ris}
 \end{mess}
 \end{sdblock}
-
+\postlevel
 
 \begin{sdblock}{CompleteBookingAlert}{}
 
@@ -292,27 +411,27 @@ Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3
 \newthread{ris}{:RIS}
 \newinst[8]{fvs}{:FVS}
 
-\begin{sdblock}{OpenSession*}{}
-
-\begin{call}{ris}{}{fvs}{}
-\end{call}
-
-\end{sdblock}
+% \begin{sdblock}{OpenSession*}{}
+% 
+% \begin{call}{ris}{}{fvs}{}
+% \end{call}
+% 
+% \end{sdblock}
 
 \begin{sdblock}{PriceInformation}{}
 
-\begin{call}{ris}{BookingTargetID, TimePeriodProposal, Distance}{fvs}{Tariff}
+\begin{call}{ris}{Buchungszielreferenz, Vorschlag Zeitraum, Distanz}{fvs}{Preis}
 
 \end{call}
 
 \end{sdblock}
 
-\begin{sdblock}{EndSession*}{}
-
-\begin{call}{ris}{}{fvs}{}
-\end{call}
-
-\end{sdblock}
+% \begin{sdblock}{EndSession*}{}
+% 
+% \begin{call}{ris}{}{fvs}{}
+% \end{call}
+% 
+% \end{sdblock}
 
 \end{sequencediagram}
 \end{center}
