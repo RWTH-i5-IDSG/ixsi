@@ -1827,7 +1827,12 @@
 		<xs:sequence>
 			<xs:element name="Transaction" type="TransactionType">
 				<xs:annotation>
-					<xs:documentation>Transaktions-Identifier, gesetzt vom Anforderer.</xs:documentation>
+					<xs:documentation>Transaktions-Identifier, gesetzt vom Client.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SystemID" type="SystemIDType">
+				<xs:annotation>
+					<xs:documentation>ID des Clientsystems.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
@@ -1865,6 +1870,11 @@
 			<xs:element name="Transaction" type="TransactionType">
 				<xs:annotation>
 					<xs:documentation>Transaktions-Identifier, gesetzt vom Client.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SystemID" type="SystemIDType">
+				<xs:annotation>
+					<xs:documentation>ID des Clientsystems.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
