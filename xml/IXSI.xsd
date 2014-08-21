@@ -1830,6 +1830,11 @@
 					<xs:documentation>Transaction identifier, set by the requestor.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="SystemID" type="SystemIDType">
+				<xs:annotation>
+					<xs:documentation>ID of the requesting system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:choice>
 				<xs:group ref="StaticDataRequestGroup"/>
 				<xs:group ref="UserTriggeredRequestGroup"/>
@@ -1865,6 +1870,11 @@
 			<xs:element name="Transaction" type="TransactionType">
 				<xs:annotation>
 					<xs:documentation>Transaction identifier, set by the requestor.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SystemID" type="SystemIDType">
+				<xs:annotation>
+					<xs:documentation>ID of the requesting system.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
