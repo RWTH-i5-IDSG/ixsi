@@ -6,7 +6,7 @@ Dieser Abschnitt gibt einen Überblick über die in IXSI verwendeten Interaktion
 \section{Überblick}
 Das folgende Sequenzdiagramm gibt einen Überblick über eine beispielhafte Informationskopplung wie sie durch IXSI realisiert werden kann. Die im einzelnen verwendeten Dienste werden in den folgenden Abschnitt genauer beschrieben. In diesem Anwendungsfall hohlt eine Kunde beim RIS eine Reiseauskunft ein, bucht eine entsprechende Reise und lässt sich über Änderungen an der Buchung benachrichtigen. 
 
-Im ersten Block \emph{Austausch Buchungsziele} werden die vom \index{FVS} zur Verfügung gestellten Buchungsziele mit dem \index{RIS} ausgetauscht und relevante Buchungsziele abonniert (vl. \cref{sec:Interaktionsprotokolle:Dienst1,sec:Interaktionsprotokolle:Dienst3}). Die geschieht proaktiv ohne Involvierung eines Kunden. 
+Im ersten Block \emph{Austausch Buchungsziele} werden die vom \index{FVS}FVS zur Verfügung gestellten Buchungsziele mit dem \index{RIS}RIS ausgetauscht und relevante Buchungsziele abonniert (vl. \cref{sec:Interaktionsprotokolle:Dienst1,sec:Interaktionsprotokolle:Dienst3}). Die geschieht proaktiv ohne Involvierung eines Kunden. 
 Im Block \emph{Reiseauskunft} führt ein Kunde, z.B. mit einem Mobilgerät, eine Reiseauskunft beim RIS durch. Hierbei kommen mehrere Leihfahrzeuge in Frage deren Verfügbarkeit dann synchron beim FVS abgefragt wird. Für die verfügbaren Fahrzeuge fragt das RIS zusätzlich eine Preisauskunft an. Als Ergebnis gibt das RIS eine Auswahl an möglichen Reiserouten / Verbindungen an den Kunden zurück. Da es sich um durch einen Kunden ausgelöste Kommunikation handelt wird impliziert eine Sitzung erstellt in deren Kontext die Abfragen ausgeführt werden. Da sich der Kunde nicht auf seinem Gerät eingeloggt hat, wird eine anonyme Sitzung verwendet.
 Im Block \emph{Reisebuchung} hat sich der Kunde für eine Reiseroute entschieden und möchte diese buchen. Hierzu loggt er sich auf seinem Mobilgerät ein wodurch ein Token generiert wird (Block \emph{Anmeldung}. Mit diesem Token wird eine (nicht anonyme) Sitzung erstellt in welcher der Buchungsvorgang durchgeführt wird. Hierzu übergibt das RIS die Buchungszielreferenz und einen Zeitvorschlag an das FVS. Das sendet eine Buchungsbestätigung welche vom RIS an den Kunden weitergegeben wird. Zusätzlich abboniert das RIS die entsprechende Buchung beim FVS.
 Im letzten Block \emph{Reiseüberwachung} wird der Kunde vom über Änderungen an der Buchung die das RIS vom FVS erhält, benachrichtigt.
@@ -19,7 +19,7 @@ Im letzten Block \emph{Reiseüberwachung} wird der Kunde vom über Änderungen a
 \newinst[8]{fvs}{:FVS}
 
 
-\begin{sdblock}{Austausch Buchungsziele}{Dienst 1, Diesnt 3}
+\begin{sdblock}{Austausch Buchungsziele}{Dienst 1, Dienst 3}
 
   \begin{call}{ris}{Anfrage}{fvs}{Liste Buchungsziele}
   \end{call}
