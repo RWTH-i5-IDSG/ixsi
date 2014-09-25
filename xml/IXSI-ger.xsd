@@ -169,7 +169,7 @@
 		<xs:sequence>
 			<xs:element name="PolyPoint" type="CoordType" minOccurs="3" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Geopositionen der nahegelegensten Polygongrenze des Gebiets.</xs:documentation>
+					<xs:documentation>Geopositionen der nächstgelegenen Polygongrenze des Gebiets.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -209,7 +209,7 @@
 	</xs:group>
 	<xs:complexType name="DensityAreaType">
 		<xs:annotation>
-			<xs:documentation>Typ für geograohischen Gebiete mit wahrscheinlicher Zeit um ein Fahrzeug zu erhalten.</xs:documentation>
+			<xs:documentation>Typ für geographische Gebiete mit wahrscheinlicher Zeit um ein Fahrzeug zu erhalten.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Area" type="GeoAreaType">
@@ -652,12 +652,12 @@
 			<xs:element name="Engine" type="EngineType" minOccurs="0"/>
 			<xs:element name="CO2Factor" type="xs:nonNegativeInteger" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>CO2-Emmissionen in Gramm pro Kilometer.</xs:documentation>
+					<xs:documentation>CO2-Emissionen in Gramm pro Kilometer.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="MaxDistance" type="xs:nonNegativeInteger" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Maximale Distanz ion Metern, die ein Bookee ohne längere Stops zurücklegen kann. Falls nicht gegeben, ist kein Limit angenommen.</xs:documentation>
+					<xs:documentation>Maximale Distanz in Metern, die ein Bookee ohne längere Stops zurücklegen kann. Falls nicht gegeben, ist kein Limit angenommen.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="AttributeID" type="AttributeIDType" minOccurs="0" maxOccurs="unbounded">
@@ -684,7 +684,7 @@
 			</xs:element>
 			<xs:element name="SeverityFactor" type="xs:nonNegativeInteger" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Severity-Faktor der vorgeschlagenden Route in Prozent. 100 repräsentieren eine nahezu vollkommen flache Route.Je höher der Wert, desto mehr Energy wird für das Fahren der Route verbraucht. Beispielsweise ein Wert von 200 indiziert, dass doppelt so viel Energie verbracht wird, wie es bei einer vollkommen flachen Route der Fall wäre.</xs:documentation>
+					<xs:documentation>Severity-Faktor der vorgeschlagenden Route in Prozent. 100 repräsentieren eine nahezu vollkommen flache Route.Je höher der Wert, desto mehr Energie wird für das Fahren der Route verbraucht. Beispielsweise ein Wert von 200 indiziert, dass doppelt so viel Energie verbraucht wird, wie es bei einer vollkommen flachen Route der Fall wäre.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -739,7 +739,7 @@
 			</xs:element>
 			<xs:element name="GeoPosition" type="CoordType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Für neu verfügbare Fahrzeug, welche nicht an einen spezifischen Standort gebunden sind, sollte die Position zurückgegeben werden.</xs:documentation>
+					<xs:documentation>Für neu verfügbare Fahrzeuge, welche nicht an einen spezifischen Standort gebunden sind, sollte die Position zurückgegeben werden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
@@ -901,7 +901,7 @@
 	</xs:annotation>
 	<xs:complexType name="OpenSessionRequestType">
 		<xs:annotation>
-			<xs:documentation>Anfrage für das öffnen einer Session für den User. Kann für Funktionen 2, 4, und 6 verwendet werden.</xs:documentation>
+			<xs:documentation>Anfrage für das Öffnen einer Session für den User. Kann für Funktionen 2, 4, und 6 verwendet werden.</xs:documentation>
 		</xs:annotation>
 	</xs:complexType>
 	<xs:complexType name="OpenSessionResponseType">
@@ -1004,26 +1004,26 @@
 	</xs:complexType>
 	<xs:complexType name="ChangedProvidersRequestType">
 		<xs:annotation>
-			<xs:documentation>Anfrage um jene Anbieter mit veränderter statischer Daten zu erhalten.</xs:documentation>
+			<xs:documentation>Anfrage um jene Anbieter mit veränderten statischen Daten zu erhalten.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Timestamp" type="xs:dateTime">
 				<xs:annotation>
-					<xs:documentation>Zeitstempel der satischen Datenlieferung, für welche die Änderungen angefordert wurden.</xs:documentation>
+					<xs:documentation>Zeitstempel der statischen Datenlieferung, für welche die Änderungen angefordert wurden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ChangedProvidersResponseType">
 		<xs:annotation>
-			<xs:documentation>Antwort um Anbieter mit veränderter statischer Daten zu erhalten.</xs:documentation>
+			<xs:documentation>Antwort um Anbieter mit veränderten statischen Daten zu erhalten.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
 					<xs:element name="Provider" type="ProviderIDType" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
-							<xs:documentation> Liste von Anbietern mit Änderungen in deren statischer Daten.</xs:documentation>
+							<xs:documentation> Liste von Anbietern mit Änderungen in deren statischen Daten.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -1112,12 +1112,12 @@
 			</xs:element>
 			<xs:element name="Unsubscription" type="xs:boolean" default="false" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Falls gesetzt, Abo von gegebenen Buchungszielen kündigen. Andernfalls abonnieren..</xs:documentation>
+					<xs:documentation>Falls gesetzt, Abo von gegebenen Buchungszielen kündigen. Andernfalls abonnieren.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="EventHorizon" type="xs:duration" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Falls gesetzt, beschreibt der Ereignishorizont die Zeit in der Zukunft, für diese das Abo valide ist. Der Wert wird für alle abonnierten Buchungsziele verwendet.Diese Dauer ist relativ zur aktuellen Zeit.</xs:documentation>
+					<xs:documentation>Falls gesetzt, beschreibt der Ereignishorizont die Zeit in der Zukunft, für diese das Abo valide ist. Der Wert wird für alle abonnierten Buchungsziele verwendet. Diese Dauer ist relativ zur aktuellen Zeit.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1165,19 +1165,19 @@
 	</xs:complexType>
 	<xs:complexType name="CompleteAvailabilityResponseType">
 		<xs:annotation>
-			<xs:documentation>Antwort um den vollständigen aktuellen Status der Verfügbarkeiten zu erhalten. Einiege solcher Antworten können zu einer einzigen Anfrage gehören.</xs:documentation>
+			<xs:documentation>Antwort um den vollständigen aktuellen Status der Verfügbarkeiten zu erhalten. Einige solcher Antworten können zu einer einzigen Anfrage gehören.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
 					<xs:element name="MessageBlockID" type="xs:NMTOKEN">
 						<xs:annotation>
-							<xs:documentation> ID des Blocks, zu dem diese Nachricht gehört. Alle Nachrichten des Blocks haben die selbe ID.</xs:documentation>
+							<xs:documentation> ID des Blocks, zu dem diese Nachricht gehört. Alle Nachrichten des Blocks haben dieselbe ID.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="Last" type="xs:boolean" default="false" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Falls gesetzt, ist die Nachricht die letzte des korrespondierenden Blocks. Andernfalls werden mehr Nachrichten des selben Blocks folgen.</xs:documentation>
+							<xs:documentation>Falls gesetzt, ist die Nachricht die letzte des korrespondierenden Blocks. Andernfalls werden mehr Nachrichten desselben Blocks folgen.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="BookingTarget" type="BookingTargetAvailabilityType" minOccurs="0" maxOccurs="unbounded"/>
@@ -1203,19 +1203,19 @@
 		<xs:sequence>
 			<xs:element name="PlaceID" type="ProviderPlaceIDType" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Standorte zu abonnieren/ Abo kündigen.</xs:documentation>
+					<xs:documentation>Standorte zu abonnieren / Abo kündigen.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Unsubscription" type="xs:boolean" default="false" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Falls gesetzt, kündigen der Abos gegebener Buchungsziele. Andernfalls abonnieren.</xs:documentation>
+					<xs:documentation>Falls gesetzt, Kündigen der Abos gegebener Buchungsziele. Andernfalls abonnieren.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="PlaceAvailabilitySubscriptionResponseType">
 		<xs:annotation>
-			<xs:documentation>Antwort zum abonnieren der verfügbaren Kapazität von Standorten.</xs:documentation>
+			<xs:documentation>Antwort zum Abonnieren der verfügbaren Kapazität von Standorten.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType"/>
@@ -1263,12 +1263,12 @@
 				<xs:sequence>
 					<xs:element name="MessageBlockID" type="xs:NMTOKEN">
 						<xs:annotation>
-							<xs:documentation> ID des Blocks, zu dem die Nachricht gehört. Alle Nachrichten eines Blocks haben die selbe ID.</xs:documentation>
+							<xs:documentation> ID des Blocks, zu dem die Nachricht gehört. Alle Nachrichten eines Blocks haben dieselbe ID.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="Last" type="xs:boolean" default="false" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Falls gesetzt, ist diese Nachricht die Letzte des korrespondierenden Blocks. Andernfalls werden mehr Nachrichten des selben Blocks folgen.</xs:documentation>
+							<xs:documentation>Falls gesetzt, ist diese Nachricht die Letzte des korrespondierenden Blocks. Andernfalls werden mehr Nachrichten desselben Blocks folgen.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="PlaceAvailability" type="PlaceAvailabilityType" minOccurs="0" maxOccurs="unbounded"/>
@@ -1289,7 +1289,7 @@
 	</xs:annotation>
 	<xs:complexType name="BookingRequestType">
 		<xs:annotation>
-			<xs:documentation>Anfrage zum Buchen eines Buchungsziel.</xs:documentation>
+			<xs:documentation>Anfrage zum Buchen eines Buchungsziels.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="BookingTargetID" type="BookingTargetIDType"/>
@@ -1368,7 +1368,7 @@
 		<xs:sequence>
 			<xs:element name="BookingID" type="BookingIDType" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Buchungen zu abonnieren/ kündigen.</xs:documentation>
+					<xs:documentation>Buchungen zu abonnieren / kündigen.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Unsubscription" type="xs:boolean" default="false" minOccurs="0">
@@ -1428,12 +1428,12 @@
 				<xs:sequence>
 					<xs:element name="MessageBlockID" type="xs:NMTOKEN">
 						<xs:annotation>
-							<xs:documentation>ID des Blocks, zu dem diese Nachricht gehört. Alle Nachrichten eines Blockes haben die selbe ID.</xs:documentation>
+							<xs:documentation>ID des Blocks, zu dem diese Nachricht gehört. Alle Nachrichten eines Blockes haben dieselbe ID.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="Last" type="xs:boolean" default="false" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation>Falls gesetzt, ist diese Nachricht die Letzte im korrespondierenden Block. Andernfalls folgen mehr Nachrichten des selben Blocks.</xs:documentation>
+							<xs:documentation>Falls gesetzt, ist diese Nachricht die Letzte im korrespondierenden Block. Andernfalls folgen mehr Nachrichten desselben Blocks.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 					<xs:element name="BookingChange" type="BookingChangeType" minOccurs="0" maxOccurs="unbounded"/>
@@ -1509,7 +1509,7 @@
 				</xs:element>
 				<xs:element name="CloseSession" type="CloseSessionRequestType">
 					<xs:annotation>
-						<xs:documentation>Explizietes Schließen einer Session.</xs:documentation>
+						<xs:documentation>Explizites Schließen einer Session.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="TokenGeneration" type="TokenGenerationRequestType">
@@ -1547,12 +1547,12 @@
 	</xs:group>
 	<xs:group name="UserTriggeredResponseGroup">
 		<xs:annotation>
-			<xs:documentation>Antworten, die direkt durch einer Userinteraktion ausgelößt werden.</xs:documentation>
+			<xs:documentation>Antworten, die direkt durch einer Userinteraktion ausgelöst werden.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="SessionID" type="SessionIDType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Falls zurückgegeben wurde eine Session für einen User geöffnet.Diese Session-ID kann für Athentifizierung in der nächsten Anfrage verwendet werden.</xs:documentation>
+					<xs:documentation>Falls zurückgegeben wurde eine Session für einen User geöffnet.Diese Session-ID kann für Authentifizierung in der nächsten Anfrage verwendet werden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="SessionTimeout" type="xs:duration" minOccurs="0">
@@ -1568,7 +1568,7 @@
 				</xs:element>
 				<xs:element name="CloseSession" type="CloseSessionResponseType">
 					<xs:annotation>
-						<xs:documentation>Explizietes Schließen einer Session.</xs:documentation>
+						<xs:documentation>Explizites Schließen einer Session.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="TokenGeneration" type="TokenGenerationResponseType">
@@ -1896,7 +1896,7 @@
 			</xs:element>
 			<xs:element name="CalcTime" type="xs:duration">
 				<xs:annotation>
-					<xs:documentation>Benötigte Zeit um die beinhaltete Resultate zu berechnen.</xs:documentation>
+					<xs:documentation>Benötigte Zeit um die beinhalteten Resultate zu berechnen.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
