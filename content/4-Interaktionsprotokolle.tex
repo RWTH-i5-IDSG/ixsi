@@ -131,9 +131,9 @@ Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an 
 \newthread{ris}{:RIS}
 \newinst[8]{fvs}{:FVS}
 
-\begin{sdblock}{BookingTargetsInfo}{}
+\begin{sdblock}{Buchungszielaustausch}{}
 
-\begin{call}{ris}{BookingTargetsInfoRequest(Provider*)}{fvs}{BookingTargetsInfos}
+\begin{call}{ris}{Buchungszielabfrage(Anbieter*)}{fvs}{Buchungszielliste}
 
 \end{call}
 
@@ -153,9 +153,9 @@ Als Basis für die Informationskopplung dient der Austausch von sogenannten Buch
 \newthread{ris}{:RIS}
 \newinst[8]{fvs}{:FVS}
 
-\begin{sdblock}{ChangedProviders}{}
+\begin{sdblock}{Änderungen Buchungsziele}{}
 
-\begin{call}{ris}{ChangedProvidersRequest}{fvs}{Changed Providers}
+\begin{call}{ris}{Abfrage Änderungenbuchungsziele}{fvs}{Anbieterliste}
 \end{call}
 
 % \begin{messcall}{ris}{Asynchrone Nachricht}{fvs}
@@ -178,7 +178,7 @@ Um nicht intervallweise alle Buchungszielinformationen übertragen zu müssen, k
 \newthread{ris}{:RIS}
 \newinst[8]{fvs}{:FVS}
 
-\begin{sdblock}{AvailabilityRequest}{}
+\begin{sdblock}{Verfügbarkeitsauskunft}{}
 
 \begin{call}{ris}{Buchungsziele/Gebiet, Zeitraum}{fvs}{Buchungsziele}
 \end{call}
@@ -199,9 +199,9 @@ Um die konkreten Verfügbarkeiten abzufragen, sendet das RIS eine Anfrage die en
 \newthread{ris}{:RIS}
 \newinst[8]{fvs}{:FVS}
 
-\begin{sdblock}{PlaceAvailability}{}
+\begin{sdblock}{Abfrage Stationskapazität}{}
 
-\begin{call}{ris}{PlaceIDList/Circle/GeoRectangle}{fvs}{PlaceAvailabilityList}
+\begin{call}{ris}{Referenz Stationen / Gebiet}{fvs}{Liste Stationskapazitäten}
 \end{call}
 
 \end{sdblock}
@@ -223,14 +223,14 @@ Das RIS kann die aktuellen Kapazitäten, bspw. zur Kartendarstellung, von Verlei
 \newthread{ris}{:RIS}
 \newinst[8]{fvs}{:FVS}
 
-\begin{sdblock}{AvailabilitySubscription}{}
+\begin{sdblock}{Verfügbarkeit abonnieren}{}
 
 \begin{call}{ris}{Buchungsziel, (Kündigung)*, Zeithorizont}{fvs}{}
 \end{call}
 
 \end{sdblock}
 \postlevel
-\begin{sdblock}{AvailabilityPushMessage}{}
+\begin{sdblock}{Verfügbarkeitsaktualisierungen}{}
 
 \begin{mess}{fvs}{Verfügbarkeitsaktualisierung}{ris}
 \end{mess}
@@ -243,7 +243,7 @@ Das RIS kann die aktuellen Kapazitäten, bspw. zur Kartendarstellung, von Verlei
 \end{sdblock}
 
 \postlevel
-\begin{sdblock}{CompleteAvailability}{}
+\begin{sdblock}{Gesamte Verfügbarkeit}{}
 
 \begin{call}{ris}{Maximale Anzahl Objekte}{fvs}{Buchungsziele}
 \end{call}
@@ -274,30 +274,30 @@ Zur anfänglichen Synchronisierung aller Verfügbarkeiten kann das RIS die Funkt
 \newthread{ris}{:RIS}
 \newinst[8]{fvs}{:FVS}
 
-\begin{sdblock}{PlaceAvailabilitySubscription}{}
+\begin{sdblock}{Stantortkapazitäten abonnieren}{}
 
 \begin{call}{ris}{Standortreferenz, (Kündigung)*}{fvs}{}
 \end{call}
 
 \end{sdblock}
 \postlevel
-\begin{sdblock}{PlaceAvailabilityPushMessage}{}
+\begin{sdblock}{Kapazitätsaktualisierungen}{}
 
-\begin{mess}{fvs}{Standortverfügbarkeit}{ris}
+\begin{mess}{fvs}{Standortkapazität}{ris}
 \end{mess}
 
-\begin{mess}{fvs}{Standortverfügbarkeit}{ris}
+\begin{mess}{fvs}{Standortkapazität}{ris}
 \end{mess}
-\begin{mess}{fvs}{Standortverfügbarkeit}{ris}
+\begin{mess}{fvs}{Standortkapazität}{ris}
 \end{mess}
 \begin{mess}{fvs}{...}{ris}
 \end{mess}
 \end{sdblock}
 \postlevel
 
-\begin{sdblock}{CompletePlaceAvailability}{}
+\begin{sdblock}{Vollständige Standortkapazitäten}{}
 
-\begin{call}{ris}{}{fvs}{Standortverfügbarkeiten}
+\begin{call}{ris}{}{fvs}{Standortkapazitäten}
 \end{call}
 
 \end{sdblock}
@@ -327,7 +327,7 @@ Das RIS kann die Kapazitätsinformation von Standorten abonnieren. Der Interakti
 % \end{sdblock}
 
 
-\begin{sdblock}{Booking}{}
+\begin{sdblock}{Buchung}{}
 
 \begin{call}{ris}{Buchungszielreferenz, Zeitraumvorschlag}{fvs}{Buchungsreferenz, Zeitraum}
 \end{call}
@@ -335,7 +335,7 @@ Das RIS kann die Kapazitätsinformation von Standorten abonnieren. Der Interakti
 \end{sdblock}
 \postlevel
 
-\begin{sdblock}{ChangeBooking*}{}
+\begin{sdblock}{Buchungsänderung*}{}
 
 \begin{call}{ris}{Vorschlag für neuen Zeitraum / Stornierung}{fvs}{Zeitraum}
 \end{call}
@@ -364,14 +364,14 @@ Um im Kundenauftrag ein Fahrzeug zu Buchen, ist es erfoderlich, dass das RIS den
 \newthread{ris}{:RIS}
 \newinst[8]{fvs}{:FVS}
 
-\begin{sdblock}{BookingAlertSubscription}{}
+\begin{sdblock}{Buchungsabonnement}{}
 
-\begin{call}{ris}{BookingID, (Unsubscription)*}{fvs}{}
+\begin{call}{ris}{Buchungsreferenz, (Abostornierung)*}{fvs}{}
 \end{call}
 
 \end{sdblock}
 \postlevel
-\begin{sdblock}{BookingAlertPushMessage}{}
+\begin{sdblock}{Buchungsänderungen}{}
 
 \begin{mess}{fvs}{Buchungsänderung}{ris}
 \end{mess}
@@ -385,7 +385,7 @@ Um im Kundenauftrag ein Fahrzeug zu Buchen, ist es erfoderlich, dass das RIS den
 \end{sdblock}
 \postlevel
 
-\begin{sdblock}{CompleteBookingAlert}{}
+\begin{sdblock}{Vollständige Buchungsinformation}{}
 
 \begin{call}{ris}{}{fvs}{Buchungsänderungen}
 \end{call}
@@ -418,7 +418,7 @@ Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3
 % 
 % \end{sdblock}
 
-\begin{sdblock}{PriceInformation}{}
+\begin{sdblock}{Preisauskunft}{}
 
 \begin{call}{ris}{Buchungszielreferenz, Vorschlag Zeitraum, Distanz}{fvs}{Preis}
 
