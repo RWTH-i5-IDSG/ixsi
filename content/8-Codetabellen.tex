@@ -80,6 +80,23 @@ Wert & Bedeutung\\
 \end{tabularx}
 \end{flushleft}
 
+\section{Verbrauchsdaten}
+\label{sec:CodeTabellen:AttributeClass}
+\TODO{Mehr typische Verbrauchsdaten / Rechnungsposten}
+Klassen von Verbrauchsdaten zur Abrechnung von Leistungen, wie z.B. Entfernung, Dauer oder Zusatzleistungen wie ein Kindersitz. Wird in  \emph{ConsumptionClassType} gespeichert. Folgende Werte sind dabei erlaubt:
+
+\begin{flushleft}
+\rowcolors{1}{}{gray!10}
+\begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}X} 
+\toprule
+Wert & Bedeutung\\
+\midrule
+\verb|distance| & Entfernung\\
+\verb|duration| & Dauer\\
+\bottomrule
+\end{tabularx}
+\end{flushleft}
+
 \section{Fehlercodes}
 \label{sec:CodeTabellen:ErrorCode}
 Das FVS kann alternativ zu den normalen Response-, Update- und Handshake-Nachrichten auch im Fall eines Fehlers Fehlernachrichten an das RIS schicken. Fehlercodes werden im Datentyp \emph{ErrorCodeType} gespeichert.

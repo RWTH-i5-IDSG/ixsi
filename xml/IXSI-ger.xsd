@@ -383,6 +383,12 @@
 		</xs:annotation>
 		<xs:restriction base="xs:NMTOKEN"/>
 	</xs:simpleType>
+        <xs:simpleType name="ConsumptionIDType">
+                <xs:annotation>
+                        <xs:documentation>Aufzählung von Verbrauchsdatentypen.</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:NMTOKEN"/>
+        </xs:simpleType>
 	<xs:simpleType name="AttributeIDType">
 		<xs:annotation>
 			<xs:documentation>Aufzählung von Attributcodes.</xs:documentation>
@@ -854,6 +860,43 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+        <xs:complexType name="ConsumptionType">
+                <xs:annotation>
+                        <xs:documentation>Typ für einen Rechnungsposten der Verbrauchsdaten.</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                        <xs:element name="Type" type="ConsumptionIDType">
+                                <xs:annotation>
+                                        <xs:documentation>Typ des Verbrauchs.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Name" type="xs:string">
+                                <xs:annotation>
+                                        <xs:documentation>Druckbarer Name des Rechnungsposten.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Unit" type="xs:string" minOccurs="0">
+                                <xs:annotation>
+                                        <xs:documentation>Druckbarer Name der Einheit.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Value" type="xs:string">
+                                <xs:annotation>
+                                        <xs:documentation>Verbrauchswert.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Price" type="EuroPriceType" minOccurs="0">
+                                <xs:annotation>
+                                        <xs:documentation>Preis in Euro-Cent.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Description" type="xs:string" minOccurs="0">
+                                <xs:annotation>
+                                        <xs:documentation>Druckbare Beschreibung des Tarifdetails.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                </xs:sequence>
+        </xs:complexType>
 	<xs:complexType name="OriginDestType">
 		<xs:annotation>
 			<xs:documentation>Typ für den Ausgangspunkt oder den Reisezielort.</xs:documentation>

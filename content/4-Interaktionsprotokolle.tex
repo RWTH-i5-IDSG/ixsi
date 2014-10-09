@@ -93,7 +93,14 @@ Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an 
     
     \begin{sdblock}{Buchungsabonnement}{Dienst 5}
 
-      \begin{call}{ris}{Buchungszielreferenz}{fvs}{}
+      \begin{call}{ris}{Buchungsreferenz}{fvs}{}
+      \end{call}
+
+    \end{sdblock}
+    
+    \begin{sdblock}{Verbrauchsdatenabonnement}{Dienst 7}
+
+      \begin{call}{ris}{Buchungsreferenz}{fvs}{}
       \end{call}
 
     \end{sdblock}
@@ -102,23 +109,45 @@ Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an 
 
 \end{sdblock}
 
-\postlevel
 
-\begin{sdblock}{Reiseüberwachung}{Dienst 5}
-\postlevel
-  \begin{mess}{fvs}{Buchungsänderung}{ris}
-  \end{mess}
-
-  \begin{mess}{ris}{Buchungsänderung}{kunde}
-  \end{mess}
-  
-\end{sdblock}
 
 \end{sequencediagram}
 \end{center}
 \smallskip
 
+\begin{center}
+     
+\begin{sequencediagram}
+\newthread{kunde}{:Kunde}
+\newthread{ris}{:RIS}
+\newinst[8]{fvs}{:FVS}
 
+\postlevel
+
+\begin{sdblock}{Reiseüberwachung}{Dienst 5}
+\postlevel
+\begin{mess}{fvs}{Buchungsänderung}{ris}
+\end{mess}
+
+\begin{mess}{ris}{Buchungsänderung}{kunde}
+\end{mess}
+
+\end{sdblock}
+
+\begin{sdblock}{Abrechnung}{Dienst 7}
+\postlevel
+\begin{mess}{fvs}{Verbrauchsdaten}{ris}
+\end{mess}
+
+\begin{mess}{ris}{Rechnung}{kunde}
+\end{mess}
+
+\end{sdblock}
+
+\end{sequencediagram}
+\end{center}
+
+\smallskip
 
 
 \section{Dienst 1 -- Statische Daten}
@@ -438,3 +467,51 @@ Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3
 \smallskip
 
 Mit einer Anfrage \texttt{PriceInformationRequest} kann das RIS beim FVS eine Preisauskunft auf Basis von Buchungsziel ID, Zeitraum und zurückzulegende Distanz anfragen. Falls vorher eine Authentifizierung des Endkunden z.B. durch \texttt{OpenSession} stattgefunden hat, ist die Preisanfrage entsprechend des Kundenvertrags zu beantworten.
+
+
+
+\section{Dienst 7 --  Verbrauchsdatenabonnement}
+\label{sec:Interaktionsprotokolle:Dienst7}
+
+\begin{center}
+\begin{sequencediagram}
+\newthread{ris}{:RIS}
+\newinst[8]{fvs}{:FVS}
+
+\begin{sdblock}{Verbrauchsdatenabonnement}{}
+
+\begin{call}{ris}{Buchungsreferenz, (Abostornierung)*}{fvs}{}
+\end{call}
+
+\end{sdblock}
+\postlevel
+\begin{sdblock}{Verbrauchsdaten}{}
+
+\begin{mess}{fvs}{Verbrauchsdaten}{ris}
+\end{mess}
+
+\begin{mess}{fvs}{Verbrauchsdaten}{ris}
+\end{mess}
+
+\begin{mess}{fvs}{Verbrauchsdaten}{ris}
+\end{mess}
+
+\begin{mess}{fvs}{...}{ris}
+\end{mess}
+\end{sdblock}
+\postlevel
+
+\begin{sdblock}{Vollständige Verbrauchsdaten}{}
+
+\begin{call}{ris}{}{fvs}{Verbrauchsdaten}
+\end{call}
+
+\end{sdblock}
+
+\end{sequencediagram}
+\end{center}
+\smallskip
+
+Das RIS kann Verbrauchsdaten (Nutzungsdauer, Entfernung, ggfs. andere) für eine Buchung abonnieren. Sobald neue Verbrauchsdaten vorliegen (z.B. bei Rückgabe eines Fahrzeuges) informiert das FVS dann RIS über den vorliegenden Verbrauch. Zu einer Buchung können mehrere Informationen zu Verbrauchsdaten versendet werden. Neue Verbrauchsdaten zu einer Buchung invalidieren alle vorherigen und müssen entsprechend vollständig sein.
+
+Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3}.

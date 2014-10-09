@@ -5,6 +5,7 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
 
 \begin{figure}[h]
   \centering
+  \resizebox {\columnwidth} {!} {
   \begin{tikzpicture}
   % Dienste
   \tikzstyle{ann} = [draw=none,fill=none,right]
@@ -13,6 +14,7 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
   \node[rectangleTX, left= 1cm of s3](s2) {Dienst 2\\Verfügbarkeitsauskunft};
   \node[rectangleTX, below right of=s1](s4) {Dienst 4\\Buchung};
   \node[rectangleTX, right= 1cm of s4](s6) {Dienst 6\\Preisauskunft};
+  \node[rectangleTX, right= 1cm of s6](s7) {Dienst 7\\Verbrauchsdaten};
   \node[rectangleTX, below= 1cm of s4](s5) {Dienst 5\\Buchungsabonnement};
 
   %   arrows
@@ -21,7 +23,9 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
   \draw (s4) edge[->,thick=1cm] (s1);
   \draw (s5) edge[->,thick=1cm] (s4);
   \draw (s6) edge[->,thick=1cm] (s1);
+  \draw (s7) edge[->,thick=1cm] (s1);
   \end{tikzpicture}
+  }
   \caption{Dienstabhängigkeiten \label{fig:depend}}
 \end{figure}
 
@@ -68,9 +72,7 @@ Dienst C enthält eine Funktion zur Erstellung von Authentifizierungstokens für
 
 
 \section{Dienst 1 -- Statische Daten (static data)}
-Dienst 1 dient dem Austausch von Informationen über Fahrzeugverleihanbietern und statischen Daten von Buchungszielen. Hierzu gehören Anbieter, Standort- und Fahrzeugdaten. 
-
-Dienst 1 kann beispielsweise dafür verwendet werden, um nur Hinweise zu vorhandenen Standorten eines FVS-Betreibers in einem RIS anzuzeigen.
+Dienst 1 dient dem Austausch von Informationen über Fahrzeugverleihanbietern und statischen Daten von Buchungszielen. Hierzu gehören Anbieter, Standort- und Fahrzeugdaten. Dienst 1 kann beispielsweise dafür verwendet werden, um nur Hinweise zu vorhandenen Standorten eines FVS-Betreibers in einem RIS anzuzeigen.
 \subsection*{Funktionen}
 \begin{itemize}
 \item Abruf von Buchungsziel- und Betreiberinformationen
@@ -80,9 +82,7 @@ Dienst 1 kann beispielsweise dafür verwendet werden, um nur Hinweise zu vorhand
 keine 
 
 \section{Dienst 2 -- Verfügbarkeitsauskunft (availability query) }
-Dienst 2 dient dem synchronen Abruf von Verfügbarkeitsinformationen.
-
-Die tatsächlichen Verfügbarkeitszeiten von Buchungszielen werden während der Reiseauskunft durch das RIS beim FVS abgerufen. 
+Dienst 2 dient dem synchronen Abruf von Verfügbarkeitsinformationen. Die tatsächlichen Verfügbarkeitszeiten von Buchungszielen werden während der Reiseauskunft durch das RIS beim FVS abgerufen. 
 
 \subsection*{Funktionen}
 \begin{itemize}
@@ -96,9 +96,7 @@ Die tatsächlichen Verfügbarkeitszeiten von Buchungszielen werden während der 
 \end{itemize}
 
 \section{Dienst 3 -- Verfügbarkeitsabonnement (availability subscription) }
-Dienst 2 dient dem asynchronen Austausch von Verfügbarkeitsinformationen.
-
-Um die Reiseauskunft zu beschleunigen, kann das RIS Verfügbarkeitszeiträume von Buchungszielen abonnieren um eine Abfrage während der Reiseauskunft zu vermeiden. Nach dem Abonnement einer Menge von Buchungszielen, informiert das FVS fortlaufend über Änderungen an Verfügbarkeitszeiträumen.
+Dienst 2 dient dem asynchronen Austausch von Verfügbarkeitsinformationen. Um die Reiseauskunft zu beschleunigen, kann das RIS Verfügbarkeitszeiträume von Buchungszielen abonnieren um eine Abfrage während der Reiseauskunft zu vermeiden. Nach dem Abonnement einer Menge von Buchungszielen, informiert das FVS fortlaufend über Änderungen an Verfügbarkeitszeiträumen.
 
 \subsection*{Funktionen}
 \begin{itemize}
@@ -115,9 +113,7 @@ Um die Reiseauskunft zu beschleunigen, kann das RIS Verfügbarkeitszeiträume vo
 
 
 \section{Dienst 4 -- Buchung (booking)}
-Dienst 4 dient der Buchung, Umbuchung und Stornierung von Fahrzeugen durch das RIS im Auftrag eines Kunden des FVS.
-
-Für die Buchung eines Fahrzeuges ist es notwendig, dass der Kunde sich gegenüber dem FVS authentifiziert. Dazu werden die Authentifizierungsinformationen vom RIS an das FVS weitergeleitet. Das Geheimnis (Passwort, PIN, etc.) des Kunden darf vom RIS aus Sicherheitsgründen nicht gespeichert werden. Das RIS erhält bei erfolgreicher Authentifizierung eines Kunden für diesen ein Authentifizierungs-Token. Dieser kann entweder im RIS oder auf dem Endgerät des Kunden gespeichert werden. Unter Verwendung des Authentifizierungs-Tokens kann das RIS Anfragen zur Buchung und Stornierung von Buchungen durchführen. 
+Dienst 4 dient der Buchung, Umbuchung und Stornierung von Fahrzeugen durch das RIS im Auftrag eines Kunden des FVS. Für die Buchung eines Fahrzeuges ist es notwendig, dass der Kunde sich gegenüber dem FVS authentifiziert. Dazu werden die Authentifizierungsinformationen vom RIS an das FVS weitergeleitet. Das Geheimnis (Passwort, PIN, etc.) des Kunden darf vom RIS aus Sicherheitsgründen nicht gespeichert werden. Das RIS erhält bei erfolgreicher Authentifizierung eines Kunden für diesen ein Authentifizierungs-Token. Dieser kann entweder im RIS oder auf dem Endgerät des Kunden gespeichert werden. Unter Verwendung des Authentifizierungs-Tokens kann das RIS Anfragen zur Buchung und Stornierung von Buchungen durchführen. 
 Um dem Nutzer die Änderung einer Buchung zu ermöglichen, kann eine Buchung durch eine Umbuchungsanfrage des RIS durch eine neue Buchung ersetzt werden. Dabei muss sichergestellt werden, dass im Fall, dass keine neue Buchung möglich ist, die alte Buchung ihre Gültigkeit behält.
 
 \subsection*{Funktionen}
@@ -133,9 +129,7 @@ Um dem Nutzer die Änderung einer Buchung zu ermöglichen, kann eine Buchung dur
 \end{itemize}
 
 \section{Dienst 5 -- Buchungsabonnement (booking subscription)}
-Dienst 5 dient dem Abonnement von Buchungsänderungen.
-
-Das RIS kann durchgeführte Buchungen beim FVS abbonnieren, um den Benutzer bei Änderungen (z.B. durch ein defektes Fahrzeug) informieren zu können.
+Dienst 5 dient dem Abonnement von Buchungsänderungen. Das RIS kann durchgeführte Buchungen beim FVS abbonnieren, um den Benutzer bei Änderungen (z.B. durch ein defektes Fahrzeug) informieren zu können.
 \subsection*{Funktionen}
 \begin{itemize}
 \item Buchungsabonnement
@@ -149,9 +143,7 @@ Das RIS kann durchgeführte Buchungen beim FVS abbonnieren, um den Benutzer bei 
 \end{itemize}
 
 \section{Dienst 6 -- Preisauskunft (price information)}
-Dienst 6 dient der Preisauskunft von Verleihdienstleistungen. 
-
-Durch die Übermittlung von Start-, Zielort und Startzeitpunkt und Endzeitpunkt der Fahrt kann das RIS beim FVS eine unverbindliche Preisauskunft zur Information des Benutzers einhohlen. Das FVS antwortet mit einem Preis und ggfs. Einzelposten.
+Dienst 6 dient der Preisauskunft von Verleihdienstleistungen. Durch die Übermittlung von Start-, Zielort und Startzeitpunkt und Endzeitpunkt der Fahrt kann das RIS beim FVS eine unverbindliche Preisauskunft zur Information des Benutzers einhohlen. Das FVS antwortet mit einem Preis und ggfs. Einzelposten.
 
 \subsection*{Funktionen}
 \begin{itemize}
@@ -164,4 +156,18 @@ Durch die Übermittlung von Start-, Zielort und Startzeitpunkt und Endzeitpunkt 
 \end{itemize}
 
 
+\section{Dienst 7 -- Abonnement Verbrauchsdaten / Abrechnung (consumption data)}
+Dienst 7 dient dem Austausch von Verbrauchsdaten wie z.B. Nutzungsdauer und Entfernung. Durch die Übermittlung der Verbrauchsdaten kann das RIS Rechnungen für Endkunden erstellen. Das RIS abonniert hierzu eine Buchung beim FVS und wird dann beim vorliegen von neuen Verbrauchsdaten zu dieser Buchung informiert.
 
+\subsection*{Funktionen}
+\begin{itemize}
+\item Abonnement Verbrauchsdaten
+\item Austausch Verbrauchsdaten (Push)
+\end{itemize}
+
+\subsection*{Abhängigkeiten}
+\begin{itemize}
+\item Dienst 1
+%\ item Basisdienst A
+\item Basisdienst B
+\end{itemize}
