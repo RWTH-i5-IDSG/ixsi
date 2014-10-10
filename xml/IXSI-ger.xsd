@@ -1173,12 +1173,12 @@
 			<xs:extension base="AbstractBaseResponseType"/>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="AvailabilitySubscriptionStatusRequest">
+	<xs:complexType name="AvailabilitySubscriptionStatusRequestType">
 		<xs:annotation>
 			<xs:documentation>Anfrage um alle abonnierten Buchungsziele zu erhalten.</xs:documentation>
 		</xs:annotation>
 	</xs:complexType>
-	<xs:complexType name="AvailabilitySubscriptionStatusResponse">
+	<xs:complexType name="AvailabilitySubscriptionStatusResponseType">
 		<xs:annotation>
 			<xs:documentation>Antwort um alle abonnierten Buchungsziele zu erhalten.</xs:documentation>
 		</xs:annotation>
@@ -1264,12 +1264,12 @@
 			<xs:extension base="AbstractBaseResponseType"/>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="PlaceAvailabilitySubscriptionStatusRequest">
+	<xs:complexType name="PlaceAvailabilitySubscriptionStatusRequestType">
 		<xs:annotation>
 			<xs:documentation>Anfrage um alle abonnierten Standorte zu erhalten.</xs:documentation>
 		</xs:annotation>
 	</xs:complexType>
-	<xs:complexType name="PlaceAvailabilitySubscriptionStatusResponse">
+	<xs:complexType name="PlaceAvailabilitySubscriptionStatusResponseType">
 		<xs:annotation>
 			<xs:documentation>Antwort um alle abonnierten Standorte zu erhalten</xs:documentation>
 		</xs:annotation>
@@ -1406,12 +1406,12 @@
 	</xs:annotation>
 	<xs:complexType name="BookingAlertSubscriptionRequestType">
 		<xs:annotation>
-			<xs:documentation>Anfrage um Alarmmeldungen für gegebene Buchungen zu abonnieren.</xs:documentation>
+			<xs:documentation>Anfrage um Alarmmeldungen für gegebene Buchungen zu abonnieren oder zu kündigen.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="BookingID" type="BookingIDType" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Buchungen zu abonnieren / kündigen.</xs:documentation>
+					<xs:documentation>zu abonnierende Buchungen.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Unsubscription" type="xs:boolean" default="false" minOccurs="0">
@@ -1526,6 +1526,97 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+        <xs:annotation>
+                <xs:documentation>**** Service (7) : Verbrauchsdaten-Abonnement ****</xs:documentation>
+        </xs:annotation>
+        <xs:complexType name="ConsumptionSubscriptionRequestType">
+                <xs:annotation>
+                        <xs:documentation>Anfrage um Verbrauchsdaten für gegebene Buchungen zu abonnieren oder zu kündigen.</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                        <xs:element name="BookingID" type="BookingIDType" maxOccurs="unbounded">
+                                <xs:annotation>
+                                        <xs:documentation>Verbrauchsdaten für Buchungen abonnieren.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Unsubscription" type="xs:boolean" default="false" minOccurs="0">
+                                <xs:annotation>
+                                        <xs:documentation>Falls gesetzt, gegebene Abos der Buchungen kündigen. Andernfalls abonnieren.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                </xs:sequence>
+        </xs:complexType>
+        <xs:complexType name="ConsumptionSubscriptionResponseType">
+                <xs:annotation>
+                        <xs:documentation>Antwort um Verbrauchsdaten für gegebene Buchungen zu abonnieren.</xs:documentation>
+                </xs:annotation>
+                <xs:complexContent>
+                        <xs:extension base="AbstractBaseResponseType"/>
+                </xs:complexContent>
+        </xs:complexType>
+        <xs:complexType name="ConsumptionSubscriptionStatusRequestType">
+                <xs:annotation>
+                        <xs:documentation>Anfrage um alle abonnierten Verbrauchsdaten zu erhalten.</xs:documentation>
+                </xs:annotation>
+        </xs:complexType>
+        <xs:complexType name="ConsumptionSubscriptionStatusResponseType">
+                <xs:annotation>
+                        <xs:documentation>Antwort um alle abonnierten Verbauchsdaten zu erhalten.</xs:documentation>
+                </xs:annotation>
+                <xs:complexContent>
+                        <xs:extension base="AbstractBaseResponseType">
+                                <xs:sequence>
+                                        <xs:element name="BookingID" type="BookingIDType" minOccurs="0" maxOccurs="unbounded">
+                                                <xs:annotation>
+                                                        <xs:documentation>Abonnierte Buchungen.</xs:documentation>
+                                                </xs:annotation>
+                                        </xs:element>
+                                </xs:sequence>
+                        </xs:extension>
+                </xs:complexContent>
+        </xs:complexType>
+        <xs:complexType name="CompleteConsumptionRequestType">
+                <xs:annotation>
+                        <xs:documentation>Anfrage um den vollständigen aktuellen Status abonnierter Verbrauchsdaten zu erhalten.</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                        <xs:element name="MaxResults" type="xs:integer" minOccurs="0">
+                                <xs:annotation>
+                                        <xs:documentation>Definiert die maximale Anzahl Resultate, die in einer Nachricht zurückgegeben werden.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                </xs:sequence>
+        </xs:complexType>
+        <xs:complexType name="CompleteConsumptionResponseType">
+                <xs:annotation>
+                        <xs:documentation>Nachricht um den vollständigen aktuellen Status abonnierter Verbauchsdaten zu erhalten. Verschiedene solcher Antworten können zu einer einzigen Anfrage gehören.</xs:documentation>
+                </xs:annotation>
+                <xs:complexContent>
+                        <xs:extension base="AbstractBaseResponseType">
+                                <xs:sequence>
+                                        <xs:element name="MessageBlockID" type="xs:NMTOKEN">
+                                                <xs:annotation>
+                                                        <xs:documentation>ID des Blocks, zu dem diese Nachricht gehört. Alle Nachrichten eines Blockes haben dieselbe ID.</xs:documentation>
+                                                </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="Last" type="xs:boolean" default="false" minOccurs="0">
+                                                <xs:annotation>
+                                                        <xs:documentation>Falls gesetzt, ist diese Nachricht die Letzte im korrespondierenden Block. Andernfalls folgen mehr Nachrichten desselben Blocks.</xs:documentation>
+                                                </xs:annotation>
+                                        </xs:element>
+                                        <xs:element name="BookingChange" type="BookingChangeType" minOccurs="0" maxOccurs="unbounded"/>
+                                </xs:sequence>
+                        </xs:extension>
+                </xs:complexContent>
+        </xs:complexType>
+        <xs:complexType name="ConsumptionPushMessageType">
+                <xs:annotation>
+                        <xs:documentation>Push-Nachricht, die Verbrauchsdaten für abonnierte Buchungen enthält.</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                        <xs:element name="Conumption" type="ConsumptionType" maxOccurs="unbounded"/>
+                </xs:sequence>
+        </xs:complexType>
 	<xs:annotation>
 		<xs:documentation>**** Nachrichtencontainer ****</xs:documentation>
 	</xs:annotation>
@@ -1763,7 +1854,7 @@
 						<xs:documentation>Abo von Verfügbarkeiten von Buchungszielen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="AvailabilitySubscriptionStatus" type="AvailabilitySubscriptionStatusResponse">
+				<xs:element name="AvailabilitySubscriptionStatus" type="AvailabilitySubscriptionStatusResponseType">
 					<xs:annotation>
 						<xs:documentation>Prüfen von Verfügbarkeitsabos.</xs:documentation>
 					</xs:annotation>
@@ -1773,7 +1864,7 @@
 						<xs:documentation>Abonnieren von verfügbaren Kapazitäten von Standorten.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="PlaceAvailabilitySubscriptionStatus" type="PlaceAvailabilitySubscriptionStatusResponse">
+				<xs:element name="PlaceAvailabilitySubscriptionStatus" type="PlaceAvailabilitySubscriptionStatusResponseType">
 					<xs:annotation>
 						<xs:documentation>Prüfen von Standortabos.</xs:documentation>
 					</xs:annotation>
