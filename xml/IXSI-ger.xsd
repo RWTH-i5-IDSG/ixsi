@@ -1130,12 +1130,12 @@
 			<xs:extension base="AbstractBaseResponseType"/>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="AvailabilitySubscriptionStatusRequest">
+	<xs:complexType name="AvailabilitySubscriptionStatusRequestType">
 		<xs:annotation>
 			<xs:documentation>Anfrage um alle abonnierten Buchungsziele zu erhalten.</xs:documentation>
 		</xs:annotation>
 	</xs:complexType>
-	<xs:complexType name="AvailabilitySubscriptionStatusResponse">
+	<xs:complexType name="AvailabilitySubscriptionStatusResponseType">
 		<xs:annotation>
 			<xs:documentation>Antwort um alle abonnierten Buchungsziele zu erhalten.</xs:documentation>
 		</xs:annotation>
