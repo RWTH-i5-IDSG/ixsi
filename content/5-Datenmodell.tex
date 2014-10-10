@@ -1,5 +1,5 @@
 \chapter{Datenmodell}
-\label{sec:Datenmodell}
+\label{cha:Datenmodell}
 Dieser Abschnitt beschreibt das der Schnittstelle zugrunde liegende Datenmodell. \medskip
 
 \noindent Symbollegende:\\
@@ -9,7 +9,7 @@ $\boxbox$ Mehrwertig (\verb|maxOccurs=0|)\\
 
 
 \section{Basisdatentypen}
-\label{subsec:Datenmodell:Basis}
+\label{sec:Datenmodell:Basisdatentypen}
 
 \subsection*{Einfache Basistypen}
 Einfache Basistypen sind Aliasnamen für vorhandene Datentypen um eine semantische Unterscheidung zu erlauben.
@@ -58,6 +58,7 @@ Erlaubte Werte für die Aufzählungen \emph{ClassType}, \emph{EngineType}, \emph
 \input{xml/generated/StopLinkType-schema}
 
 \section{Basisgruppen}
+\label{sec:Datenmodell:Baisgruppen}
 
 \subsection*{Standort oder Gebiet}
 \input{xml/generated/PlaceOrAreaGroup}
@@ -68,7 +69,7 @@ Erlaubte Werte für die Aufzählungen \emph{ClassType}, \emph{EngineType}, \emph
 \input{xml/generated/DurationGroup-schema}
 
 \section{Dienst 1}
-\label{subsec:Datenmodell:Dienst1}
+\label{sec:Datenmodell:Dienst1}
 
 \subsection*{Buchungsziel ID}
 \input{xml/generated/BookingTargetIDType}
@@ -108,7 +109,7 @@ Erlaubte Werte für die Aufzählungen \emph{ClassType}, \emph{EngineType}, \emph
 
 
 \section{Dienst 2}
-\label{subsec:Datenmodell:Dienst2}
+\label{sec:Datenmodell:Dienst2}
 
 \subsection*{Buchungszieleigenschaften}
 \input{xml/generated/BookingTargetPropertiesType}
@@ -116,7 +117,7 @@ Erlaubte Werte für die Aufzählungen \emph{ClassType}, \emph{EngineType}, \emph
 
 
 \section{Dienst 4}
-\label{subsec:Datenmodell:Dienst4}
+\label{sec:Datenmodell:Dienst4}
 
 \subsection*{Fahrzeugverfügbarkeit}
 \input{xml/generated/BookingTargetChangeAvailabilityType}
@@ -127,14 +128,18 @@ Erlaubte Werte für die Aufzählungen \emph{ClassType}, \emph{EngineType}, \emph
 \input{xml/generated/PlaceAvailabilityType-schema}
 
 \section{Dienst 5}
-\label{subsec:Datenmodell:Dienst5}
+\label{sec:Datenmodell:Dienst5}
 
 \subsection*{Buchungsverfügbarkeit}
 \input{xml/generated/BookingChangeType}
 \input{xml/generated/BookingChangeType-schema}
 
 \section{Dienst 6}
-\label{subsec:Datenmodell:Dienst6}
+\label{sec:Datenmodell:Dienst6}
+
+\subsection*{Preisinformation (Details)}
+\input{xml/generated/TariffDetailType}
+\input{xml/generated/TariffDetailType-schema}
 
 \subsection*{Preisinformation}
 \input{xml/generated/TariffType}

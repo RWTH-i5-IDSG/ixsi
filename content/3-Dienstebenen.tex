@@ -27,6 +27,7 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
 
 
 \section{Basisdienst A -- Sitzungen (session handling)}
+\label{sec:Hierachiemodell:BasisdientA}
 Dienst A dient der Authentifizierung von Endkunden gegenüber dem FVS.
 
 \subsection*{Funktionen}
@@ -41,6 +42,7 @@ Dienst A dient der Authentifizierung von Endkunden gegenüber dem FVS.
 
 
 \section{Basisdienst B -- Abonnements (subscription handling)}
+\label{sec:Hierachiemodell:BasisdientB}
 Dienst B enthält eine Funktion zur Überprüfung des Status einer Abonnementverbindung (heartbeat)
 
 \subsection*{Funktionen}
@@ -54,6 +56,7 @@ Dienst B enthält eine Funktion zur Überprüfung des Status einer Abonnementver
 \end{itemize}
 
 \section{Basisdienst C -- tokens}
+\label{sec:Hierachiemodell:BasisdientC}
 Dienst C enthält eine Funktion zur Erstellung von Authentifizierungstokens für Endkunden, die an Stelle von Klartextpasswörtern gespeichert / übertragen werden können.
 
 \subsection*{Funktionen}
@@ -68,6 +71,7 @@ Dienst C enthält eine Funktion zur Erstellung von Authentifizierungstokens für
 
 
 \section{Dienst 1 -- Statische Daten (static data)}
+\label{sec:Hierachiemodell:Dienst1}
 Dienst 1 dient dem Austausch von Informationen über Fahrzeugverleihanbietern und statischen Daten von Buchungszielen. Hierzu gehören Anbieter, Standort- und Fahrzeugdaten. 
 
 Dienst 1 kann beispielsweise dafür verwendet werden, um nur Hinweise zu vorhandenen Standorten eines FVS-Betreibers in einem RIS anzuzeigen.
@@ -80,6 +84,7 @@ Dienst 1 kann beispielsweise dafür verwendet werden, um nur Hinweise zu vorhand
 keine 
 
 \section{Dienst 2 -- Verfügbarkeitsauskunft (availability query) }
+\label{sec:Hierachiemodell:Dienst2}
 Dienst 2 dient dem synchronen Abruf von Verfügbarkeitsinformationen.
 
 Die tatsächlichen Verfügbarkeitszeiten von Buchungszielen werden während der Reiseauskunft durch das RIS beim FVS abgerufen. 
@@ -96,6 +101,7 @@ Die tatsächlichen Verfügbarkeitszeiten von Buchungszielen werden während der 
 \end{itemize}
 
 \section{Dienst 3 -- Verfügbarkeitsabonnement (availability subscription) }
+\label{sec:Hierachiemodell:Dienst3}
 Dienst 2 dient dem asynchronen Austausch von Verfügbarkeitsinformationen.
 
 Um die Reiseauskunft zu beschleunigen, kann das RIS Verfügbarkeitszeiträume von Buchungszielen abonnieren um eine Abfrage während der Reiseauskunft zu vermeiden. Nach dem Abonnement einer Menge von Buchungszielen, informiert das FVS fortlaufend über Änderungen an Verfügbarkeitszeiträumen.
@@ -115,6 +121,7 @@ Um die Reiseauskunft zu beschleunigen, kann das RIS Verfügbarkeitszeiträume vo
 
 
 \section{Dienst 4 -- Buchung (booking)}
+\label{sec:Hierachiemodell:Dienst4}
 Dienst 4 dient der Buchung, Umbuchung und Stornierung von Fahrzeugen durch das RIS im Auftrag eines Kunden des FVS.
 
 Für die Buchung eines Fahrzeuges ist es notwendig, dass der Kunde sich gegenüber dem FVS authentifiziert. Dazu werden die Authentifizierungsinformationen vom RIS an das FVS weitergeleitet. Das Geheimnis (Passwort, PIN, etc.) des Kunden darf vom RIS aus Sicherheitsgründen nicht gespeichert werden. Das RIS erhält bei erfolgreicher Authentifizierung eines Kunden für diesen ein Authentifizierungs-Token. Dieser kann entweder im RIS oder auf dem Endgerät des Kunden gespeichert werden. Unter Verwendung des Authentifizierungs-Tokens kann das RIS Anfragen zur Buchung und Stornierung von Buchungen durchführen. 
@@ -133,6 +140,7 @@ Um dem Nutzer die Änderung einer Buchung zu ermöglichen, kann eine Buchung dur
 \end{itemize}
 
 \section{Dienst 5 -- Buchungsabonnement (booking subscription)}
+\label{sec:Hierachiemodell:Dienst5}
 Dienst 5 dient dem Abonnement von Buchungsänderungen.
 
 Das RIS kann durchgeführte Buchungen beim FVS abbonnieren, um den Benutzer bei Änderungen (z.B. durch ein defektes Fahrzeug) informieren zu können.
@@ -149,6 +157,7 @@ Das RIS kann durchgeführte Buchungen beim FVS abbonnieren, um den Benutzer bei 
 \end{itemize}
 
 \section{Dienst 6 -- Preisauskunft (price information)}
+\label{sec:Hierachiemodell:Dienst6}
 Dienst 6 dient der Preisauskunft von Verleihdienstleistungen. 
 
 Durch die Übermittlung von Start-, Zielort und Startzeitpunkt und Endzeitpunkt der Fahrt kann das RIS beim FVS eine unverbindliche Preisauskunft zur Information des Benutzers einhohlen. Das FVS antwortet mit einem Preis und ggfs. Einzelposten.
