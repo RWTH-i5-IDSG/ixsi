@@ -1815,7 +1815,7 @@
 						<xs:documentation>Abo von Verfügbarkeiten von Buchungszielen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="AvailabilitySubscriptionStatus" type="AvailabilitySubscriptionStatusRequest">
+				<xs:element name="AvailabilitySubscriptionStatus" type="AvailabilitySubscriptionStatusRequestType">
 					<xs:annotation>
 						<xs:documentation>Prüfen von Verfügbarkeitsabonnements.</xs:documentation>
 					</xs:annotation>
@@ -1825,7 +1825,7 @@
 						<xs:documentation>Abonnieren von verfügbaren Standortkapazitäten.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="PlaceAvailabilitySubscriptionStatus" type="PlaceAvailabilitySubscriptionStatusRequest">
+				<xs:element name="PlaceAvailabilitySubscriptionStatus" type="PlaceAvailabilitySubscriptionStatusRequestType">
 					<xs:annotation>
 						<xs:documentation>Prüfen von Standortabonnements.</xs:documentation>
 					</xs:annotation>
