@@ -1,0 +1,299 @@
+--- IXSI_4.4.xsd	2014-08-21 15:54:28.000000000 +0200
++++ IXSI_4_5.xsd	2014-10-14 09:37:52.066609887 +0200
+@@ -70,6 +70,12 @@
+ 		</xs:annotation>
+ 		<xs:restriction base="xs:NMTOKEN"/>
+ 	</xs:simpleType>
++	<xs:simpleType name="GlobalIDType">
++		<xs:annotation>
++			<xs:documentation>Type for globally unique IDs for identifiying clone entities.</xs:documentation>
++		</xs:annotation>
++		<xs:restriction base="xs:NMTOKEN"/>
++	</xs:simpleType>
+ 	<xs:annotation>
+ 		<xs:documentation>**** General type definitions ****</xs:documentation>
+ 	</xs:annotation>
+@@ -298,11 +304,13 @@
+ 						<xs:documentation>Valid session ID. If a session is reused, fill this one.</xs:documentation>
+ 					</xs:annotation>
+ 				</xs:element>
+-				<xs:element name="UserInfo" type="UserInfoType">
+-					<xs:annotation>
+-						<xs:documentation>If no session is available, the user has to authenticate.</xs:documentation>
+-					</xs:annotation>
+-				</xs:element>
++				<xs:sequence>
++					<xs:element name="UserInfo" type="UserInfoType" maxOccurs="unbounded">
++						<xs:annotation>
++							<xs:documentation>If no session is available, the user has to authenticate.</xs:documentation>
++						</xs:annotation>
++					</xs:element>
++				</xs:sequence>
+ 				<xs:element name="Anonymous" type="xs:boolean">
+ 					<xs:annotation>
+ 						<xs:documentation>If neither an existing session, nor a use information is available, an anonyous session can be opened.</xs:documentation>
+@@ -436,6 +444,43 @@
+ 			</xs:element>
+ 		</xs:sequence>
+ 	</xs:complexType>
++	<xs:complexType name="InfoType">
++		<xs:annotation>
++			<xs:documentation>Type for structured information classification with associated text.</xs:documentation>
++		</xs:annotation>
++		<xs:sequence>
++			<xs:element name="Text" type="xs:string" minOccurs="0" maxOccurs="unbounded">
++				<xs:annotation>
++					<xs:documentation>Text of the informaton to be shown to the user.</xs:documentation>
++				</xs:annotation>
++			</xs:element>
++			<xs:element name="WithText" type="xs:boolean">
++				<xs:annotation>
++					<xs:documentation>Defines, whether this information has a text meant for the user or not.</xs:documentation>
++				</xs:annotation>
++			</xs:element>
++			<xs:element name="Class" type="AttributeClassType" minOccurs="0">
++				<xs:annotation>
++					<xs:documentation>Class of the information, taken from the list of allowed values.</xs:documentation>
++				</xs:annotation>
++			</xs:element>
++			<xs:element name="Mandatory" type="xs:boolean" default="false" minOccurs="0">
++				<xs:annotation>
++					<xs:documentation>Defines whether the attribute has to be shown to the user in any case.</xs:documentation>
++				</xs:annotation>
++			</xs:element>
++			<xs:element name="Importance" type="PercentType" minOccurs="0">
++				<xs:annotation>
++					<xs:documentation>Importance of the attribute in percent.</xs:documentation>
++				</xs:annotation>
++			</xs:element>
++			<xs:element name="URL" type="xs:anyURI" minOccurs="0">
++				<xs:annotation>
++					<xs:documentation>URL to additional information on this general attribute. If available, the whole attribute text has to be used as the marked link.</xs:documentation>
++				</xs:annotation>
++			</xs:element>
++		</xs:sequence>
++	</xs:complexType>
+ 	<xs:complexType name="StopLinkType">
+ 		<xs:annotation>
+ 			<xs:documentation>Type for link from a car-sharing place to a stop.</xs:documentation>
+@@ -457,7 +502,7 @@
+ 		<xs:sequence>
+ 			<xs:element name="ID" type="ProviderIDType">
+ 				<xs:annotation>
+-					<xs:documentation>Provider ID.</xs:documentation>
++					<xs:documentation>Provider ID. For one provider this ID has to remain constant for subsequent responses.</xs:documentation>
+ 				</xs:annotation>
+ 			</xs:element>
+ 			<xs:element name="Name" type="xs:normalizedString">
+@@ -465,29 +510,19 @@
+ 					<xs:documentation>Printable full name of the provider.</xs:documentation>
+ 				</xs:annotation>
+ 			</xs:element>
+-			<xs:element name="ShortName" type="xs:normalizedString" minOccurs="0">
++			<xs:element name="CustomerChoice" type="xs:boolean">
+ 				<xs:annotation>
+-					<xs:documentation>Printable short name of the provider.</xs:documentation>
++					<xs:documentation>If set, this provider is presented to the user as a "home provider". This way this provider becomes a "customer provider".</xs:documentation>
+ 				</xs:annotation>
+ 			</xs:element>
+-			<xs:element name="URL" type="xs:anyURI" minOccurs="0">
+-				<xs:annotation>
+-					<xs:documentation>URL to Homepage of provider.</xs:documentation>
+-				</xs:annotation>
+-			</xs:element>
+-			<xs:element name="LogoURL" type="xs:anyURI" minOccurs="0">
+-				<xs:annotation>
+-					<xs:documentation>URL to a logo of the provider.</xs:documentation>
+-				</xs:annotation>
+-			</xs:element>
+-			<xs:element name="InterAppBaseURL" type="xs:anyURI" minOccurs="0">
++			<xs:element name="ShortName" type="xs:normalizedString" minOccurs="0">
+ 				<xs:annotation>
+-					<xs:documentation>Base URL for calling a provider app (e.g. for booking).</xs:documentation>
++					<xs:documentation>Printable short name of the provider.</xs:documentation>
+ 				</xs:annotation>
+ 			</xs:element>
+-			<xs:element name="WebAppBaseURL" type="xs:anyURI" minOccurs="0">
++			<xs:element name="AttributeID" type="AttributeIDType" minOccurs="0" maxOccurs="unbounded">
+ 				<xs:annotation>
+-					<xs:documentation>Base URL for calling a provider web app (e.g. for booking).</xs:documentation>
++					<xs:documentation>Additional information on this provider (e.g. URLs, logo, inter-app-URLs).</xs:documentation>
+ 				</xs:annotation>
+ 			</xs:element>
+ 		</xs:sequence>
+@@ -527,7 +562,12 @@
+ 		<xs:sequence>
+ 			<xs:element name="ID" type="PlaceIDType">
+ 				<xs:annotation>
+-					<xs:documentation>Place ID.</xs:documentation>
++					<xs:documentation>Place ID. For one physical place this ID has to remain constant for subsequent responses.</xs:documentation>
++				</xs:annotation>
++			</xs:element>
++			<xs:element name="GlobalID" minOccurs="0">
++				<xs:annotation>
++					<xs:documentation>Globallly unique ID of this object. Used for identifying clones of this object, if they are delivered from different systems. Such ID should be formed using unique elements like DNS domain names.</xs:documentation>
+ 				</xs:annotation>
+ 			</xs:element>
+ 			<xs:element name="Coord" type="CoordType">
+@@ -567,7 +607,7 @@
+ 		<xs:sequence>
+ 			<xs:element name="ID" type="PlaceGroupIDType">
+ 				<xs:annotation>
+-					<xs:documentation>Place group ID.</xs:documentation>
++					<xs:documentation>Place group ID. For one physical place group this ID has to remain constant for subsequent responses.</xs:documentation>
+ 				</xs:annotation>
+ 			</xs:element>
+ 			<xs:element name="PlaceID" type="ProbabilityPlaceIDType" maxOccurs="unbounded"/>
+@@ -585,7 +625,7 @@
+ 		<xs:sequence>
+ 			<xs:element name="ID" type="AreaIDType">
+ 				<xs:annotation>
+-					<xs:documentation>Area ID.</xs:documentation>
++					<xs:documentation>Area ID. For one physical free floating area this ID has to remain constant for subsequent responses.</xs:documentation>
+ 				</xs:annotation>
+ 			</xs:element>
+ 			<xs:element name="Area" type="IncExcGeoAreaType" maxOccurs="unbounded">
+@@ -609,7 +649,12 @@
+ 		<xs:sequence>
+ 			<xs:element name="ID" type="BookeeIDType">
+ 				<xs:annotation>
+-					<xs:documentation>Bookee ID.</xs:documentation>
++					<xs:documentation>Bookee ID. For one physical bookee this ID has to remain constant for subsequent responses.</xs:documentation>
++				</xs:annotation>
++			</xs:element>
++			<xs:element name="GlobalID" minOccurs="0">
++				<xs:annotation>
++					<xs:documentation>Globallly unique ID of this object. Used for identifying clones of this object, if they are delivered from different systems. Such ID should be formed using unique elements like DNS domain names.</xs:documentation>
+ 				</xs:annotation>
+ 			</xs:element>
+ 			<xs:element name="Name" type="TextType" maxOccurs="unbounded">
+@@ -852,6 +897,11 @@
+ 					<xs:documentation>Details for the overall price. If provided, it should contain a set of component prices, that sums up to the overall price.</xs:documentation>
+ 				</xs:annotation>
+ 			</xs:element>
++			<xs:element name="Info" type="InfoType" minOccurs="0" maxOccurs="unbounded">
++				<xs:annotation>
++					<xs:documentation>Additional information for this tariff.</xs:documentation>
++				</xs:annotation>
++			</xs:element>
+ 		</xs:sequence>
+ 	</xs:complexType>
+ 	<xs:complexType name="OriginDestType">
+@@ -888,6 +938,24 @@
+ 			</xs:element>
+ 		</xs:sequence>
+ 	</xs:group>
++	<xs:complexType name="BookingType">
++		<xs:annotation>
++			<xs:documentation>Type for a booking.</xs:documentation>
++		</xs:annotation>
++		<xs:sequence>
++			<xs:element name="ID" type="BookingIDType"/>
++			<xs:element name="TimePeriod" type="TimePeriodType" minOccurs="0">
++				<xs:annotation>
++					<xs:documentation>Actual time period of the booking, eventually adapted to the booking time grid.</xs:documentation>
++				</xs:annotation>
++			</xs:element>
++			<xs:element name="Info" type="InfoType" minOccurs="0" maxOccurs="unbounded">
++				<xs:annotation>
++					<xs:documentation>Additional information on this booking.</xs:documentation>
++				</xs:annotation>
++			</xs:element>
++		</xs:sequence>
++	</xs:complexType>
+ 	<xs:complexType name="AbstractBaseResponseType" abstract="true">
+ 		<xs:annotation>
+ 			<xs:documentation>Abstract type as a base for responses.</xs:documentation>
+@@ -1130,12 +1198,12 @@
+ 			<xs:extension base="AbstractBaseResponseType"/>
+ 		</xs:complexContent>
+ 	</xs:complexType>
+-	<xs:complexType name="AvailabilitySubscriptionStatusRequest">
++	<xs:complexType name="AvailabilitySubscriptionStatusRequestType">
+ 		<xs:annotation>
+ 			<xs:documentation>Request for getting all subsribed booking targets.</xs:documentation>
+ 		</xs:annotation>
+ 	</xs:complexType>
+-	<xs:complexType name="AvailabilitySubscriptionStatusResponse">
++	<xs:complexType name="AvailabilitySubscriptionStatusResponseType">
+ 		<xs:annotation>
+ 			<xs:documentation>Response for getting all subscribed booking targets.</xs:documentation>
+ 		</xs:annotation>
+@@ -1221,12 +1289,12 @@
+ 			<xs:extension base="AbstractBaseResponseType"/>
+ 		</xs:complexContent>
+ 	</xs:complexType>
+-	<xs:complexType name="PlaceAvailabilitySubscriptionStatusRequest">
++	<xs:complexType name="PlaceAvailabilitySubscriptionStatusRequestType">
+ 		<xs:annotation>
+ 			<xs:documentation>Request for getting all subsribed places.</xs:documentation>
+ 		</xs:annotation>
+ 	</xs:complexType>
+-	<xs:complexType name="PlaceAvailabilitySubscriptionStatusResponse">
++	<xs:complexType name="PlaceAvailabilitySubscriptionStatusResponseType">
+ 		<xs:annotation>
+ 			<xs:documentation>Response for getting all subscribed places.</xs:documentation>
+ 		</xs:annotation>
+@@ -1308,12 +1376,7 @@
+ 		<xs:complexContent>
+ 			<xs:extension base="AbstractBaseResponseType">
+ 				<xs:sequence>
+-					<xs:element name="BookingID" type="BookingIDType" minOccurs="0"/>
+-					<xs:element name="TimePeriod" type="TimePeriodType" minOccurs="0">
+-						<xs:annotation>
+-							<xs:documentation>Actual time period of the booking, eventually adapted to the booking time grid.</xs:documentation>
+-						</xs:annotation>
+-					</xs:element>
++					<xs:element name="Booking" type="BookingType" minOccurs="0"/>
+ 				</xs:sequence>
+ 			</xs:extension>
+ 		</xs:complexContent>
+@@ -1349,11 +1412,7 @@
+ 		<xs:complexContent>
+ 			<xs:extension base="AbstractBaseResponseType">
+ 				<xs:sequence>
+-					<xs:element name="TimePeriod" type="TimePeriodType" minOccurs="0">
+-						<xs:annotation>
+-							<xs:documentation>Actiual time period of booking, eventually adapted to the booking time grid.</xs:documentation>
+-						</xs:annotation>
+-					</xs:element>
++					<xs:element name="Booking" type="BookingType" minOccurs="0"/>
+ 				</xs:sequence>
+ 			</xs:extension>
+ 		</xs:complexContent>
+@@ -1681,7 +1740,7 @@
+ 						<xs:documentation>Subscribe for availabilities of booking targets.</xs:documentation>
+ 					</xs:annotation>
+ 				</xs:element>
+-				<xs:element name="AvailabilitySubscriptionStatus" type="AvailabilitySubscriptionStatusRequest">
++				<xs:element name="AvailabilitySubscriptionStatus" type="AvailabilitySubscriptionStatusRequestType">
+ 					<xs:annotation>
+ 						<xs:documentation>Check availability subscriptions.</xs:documentation>
+ 					</xs:annotation>
+@@ -1691,7 +1750,7 @@
+ 						<xs:documentation>Subscribe for available capacities of places.</xs:documentation>
+ 					</xs:annotation>
+ 				</xs:element>
+-				<xs:element name="PlaceAvailabilitySubscriptionStatus" type="PlaceAvailabilitySubscriptionStatusRequest">
++				<xs:element name="PlaceAvailabilitySubscriptionStatus" type="PlaceAvailabilitySubscriptionStatusRequestType">
+ 					<xs:annotation>
+ 						<xs:documentation>Check places subscriptions.</xs:documentation>
+ 					</xs:annotation>
+@@ -1720,7 +1779,7 @@
+ 						<xs:documentation>Subscribe for availabilities of booking targets.</xs:documentation>
+ 					</xs:annotation>
+ 				</xs:element>
+-				<xs:element name="AvailabilitySubscriptionStatus" type="AvailabilitySubscriptionStatusResponse">
++				<xs:element name="AvailabilitySubscriptionStatus" type="AvailabilitySubscriptionStatusResponseType">
+ 					<xs:annotation>
+ 						<xs:documentation>Check availability subscriptions.</xs:documentation>
+ 					</xs:annotation>
+@@ -1730,7 +1789,7 @@
+ 						<xs:documentation>Subscribe for available capacities of places.</xs:documentation>
+ 					</xs:annotation>
+ 				</xs:element>
+-				<xs:element name="PlaceAvailabilitySubscriptionStatus" type="PlaceAvailabilitySubscriptionStatusResponse">
++				<xs:element name="PlaceAvailabilitySubscriptionStatus" type="PlaceAvailabilitySubscriptionStatusResponseType">
+ 					<xs:annotation>
+ 						<xs:documentation>Check places subscriptions.</xs:documentation>
+ 					</xs:annotation>

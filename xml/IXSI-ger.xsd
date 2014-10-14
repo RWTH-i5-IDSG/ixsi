@@ -70,6 +70,12 @@
 		</xs:annotation>
 		<xs:restriction base="xs:NMTOKEN"/>
 	</xs:simpleType>
+	<xs:simpleType name="GlobalIDType">
+		<xs:annotation>
+			<xs:documentation>Type for globally unique IDs for identifiying clone entities.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:NMTOKEN"/>
+	</xs:simpleType>
 	<xs:annotation>
 		<xs:documentation>**** Generelle Typ-Definitionen ****</xs:documentation>
 	</xs:annotation>
@@ -298,8 +304,8 @@
 						<xs:documentation>Valide Session-ID. Falls eine Session wiederverwendet wird, diese ausfüllen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="UserInfo" type="UserInfoType">
-					<xs:annotation>
+                                <xs:element name="UserInfo" type="UserInfoType" maxOccurs="unbounded">
+                                  <xs:annotation>
 						<xs:documentation>Falls keine Session verfügbar ist, muss der User authentisieren.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
@@ -436,6 +442,43 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="InfoType">
+		<xs:annotation>
+			<xs:documentation>Typ für struktuierte Information und Text.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Text" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Informationstext für den Benutzer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="WithText" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Falls gesetzt enthält die Information Text der dem Benutzer angezeigt werden soll.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Class" type="AttributeClassType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Informationsklasse.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Mandatory" type="xs:boolean" default="false" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Falls gesetzt ist es obligatorisch dem Benutzer die Information anzuzeigen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Importance" type="PercentType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Wichtigkeit der Information in Prozent.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="URL" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>URL mit weiteren Information. Falls möglich, soll der der Text als Link verwendet werden.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="StopLinkType">
 		<xs:annotation>
 			<xs:documentation>Typ für eine Verbindung von einem Verleihstandort zu einer Haltestelle.</xs:documentation>
@@ -450,48 +493,38 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="ProviderType">
-		<xs:annotation>
-			<xs:documentation>Typ für Anbieterinformationen.</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="ID" type="ProviderIDType">
-				<xs:annotation>
-					<xs:documentation>Anbieter-ID.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="Name" type="xs:normalizedString">
-				<xs:annotation>
-					<xs:documentation>Druckbarer voller Name des Anbieters.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="ShortName" type="xs:normalizedString" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Druckbarer verkürzter Name des Anbieters</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="URL" type="xs:anyURI" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>URL zur Homepage des Anbieters.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="LogoURL" type="xs:anyURI" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>URL zu einem Logo des Anbieters.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="InterAppBaseURL" type="xs:anyURI" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Basis-URL zum Aufruf einer Anbieter-App (z.B. zum Buchen).</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="WebAppBaseURL" type="xs:anyURI" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation>Basis-URL zum Aufruf einer Anbieter-Web-App (z.B. zum Buchen).</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
+        <xs:complexType name="ProviderType">
+          <xs:annotation>
+            <xs:documentation>Type for Anbieter Informationen.</xs:documentation>
+          </xs:annotation>
+          <xs:sequence>
+            <xs:element name="ID" type="ProviderIDType">
+              <xs:annotation>
+                <xs:documentation>Anbieter ID.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Name" type="xs:normalizedString">
+              <xs:annotation>
+                <xs:documentation>Druckbarer, vollständiger Name des Anbieters.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="CustomerChoice" type="xs:boolean">
+              <xs:annotation>
+                <xs:documentation>Falls gesetzt, wird der Anbieter zum Heimat/Standardanbieter des Kunden.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ShortName" type="xs:normalizedString" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation>Kurzname des Anbieters.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="AttributeID" type="AttributeIDType" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>Weiter Informationen zu dem Anbieter, z.B. URLs.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
 	<xs:group name="PlaceOrAreaGroup">
 		<xs:annotation>
 			<xs:documentation>Gruppe für Informationen, welche für Standorte und Free-Floating-Gebiete verwendet werden.</xs:documentation>
@@ -527,9 +560,14 @@
 		<xs:sequence>
 			<xs:element name="ID" type="PlaceIDType">
 				<xs:annotation>
-					<xs:documentation>Standort-ID.</xs:documentation>
+					<xs:documentation>Standort-ID. Für jeden physischen Standard muss diese ID einheitlich sein.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+                       <xs:element name="GlobalID" minOccurs="0">
+                               <xs:annotation>
+                                       <xs:documentation>Global eindeutige ID. Wird benutzt um Duplikate eines Objektes das von verschiedenen Systemen verwaltet wird zu erkennen.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
 			<xs:element name="Coord" type="CoordType">
 				<xs:annotation>
 					<xs:documentation>Geoposition des Standortes.</xs:documentation>
@@ -612,6 +650,11 @@
 					<xs:documentation>Bookee-ID.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+                       <xs:element name="GlobalID" minOccurs="0">
+                               <xs:annotation>
+                                       <xs:documentation>Global eindeutige ID. Wird benutzt um Duplikate eines Objektes das von verschiedenen Systemen verwaltet wird zu erkennen.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
 			<xs:element name="Name" type="TextType" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Druckbarer Name des Bookee.</xs:documentation>
@@ -852,6 +895,11 @@
 					<xs:documentation>Details des Endpreises. Falls bereitgestellt, sollten diese einen Satz Preiskomponenten beinhalten, welche den Gesamtpreis bilden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="Info" type="InfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Additional information for this tariff.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="OriginDestType">
@@ -888,6 +936,24 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:group>
+	<xs:complexType name="BookingType">
+		<xs:annotation>
+			<xs:documentation>Type for a booking.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="BookingIDType"/>
+			<xs:element name="TimePeriod" type="TimePeriodType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Actual time period of the booking, eventually adapted to the booking time grid.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Info" type="InfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Additional information on this booking.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="AbstractBaseResponseType" abstract="true">
 		<xs:annotation>
 			<xs:documentation>Abstrakter Typ als eine Basis für Antworten.</xs:documentation>
@@ -1308,12 +1374,7 @@
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
-					<xs:element name="BookingID" type="BookingIDType" minOccurs="0"/>
-					<xs:element name="TimePeriod" type="TimePeriodType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>Aktuelle Zeitperiode der Buchung. Eventuell adaptiert zum Buchungszeitraster.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
+                                        <xs:element name="Booking" type="BookingType" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -1349,11 +1410,7 @@
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
-					<xs:element name="TimePeriod" type="TimePeriodType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation>Aktuelle Zeitperiode, eventuell adaptiert zum Buchungszeitraster.</xs:documentation>
-						</xs:annotation>
-					</xs:element>
+                                        <xs:element name="Booking" type="BookingType" minOccurs="0"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
