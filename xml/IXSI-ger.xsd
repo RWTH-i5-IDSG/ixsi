@@ -305,7 +305,7 @@
 					</xs:annotation>
 				</xs:element>
                                 <xs:element name="UserInfo" type="UserInfoType" maxOccurs="unbounded">
-                                  	<xs:annotation>
+                                  <xs:annotation>
 						<xs:documentation>Falls keine Session verfügbar ist, muss der User authentisieren.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
@@ -450,37 +450,37 @@
 	</xs:complexType>
 	<xs:complexType name="InfoType">
 		<xs:annotation>
-			<xs:documentation>Type for structured information classification with associated text.</xs:documentation>
+			<xs:documentation>Typ für struktuierte Information und Text.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="Text" type="xs:string" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Text of the informaton to be shown to the user.</xs:documentation>
+					<xs:documentation>Informationstext für den Benutzer.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="WithText" type="xs:boolean">
 				<xs:annotation>
-					<xs:documentation>Defines, whether this information has a text meant for the user or not.</xs:documentation>
+					<xs:documentation>Falls gesetzt enthält die Information Text der dem Benutzer angezeigt werden soll.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Class" type="AttributeClassType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Class of the information, taken from the list of allowed values.</xs:documentation>
+					<xs:documentation>Informationsklasse.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Mandatory" type="xs:boolean" default="false" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Defines whether the attribute has to be shown to the user in any case.</xs:documentation>
+					<xs:documentation>Falls gesetzt ist es obligatorisch dem Benutzer die Information anzuzeigen.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Importance" type="PercentType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Importance of the attribute in percent.</xs:documentation>
+					<xs:documentation>Wichtigkeit der Information in Prozent.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="URL" type="xs:anyURI" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>URL to additional information on this general attribute. If available, the whole attribute text has to be used as the marked link.</xs:documentation>
+					<xs:documentation>URL mit weiteren Information. Falls möglich, soll der der Text als Link verwendet werden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
