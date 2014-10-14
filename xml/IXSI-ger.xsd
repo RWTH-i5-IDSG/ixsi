@@ -938,18 +938,18 @@
 	</xs:group>
 	<xs:complexType name="BookingType">
 		<xs:annotation>
-			<xs:documentation>Type for a booking.</xs:documentation>
+			<xs:documentation>Typ für eine Buchung.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="ID" type="BookingIDType"/>
 			<xs:element name="TimePeriod" type="TimePeriodType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Actual time period of the booking, eventually adapted to the booking time grid.</xs:documentation>
+					<xs:documentation>Tatsächlicher Zeitraum für die Buchung, wurde ggfs. an das Buchungsraster angepasst.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Info" type="InfoType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Additional information on this booking.</xs:documentation>
+					<xs:documentation>Weitere Informationen zur Buchung.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
