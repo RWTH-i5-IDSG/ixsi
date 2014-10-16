@@ -563,7 +563,7 @@
 					<xs:documentation>Standort-ID. Für jeden physischen Standard muss diese ID einheitlich sein.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-                       <xs:element name="GlobalID" minOccurs="0">
+                       <xs:element name="GlobalID" type="GlobalIDType" minOccurs="0">
                                <xs:annotation>
                                        <xs:documentation>Global eindeutige ID. Wird benutzt um Duplikate eines Objektes das von verschiedenen Systemen verwaltet wird zu erkennen.</xs:documentation>
                                 </xs:annotation>
@@ -650,7 +650,7 @@
 					<xs:documentation>Bookee-ID.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-                       <xs:element name="GlobalID" minOccurs="0">
+                       <xs:element name="GlobalID" type="GlobalIDType" minOccurs="0">
                                <xs:annotation>
                                        <xs:documentation>Global eindeutige ID. Wird benutzt um Duplikate eines Objektes das von verschiedenen Systemen verwaltet wird zu erkennen.</xs:documentation>
                                 </xs:annotation>
@@ -1374,7 +1374,11 @@
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
-                                        <xs:element name="Booking" type="BookingType" minOccurs="0"/>
+					<xs:element name="Booking" type="BookingType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Information über eine erfolgreiche Buchung.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -1410,7 +1414,11 @@
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
-                                        <xs:element name="Booking" type="BookingType" minOccurs="0"/>
+					<xs:element name="Booking" type="BookingType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Information über eine erfolgreiche Umbuchung.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
