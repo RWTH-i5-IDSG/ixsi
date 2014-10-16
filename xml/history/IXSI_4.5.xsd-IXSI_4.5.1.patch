@@ -1,0 +1,46 @@
+--- IXSI_4.5.xsd	2014-10-14 10:06:25.099890304 +0200
++++ IXSI_4.5.1.xsd	2014-10-16 10:27:05.910002277 +0200
+@@ -565,7 +565,7 @@
+ 					<xs:documentation>Place ID. For one physical place this ID has to remain constant for subsequent responses.</xs:documentation>
+ 				</xs:annotation>
+ 			</xs:element>
+-			<xs:element name="GlobalID" minOccurs="0">
++			<xs:element name="GlobalID" type="GlobalIDType" minOccurs="0">
+ 				<xs:annotation>
+ 					<xs:documentation>Globallly unique ID of this object. Used for identifying clones of this object, if they are delivered from different systems. Such ID should be formed using unique elements like DNS domain names.</xs:documentation>
+ 				</xs:annotation>
+@@ -652,7 +652,7 @@
+ 					<xs:documentation>Bookee ID. For one physical bookee this ID has to remain constant for subsequent responses.</xs:documentation>
+ 				</xs:annotation>
+ 			</xs:element>
+-			<xs:element name="GlobalID" minOccurs="0">
++			<xs:element name="GlobalID" type="GlobalIDType" minOccurs="0">
+ 				<xs:annotation>
+ 					<xs:documentation>Globallly unique ID of this object. Used for identifying clones of this object, if they are delivered from different systems. Such ID should be formed using unique elements like DNS domain names.</xs:documentation>
+ 				</xs:annotation>
+@@ -1376,7 +1376,11 @@
+ 		<xs:complexContent>
+ 			<xs:extension base="AbstractBaseResponseType">
+ 				<xs:sequence>
+-					<xs:element name="Booking" type="BookingType" minOccurs="0"/>
++					<xs:element name="Booking" type="BookingType" minOccurs="0">
++						<xs:annotation>
++							<xs:documentation>Information on a successful booking.</xs:documentation>
++						</xs:annotation>
++					</xs:element>
+ 				</xs:sequence>
+ 			</xs:extension>
+ 		</xs:complexContent>
+@@ -1412,7 +1416,11 @@
+ 		<xs:complexContent>
+ 			<xs:extension base="AbstractBaseResponseType">
+ 				<xs:sequence>
+-					<xs:element name="Booking" type="BookingType" minOccurs="0"/>
++					<xs:element name="Booking" type="BookingType" minOccurs="0">
++						<xs:annotation>
++							<xs:documentation>Information on a successful re-booking.</xs:documentation>
++						</xs:annotation>
++					</xs:element>
+ 				</xs:sequence>
+ 			</xs:extension>
+ 		</xs:complexContent>

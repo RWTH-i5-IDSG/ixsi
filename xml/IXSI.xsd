@@ -571,7 +571,7 @@
 					<xs:documentation>Place ID. For one physical place this ID has to remain constant for subsequent responses.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="GlobalID" minOccurs="0">
+			<xs:element name="GlobalID" type="GlobalIDType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Globallly unique ID of this object. Used for identifying clones of this object, if they are delivered from different systems. Such ID should be formed using unique elements like DNS domain names.</xs:documentation>
 				</xs:annotation>
@@ -658,7 +658,7 @@
 					<xs:documentation>Bookee ID. For one physical bookee this ID has to remain constant for subsequent responses.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="GlobalID" minOccurs="0">
+			<xs:element name="GlobalID" type="GlobalIDType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Globallly unique ID of this object. Used for identifying clones of this object, if they are delivered from different systems. Such ID should be formed using unique elements like DNS domain names.</xs:documentation>
 				</xs:annotation>
@@ -1419,7 +1419,11 @@
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
-					<xs:element name="Booking" type="BookingType" minOccurs="0"/>
+					<xs:element name="Booking" type="BookingType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Information on a successful booking.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -1455,7 +1459,11 @@
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
-					<xs:element name="Booking" type="BookingType" minOccurs="0"/>
+					<xs:element name="Booking" type="BookingType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Information on a successful re-booking.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
