@@ -1,0 +1,11 @@
+<Ixsi>
+    <SubscriptionRequest>
+        <Transaction>
+            <TimeStamp>2014-11-03T11:23:30.059+01:00</TimeStamp>
+            <MessageID>100</MessageID>
+        </Transaction>
+        <CompleteAvailability>
+            <MaxTargets>5</MaxTargets>
+        </CompleteAvailability>
+    </SubscriptionRequest>
+</Ixsi>
