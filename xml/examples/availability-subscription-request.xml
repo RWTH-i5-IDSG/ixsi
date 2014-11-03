@@ -1,0 +1,14 @@
+<Ixsi>
+    <SubscriptionRequest>
+        <Transaction>
+            <TimeStamp>2014-11-03T11:23:47.309+01:00</TimeStamp>
+            <MessageID>100</MessageID>
+        </Transaction>
+        <AvailabilitySubscription>
+            <BookingTargetID>
+                <BookeeID>7</BookeeID>
+                <ProviderID>2</ProviderID>
+            </BookingTargetID>
+        </AvailabilitySubscription>
+    </SubscriptionRequest>
+</Ixsi>

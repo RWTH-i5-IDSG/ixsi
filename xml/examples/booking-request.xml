@@ -1,0 +1,27 @@
+<Ixsi>
+    <Request>
+        <Transaction>
+            <TimeStamp>2014-11-03T11:19:02.258+01:00</TimeStamp>
+            <MessageID>100</MessageID>
+        </Transaction>
+        <Auth>
+            <UserInfo>
+                <ProviderID>2</ProviderID>
+                <UserID>40</UserID>
+                <Password>x</Password>
+            </UserInfo>
+        </Auth>
+        <Booking>
+            <BookingTargetID>
+                <BookeeID>14</BookeeID>
+                <ProviderID>2</ProviderID>
+            </BookingTargetID>
+            <TimePeriodProposal>
+                <TimePeriod>
+                    <Begin>2014-11-04T15:21:00.000+01:00</Begin>
+                    <End>2014-11-04T17:18:00.000+01:00</End>
+                </TimePeriod>
+            </TimePeriodProposal>
+        </Booking>
+    </Request>
+</Ixsi>

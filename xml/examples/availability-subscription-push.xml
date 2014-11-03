@@ -1,0 +1,16 @@
+<Ixsi>
+    <SubscriptionMessage>
+        <AvailabilityPush>
+            <AvailabilityChange>
+                <ID>
+                    <BookeeID>7</BookeeID>
+                    <ProviderID>2</ProviderID>
+                </ID>
+                <Inavailability>
+                    <Begin>2014-11-04T15:00:00.000+01:00</Begin>
+                    <End>2014-11-04T17:30:00.000+01:00</End>
+                </Inavailability>
+            </AvailabilityChange>
+        </AvailabilityPush>
+    </SubscriptionMessage>
+</Ixsi>

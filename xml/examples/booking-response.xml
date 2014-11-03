@@ -1,0 +1,16 @@
+<Ixsi>
+    <Response>
+        <Transaction>
+            <TimeStamp>2014-11-03T11:19:02.258+01:00</TimeStamp>
+            <MessageID>100</MessageID>
+        </Transaction>
+        <CalcTime>PT0.325S</CalcTime>
+        <Booking>
+            <BookingID>2-9</BookingID>
+            <TimePeriod>
+                <Begin>2014-11-04T15:00:00.000+01:00</Begin>
+                <End>2014-11-04T17:30:00.000+01:00</End>
+            </TimePeriod>
+        </Booking>
+    </Response>
+</Ixsi>
