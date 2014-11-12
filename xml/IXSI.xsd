@@ -1684,6 +1684,33 @@
                         <xs:element name="Conumption" type="ConsumptionType" maxOccurs="unbounded"/>
                 </xs:sequence>
         </xs:complexType>
+        <xs:annotation>
+                <xs:documentation>**** Service (8) : Vehicle unlock ****</xs:documentation>
+        </xs:annotation>
+        <xs:complexType name="BookingUnlockRequestType">
+                <xs:annotation>
+                        <xs:documentation>Request to unlock the booked vehicle.</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                        <xs:element name="BookingID" type="BookingIDType">
+                                <xs:annotation>
+                                        <xs:documentation>The respective booking.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                </xs:sequence>
+        </xs:complexType>
+        <xs:complexType name="BookingUnlockResponseType">
+                <xs:annotation>
+                        <xs:documentation>Response to unlock request with attributes to be conveyed to the customer. Can include e.g. license plate information.</xs:documentation>
+                </xs:annotation>
+                <xs:complexContent>
+                        <xs:extension base="AbstractBaseResponseType">
+                                <xs:sequence>
+                                        <xs:element name="Attributes" type="AttributeType" minOccurs="0" maxOccurs="unbounded"/>
+                                </xs:sequence>
+                        </xs:extension>
+                </xs:complexContent>
+        </xs:complexType>
 	<xs:annotation>
 		<xs:documentation>**** Message container ****</xs:documentation>
 	</xs:annotation>
@@ -1743,6 +1770,11 @@
 						<xs:documentation>Change a booking.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+                                <xs:element name="BookingUnlock" type="BookingUnlockRequestType">
+                                        <xs:annotation>
+                                                <xs:documentation>Unlock a booked vehicle.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -1802,6 +1834,11 @@
 						<xs:documentation>Change a booking.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+                                <xs:element name="BookingUnlock" type="BookingUnlockResponseType">
+                                        <xs:annotation>
+                                                <xs:documentation>Unlock a booked vehicle.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -1907,6 +1944,16 @@
 						<xs:documentation>Check booking subscriptions.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+                                <xs:element name="ConsumptionSubscription" type="ConsumptionSubscriptionRequestType">
+                                        <xs:annotation>
+                                                <xs:documentation>Subscribe to consumption data.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
+                                <xs:element name="ConsumptionSubscriptionStatus" type="ConsumptionSubscriptionStatusRequestType">
+                                        <xs:annotation>
+                                                <xs:documentation>check consumption data subscriptions.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -1946,6 +1993,16 @@
 						<xs:documentation>Check booking subscriptions.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+                                <xs:element name="ConsumptionSubscription" type="ConsumptionSubscriptionResponseType">
+                                        <xs:annotation>
+                                                <xs:documentation>Subscribe to consumption data.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
+                                <xs:element name="ConsumptionSubscriptionStatus" type="ConsumptionSubscriptionStatusResponseType">
+                                        <xs:annotation>
+                                                <xs:documentation>check consumption data subscriptions.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -1970,6 +2027,11 @@
 						<xs:documentation>Get all subscribed booking changes.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+                                <xs:element name="CompleteConsumption" type="CompleteConsumptionRequestType">
+                                        <xs:annotation>
+                                                <xs:documentation>Get all subscribed consumption data.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -1994,6 +2056,11 @@
 						<xs:documentation>Get all subscribed booking changes.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+                                <xs:element name="CompleteConsumption" type="CompleteConsumptionResponseType">
+                                        <xs:annotation>
+                                                <xs:documentation>Get all subscribed consumption data.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2018,6 +2085,11 @@
 						<xs:documentation>Push message for booking changes.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+                                <xs:element name="ConsumptionPush" type="ConsumptionPushMessageType">
+                                        <xs:annotation>
+                                                <xs:documentation>Push message for consumption data.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
