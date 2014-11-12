@@ -389,7 +389,7 @@
 		</xs:annotation>
 		<xs:restriction base="xs:NMTOKEN"/>
 	</xs:simpleType>
-        <xs:simpleType name="ConsumptionIDType">
+        <xs:simpleType name="ConsumptionClassType">
                 <xs:annotation>
                         <xs:documentation>Aufzählung von Verbrauchsdatentypen.</xs:documentation>
                 </xs:annotation>
@@ -913,7 +913,7 @@
                         <xs:documentation>Typ für einen Rechnungsposten der Verbrauchsdaten.</xs:documentation>
                 </xs:annotation>
                 <xs:sequence>
-                        <xs:element name="Type" type="ConsumptionIDType">
+                        <xs:element name="Type" type="ConsumptionClassType">
                                 <xs:annotation>
                                         <xs:documentation>Typ des Verbrauchs.</xs:documentation>
                                 </xs:annotation>
@@ -940,7 +940,7 @@
                         </xs:element>
                         <xs:element name="Description" type="xs:string" minOccurs="0">
                                 <xs:annotation>
-                                        <xs:documentation>Druckbare Beschreibung des Tarifdetails.</xs:documentation>
+                                        <xs:documentation>Druckbare Beschreibung des des Rechnungsposten.</xs:documentation>
                                 </xs:annotation>
                         </xs:element>
                 </xs:sequence>
@@ -1682,6 +1682,32 @@
                         <xs:element name="Conumption" type="ConsumptionType" maxOccurs="unbounded"/>
                 </xs:sequence>
         </xs:complexType>
+        <xs:annotation>
+                <xs:documentation>**** Service (8) : Fahrzeugfreischaltung ****</xs:documentation>
+        </xs:annotation>
+        <xs:complexType name="BookingUnlockRequestType">
+                <xs:annotation>
+                        <xs:documentation>Anfrage um zur Buchung gehörendes Fahrzeug für die Fahrt freizuschalten.</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                        <xs:element name="BookingID" type="BookingIDType">
+                                <xs:annotation>
+                                        <xs:documentation>Die freizuschaltene Buchung.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                </xs:sequence>
+        </xs:complexType>
+        <xs:complexType name="BookingUnlockResponseType">
+                <xs:annotation>
+                        <xs:documentation>Antwort die den Status der Freischaltung zurück gibt. Enthält Attribute zur Information des Benutzers, z.B. das Kennzeichen des freigeschalteten Fahrzeuges.</xs:documentation>
+                </xs:annotation>
+                <xs:complexContent>
+                        <xs:extension base="AbstractBaseResponseType">
+                                <xs:sequence>
+                                        <xs:element name="Attributes" type="AttributeType" minOccurs="0" maxOccurs="unbounded"/>
+                                </xs:sequence>
+                        </xs:extension>
+        </xs:complexType>
 	<xs:annotation>
 		<xs:documentation>**** Nachrichtencontainer ****</xs:documentation>
 	</xs:annotation>
@@ -1741,6 +1767,11 @@
 						<xs:documentation>Ändern einer Buchung.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+                                <xs:element name="BookingUnlock" type="BookingUnlockRequestType">
+                                        <xs:annotation>
+                                                <xs:documentation>Fahrzeugfreischaltung.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -1800,6 +1831,11 @@
 						<xs:documentation>Ändern einer Buchung.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+                                <xs:element name="BookingUnlock" type="BookingUnlockResponseType">
+                                        <xs:annotation>
+                                                <xs:documentation>Fahrzeugfreischaltung.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>

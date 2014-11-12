@@ -391,7 +391,7 @@
 		</xs:annotation>
 		<xs:restriction base="xs:NMTOKEN"/>
 	</xs:simpleType>
-        <xs:simpleType name="ConsumptionIDType">
+        <xs:simpleType name="ConsumptionClassType">
                 <xs:annotation>
                         <xs:documentation>Enumeration for consumption classes.</xs:documentation>
                 </xs:annotation>
@@ -915,7 +915,7 @@
                         <xs:documentation>Type for single Consumption item.</xs:documentation>
                 </xs:annotation>
                 <xs:sequence>
-                        <xs:element name="Type" type="ConsumptionIDType">
+                        <xs:element name="Type" type="ConsumptionClassType">
                                 <xs:annotation>
 					<xs:documentation>Type of consumption.</xs:documentation>
                                 </xs:annotation>

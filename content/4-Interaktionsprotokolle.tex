@@ -515,3 +515,35 @@ Mit einer Anfrage \texttt{PriceInformationRequest} kann das RIS beim FVS eine Pr
 Das RIS kann Verbrauchsdaten (Nutzungsdauer, Entfernung, ggfs. andere) für eine Buchung abonnieren. Sobald neue Verbrauchsdaten vorliegen (z.B. bei Rückgabe eines Fahrzeuges) informiert das FVS dann RIS über den vorliegenden Verbrauch. Zu einer Buchung können mehrere Informationen zu Verbrauchsdaten versendet werden. Neue Verbrauchsdaten zu einer Buchung invalidieren alle vorherigen und müssen entsprechend vollständig sein.
 
 Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3}.
+
+
+\section{Dienst 8 --  Fahrzeugfreischaltung}
+\label{sec:Interaktionsprotokolle:Dienst8}
+
+\begin{center}
+\begin{sequencediagram}
+\newthread{ris}{:RIS}
+\newinst[8]{fvs}{:FVS}
+
+
+
+\begin{sdblock}{Sitzung}{Basisdienst A}
+
+  \begin{sdblock}{Fahrzeugbuchung}{Dienst 4}
+  \begin{call}{ris}{Buchungszielreferenz}{fvs}{Buchungsreferenz, Vorschlag Zeitraum}
+    \end{call}
+  \end{sdblock}
+
+  \begin{sdblock}{Fahrzeugfreischaltung}{Dienst 8}
+  \begin{call}{ris}{Buchungsreferenz}{fvs}{Buchungszielreferenz, Zusatzinformationen}
+    \end{call}
+  \end{sdblock}
+
+\end{sdblock}
+
+
+\end{sequencediagram}
+\end{center}
+\smallskip
+
+Um ein Fahrzeug durch das RIS freischalten zulassen muss eine Buchung für dieses Fahrzeug bereits vorliegen. Mit einer Referenz auf diese Buchung kann das Fahrzeug freigeschaltet werden. Eine Authentifizierung ist hier für erforderlich.
