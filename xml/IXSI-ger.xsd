@@ -2056,7 +2056,7 @@
 				</xs:element>
                                 <xs:element name="CompleteConsumption" type="CompleteConsumptionResponseType">
                                         <xs:annotation>
-                                                <xs:documentation>Beziehen aller abonnierten Buchungsänderungen.</xs:documentation>
+                                                <xs:documentation>Beziehen aller abonnierten Verbrauchsdaten.</xs:documentation>
                                         </xs:annotation>
                                 </xs:element>
 			</xs:choice>
