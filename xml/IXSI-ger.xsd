@@ -1941,6 +1941,16 @@
 						<xs:documentation>Prüfen von Buchungsabonnements.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+                                <xs:element name=""ConsumptionSubscription" type=""ConsumptionSubscriptionRequestType">
+                                        <xs:annotation>
+                                                <xs:documentation>Abonnieren von Verbrauchsdaten.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
+                                <xs:element name=""ConsumptionSubscriptionStatus" type=""ConsumptionSubscriptionStatusRequestType">
+                                        <xs:annotation>
+                                                <xs:documentation>Prüfen von Verbauchsdatenabonnements.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -1980,6 +1990,16 @@
 						<xs:documentation>Prüfen von Buchungsabos.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+                                <xs:element name=""ConsumptionSubscription" type=""ConsumptionSubscriptionResponseType">
+                                        <xs:annotation>
+                                                <xs:documentation>Abonnieren von Verbrauchsdaten.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
+                                <xs:element name=""ConsumptionSubscriptionStatus" type=""ConsumptionSubscriptionStatusResponseType">
+                                        <xs:annotation>
+                                                <xs:documentation>Prüfen von Verbauchsdatenabonnements.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2004,6 +2024,11 @@
 						<xs:documentation>Beziehen aller abonnierten Buchungsänderungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+                                <xs:element name=""CompleteConsumption" type=""CompleteConsumptionRequestType">
+                                        <xs:annotation>
+                                                <xs:documentation>Beziehen aller abonnierten Buchungsänderungen.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2028,6 +2053,11 @@
 						<xs:documentation>Beziehen aller abonnierten Buchungsänderungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+                                <xs:element name=""CompleteConsumption" type=""CompleteConsumptionResponseType">
+                                        <xs:annotation>
+                                                <xs:documentation>Beziehen aller abonnierten Buchungsänderungen.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2052,6 +2082,11 @@
 						<xs:documentation>Push-Nachrichten für Buchungsänderungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+                                <xs:element name=""ConsumptionPush" type="ConsumptionPushMessageType">
+                                        <xs:annotation>
+                                                <xs:documentation>Push-Nachrichten für Verbrauchsdaten.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
