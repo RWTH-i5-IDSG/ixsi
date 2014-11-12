@@ -187,7 +187,7 @@ EOF
         	echo "failed"
 	        exit 1
     	fi
-#	rm "generated/${x}.xslt"
+	rm "generated/${x}.xslt"
 	echo "done"
 
 done
