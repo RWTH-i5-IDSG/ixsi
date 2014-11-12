@@ -141,10 +141,14 @@ xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; d
 <xsl:text>&#xa;$basetype: \\emph{</xsl:text><xsl:value-of select="//*[@name='$x']//xs:extension/@base"/>
 <xsl:text>}\\\\&#xa;</xsl:text>
 </xsl:if>
-<xsl:if test="//*[@name='$x']//xs:group">
+<xsl:if test="//*[@name='$x']//xs:group or //xs:group[xs:sequence/xs:choice/xs:element/@type='$x']">
 <xsl:text>&#xa;$group: </xsl:text>
 <xsl:for-each select="//*[@name='$x']//xs:group">
 <xsl:text>\\emph{</xsl:text><xsl:value-of select="@ref"/>
+<xsl:text>} </xsl:text>
+</xsl:for-each>
+<xsl:for-each select="//xs:group[xs:sequence/xs:choice/xs:element/@type='$x']">
+<xsl:text>\\emph{</xsl:text><xsl:value-of select="@name"/>
 <xsl:text>} </xsl:text>
 </xsl:for-each>
 <xsl:text>\\\\&#xa;</xsl:text>
@@ -182,7 +186,7 @@ EOF
         	echo "failed"
 	        exit 1
     	fi
-	rm "generated/${x}.xslt"
+#	rm "generated/${x}.xslt"
 	echo "done"
 
 done
