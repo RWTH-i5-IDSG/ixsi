@@ -14,9 +14,10 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
   \node[rectangleTX, left= 1cm of s3](s2) {Dienst 2\\Verfügbarkeitsauskunft};
   \node[rectangleTX, below right of=s1](s4) {Dienst 4\\Buchung};
   \node[rectangleTX, right= 1cm of s4](s6) {Dienst 6\\Preisauskunft};
-  \node[rectangleTX, below right= 1cm of s4](s7) {Dienst 7\\Verbrauchsdaten};
-  \node[rectangleTX, below left= 1cm of s4](s5) {Dienst 5\\Buchungsabonnement};
-  \node[rectangleTX, right= 1cm of s6](s8) {Dienst 8\\Fahrzeugfreischaltung};
+  
+  \node[rectangleTX, below right = 1cm of s4](s8) {Dienst 8\\Fahrzeugfreischaltung};
+  \node[rectangleTX, left= 1cm of s8](s7) {Dienst 7\\Verbrauchsdaten};
+  \node[rectangleTX, left= 1cm of s7](s5) {Dienst 5\\Buchungsabonnement};
   %   arrows
   \draw (s2) edge[->,thick=1cm] (s1);
   \draw (s3) edge[->,thick=1cm] (s1);
@@ -24,7 +25,7 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
   \draw (s5) edge[->,thick=1cm] (s4);
   \draw (s6) edge[->,thick=1cm] (s1);
   \draw (s7) edge[->,thick=1cm] (s4);
-  \draw (s8) edge[->,thick=1cm] (s1);
+  \draw (s8) edge[->,thick=1cm] (s4);
   \end{tikzpicture}
   }
   \caption{Dienstabhängigkeiten \label{fig:depend}}
@@ -195,6 +196,6 @@ Dienst 8 dient dem freischalten von Fahrzeugen bzgl. Buchungszielen durch das RI
 
 \subsection*{Abhängigkeiten}
 \begin{itemize}
-\item Dienst 1
+\item Dienst 4
 \item Basisdienst A
 \end{itemize}
