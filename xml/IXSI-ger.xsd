@@ -1724,7 +1724,7 @@
 			</xs:element>
 			<xs:element name="Auth" type="AuthType">
 				<xs:annotation>
-					<xs:documentation>Authentifikationsinformationen.</xs:documentation>
+					<xs:documentation>AutAuthentifizierungsinformation des entsprechenden Benutzers.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
