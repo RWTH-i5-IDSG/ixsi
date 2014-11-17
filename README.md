@@ -23,4 +23,4 @@ IXSI was developed for eConnect Germany, Hub Osnabrück by
 
 cantamen GmbH,
 HaCon Ing.-Ges. mbH,
-RWTH Aachen, Lehrstuhl Informatik 5
+RWTH Aachen
