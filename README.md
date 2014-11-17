@@ -3,7 +3,7 @@ ixsi
 
 IXSI - Interface for X-Sharing Information documentation
 
-IXSI is a interface for exchanging information  between a Travel Information System an a Ride Sharing System (Carsharing, Bikesharing).
+IXSI is a interface for exchanging information  between a Travel Information System and a Ride Sharing System (Carsharing, Bikesharing).
 This repository contains the documentation written in TeX. To generate the pdf:
 
 ``` 
@@ -15,7 +15,7 @@ This repository contains the documentation written in TeX. To generate the pdf:
 
 a recent TexLive version is recommended for building.
 
-IXSI is currently still under development and the API is not final. The branch consumption contains non standard additions to support the transfer of conumption data.
+IXSI is currently still under development and the API is not final. The branch `consumption` contains non standard additions to support the transfer of conumption data.
 
 
 IXSI was developed for eConnect Germany, Hub Osnabrück by
