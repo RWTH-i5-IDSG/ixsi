@@ -1468,6 +1468,37 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+        <xs:annotation>
+                <xs:documentation>**** Service (4a) : get external Bookings ****</xs:documentation>
+        </xs:annotation>
+        <xs:complexType name="externalBookingRequestType">
+                <xs:annotation>
+                        <xs:documentation>Request to fetch BookingIDs referencing external bookings. Can  be use to gather consumption data.</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                        <xs:element name="TimePeriod" type="TimePeriodType">
+                                <xs:annotation>
+                                        <xs:documentation>TimePeriod of respective bookings.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                </xs:sequence>
+        </xs:complexType>
+        <xs:complexType name="externalBookingResponseType">
+                <xs:annotation>
+                        <xs:documentation>Response to for external bookings.</xs:documentation>
+                </xs:annotation>
+                <xs:complexContent>
+                        <xs:extension base="AbstractBaseResponseType">
+                                <xs:sequence>
+                                  <xs:element name="BookingID" type="BookingIDType" minOccurs="0" maxOccurs="unbounded">
+                                                <xs:annotation>
+                                                        <xs:documentation>BookingIDs added externally.</xs:documentation>
+                                                </xs:annotation>
+                                        </xs:element>
+                                </xs:sequence>
+                        </xs:extension>
+                </xs:complexContent>
+        </xs:complexType>
 	<xs:annotation>
 		<xs:documentation>**** Service (5) : Booking alerts subscription ****</xs:documentation>
 	</xs:annotation>
