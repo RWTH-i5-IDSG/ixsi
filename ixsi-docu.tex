@@ -54,14 +54,15 @@
 % \addchap{Anhang}
 \input{content/8-Codetabellen.tex}
 
-
+\cleardoublepage
 
 
 
 \setglossarysection{section}
 \printglossary[type=\acronymtype,style=long]
 
-\renewcommand{\lstlistlistingname}{Schemaverzeichnis}
+\renewcommand{\lstlistlistingname}{Quellcodeverzeichnis}
+\addcontentsline{toc}{chapter}{\lstlistlistingname}
 \lstlistoflistings
 
 \renewcommand{\indexname}{Stichwortverzeichnis}
