@@ -21,6 +21,6 @@ IXSI is currently still under development and the API is not final.
 
 IXSI was developed for eConnect Germany, Hub Osnabrück by
 
-cantamen GmbH
-HaCon Ing.-Ges. mbH
+cantamen GmbH,
+HaCon Ing.-Ges. mbH,
 RWTH Aachen, Lehrstuhl Informatik 5
