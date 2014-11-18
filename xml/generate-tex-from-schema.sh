@@ -137,7 +137,7 @@ xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; d
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 <xsl:output omit-xml-declaration="yes" />
 <xsl:template match="/">
-<xsl:text disable-output-escaping="yes">\\emph{$x}\\index{$x}: </xsl:text>
+<xsl:text disable-output-escaping="yes">\\emph{$x}: </xsl:text>
 <xsl:value-of select="//*[@name='$x']/xs:annotation/xs:documentation"/>
 <xsl:text>\\\\&#xa;</xsl:text>
 <xsl:if test="//*[@name='$x']//xs:extension">
@@ -171,7 +171,7 @@ xsltproc "getalltypes.xslt" $file | uniq | sort | grep -v '^$' | while read x; d
 <xsl:if test="@maxOccurs='unbounded'"><xsl:text> \$\boxbox\$ </xsl:text></xsl:if>
 <xsl:text disable-output-escaping="yes"><![CDATA[ & ]]></xsl:text>
 <xsl:text>\emph{</xsl:text><xsl:value-of select="@name"/><xsl:text disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
-<xsl:text>\texttt{</xsl:text><xsl:value-of select="@type"/><xsl:text  disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
+<xsl:text>\texttt{</xsl:text><xsl:value-of select="@type"/><xsl:if test="not(@type)"><xsl:text>simpleType</xsl:text></xsl:if><xsl:text disable-output-escaping="yes"><![CDATA[} & ]]></xsl:text>
 <xsl:value-of select="xs:annotation/xs:documentation"/>
 <xsl:text>\\\\
 </xsl:text>
