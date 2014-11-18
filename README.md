@@ -10,7 +10,7 @@ This repository contains the documentation written in TeX. To generate the pdf:
 	git clone https://github.com/RWTH-i5-IDSG/ixsi.git
 	cd ixsi
 	xml/generate-tex-from-schema.sh
-	pdflatex ixsi-docu
+	make
 ``` 
 
 a recent TexLive version is recommended for building.
