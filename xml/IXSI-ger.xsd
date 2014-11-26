@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Mit XMLSpy v2013 sp1 (x64) (http://www.altova.com) von Peter von Grumbkow (HaCon Ingenieurgesellschaft mbH) bearbeitet -->
 <!-- edited with XMLSpy v2010 rel. 3 sp1 (x64) (http://www.altova.com) by Peter von Grumbkow (HaCon Ingenieurgesellschaft mbH) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns="http://www.ixsi-schnittstelle.de/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ixsi-schnittstelle.de/" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--*******************************************************************-->
 	<!--Interface for X-Sharing Information (IXSI)-->
 	<!--*******************************************************************-->
-	<!--Spezifikation, Version 4 vom 2014-07-03-->
+	<!--Spezifikation, Version 4 vom 2014-11-25-->
 	<!--Urheber: Peter von Grumbkow, HaCon Ing.-Ges. mbH und Dirk Hillbrecht, cantamen GmbH-->
 	<!--Diese Schnittstellenspezifikation steht unter folgender Lizenz: CC BY-ND 3.0 DE (Creative Commons Namensnennung-Keine Bearbeitung 3.0 Deutschland), http://creativecommons.org/licenses/by-nd/3.0/de/-->
 	<!--*******************************************************************-->
-	<!--Specification, Version 4 of 2014-07-03-->
+	<!--Specification, Version 4 of 2014-11-25-->
 	<!--Authors: Peter von Grumbkow, HaCon Ing.-Ges. mbH and Dirk Hillbrecht, cantamen GmbH-->
 	<!--This interface specification is licensed according to: CC BY-ND 3.0 DE (Creative Commons Namensnennung-Keine Bearbeitung 3.0 Deutschland), http://creativecommons.org/licenses/by-nd/3.0/de/-->
 	<!--*******************************************************************-->
@@ -20,61 +20,61 @@
 		<xs:annotation>
 			<xs:documentation>Typ für Gebiet-IDs.</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:NMTOKEN"/>
+		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="PlaceIDType">
 		<xs:annotation>
 			<xs:documentation>Typ für Standort-IDs.</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:NMTOKEN"/>
+                <xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="PlaceGroupIDType">
 		<xs:annotation>
 			<xs:documentation>Typ für Standortgruppen-IDs.</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:NMTOKEN"/>
+                <xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="BookeeIDType">
 		<xs:annotation>
 			<xs:documentation>Typ für bookee IDs.</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:NMTOKEN"/>
+                <xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="ProviderIDType">
 		<xs:annotation>
 			<xs:documentation>Typ für Anbieter-IDs.</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:NMTOKEN"/>
+                <xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="SessionIDType">
 		<xs:annotation>
 			<xs:documentation>Typ für Session-IDs.</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:NMTOKEN"/>
+                <xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="BookingIDType">
 		<xs:annotation>
 			<xs:documentation>Typ für Buchungs-IDs.</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:NMTOKEN"/>
+                <xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="UserIDType">
 		<xs:annotation>
 			<xs:documentation>Typ für User-IDs.</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:NMTOKEN"/>
+                <xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="SystemIDType">
 		<xs:annotation>
 			<xs:documentation>Typ für System-IDs.</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:NMTOKEN"/>
+                <xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="GlobalIDType">
 		<xs:annotation>
 			<xs:documentation>Type for globally unique IDs for identifiying clone entities.</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:NMTOKEN"/>
+                <xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:annotation>
 		<xs:documentation>**** Generelle Typ-Definitionen ****</xs:documentation>
@@ -226,6 +226,50 @@
 			<xs:group ref="DurationGroup"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="AddressType">
+		<xs:annotation>
+			<xs:documentation>Typ um eine Adresse zu speichern.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Country" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Name des Landes.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PostalCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Postleitzahl / ZIP-Code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="City" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Name der Stadt.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="StreetHouseNr" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Straße und Hausnummer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GeoPositionType">
+		<xs:annotation>
+			<xs:documentation>Typ für Geografische Ortsangabe.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Coord" type="CoordType">
+				<xs:annotation>
+					<xs:documentation>Geographische Koordinaten.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Address" type="AddressType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Adresse der geographischen Position (optional).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="TimePeriodType">
 		<xs:annotation>
 			<xs:documentation>Typ für eine Zeitperiode.</xs:documentation>
@@ -339,7 +383,7 @@
 		<xs:annotation>
 			<xs:documentation>Aufzählung von Fehlercodes.</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:NMTOKEN"/>
+		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:complexType name="ErrorType">
 		<xs:annotation>
@@ -375,19 +419,19 @@
 		<xs:annotation>
 			<xs:documentation>Aufzählung von Autoklassen.</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:NMTOKEN"/>
+                <xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="EngineType">
 		<xs:annotation>
 			<xs:documentation>Aufzählung von Motoren.</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:NMTOKEN"/>
+                <xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="AttributeClassType">
 		<xs:annotation>
 			<xs:documentation>Aufzählung von Attributklassen.</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:NMTOKEN"/>
+                <xs:restriction base="xs:token"/>
 	</xs:simpleType>
         <xs:simpleType name="ConsumptionClassType">
                 <xs:annotation>
@@ -399,7 +443,7 @@
 		<xs:annotation>
 			<xs:documentation>Aufzählung von Attributcodes.</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:NMTOKEN"/>
+                <xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:complexType name="AttributeType">
 		<xs:annotation>
@@ -490,7 +534,7 @@
 			<xs:documentation>Typ für eine Verbindung von einem Verleihstandort zu einer Haltestelle.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="StopID" type="xs:NMTOKEN"/>
+			<xs:element name="StopID" type="xs:token"/>
 			<xs:group ref="DurationGroup"/>
 			<xs:element name="Distance" type="xs:nonNegativeInteger" minOccurs="0">
 				<xs:annotation>
@@ -500,36 +544,36 @@
 		</xs:sequence>
 	</xs:complexType>
         <xs:complexType name="ProviderType">
-          <xs:annotation>
-            <xs:documentation>Type for Anbieter Informationen.</xs:documentation>
-          </xs:annotation>
-          <xs:sequence>
-            <xs:element name="ID" type="ProviderIDType">
-              <xs:annotation>
-                <xs:documentation>Anbieter ID.</xs:documentation>
-              </xs:annotation>
-            </xs:element>
-            <xs:element name="Name" type="xs:normalizedString">
-              <xs:annotation>
-                <xs:documentation>Druckbarer, vollständiger Name des Anbieters.</xs:documentation>
-              </xs:annotation>
-            </xs:element>
-            <xs:element name="CustomerChoice" type="xs:boolean">
-              <xs:annotation>
-                <xs:documentation>Falls gesetzt, wird der Anbieter zum Heimat/Standardanbieter des Kunden.</xs:documentation>
-              </xs:annotation>
-            </xs:element>
-            <xs:element name="ShortName" type="xs:normalizedString" minOccurs="0">
-              <xs:annotation>
-                <xs:documentation>Kurzname des Anbieters.</xs:documentation>
-              </xs:annotation>
-            </xs:element>
-            <xs:element name="AttributeID" type="AttributeIDType" minOccurs="0" maxOccurs="unbounded">
-              <xs:annotation>
-                <xs:documentation>Weiter Informationen zu dem Anbieter, z.B. URLs.</xs:documentation>
-              </xs:annotation>
-            </xs:element>
-          </xs:sequence>
+                <xs:annotation>
+                        <xs:documentation>Type for Anbieter Informationen.</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                        <xs:element name="ID" type="ProviderIDType">
+                                <xs:annotation>
+                                        <xs:documentation>Anbieter ID.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Name" type="xs:normalizedString">
+                                <xs:annotation>
+                                        <xs:documentation>Druckbarer, vollständiger Name des Anbieters.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                        <xs:element name="CustomerChoice" type="xs:boolean">
+                                <xs:annotation>
+                                        <xs:documentation>Falls gesetzt, wird der Anbieter zum Heimat/Standardanbieter des Kunden.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                        <xs:element name="ShortName" type="xs:normalizedString" minOccurs="0">
+                                <xs:annotation>
+                                        <xs:documentation>Kurzname des Anbieters.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                        <xs:element name="AttributeID" type="AttributeIDType" minOccurs="0" maxOccurs="unbounded">
+                                <xs:annotation>
+                                        <xs:documentation>Weiter Informationen zu dem Anbieter, z.B. URLs.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                </xs:sequence>
         </xs:complexType>
 	<xs:group name="PlaceOrAreaGroup">
 		<xs:annotation>
@@ -574,7 +618,7 @@
                                        <xs:documentation>Global eindeutige ID. Wird benutzt um Duplikate eines Objektes das von verschiedenen Systemen verwaltet wird zu erkennen.</xs:documentation>
                                 </xs:annotation>
                         </xs:element>
-			<xs:element name="Coord" type="CoordType">
+                        <xs:element name="Coord" type="GeoPositionType">
 				<xs:annotation>
 					<xs:documentation>Geoposition des Standortes.</xs:documentation>
 				</xs:annotation>
@@ -585,6 +629,11 @@
 				</xs:annotation>
 			</xs:element>
 			<xs:group ref="PlaceOrAreaGroup"/>
+			<xs:element name="OnPremisesTime" type="xs:duration" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Zusätzliche Zeit um das Buchungsziel am Abstellort zu finden, z.B. in großen Parkhäusern. Standardmäßig 0. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ProbabilityPlaceIDType">
@@ -698,6 +747,11 @@
 					<xs:documentation>Netz für Start- und Endzeit der Buchung in Minuten. Sollte ein Divisor von 60 sein. Beispiele: 1, 5, 10, 15, 30, 60.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="OpeningTime" type="xs:duration" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Benötigte Zeit um das Fahrzeug aufzuschließen..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="Engine" type="EngineType" minOccurs="0"/>
 			<xs:element name="CO2Factor" type="xs:nonNegativeInteger" minOccurs="0">
 				<xs:annotation>
@@ -749,7 +803,7 @@
 					<xs:documentation>Für aktuell verfügbare Buchungsziele, die nicht an einen spezifischen Standort gebunden sind, sollte der aktuelle Standort zurückgegeben werden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="GeoPosition" type="CoordType" minOccurs="0">
+			<xs:element name="GeoPosition" type="GeoPositionType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Für aktuell verfügbare Buchungsziele, welche nicht an einen spezifischen Standort gebunden sind, sollte die aktuelle Position zurückgegeben werden.</xs:documentation>
 				</xs:annotation>
@@ -786,7 +840,7 @@
 					<xs:documentation>Für aktuell verfügbare Buchungsziele, welche nicht an einen spezifischen Standort gebunden sind, sollte der aktuelle Standort zurückgegeben werden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="GeoPosition" type="CoordType" minOccurs="0">
+			<xs:element name="GeoPosition" type="GeoPositionType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Für neu verfügbare Fahrzeuge, welche nicht an einen spezifischen Standort gebunden sind, sollte die Position zurückgegeben werden.</xs:documentation>
 				</xs:annotation>
@@ -1279,7 +1333,7 @@
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
-					<xs:element name="MessageBlockID" type="xs:NMTOKEN">
+					<xs:element name="MessageBlockID" type="xs:token">
 						<xs:annotation>
 							<xs:documentation> ID des Blocks, zu dem diese Nachricht gehört. Alle Nachrichten des Blocks haben dieselbe ID.</xs:documentation>
 						</xs:annotation>
@@ -1370,7 +1424,7 @@
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
-					<xs:element name="MessageBlockID" type="xs:NMTOKEN">
+					<xs:element name="MessageBlockID" type="xs:token">
 						<xs:annotation>
 							<xs:documentation> ID des Blocks, zu dem die Nachricht gehört. Alle Nachrichten eines Blocks haben dieselbe ID.</xs:documentation>
 						</xs:annotation>
@@ -1565,7 +1619,7 @@
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
-					<xs:element name="MessageBlockID" type="xs:NMTOKEN">
+					<xs:element name="MessageBlockID" type="xs:token">
 						<xs:annotation>
 							<xs:documentation>ID des Blocks, zu dem diese Nachricht gehört. Alle Nachrichten eines Blockes haben dieselbe ID.</xs:documentation>
 						</xs:annotation>
