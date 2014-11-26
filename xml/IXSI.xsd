@@ -439,7 +439,7 @@
                 <xs:annotation>
                         <xs:documentation>Enumeration for consumption classes.</xs:documentation>
                 </xs:annotation>
-                <xs:restriction base="xs:NMTOKEN"/>
+                <xs:restriction base="xs:token"/>
         </xs:simpleType>
 	<xs:simpleType name="AttributeIDType">
 		<xs:annotation>
@@ -1746,7 +1746,7 @@
                 <xs:complexContent>
                         <xs:extension base="AbstractBaseResponseType">
                                 <xs:sequence>
-                                        <xs:element name="MessageBlockID" type="xs:NMTOKEN">
+                                        <xs:element name="MessageBlockID" type="xs:token">
                                                 <xs:annotation>
                                                         <xs:documentation>ID of the block, this message belongs to. All messages of one block have the same ID.</xs:documentation>
                                                 </xs:annotation>

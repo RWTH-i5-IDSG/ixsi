@@ -437,7 +437,7 @@
                 <xs:annotation>
                         <xs:documentation>Aufzählung von Verbrauchsdatentypen.</xs:documentation>
                 </xs:annotation>
-                <xs:restriction base="xs:NMTOKEN"/>
+                <xs:restriction base="xs:token"/>
         </xs:simpleType>
 	<xs:simpleType name="AttributeIDType">
 		<xs:annotation>
@@ -1744,7 +1744,7 @@
                 <xs:complexContent>
                         <xs:extension base="AbstractBaseResponseType">
                                 <xs:sequence>
-                                        <xs:element name="MessageBlockID" type="xs:NMTOKEN">
+                                        <xs:element name="MessageBlockID" type="xs:token">
                                                 <xs:annotation>
                                                         <xs:documentation>ID des Blocks, zu dem diese Nachricht gehört. Alle Nachrichten eines Blockes haben dieselbe ID.</xs:documentation>
                                                 </xs:annotation>
