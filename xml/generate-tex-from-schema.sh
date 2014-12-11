@@ -31,7 +31,7 @@ cd ${0%/*}
 
 mkdir -p generated
 
-rm generated/*.tex
+rm -f "generated/*.tex"
 
 echo "generating stripped $file..."
 
