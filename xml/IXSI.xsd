@@ -996,7 +996,7 @@
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
-			<xs:element name="Unit" type="xs:string" miOccurs="0">
+			<xs:element name="Unit" type="xs:string" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Printable name of Unit.</xs:documentation>
 				</xs:annotation>
