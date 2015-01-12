@@ -967,6 +967,10 @@
                         <xs:documentation>Typ für einen Rechnungsposten der Verbrauchsdaten.</xs:documentation>
                 </xs:annotation>
                 <xs:sequence>
+                        <xs:element name="BookingID" type="BookingIDType">
+                        <xs:annotation>
+                                <xs:documentation>BookingID reference for this Consumption item.</xs:documentation>
+                        </xs:annotation>
                         <xs:element name="Type" type="ConsumptionClassType">
                                 <xs:annotation>
                                         <xs:documentation>Typ des Verbrauchs.</xs:documentation>
