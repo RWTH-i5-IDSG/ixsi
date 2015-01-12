@@ -26,55 +26,55 @@
 		<xs:annotation>
 			<xs:documentation>Typ für Standort-IDs.</xs:documentation>
 		</xs:annotation>
-                <xs:restriction base="xs:token"/>
+		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="PlaceGroupIDType">
 		<xs:annotation>
 			<xs:documentation>Typ für Standortgruppen-IDs.</xs:documentation>
 		</xs:annotation>
-                <xs:restriction base="xs:token"/>
+		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="BookeeIDType">
 		<xs:annotation>
 			<xs:documentation>Typ für bookee IDs.</xs:documentation>
 		</xs:annotation>
-                <xs:restriction base="xs:token"/>
+		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="ProviderIDType">
 		<xs:annotation>
 			<xs:documentation>Typ für Anbieter-IDs.</xs:documentation>
 		</xs:annotation>
-                <xs:restriction base="xs:token"/>
+		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="SessionIDType">
 		<xs:annotation>
 			<xs:documentation>Typ für Session-IDs.</xs:documentation>
 		</xs:annotation>
-                <xs:restriction base="xs:token"/>
+		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="BookingIDType">
 		<xs:annotation>
 			<xs:documentation>Typ für Buchungs-IDs.</xs:documentation>
 		</xs:annotation>
-                <xs:restriction base="xs:token"/>
+		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="UserIDType">
 		<xs:annotation>
 			<xs:documentation>Typ für User-IDs.</xs:documentation>
 		</xs:annotation>
-                <xs:restriction base="xs:token"/>
+		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="SystemIDType">
 		<xs:annotation>
 			<xs:documentation>Typ für System-IDs.</xs:documentation>
 		</xs:annotation>
-                <xs:restriction base="xs:token"/>
+		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="GlobalIDType">
 		<xs:annotation>
 			<xs:documentation>Type for globally unique IDs for identifiying clone entities.</xs:documentation>
 		</xs:annotation>
-                <xs:restriction base="xs:token"/>
+		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:annotation>
 		<xs:documentation>**** Generelle Typ-Definitionen ****</xs:documentation>
@@ -348,8 +348,8 @@
 						<xs:documentation>Valide Session-ID. Falls eine Session wiederverwendet wird, diese ausfüllen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-                                <xs:element name="UserInfo" type="UserInfoType" maxOccurs="unbounded">
-                                  <xs:annotation>
+				<xs:element name="UserInfo" type="UserInfoType" maxOccurs="unbounded">
+				  <xs:annotation>
 						<xs:documentation>Falls keine Session verfügbar ist, muss der User authentisieren.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
@@ -419,31 +419,31 @@
 		<xs:annotation>
 			<xs:documentation>Aufzählung von Autoklassen.</xs:documentation>
 		</xs:annotation>
-                <xs:restriction base="xs:token"/>
+		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="EngineType">
 		<xs:annotation>
 			<xs:documentation>Aufzählung von Motoren.</xs:documentation>
 		</xs:annotation>
-                <xs:restriction base="xs:token"/>
+		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:simpleType name="AttributeClassType">
 		<xs:annotation>
 			<xs:documentation>Aufzählung von Attributklassen.</xs:documentation>
 		</xs:annotation>
-                <xs:restriction base="xs:token"/>
+		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
-        <xs:simpleType name="ConsumptionClassType">
-                <xs:annotation>
-                        <xs:documentation>Aufzählung von Verbrauchsdatentypen.</xs:documentation>
-                </xs:annotation>
-                <xs:restriction base="xs:token"/>
-        </xs:simpleType>
+	<xs:simpleType name="ConsumptionClassType">
+		<xs:annotation>
+			<xs:documentation>Aufzählung von Verbrauchsdatentypen.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token"/>
+	</xs:simpleType>
 	<xs:simpleType name="AttributeIDType">
 		<xs:annotation>
 			<xs:documentation>Aufzählung von Attributcodes.</xs:documentation>
 		</xs:annotation>
-                <xs:restriction base="xs:token"/>
+		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
 	<xs:complexType name="AttributeType">
 		<xs:annotation>
@@ -543,38 +543,38 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-        <xs:complexType name="ProviderType">
-                <xs:annotation>
-                        <xs:documentation>Type for Anbieter Informationen.</xs:documentation>
-                </xs:annotation>
-                <xs:sequence>
-                        <xs:element name="ID" type="ProviderIDType">
-                                <xs:annotation>
-                                        <xs:documentation>Anbieter ID.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                        <xs:element name="Name" type="xs:normalizedString">
-                                <xs:annotation>
-                                        <xs:documentation>Druckbarer, vollständiger Name des Anbieters.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                        <xs:element name="CustomerChoice" type="xs:boolean">
-                                <xs:annotation>
-                                        <xs:documentation>Falls gesetzt, wird der Anbieter zum Heimat/Standardanbieter des Kunden.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                        <xs:element name="ShortName" type="xs:normalizedString" minOccurs="0">
-                                <xs:annotation>
-                                        <xs:documentation>Kurzname des Anbieters.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                        <xs:element name="AttributeID" type="AttributeIDType" minOccurs="0" maxOccurs="unbounded">
-                                <xs:annotation>
-                                        <xs:documentation>Weiter Informationen zu dem Anbieter, z.B. URLs.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                </xs:sequence>
-        </xs:complexType>
+	<xs:complexType name="ProviderType">
+		<xs:annotation>
+			<xs:documentation>Type for Anbieter Informationen.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="ProviderIDType">
+				<xs:annotation>
+					<xs:documentation>Anbieter ID.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="xs:normalizedString">
+				<xs:annotation>
+					<xs:documentation>Druckbarer, vollständiger Name des Anbieters.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CustomerChoice" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Falls gesetzt, wird der Anbieter zum Heimat/Standardanbieter des Kunden.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ShortName" type="xs:normalizedString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Kurzname des Anbieters.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AttributeID" type="AttributeIDType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Weiter Informationen zu dem Anbieter, z.B. URLs.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:group name="PlaceOrAreaGroup">
 		<xs:annotation>
 			<xs:documentation>Gruppe für Informationen, welche für Standorte und Free-Floating-Gebiete verwendet werden.</xs:documentation>
@@ -613,12 +613,12 @@
 					<xs:documentation>Standort-ID. Für jeden physischen Standard muss diese ID einheitlich sein.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-                       <xs:element name="GlobalID" type="GlobalIDType" minOccurs="0">
-                               <xs:annotation>
-                                       <xs:documentation>Global eindeutige ID. Wird benutzt um Duplikate eines Objektes das von verschiedenen Systemen verwaltet wird zu erkennen.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                        <xs:element name="Coord" type="GeoPositionType">
+		       <xs:element name="GlobalID" type="GlobalIDType" minOccurs="0">
+			       <xs:annotation>
+				       <xs:documentation>Global eindeutige ID. Wird benutzt um Duplikate eines Objektes das von verschiedenen Systemen verwaltet wird zu erkennen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Coord" type="GeoPositionType">
 				<xs:annotation>
 					<xs:documentation>Geoposition des Standortes.</xs:documentation>
 				</xs:annotation>
@@ -705,11 +705,11 @@
 					<xs:documentation>Bookee-ID.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-                       <xs:element name="GlobalID" type="GlobalIDType" minOccurs="0">
-                               <xs:annotation>
-                                       <xs:documentation>Global eindeutige ID. Wird benutzt um Duplikate eines Objektes das von verschiedenen Systemen verwaltet wird zu erkennen.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
+		       <xs:element name="GlobalID" type="GlobalIDType" minOccurs="0">
+			       <xs:annotation>
+				       <xs:documentation>Global eindeutige ID. Wird benutzt um Duplikate eines Objektes das von verschiedenen Systemen verwaltet wird zu erkennen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="Name" type="TextType" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Druckbarer Name des Bookee.</xs:documentation>
@@ -962,55 +962,55 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-        <xs:complexType name="ConsumptionType">
-                <xs:annotation>
-                        <xs:documentation>Typ für einen Rechnungsposten der Verbrauchsdaten.</xs:documentation>
-                </xs:annotation>
-                <xs:sequence>
-                        <xs:element name="BookingID" type="BookingIDType">
-                        	<xs:annotation>
-                                	<xs:documentation>BookingID reference for this Consumption item.</xs:documentation>
-                        	</xs:annotation>
+	<xs:complexType name="ConsumptionType">
+		<xs:annotation>
+			<xs:documentation>Typ für einen Rechnungsposten der Verbrauchsdaten.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BookingID" type="BookingIDType">
+				<xs:annotation>
+					<xs:documentation>BookingID reference for this Consumption item.</xs:documentation>
+				</xs:annotation>
 			</xs:element>
-                        <xs:element name="Type" type="ConsumptionClassType">
-                                <xs:annotation>
-                                        <xs:documentation>Typ des Verbrauchs.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                        <xs:element name="Name" type="xs:string">
-                                <xs:annotation>
-                                        <xs:documentation>Druckbarer Name des Rechnungsposten.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                        <xs:choice>
-                                <xs:element name="Value" type="xs:decimal">
-                                        <xs:annotation>
-                                                <xs:documentation>Dezimaler Verbrauchswert (e.g., Distanz).</xs:documentation>
-                                        </xs:annotation>
-                                </xs:element>
-                                <xs:element name="TimePeriod" type="TimePeriodType">
-                                        <xs:annotation>
-                                                <xs:documentation>Verbrauchswert als Zeitperiode.</xs:documentation>
-                                        </xs:annotation>
-                                </xs:element>
-                        </xs:choice>
-                        <xs:element name="Unit" type="xs:string" minOccurs="0">
-                                <xs:annotation>
-                                        <xs:documentation>Druckbarer Name der Einheit.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                        <xs:element name="Price" type="EuroPriceType" minOccurs="0">
-                                <xs:annotation>
-                                        <xs:documentation>Preis in Euro-Cent.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                        <xs:element name="Description" type="xs:string" minOccurs="0">
-                                <xs:annotation>
-                                        <xs:documentation>Druckbare Beschreibung des des Rechnungsposten.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                </xs:sequence>
-        </xs:complexType>
+			<xs:element name="Type" type="ConsumptionClassType">
+				<xs:annotation>
+					<xs:documentation>Typ des Verbrauchs.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Druckbarer Name des Rechnungsposten.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="Value" type="xs:decimal">
+					<xs:annotation>
+						<xs:documentation>Dezimaler Verbrauchswert (e.g., Distanz).</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="TimePeriod" type="TimePeriodType">
+					<xs:annotation>
+						<xs:documentation>Verbrauchswert als Zeitperiode.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="Unit" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Druckbarer Name der Einheit.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Price" type="EuroPriceType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Preis in Euro-Cent.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Description" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Druckbare Beschreibung des des Rechnungsposten.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="OriginDestType">
 		<xs:annotation>
 			<xs:documentation>Typ für den Ausgangspunkt oder den Reisezielort.</xs:documentation>
@@ -1532,37 +1532,37 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-        <xs:annotation>
-                <xs:documentation>**** Service (4a) : externe Buchungen abfragen ****</xs:documentation>
-        </xs:annotation>
-        <xs:complexType name="externalBookingRequestType">
-                <xs:annotation>
-                        <xs:documentation>Anfrage um BuchungsID abzufragen die extern erstellt wurden. Kann zur Abfrage von Verbauchsdaten verwendet werden.</xs:documentation>
-                </xs:annotation>
-                <xs:sequence>
-                        <xs:element name="TimePeriod" type="TimePeriodType">
-                                <xs:annotation>
-                                        <xs:documentation>Zeitraum in dem Buchung durchgeführt wurden.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                </xs:sequence>
-        </xs:complexType>
-        <xs:complexType name="externalBookingResponseType">
-                <xs:annotation>
-                        <xs:documentation>Antwort für externe BuchungsIDs.</xs:documentation>
-                </xs:annotation>
-                <xs:complexContent>
-                        <xs:extension base="AbstractBaseResponseType">
-                                <xs:sequence>
-                                        <xs:element name="BookingID" type="BookingIDType" minOccurs="0" maxOccurs="unbounded">
-                                                <xs:annotation>
-                                                        <xs:documentation>BuchungsIDs für externe Buchungen.</xs:documentation>
-                                                </xs:annotation>
-                                        </xs:element>
-                                </xs:sequence>
-                        </xs:extension>
-                </xs:complexContent>
-        </xs:complexType>
+	<xs:annotation>
+		<xs:documentation>**** Service (4a) : externe Buchungen abfragen ****</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="externalBookingRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um BuchungsID abzufragen die extern erstellt wurden. Kann zur Abfrage von Verbauchsdaten verwendet werden.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TimePeriod" type="TimePeriodType">
+				<xs:annotation>
+					<xs:documentation>Zeitraum in dem Buchung durchgeführt wurden.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="externalBookingResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort für externe BuchungsIDs.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType">
+				<xs:sequence>
+					<xs:element name="BookingID" type="BookingIDType" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>BuchungsIDs für externe Buchungen.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 	<xs:annotation>
 		<xs:documentation>**** Service (5) : Buchungsalarm-Abonnement ****</xs:documentation>
 	</xs:annotation>
@@ -1688,124 +1688,124 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-        <xs:annotation>
-                <xs:documentation>**** Service (7) : Verbrauchsdaten-Abonnement ****</xs:documentation>
-        </xs:annotation>
-        <xs:complexType name="ConsumptionSubscriptionRequestType">
-                <xs:annotation>
-                        <xs:documentation>Anfrage um Verbrauchsdaten für gegebene Buchungen zu abonnieren oder zu kündigen.</xs:documentation>
-                </xs:annotation>
-                <xs:sequence>
-                        <xs:element name="BookingID" type="BookingIDType" maxOccurs="unbounded">
-                                <xs:annotation>
-                                        <xs:documentation>Verbrauchsdaten für Buchungen abonnieren.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                        <xs:element name="Unsubscription" type="xs:boolean" default="false" minOccurs="0">
-                                <xs:annotation>
-                                        <xs:documentation>Falls gesetzt, gegebene Abos der Buchungen kündigen. Andernfalls abonnieren.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                </xs:sequence>
-        </xs:complexType>
-        <xs:complexType name="ConsumptionSubscriptionResponseType">
-                <xs:annotation>
-                        <xs:documentation>Antwort um Verbrauchsdaten für gegebene Buchungen zu abonnieren.</xs:documentation>
-                </xs:annotation>
-                <xs:complexContent>
-                        <xs:extension base="AbstractBaseResponseType"/>
-                </xs:complexContent>
-        </xs:complexType>
-        <xs:complexType name="ConsumptionSubscriptionStatusRequestType">
-                <xs:annotation>
-                        <xs:documentation>Anfrage um alle abonnierten Verbrauchsdaten zu erhalten.</xs:documentation>
-                </xs:annotation>
-        </xs:complexType>
-        <xs:complexType name="ConsumptionSubscriptionStatusResponseType">
-                <xs:annotation>
-                        <xs:documentation>Antwort um alle abonnierten Verbauchsdaten zu erhalten.</xs:documentation>
-                </xs:annotation>
-                <xs:complexContent>
-                        <xs:extension base="AbstractBaseResponseType">
-                                <xs:sequence>
-                                        <xs:element name="BookingID" type="BookingIDType" minOccurs="0" maxOccurs="unbounded">
-                                                <xs:annotation>
-                                                        <xs:documentation>Abonnierte Buchungen.</xs:documentation>
-                                                </xs:annotation>
-                                        </xs:element>
-                                </xs:sequence>
-                        </xs:extension>
-                </xs:complexContent>
-        </xs:complexType>
-        <xs:complexType name="CompleteConsumptionRequestType">
-                <xs:annotation>
-                        <xs:documentation>Anfrage um den vollständigen aktuellen Status abonnierter Verbrauchsdaten zu erhalten.</xs:documentation>
-                </xs:annotation>
-                <xs:sequence>
-                        <xs:element name="MaxResults" type="xs:integer" minOccurs="0">
-                                <xs:annotation>
-                                        <xs:documentation>Definiert die maximale Anzahl Resultate, die in einer Nachricht zurückgegeben werden.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                </xs:sequence>
-        </xs:complexType>
-        <xs:complexType name="CompleteConsumptionResponseType">
-                <xs:annotation>
-                        <xs:documentation>Nachricht um den vollständigen aktuellen Status abonnierter Verbauchsdaten zu erhalten. Verschiedene solcher Antworten können zu einer einzigen Anfrage gehören.</xs:documentation>
-                </xs:annotation>
-                <xs:complexContent>
-                        <xs:extension base="AbstractBaseResponseType">
-                                <xs:sequence>
-                                        <xs:element name="MessageBlockID" type="xs:token">
-                                                <xs:annotation>
-                                                        <xs:documentation>ID des Blocks, zu dem diese Nachricht gehört. Alle Nachrichten eines Blockes haben dieselbe ID.</xs:documentation>
-                                                </xs:annotation>
-                                        </xs:element>
-                                        <xs:element name="Last" type="xs:boolean" default="false" minOccurs="0">
-                                                <xs:annotation>
-                                                        <xs:documentation>Falls gesetzt, ist diese Nachricht die Letzte im korrespondierenden Block. Andernfalls folgen mehr Nachrichten desselben Blocks.</xs:documentation>
-                                                </xs:annotation>
-                                        </xs:element>
-                                        <xs:element name="Consumption" type="ConsumptionType" minOccurs="0" maxOccurs="unbounded"/>
-                                </xs:sequence>
-                        </xs:extension>
-                </xs:complexContent>
-        </xs:complexType>
-        <xs:complexType name="ConsumptionPushMessageType">
-                <xs:annotation>
-                        <xs:documentation>Push-Nachricht, die Verbrauchsdaten für abonnierte Buchungen enthält.</xs:documentation>
-                </xs:annotation>
-                <xs:sequence>
-                        <xs:element name="Consumption" type="ConsumptionType" maxOccurs="unbounded"/>
-                </xs:sequence>
-        </xs:complexType>
-        <xs:annotation>
-                <xs:documentation>**** Service (8) : Fahrzeugfreischaltung ****</xs:documentation>
-        </xs:annotation>
-        <xs:complexType name="BookingUnlockRequestType">
-                <xs:annotation>
-                        <xs:documentation>Anfrage um zur Buchung gehörendes Fahrzeug für die Fahrt freizuschalten.</xs:documentation>
-                </xs:annotation>
-                <xs:sequence>
-                        <xs:element name="BookingID" type="BookingIDType">
-                                <xs:annotation>
-                                        <xs:documentation>Die freizuschaltene Buchung.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                </xs:sequence>
-        </xs:complexType>
-        <xs:complexType name="BookingUnlockResponseType">
-                <xs:annotation>
-                        <xs:documentation>Antwort die den Status der Freischaltung zurück gibt. Enthält Attribute zur Information des Benutzers, z.B. das Kennzeichen des freigeschalteten Fahrzeuges.</xs:documentation>
-                </xs:annotation>
-                <xs:complexContent>
-                        <xs:extension base="AbstractBaseResponseType">
-                                <xs:sequence>
-                                        <xs:element name="Attributes" type="AttributeType" minOccurs="0" maxOccurs="unbounded"/>
-                                </xs:sequence>
-                        </xs:extension>
-                </xs:complexContent>
-        </xs:complexType>
+	<xs:annotation>
+		<xs:documentation>**** Service (7) : Verbrauchsdaten-Abonnement ****</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="ConsumptionSubscriptionRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um Verbrauchsdaten für gegebene Buchungen zu abonnieren oder zu kündigen.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BookingID" type="BookingIDType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Verbrauchsdaten für Buchungen abonnieren.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Unsubscription" type="xs:boolean" default="false" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Falls gesetzt, gegebene Abos der Buchungen kündigen. Andernfalls abonnieren.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConsumptionSubscriptionResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort um Verbrauchsdaten für gegebene Buchungen zu abonnieren.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ConsumptionSubscriptionStatusRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um alle abonnierten Verbrauchsdaten zu erhalten.</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:complexType name="ConsumptionSubscriptionStatusResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort um alle abonnierten Verbauchsdaten zu erhalten.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType">
+				<xs:sequence>
+					<xs:element name="BookingID" type="BookingIDType" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Abonnierte Buchungen.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CompleteConsumptionRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um den vollständigen aktuellen Status abonnierter Verbrauchsdaten zu erhalten.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MaxResults" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Definiert die maximale Anzahl Resultate, die in einer Nachricht zurückgegeben werden.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompleteConsumptionResponseType">
+		<xs:annotation>
+			<xs:documentation>Nachricht um den vollständigen aktuellen Status abonnierter Verbauchsdaten zu erhalten. Verschiedene solcher Antworten können zu einer einzigen Anfrage gehören.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType">
+				<xs:sequence>
+					<xs:element name="MessageBlockID" type="xs:token">
+						<xs:annotation>
+							<xs:documentation>ID des Blocks, zu dem diese Nachricht gehört. Alle Nachrichten eines Blockes haben dieselbe ID.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Last" type="xs:boolean" default="false" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Falls gesetzt, ist diese Nachricht die Letzte im korrespondierenden Block. Andernfalls folgen mehr Nachrichten desselben Blocks.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Consumption" type="ConsumptionType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ConsumptionPushMessageType">
+		<xs:annotation>
+			<xs:documentation>Push-Nachricht, die Verbrauchsdaten für abonnierte Buchungen enthält.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Consumption" type="ConsumptionType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:annotation>
+		<xs:documentation>**** Service (8) : Fahrzeugfreischaltung ****</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="BookingUnlockRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um zur Buchung gehörendes Fahrzeug für die Fahrt freizuschalten.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BookingID" type="BookingIDType">
+				<xs:annotation>
+					<xs:documentation>Die freizuschaltene Buchung.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BookingUnlockResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort die den Status der Freischaltung zurück gibt. Enthält Attribute zur Information des Benutzers, z.B. das Kennzeichen des freigeschalteten Fahrzeuges.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType">
+				<xs:sequence>
+					<xs:element name="Attributes" type="AttributeType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 	<xs:annotation>
 		<xs:documentation>**** Nachrichtencontainer ****</xs:documentation>
 	</xs:annotation>
@@ -1865,11 +1865,11 @@
 						<xs:documentation>Ändern einer Buchung.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-                                <xs:element name="BookingUnlock" type="BookingUnlockRequestType">
-                                        <xs:annotation>
-                                                <xs:documentation>Fahrzeugfreischaltung.</xs:documentation>
-                                        </xs:annotation>
-                                </xs:element>
+				<xs:element name="BookingUnlock" type="BookingUnlockRequestType">
+					<xs:annotation>
+						<xs:documentation>Fahrzeugfreischaltung.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -1929,11 +1929,11 @@
 						<xs:documentation>Ändern einer Buchung.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-                                <xs:element name="BookingUnlock" type="BookingUnlockResponseType">
-                                        <xs:annotation>
-                                                <xs:documentation>Fahrzeugfreischaltung.</xs:documentation>
-                                        </xs:annotation>
-                                </xs:element>
+				<xs:element name="BookingUnlock" type="BookingUnlockResponseType">
+					<xs:annotation>
+						<xs:documentation>Fahrzeugfreischaltung.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2039,16 +2039,16 @@
 						<xs:documentation>Prüfen von Buchungsabonnements.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-                                <xs:element name="ConsumptionSubscription" type="ConsumptionSubscriptionRequestType">
-                                        <xs:annotation>
-                                                <xs:documentation>Abonnieren von Verbrauchsdaten.</xs:documentation>
-                                        </xs:annotation>
-                                </xs:element>
-                                <xs:element name="ConsumptionSubscriptionStatus" type="ConsumptionSubscriptionStatusRequestType">
-                                        <xs:annotation>
-                                                <xs:documentation>Prüfen von Verbauchsdatenabonnements.</xs:documentation>
-                                        </xs:annotation>
-                                </xs:element>
+				<xs:element name="ConsumptionSubscription" type="ConsumptionSubscriptionRequestType">
+					<xs:annotation>
+						<xs:documentation>Abonnieren von Verbrauchsdaten.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ConsumptionSubscriptionStatus" type="ConsumptionSubscriptionStatusRequestType">
+					<xs:annotation>
+						<xs:documentation>Prüfen von Verbauchsdatenabonnements.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2088,16 +2088,16 @@
 						<xs:documentation>Prüfen von Buchungsabos.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-                                <xs:element name="ConsumptionSubscription" type="ConsumptionSubscriptionResponseType">
-                                        <xs:annotation>
-                                                <xs:documentation>Abonnieren von Verbrauchsdaten.</xs:documentation>
-                                        </xs:annotation>
-                                </xs:element>
-                                <xs:element name="ConsumptionSubscriptionStatus" type="ConsumptionSubscriptionStatusResponseType">
-                                        <xs:annotation>
-                                                <xs:documentation>Prüfen von Verbauchsdatenabonnements.</xs:documentation>
-                                        </xs:annotation>
-                                </xs:element>
+				<xs:element name="ConsumptionSubscription" type="ConsumptionSubscriptionResponseType">
+					<xs:annotation>
+						<xs:documentation>Abonnieren von Verbrauchsdaten.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ConsumptionSubscriptionStatus" type="ConsumptionSubscriptionStatusResponseType">
+					<xs:annotation>
+						<xs:documentation>Prüfen von Verbauchsdatenabonnements.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2122,11 +2122,11 @@
 						<xs:documentation>Beziehen aller abonnierten Buchungsänderungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-                                <xs:element name="CompleteConsumption" type="CompleteConsumptionRequestType">
-                                        <xs:annotation>
-                                                <xs:documentation>Beziehen aller abonnierten Buchungsänderungen.</xs:documentation>
-                                        </xs:annotation>
-                                </xs:element>
+				<xs:element name="CompleteConsumption" type="CompleteConsumptionRequestType">
+					<xs:annotation>
+						<xs:documentation>Beziehen aller abonnierten Buchungsänderungen.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2151,11 +2151,11 @@
 						<xs:documentation>Beziehen aller abonnierten Buchungsänderungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-                                <xs:element name="CompleteConsumption" type="CompleteConsumptionResponseType">
-                                        <xs:annotation>
-                                                <xs:documentation>Beziehen aller abonnierten Verbrauchsdaten.</xs:documentation>
-                                        </xs:annotation>
-                                </xs:element>
+				<xs:element name="CompleteConsumption" type="CompleteConsumptionResponseType">
+					<xs:annotation>
+						<xs:documentation>Beziehen aller abonnierten Verbrauchsdaten.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2180,11 +2180,11 @@
 						<xs:documentation>Push-Nachrichten für Buchungsänderungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-                                <xs:element name="ConsumptionPush" type="ConsumptionPushMessageType">
-                                        <xs:annotation>
-                                                <xs:documentation>Push-Nachrichten für Verbrauchsdaten.</xs:documentation>
-                                        </xs:annotation>
-                                </xs:element>
+				<xs:element name="ConsumptionPush" type="ConsumptionPushMessageType">
+					<xs:annotation>
+						<xs:documentation>Push-Nachrichten für Verbrauchsdaten.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
