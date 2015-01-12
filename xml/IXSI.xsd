@@ -979,14 +979,21 @@
                                         <xs:documentation>Printable name of consumption item.</xs:documentation>
                                 </xs:annotation>
                         </xs:element>
+                        <xs:choice>
+                                <xs:element name="Value" type="xs:decimal">
+                                        <xs:annotation>
+                                                <xs:documentation>Decimal consumption value (e.g., distance).</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
+                                <xs:element name="TimePeriod" type="TimePeriodType">
+                                        <xs:annotation>
+                                                <xs:documentation>Consumption time period.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
+                        </xs:choice>
                         <xs:element name="Unit" type="xs:string" minOccurs="0">
                                 <xs:annotation>
                                         <xs:documentation>Printable name of Unit.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                        <xs:element name="Value" type="xs:string">
-                                <xs:annotation>
-                                        <xs:documentation>Consumption value.</xs:documentation>
                                 </xs:annotation>
                         </xs:element>
                         <xs:element name="Price" type="EuroPriceType" minOccurs="0">
