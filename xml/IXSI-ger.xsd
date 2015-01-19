@@ -908,6 +908,33 @@
 			<xs:element name="Reason" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="ExternalBookingType">
+		<xs:annotation>
+			<xs:documentation>Type for information for external bookings.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BookingID" type="BookingIDType">
+				<xs:annotation>
+					<xs:documentation>BookingID of the externally added booking.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BookingTargetID" type="BookingTargetIDType">
+				<xs:annotation>
+					<xs:documentation>BookingTargetID of the booked vehicle.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UserInfo" type="UserInfoType">
+				<xs:annotation>
+					<xs:documentation>UserInfo of the user this booking belongs to.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TimePeriod" type="TimePeriodType">
+				  <xs:annotation>
+					<xs:documentation>Time period of respective booking.</xs:documentation>
+				  </xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="TariffDetailType">
 		<xs:annotation>
 			<xs:documentation>Typ für eine Tarifkomponente einschließlich des Preises.</xs:documentation>
@@ -1535,7 +1562,7 @@
 	<xs:annotation>
 		<xs:documentation>**** Service (4a) : externe Buchungen abfragen ****</xs:documentation>
 	</xs:annotation>
-	<xs:complexType name="externalBookingRequestType">
+	<xs:complexType name="ExternalBookingRequestType">
 		<xs:annotation>
 			<xs:documentation>Anfrage um BuchungsID abzufragen die extern erstellt wurden. Kann zur Abfrage von Verbauchsdaten verwendet werden.</xs:documentation>
 		</xs:annotation>
@@ -1547,16 +1574,16 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="externalBookingResponseType">
+	<xs:complexType name="ExternalBookingResponseType">
 		<xs:annotation>
 			<xs:documentation>Antwort für externe BuchungsIDs.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
-					<xs:element name="BookingID" type="BookingIDType" minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="externalBooking" type="externalBookingType">
 						<xs:annotation>
-							<xs:documentation>BuchungsIDs für externe Buchungen.</xs:documentation>
+							<xs:documentation>Information über externe Buchungen.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
