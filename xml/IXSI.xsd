@@ -1574,6 +1574,11 @@
 					<xs:documentation>Time period in which bookings are returned.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="UserInfo" type="UserInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Only get bookings of respective user.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ExternalBookingResponseType">
@@ -1585,7 +1590,7 @@
 				<xs:sequence>
 					<xs:element name="externalBooking" type="externalBookingType">
 						<xs:annotation>
-							<xs:documentation>Information about bookings added externally..</xs:documentation>
+							<xs:documentation>Information about bookings added externally.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>

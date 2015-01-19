@@ -1572,6 +1572,11 @@
 					<xs:documentation>Zeitraum in dem Buchung durchgeführt wurden.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="UserInfo" type="UserInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Buchungen nur für die entsprechenden Benutzer abrufen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ExternalBookingResponseType">
