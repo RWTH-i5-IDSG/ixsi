@@ -153,7 +153,7 @@ Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an 
 \section{Dienst 1 -- Statische Daten}
 \label{sec:Interaktionsprotokolle:Dienst1}
 
-\subsection{Abfrage Buchungsziele}
+\subsection*{Abfrage Buchungsziele}
 
 \begin{center}
 \begin{sequencediagram}
@@ -175,7 +175,7 @@ Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an 
 
 Als Basis für die Informationskopplung dient der Austausch von sogenannten Buchungszielen. Buchungsziele sind eine logische Repräsentation von einem oder mehreren Fahrzeugen mit gemeinsamen Eingeschaften, wie z.B. vom gleichen Anbieter bereitgestellt, gleicher Fahrzeugtyp und gleiche Verleihstation. Diese Eigenschaften sind statisch. Um nur Informationen zu Buchungszielen eines bestimmten Anbieters zu erhalten, kann nach Provider gefiltert werden. Die Übertragung wird vom RIS ausgelöst.
 
-\subsection{Abfrage Änderungen Buchungszielen}
+\subsection*{Abfrage Änderungen Buchungszielen}
 
 \begin{center}
 \begin{sequencediagram}
@@ -200,7 +200,7 @@ Um nicht intervallweise alle Buchungszielinformationen übertragen zu müssen, k
 \section{Dienst 2 -- Verfügbarkeitsauskunft}
 \label{sec:Interaktionsprotokolle:Dienst2}
 
-\subsection{Abfrage Verfügbarkeit}
+\subsection*{Abfrage Verfügbarkeit}
 
 \begin{center}
 \begin{sequencediagram}
@@ -221,7 +221,7 @@ Um nicht intervallweise alle Buchungszielinformationen übertragen zu müssen, k
 Um die konkreten Verfügbarkeiten abzufragen, sendet das RIS eine Anfrage die entweder eine Liste mit Buchungszielen oder ein geographisches Gebiet in Form einer Umgebungssuche oder als Rechteck und eine geünschte Zeitperiode enthält. Ohne Angabe wird die Verfügbarkeit von allen Buchungszielen zurückgegeben. Als Antwort sendet das FVS eine Liste mit Buchungszielen und deren Verfügbarkeiten zurück.
 
 
-\subsection{Abfrage aktuelle Stationkapazität (Dienst 2a)}
+\subsection*{Abfrage aktuelle Stationkapazität (Dienst 2a)}
 
 \begin{center}
 \begin{sequencediagram}
@@ -244,7 +244,7 @@ Das RIS kann die aktuellen Kapazitäten, bspw. zur Kartendarstellung, von Verlei
 \section{Dienst 3 -- Verfügbarkeitsabonnement}
 \label{sec:Interaktionsprotokolle:Dienst3}
 
-\subsection{Verfügbarkeitsabonnement}
+\subsection*{Verfügbarkeitsabonnement}
 \label{subsec:Interaktionsprotokolle:Dienst3}
 
 \begin{center}
@@ -295,7 +295,7 @@ Zur anfänglichen Synchronisierung aller Verfügbarkeiten kann das RIS die Funkt
 
 
 
-\subsection{Standortkapazitätabonement (Dienst 3a)}
+\subsection*{Standortkapazitätabonement (Dienst 3a)}
 \label{subsec:Interaktionsprotokolle:Dienst3a}
 
 \begin{center}
