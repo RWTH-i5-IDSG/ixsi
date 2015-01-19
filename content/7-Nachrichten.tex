@@ -70,7 +70,44 @@ Name &  Kommentar \label{tab:miscGroups}\\
 \bottomrule 
 \end{tabularx}\end{flushleft}\end{samepage}
 
-\section{Dienst 1}
+\section{Dienst A - Sitzungen}
+\label{sec:Nachrichten:DienstA}
+
+\subsection*{Session öffnen}
+\label{subsec:Nachrichten:DienstA:OpenSession}
+\input{xml/generated/OpenSessionRequestType}
+\input{xml/generated/OpenSessionRequestType-schema}
+\input{xml/generated/OpenSessionResponseType}
+\input{xml/generated/OpenSessionResponseType-schema}
+
+\subsection*{Session schließen}
+\label{subsec:Nachrichten:DienstA:CloseSession}
+\input{xml/generated/CloseSessionRequestType}
+\input{xml/generated/CloseSessionRequestType-schema}
+\input{xml/generated/CloseSessionResponseType}
+\input{xml/generated/CloseSessionResponseType-schema}
+
+\section{Dienst B - Abonnements}
+\label{sec:Nachrichten:DienstB}
+
+\subsection*{Heartbeat}
+\label{subsec:Nachrichten:DienstB:HeartBeat}
+\input{xml/generated/HeartBeatRequestType}
+\input{xml/generated/HeartBeatRequestType-schema}
+\input{xml/generated/HeartBeatResponseType}
+\input{xml/generated/HeartBeatResponseType-schema}
+
+\section{Dienst C - Tokens}
+\label{sec:Nachrichten:DienstC}
+
+\subsection*{Tokengenerierung}
+\label{subsec:Nachrichten:DienstC:Tokengenerierung}
+\input{xml/generated/TokenGenerationRequestType}
+\input{xml/generated/TokenGenerationRequestType-schema}
+\input{xml/generated/TokenGenerationResponseType}
+\input{xml/generated/TokenGenerationResponseType-schema}
+
+\section{Dienst 1 - Statische Daten}
 \label{sec:Nachrichten:Dienst1}
 
 \subsection*{Abfrage Buchungsziele}
@@ -87,7 +124,7 @@ Name &  Kommentar \label{tab:miscGroups}\\
 \input{xml/generated/ChangedProvidersResponseType}
 \input{xml/generated/ChangedProvidersResponseType-schema}
 
-\section{Dienst 2}
+\section{Dienst 2 - Verfügbarkeitsauskunft}
 \label{sec:Nachrichten:Dienst2}
 
 \subsection*{Abfrage Verfügbarkeiten}
@@ -109,7 +146,7 @@ Name &  Kommentar \label{tab:miscGroups}\\
 \input{xml/generated/PlaceAvailabilityResponseType}
 \input{xml/generated/PlaceAvailabilityResponseType-schema}
 
-\section{Dienst 3}
+\section{Dienst 3 - Verfügbarkeitsabonnement}
 \label{sec:Nachrichten:Dienst3}
 
 \subsection*{Verfügbarkeitsabonnement}
@@ -158,7 +195,7 @@ Name &  Kommentar \label{tab:miscGroups}\\
 \input{xml/generated/CompletePlaceAvailabilityResponseType}
 \input{xml/generated/CompletePlaceAvailabilityResponseType-schema}
 
-\section{Dienst 4}
+\section{Dienst 4 - Buchung / Buchungsänderung}
 \label{sec:Nachrichten:Dienst4}
 
 \subsection*{Buchung}
@@ -185,7 +222,7 @@ Name &  Kommentar \label{tab:miscGroups}\\
 \input{xml/generated/externalBookingResponseType}
 \input{xml/generated/externalBookingResponseType-schema}
 
-\section{Dienst 5}
+\section{Dienst 5 - Buchungsabonnement}
 \label{sec:Nachrichten:Dienst5}
 
 \subsection*{Buchungsabonnement}
@@ -208,7 +245,7 @@ Name &  Kommentar \label{tab:miscGroups}\\
 \input{xml/generated/CompleteBookingAlertResponseType}
 \input{xml/generated/CompleteBookingAlertResponseType-schema}
 
-\section{Dienst 6}
+\section{Dienst 6 - Preisauskunft}
 \label{sec:Nachrichten:Dienst6}
 
 \subsection*{Preisinformation}
@@ -218,7 +255,7 @@ Name &  Kommentar \label{tab:miscGroups}\\
 \input{xml/generated/PriceInformationResponseType}
 \input{xml/generated/PriceInformationResponseType-schema}
 
-\section{Dienst 7}
+\section{Dienst 7 - Verbrauchsdatenabonnement}
 \label{sec:Nachrichten:Dienst7}
 
 \subsection*{Nutzungsdatenabonnement}
@@ -242,7 +279,7 @@ Name &  Kommentar \label{tab:miscGroups}\\
 \input{xml/generated/CompleteConsumptionResponseType-schema}
 
 
-\section{Dienst 8}
+\section{Dienst 8 - Fahrzeugfreischaltung}
 \label{sec:Nachrichten:Dienst8}
 
 \subsection*{Fahrzeugfreischaltung}
@@ -251,40 +288,3 @@ Name &  Kommentar \label{tab:miscGroups}\\
 \input{xml/generated/BookingUnlockRequestType-schema}
 \input{xml/generated/BookingUnlockResponseType}
 \input{xml/generated/BookingUnlockResponseType-schema}
-
-\section{Dienst A}
-\label{sec:Nachrichten:DienstA}
-
-\subsection*{Session öffnen}
-\label{subsec:Nachrichten:DienstA:OpenSession}
-\input{xml/generated/OpenSessionRequestType}
-\input{xml/generated/OpenSessionRequestType-schema}
-\input{xml/generated/OpenSessionResponseType}
-\input{xml/generated/OpenSessionResponseType-schema}
-
-\subsection*{Session schließen}
-\label{subsec:Nachrichten:DienstA:CloseSession}
-\input{xml/generated/CloseSessionRequestType}
-\input{xml/generated/CloseSessionRequestType-schema}
-\input{xml/generated/CloseSessionResponseType}
-\input{xml/generated/CloseSessionResponseType-schema}
-
-\section{Dienst B}
-\label{sec:Nachrichten:DienstB}
-
-\subsection*{Heartbeat}
-\label{subsec:Nachrichten:DienstB:HeartBeat}
-\input{xml/generated/HeartBeatRequestType}
-\input{xml/generated/HeartBeatRequestType-schema}
-\input{xml/generated/HeartBeatResponseType}
-\input{xml/generated/HeartBeatResponseType-schema}
-
-\section{Dienst C}
-\label{sec:Nachrichten:DienstC}
-
-\subsection*{Tokengenerierung}
-\label{subsec:Nachrichten:DienstC:Tokengenerierung}
-\input{xml/generated/TokenGenerationRequestType}
-\input{xml/generated/TokenGenerationRequestType-schema}
-\input{xml/generated/TokenGenerationResponseType}
-\input{xml/generated/TokenGenerationResponseType-schema}
