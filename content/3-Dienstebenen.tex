@@ -4,16 +4,17 @@ Das Hierachiemodell beschreibt unterschiedliche Qualitäten der Informationskopp
 Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst 1 Statische Daten (static data) von beiden Interaktionspartnern unterstützt werden. In \cref{fig:depend} sind die Abhängigkeiten zwischen den Diensten dargestellt.
 
 \begin{figure}[h]
-  \centering
+\centering
+\resizebox{1\columnwidth}{!} {
   \begin{tikzpicture}
   % Dienste
   \tikzstyle{ann} = [draw=none,fill=none,right]
-  \node[rectangleTX](s1) {Dienst 1\\Statische Daten};
-  \node[rectangleTX, below left of=s1](s3) {Dienst 3\\Verfügbarkeitsabonnement};
-  \node[rectangleTX, left= 1cm of s3](s2) {Dienst 2\\Verfügbarkeitsauskunft};
-  \node[rectangleTX, below right of=s1](s4) {Dienst 4\\Buchung};
-  \node[rectangleTX, right= 1cm of s4](s6) {Dienst 6\\Preisauskunft};
-  \node[rectangleTX, below= 1cm of s4](s5) {Dienst 5\\Buchungsabonnement};
+  \node[rectangleTX, align=center](s1) {\textbf{Service 1} \\ Static Data};
+  \node[rectangleTX, align=center, below left=10mm and -7mm of s1](s3) {\textbf{Service 3} \\ Availability \\ Subscription};
+  \node[rectangleTX, align=center, left=5mm of s3](s2) {\textbf{Service 2} \\ Subscription \\ Handling};
+  \node[rectangleTX, align=center, right=5mm of s3](s4) {\textbf{Service 4} \\ Booking \\ \vphantom{b}};
+  \node[rectangleTX, align=center, right=5mm of s4](s6) {\textbf{Service 6} \\ Price \\ Information};
+  \node[rectangleTX, align=center, below=10mm of s4](s5) {\textbf{Service 5} \\ Booking \\ Subscription};
 
   %   arrows
   \draw (s2) edge[->,thick=1cm] (s1);
@@ -22,7 +23,9 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
   \draw (s5) edge[->,thick=1cm] (s4);
   \draw (s6) edge[->,thick=1cm] (s1);
   \end{tikzpicture}
-  \caption{Dienstabhängigkeiten \label{fig:depend}}
+}
+\caption{IXSI Service Groups.}
+\label{fig:depend}
 \end{figure}
 
 
