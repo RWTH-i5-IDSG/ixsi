@@ -17,6 +17,11 @@ a recent TexLive version is recommended for building.
 
 IXSI is currently still under development and the API is not final. The branch `consumption` contains non standard additions to support the transfer of conumption data.
 
+precomiled pdfs are available under: 
+
+https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-german.pdf
+
+https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-english.pdf
 
 IXSI was developed for eConnect Germany, Hub Osnabrück by
 
