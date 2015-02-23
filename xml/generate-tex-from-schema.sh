@@ -27,7 +27,7 @@ basetype="Basistyp"
 command -v xsltproc >/dev/null 2>&1 || { echo >&2 "I require xsltproc but it's not installed.  Aborting."; exit 1; }
 
 # switch to working directory
-cd ${0%/*}
+cd "`git rev-parse --git-dir`/../xml"
 
 mkdir -p generated
 
