@@ -384,7 +384,7 @@ Das RIS kann die Kapazitätsinformation von Standorten abonnieren. Der Interakti
 
 Um im Kundenauftrag ein Fahrzeug zu Buchen, ist es erfoderlich, dass das RIS den Kunden gegenüber dem FVS authentifizert. Hierzu gibt es drei Möglichkeiten die in \cref{sec:Datenmodell:Auth} genauer dargestellt sind. In diesem Beispiel wird explizit eine Sitzung geöffnet und im Anschluss der Transaktion wieder geschlossen. Danach kann eine Buchung durch den Aufruf von \texttt{Booking} mit Angabe der entsprechenden Buchungsziel ID und einem Vorschlag für einen Zeitraum durchgeführt werden. \blockquote{Vorschlag} deshalb, da das FVS z.B. den Zeitraum auf das verwendete Buchungsraster ändern kann. Als Antwort wird die verwendete Buchungsreferenz und der tatsächliche Buchungszeitraum zurückgegeben. Die Buchungsreferenz kann zur Überwachung der Buchung verwendet werden (vgl. \cref{sec:Interaktionsprotokolle:Dienst5}). Zur Änderung des Buchungszeitraums oder zur Stornierung, kann \texttt{ChangeBooking} aufgerufen werden. Bei Änderung des Buchungsziels ist eine Stornierung und Neubuchung erforderlich. 
 
-\subsection*{Abfrage externe Buchungen (Dienst 4a)}
+\subsection*{Abonnement externe Buchungen (Dienst 4a)}
 \label{subsec:Interaktionsprotokolle:Dienst4a}
 
 \begin{center}
@@ -392,32 +392,39 @@ Um im Kundenauftrag ein Fahrzeug zu Buchen, ist es erfoderlich, dass das RIS den
 \newthread{ris}{:RIS}
 \newinst[8]{fvs}{:FVS}
 
-% \begin{sdblock}{OpenSession*}{}
-%
-% \begin{call}{ris}{}{fvs}{}
-% \end{call}
-%
-% \end{sdblock}
+\begin{sdblock}{Abonnement von externen Buchungen}{}
 
-\begin{sdblock}{Abfrage externe Buchungen}{}
+\begin{call}{ris}{Kundenreferenz, (Abostornierung)*}{fvs}{}
+\end{call}
 
-\begin{call}{ris}{Zeitraum, Kundenreferenzen*}{fvs}{Buchungsinformationen}
+\end{sdblock}
+\postlevel
+\begin{sdblock}{externe Buchung}{}
 
+\begin{mess}{fvs}{externe Buchung}{ris}
+\end{mess}
+
+\begin{mess}{fvs}{externe Buchung}{ris}
+\end{mess}
+\begin{mess}{fvs}{externe Buchung}{ris}
+\end{mess}
+\begin{mess}{fvs}{...}{ris}
+\end{mess}
+\end{sdblock}
+\postlevel
+
+\begin{sdblock}{Vollständige externe Buchungen}{}
+
+\begin{call}{ris}{}{fvs}{externe Buchungen}
 \end{call}
 
 \end{sdblock}
 
-% \begin{sdblock}{EndSession*}{}
-%
-% \begin{call}{ris}{}{fvs}{}
-% \end{call}
-%
-% \end{sdblock}
-
 \end{sequencediagram}
 \end{center}
+\smallskip
 
-Das RIS kann extern durchgeführte Buchungen (z.B. direkt an der Verleihstation ohne mitwirken des RIS) beim FVS abfragen um diese zu abonnieren oder entsprechende Verbrauchsdaten abzufragen. Hierzu wird ein entsprechender Zeitraum und ggfs. eine oder mehrere Kundenreferenzen  übergeben.
+Das RIS kann extern durchgeführte Buchungen (z.B. direkt an der Verleihstation ohne mitwirken des RIS) beim FVS abonnieren um Änderungen an diesen zu Abonnieren oder entsprechende Verbrauchsdaten abzufragen. Hierzu wird eine oder mehrere Kundenreferenzen übergeben.
 
 \section{Dienst 5 --  Buchungsabonnement}
 \label{sec:Interaktionsprotokolle:Dienst5}

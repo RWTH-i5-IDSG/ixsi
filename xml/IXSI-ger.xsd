@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Mit XMLSpy v2013 sp1 (x64) (http://www.altova.com) von Peter von Grumbkow (HaCon Ingenieurgesellschaft mbH) bearbeitet -->
-<!-- edited with XMLSpy v2010 rel. 3 sp1 (x64) (http://www.altova.com) by Peter von Grumbkow (HaCon Ingenieurgesellschaft mbH) -->
 <xs:schema xmlns="http://www.ixsi-schnittstelle.de/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ixsi-schnittstelle.de/" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--*******************************************************************-->
-	<!--Interface for X-Sharing Information (IXSI)-->
+	<!--Interface for X-Sharing Information (IXSI) MobilityBroker Version -->
 	<!--*******************************************************************-->
-	<!--Spezifikation, Version 4 vom 2014-11-25-->
-	<!--Urheber: Peter von Grumbkow, HaCon Ing.-Ges. mbH und Dirk Hillbrecht, cantamen GmbH-->
+	<!--Spezifikation, Version 4.8 vom 2015-02-24-->
+	<!--Urheber: Peter von Grumbkow, HaCon Ing.-Ges. mbH; Dirk Hillbrecht, cantamen GmbH; Christian Samsel, RWTH Aachen-->
 	<!--Diese Schnittstellenspezifikation steht unter folgender Lizenz: CC BY-ND 3.0 DE (Creative Commons Namensnennung-Keine Bearbeitung 3.0 Deutschland), http://creativecommons.org/licenses/by-nd/3.0/de/-->
 	<!--*******************************************************************-->
-	<!--Specification, Version 4 of 2014-11-25-->
-	<!--Authors: Peter von Grumbkow, HaCon Ing.-Ges. mbH and Dirk Hillbrecht, cantamen GmbH-->
+	<!--Specification, Version 4 of 2015-02-24-->
+	<!--Authors: Peter von Grumbkow, HaCon Ing.-Ges. mbH; Dirk Hillbrecht, cantamen GmbH; Christian Samsel, RWTH Aachen-->
 	<!--This interface specification is licensed according to: CC BY-ND 3.0 DE (Creative Commons Namensnennung-Keine Bearbeitung 3.0 Deutschland), http://creativecommons.org/licenses/by-nd/3.0/de/-->
 	<!--*******************************************************************-->
 	<xs:annotation>
@@ -310,7 +308,7 @@
 	</xs:complexType>
 	<xs:complexType name="UserInfoType">
 		<xs:annotation>
-			<xs:documentation>Typ für eine User-Identifizierung.</xs:documentation>
+			<xs:documentation>Typ für eine User-Identifizierung. Passwort/Token sind optional.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="ProviderID" type="ProviderIDType">
@@ -323,7 +321,7 @@
 					<xs:documentation>User-ID.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:choice>
+			<xs:choice minOccurs="0">
 				<xs:element name="Password" type="xs:normalizedString">
 					<xs:annotation>
 						<xs:documentation>Passwort des Users.</xs:documentation>
@@ -1560,26 +1558,93 @@
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:annotation>
-		<xs:documentation>**** Service (4a) : externe Buchungen abfragen ****</xs:documentation>
+		<xs:documentation>**** Service (4a) : externe Buchungen abonnieren ****</xs:documentation>
 	</xs:annotation>
-	<xs:complexType name="ExternalBookingRequestType">
+	<xs:complexType name="ExternalBookingSubscriptionRequestType">
 		<xs:annotation>
 			<xs:documentation>Anfrage um BuchungsID abzufragen die extern erstellt wurden. Kann zur Abfrage von Verbauchsdaten verwendet werden.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="TimePeriod" type="TimePeriodType">
-				<xs:annotation>
-					<xs:documentation>Zeitraum in dem Buchung durchgeführt wurden.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="UserInfo" type="UserInfoType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Buchungen nur für die entsprechenden Benutzer abrufen.</xs:documentation>
+					<xs:documentation>Buchungen nur für die entsprechenden Benutzer abrufen (falls weggelassen alle erlaubten Benutzer abonnieren).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Unsubscription" type="xs:boolean" default="false" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Falls gesetzt, gegebene Abos der Buchungen kündigen. Andernfalls abonnieren.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="ExternalBookingResponseType">
+	<xs:complexType name="ExternalBookingSubscriptionResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort für Abonnement von externen Buchungen.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ExternalBookingSubscriptionStatusRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um für externe Buchungen abonnierte Benutzer zu erhalten.</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:complexType name="ExternalBookingSubscriptionStatusResponseType">
+		<xs:annotation>
+		  <xs:documentation>Antwort um für externe Buchungen abonnierte Benutzer zu erhalten.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType">
+				<xs:sequence>
+					<xs:element name="UserInfo" type="UserInfoType" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Abonnierte Benutzer.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CompleteExternalBookingRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um alle abonnierten externen Buchungen zu erhalten.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MaxResults" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Definiert die maximale Anzahl Resultate, die in einer Nachricht zurückgegeben werden.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompleteExternalBookingResponseType">
+		<xs:annotation>
+			<xs:documentation>Nachricht um den vollständigen aktuellen Status abonnierter externer Buchungen zu erhalten. Mehrere solcher Antworten können zu einer einzigen Anfrage gehören.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType">
+				<xs:sequence>
+					<xs:element name="MessageBlockID" type="xs:token">
+						<xs:annotation>
+							<xs:documentation>ID des Blocks, zu dem diese Nachricht gehört. Alle Nachrichten eines Blockes haben dieselbe ID.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Last" type="xs:boolean" default="false" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Falls gesetzt, ist diese Nachricht die Letzte im korrespondierenden Block. Andernfalls folgen mehr Nachrichten desselben Blocks.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="externalBooking" type="externalBookingType">
+						<xs:annotation>
+							<xs:documentation>Information über externe Buchungen.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ExternalBookingPushMessageType">
 		<xs:annotation>
 			<xs:documentation>Antwort für externe BuchungsIDs.</xs:documentation>
 		</xs:annotation>
@@ -1658,7 +1723,7 @@
 	</xs:complexType>
 	<xs:complexType name="CompleteBookingAlertResponseType">
 		<xs:annotation>
-			<xs:documentation>Nachricht um den vollständigen aktuellen Status abonnierter Buchungen zu erhalten. Verschiedene solcher Antworten können zu einer einzigen Anfrage gehören.</xs:documentation>
+			<xs:documentation>Nachricht um den vollständigen aktuellen Status abonnierter Buchungen zu erhalten. Mehrere solcher Antworten können zu einer einzigen Anfrage gehören.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
