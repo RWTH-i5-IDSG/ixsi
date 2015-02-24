@@ -694,9 +694,9 @@
 			<xs:documentation>Typ für Buchungszielinformationen.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="ID" type="BookeeIDType">
+			<xs:element name="ID" type="BookingTargetIDType">
 				<xs:annotation>
-					<xs:documentation>Bookee-ID.</xs:documentation>
+					<xs:documentation>BookingTargetID.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
                        <xs:element name="GlobalID" type="GlobalIDType" minOccurs="0">
