@@ -14,15 +14,11 @@ file="IXSI.xsd"
 # Headings
 name="Name"
 element="Element"
-type="Typ"
-comment="Kommentar"
-optional="optional"
-multivalue="mehrwertig"
-choice="auswahl"
-empty="(leer)"
-schema="XML Schema"
-group="Gruppenzugehoerigkeit"
-basetype="Basistyp"
+type="Type"
+comment="Comment"
+empty="(empty)"
+group="Group membership"
+basetype="Basetype"
 
 command -v xsltproc >/dev/null 2>&1 || { echo >&2 "I require xsltproc but it's not installed.  Aborting."; exit 1; }
 
