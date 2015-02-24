@@ -30,6 +30,8 @@ https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-german.pdf
 
 https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-english.pdf
 
+https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-mobilitybroker.pdf
+
 IXSI was developed for eConnect Germany, Hub Osnabrück by
 
 cantamen GmbH,
