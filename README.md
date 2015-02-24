@@ -22,7 +22,7 @@ echo "`git rev-parse --git-dir`/../xml/generate-tex-from-schema.sh" >> .git/hook
 echo "`git rev-parse --git-dir`/../xml/generate-tex-from-schema.sh" >> .git/hooks/post-merge
 chmod +x .git/hooks/post-{checkout,merge}
 ```
-IXSI is currently still under development and the API is not final. The branch `consumption` contains non standard additions to support the transfer of conumption data.
+IXSI is currently still under development and the API is not final. The branch `mobilitybroker` contains non standard additions developed in project mobilitybroker.
 
 precomiled pdfs are available under: 
 
