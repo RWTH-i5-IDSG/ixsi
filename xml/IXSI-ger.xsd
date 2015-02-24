@@ -1635,7 +1635,7 @@
 							<xs:documentation>Falls gesetzt, ist diese Nachricht die Letzte im korrespondierenden Block. Andernfalls folgen mehr Nachrichten desselben Blocks.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="externalBooking" type="externalBookingType">
+					<xs:element name="externalBooking" type="ExternalBookingType">
 						<xs:annotation>
 							<xs:documentation>Information über externe Buchungen.</xs:documentation>
 						</xs:annotation>
@@ -1651,7 +1651,7 @@
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
 				<xs:sequence>
-					<xs:element name="externalBooking" type="externalBookingType">
+					<xs:element name="externalBooking" type="ExternalBookingType">
 						<xs:annotation>
 							<xs:documentation>Information über externe Buchungen.</xs:documentation>
 						</xs:annotation>
