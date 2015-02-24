@@ -2150,16 +2150,16 @@
 						<xs:documentation>check consumption data subscriptions.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-                <xs:element name="ExternalBookingSubscription" type="ExternalBookingSubscriptionRequestType">
-                    <xs:annotation>
-                        <xs:documentation>Subscribe to external bookings.</xs:documentation>
-                    </xs:annotation>
-                </xs:element>
-                <xs:element name="ExternalBookingSubscriptionStatus" type="ExternalBookingSubscriptionStatusRequestType">
-                    <xs:annotation>
-                        <xs:documentation>Check external booking subscriptions.</xs:documentation>
-                    </xs:annotation>
-                </xs:element>
+				<xs:element name="ExternalBookingSubscription" type="ExternalBookingSubscriptionRequestType">
+				    <xs:annotation>
+					<xs:documentation>Subscribe to external bookings.</xs:documentation>
+				    </xs:annotation>
+				</xs:element>
+				<xs:element name="ExternalBookingSubscriptionStatus" type="ExternalBookingSubscriptionStatusRequestType">
+				    <xs:annotation>
+					<xs:documentation>Check external booking subscriptions.</xs:documentation>
+				    </xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2209,16 +2209,16 @@
 						<xs:documentation>check consumption data subscriptions.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-                <xs:element name="ExternalBookingSubscription" type="ExternalBookingSubscriptionResponseType">
-                    <xs:annotation>
-                        <xs:documentation>Subscribe to external bookings.</xs:documentation>
-                    </xs:annotation>
-                </xs:element>
-                <xs:element name="ExternalBookingSubscriptionStatus" type="ExternalBookingSubscriptionStatusResponseType">
-                    <xs:annotation>
-                        <xs:documentation>Check external booking subscriptions.</xs:documentation>
-                    </xs:annotation>
-                </xs:element>
+				<xs:element name="ExternalBookingSubscription" type="ExternalBookingSubscriptionResponseType">
+				    <xs:annotation>
+					<xs:documentation>Subscribe to external bookings.</xs:documentation>
+				    </xs:annotation>
+				</xs:element>
+				<xs:element name="ExternalBookingSubscriptionStatus" type="ExternalBookingSubscriptionStatusResponseType">
+				    <xs:annotation>
+					<xs:documentation>Check external booking subscriptions.</xs:documentation>
+				    </xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2248,11 +2248,11 @@
 						<xs:documentation>Get all subscribed consumption data.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-                <xs:element name="CompleteExternalBooking" type="CompleteExternalBookingRequestType">
-                    <xs:annotation>
-                        <xs:documentation>Get all subscribed external bookings.</xs:documentation>
-                    </xs:annotation>
-                </xs:element>
+				<xs:element name="CompleteExternalBooking" type="CompleteExternalBookingRequestType">
+				    <xs:annotation>
+					<xs:documentation>Get all subscribed external bookings.</xs:documentation>
+				    </xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2282,11 +2282,11 @@
 						<xs:documentation>Get all subscribed consumption data.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-                <xs:element name="CompleteExternalBooking" type="CompleteExternalBookingResponseType">
-                    <xs:annotation>
-                        <xs:documentation>Get all subscribed external bookings.</xs:documentation>
-                    </xs:annotation>
-                </xs:element>
+				<xs:element name="CompleteExternalBooking" type="CompleteExternalBookingResponseType">
+				    <xs:annotation>
+					<xs:documentation>Get all subscribed external bookings.</xs:documentation>
+				    </xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2316,11 +2316,11 @@
 						<xs:documentation>Push message for consumption data.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-                <xs:element name="ExternalBookingPush" type="ExternalBookingPushMessageType">
-                    <xs:annotation>
-                        <xs:documentation>Push message for external bookings.</xs:documentation>
-                    </xs:annotation>
-                </xs:element>
+		<xs:element name="ExternalBookingPush" type="ExternalBookingPushMessageType">
+		    <xs:annotation>
+			<xs:documentation>Push message for external bookings.</xs:documentation>
+		    </xs:annotation>
+		</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>

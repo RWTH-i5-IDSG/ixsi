@@ -908,27 +908,27 @@
 	</xs:complexType>
 	<xs:complexType name="ExternalBookingType">
 		<xs:annotation>
-			<xs:documentation>Type for information for external bookings.</xs:documentation>
+			<xs:documentation>Type für Informationen über externe Buchungen.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="BookingID" type="BookingIDType">
 				<xs:annotation>
-					<xs:documentation>BookingID of the externally added booking.</xs:documentation>
+					<xs:documentation>BookingID der externen hinzugefügten Buchungen.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="BookingTargetID" type="BookingTargetIDType">
 				<xs:annotation>
-					<xs:documentation>BookingTargetID of the booked vehicle.</xs:documentation>
+					<xs:documentation>BookingTargetID des gebuchten Fahrzeuges.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="UserInfo" type="UserInfoType">
 				<xs:annotation>
-					<xs:documentation>UserInfo of the user this booking belongs to.</xs:documentation>
+					<xs:documentation>UserInfo des Benutzers dem diese Buchung gehört.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="TimePeriod" type="TimePeriodType">
 				  <xs:annotation>
-					<xs:documentation>Time period of respective booking.</xs:documentation>
+					<xs:documentation>Zeitraum der Buchung.</xs:documentation>
 				  </xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -2146,6 +2146,15 @@
 						<xs:documentation>Prüfen von Verbauchsdatenabonnements.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="ExternalBookingSubscription" type="ExternalBookingSubscriptionRequestType">
+					<xs:annotation>
+						<xs:documentation>Abonnieren von externen Buchungen.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ExternalBookingSubscriptionStatus" type="ExternalBookingSubscriptionStatusRequestType">
+					<xs:annotation>
+						<xs:documentation>Abonnentments von externen Buchungen überprüfen.</xs:documentation>
+					</xs:annotation>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2195,6 +2204,16 @@
 						<xs:documentation>Prüfen von Verbauchsdatenabonnements.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="ExternalBookingSubscription" type="ExternalBookingSubscriptionResponseType">
+					<xs:annotation>
+						<xs:documentation>Abonnieren von externen Buchungen.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ExternalBookingSubscriptionStatus" type="ExternalBookingSubscriptionStatusResponseType">
+					<xs:annotation>
+						<xs:documentation>Prüfen von externen Buchungen.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2221,7 +2240,12 @@
 				</xs:element>
 				<xs:element name="CompleteConsumption" type="CompleteConsumptionRequestType">
 					<xs:annotation>
-						<xs:documentation>Beziehen aller abonnierten Buchungsänderungen.</xs:documentation>
+						<xs:documentation>Beziehen aller abonnierten Verbrauchsdaten.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="CompleteExternalBooking" type="CompleteExternalBookingRequestType">
+					<xs:annotation>
+						<xs:documentation>Beziehen aller abonnierten externen Buchungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -2253,6 +2277,11 @@
 						<xs:documentation>Beziehen aller abonnierten Verbrauchsdaten.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="CompleteExternalBooking" type="CompleteExternalBookingRequestType">
+				      <xs:annotation>
+						<xs:documentation>Bziehen aller abonnierter externen Buchungen.</xs:documentation>
+				      </xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2264,22 +2293,27 @@
 			<xs:choice>
 				<xs:element name="AvailabilityPush" type="AvailabilityPushMessageType">
 					<xs:annotation>
-						<xs:documentation>Push-Nachrichten für Verfügbarkeiten.</xs:documentation>
+						<xs:documentation>Push-Nachricht für Verfügbarkeiten.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="PlaceAvailabilityPush" type="PlaceAvailabilityPushMessageType">
 					<xs:annotation>
-						<xs:documentation>Push-Nachrichten für Standorte.</xs:documentation>
+						<xs:documentation>Push-Nachricht für Standorte.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="BookingAlertPush" type="BookingAlertPushMessageType">
 					<xs:annotation>
-						<xs:documentation>Push-Nachrichten für Buchungsänderungen.</xs:documentation>
+						<xs:documentation>Push-Nachricht für Buchungsänderungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="ConsumptionPush" type="ConsumptionPushMessageType">
 					<xs:annotation>
-						<xs:documentation>Push-Nachrichten für Verbrauchsdaten.</xs:documentation>
+						<xs:documentation>Push-Nachricht für Verbrauchsdaten.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ExternalBookingPush" type="ExternalBookingPushMessageType">
+					<xs:annotation>
+						<xs:documentation>Push-Nachricht für externe Buchungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
