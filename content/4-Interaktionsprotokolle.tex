@@ -588,3 +588,30 @@ Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3
 \smallskip
 
 Um ein Fahrzeug durch das RIS freischalten zu lassen muss eine Buchung für dieses Fahrzeug bereits vorliegen. Mit einer Referenz auf diese Buchung kann das Fahrzeug freigeschaltet werden. Eine Authentifizierung ist hierfür erforderlich.
+
+
+
+\section{Dienst 9 -- Benutzermanagement}
+\label{sec:Interaktionsprotokolle:Dienst9}
+
+\begin{center}
+\begin{sequencediagram}
+\newthread{ris}{:RIS}
+\newinst[8]{fvs}{:FVS}
+
+
+\begin{sdblock}{Benutzer erstellen}{Dienst 9}
+\begin{call}{ris}{Benutzerinformation}{fvs}{}
+\end{call}
+\end{sdblock}
+
+\begin{sdblock}{Benutzer sperren}{Dienst 9}
+\begin{call}{ris}{Benutzerreferenz, sperren/entsperren}{fvs}{}
+\end{call}
+\end{sdblock}
+
+\end{sequencediagram}
+\end{center}
+\smallskip
+
+Das RIS legt Benutzer im FVS an um eine doppelte Anmeldung bei beiden Diensten überflüssig zu machen. Optional können Benutzer auch gesperrt/entsperrt werden.

@@ -14,7 +14,8 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
   \node[rectangleTX, left= 1cm of s3](s2) {Dienst 2\\Verfügbarkeitsauskunft};
   \node[rectangleTX, below right of=s1](s4) {Dienst 4\\Buchung};
   \node[rectangleTX, right= 1cm of s4](s6) {Dienst 6\\Preisauskunft};
-  
+  \node[rectangleTX, right= 1cm of s6](s9) {Dienst 9\\Benutzermanagement};
+
   \node[rectangleTX, below right = 1cm of s4](s8) {Dienst 8\\Fahrzeugfreischaltung};
   \node[rectangleTX, left= 1cm of s8](s7) {Dienst 7\\Verbrauchsdaten};
   \node[rectangleTX, left= 1cm of s7](s5) {Dienst 5\\Buchungsabonnement};
@@ -26,6 +27,7 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
   \draw (s6) edge[->,thick=1cm] (s1);
   \draw (s7) edge[->,thick=1cm] (s4);
   \draw (s8) edge[->,thick=1cm] (s4);
+  \draw (s9) edge[->,thick=1cm] (s1);
   \end{tikzpicture}
   }
   \caption{Dienstabhängigkeiten \label{fig:depend}}
@@ -190,5 +192,20 @@ Dienst 8 dient dem freischalten von Fahrzeugen bzgl. Buchungszielen durch das RI
 \subsection*{Abhängigkeiten}
 \begin{itemize}
 \item Dienst 4
+\item Basisdienst A
+\end{itemize}
+
+\section{Dienst 9 -- Anlegen und Sperren von Nutzern (user management)}
+Dienst 9 dient dem anlegen und sperren von FVS Nutzern durch das RIS. Dies erlaubt dass sich Nutzer nur beim RIS Betreiber registieren müssen und diese Registierung auch für das FVS gilt.
+
+\subsection*{Funktionen}
+\begin{itemize}
+\item Benutzer anlegen
+\item Benutzer sperren
+\end{itemize}
+
+\subsection*{Abhängigkeiten}
+\begin{itemize}
+\item Dienst 1
 \item Basisdienst A
 \end{itemize}
