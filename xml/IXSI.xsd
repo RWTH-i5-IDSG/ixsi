@@ -1097,6 +1097,23 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+        <xs:complexType name="UserType">
+                <xs:annotation>
+                        <xs:documentation>Type for a user (used in user management).</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                        <xs:element name="ID" type="UserInfoType">
+                                <xs:annotation>
+                                        <xs:documentation>UserID and ProviderID for identification, can also contain credentials.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Info" type="InfoType" minOccurs="0" maxOccurs="unbounded">
+                                <xs:annotation>
+                                        <xs:documentation>Additional information on this booking.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                </xs:sequence>
+        </xs:complexType>
 	<xs:complexType name="AbstractBaseResponseType" abstract="true">
 		<xs:annotation>
 			<xs:documentation>Abstract type as a base for responses.</xs:documentation>
@@ -1912,6 +1929,77 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
+        <xs:annotation>
+                <xs:documentation>**** Service (9) : User Management ****</xs:documentation>
+        </xs:annotation>
+        <xs:complexType name="CreateUserRequestType">
+                <xs:annotation>
+                        <xs:documentation>Request for creating a user (deleting is intentionally not supported, only locking).</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                        <xs:element name="User" type="UserType">
+                                <xs:annotation>
+                                        <xs:documentation>Proposed User info (duplicated UserIDs will be changed).</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                </xs:sequence>
+        </xs:complexType>
+        <xs:complexType name="CreateUserResponseType">
+                <xs:annotation>
+                        <xs:documentation>Response for creating a user.</xs:documentation>
+                </xs:annotation>
+                <xs:complexContent>
+                        <xs:extension base="AbstractBaseResponseType">
+                                <xs:sequence>
+                                        <xs:element name="User" type="UserType">
+                                                <xs:annotation>
+                                                        <xs:documentation>Information about a successful created user (might differ).</xs:documentation>
+                                                </xs:annotation>
+                                        </xs:element>
+                                </xs:sequence>
+                        </xs:extension>
+                </xs:complexContent>
+        </xs:complexType>
+        <xs:complexType name="ChangeUserRequestType">
+                <xs:annotation>
+                        <xs:documentation>Request for changing a user.</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                        <xs:element name="UserInfoType" type="UserInfoType">
+                                <xs:annotation>
+                                        <xs:documentation>Booking to change.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                        <xs:choice>
+                                <xs:element name="NewInfo" type="InfoType" minOccurs="0" maxOccurs="unbounded">
+                                        <xs:annotation>
+                                                <xs:documentation>Additional information on this booking.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
+                                <xs:element name="Ban" type="xs:boolean">
+                                        <xs:annotation>
+                                                <xs:documentation>The User shall be suspended/unsuspended.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
+                        </xs:choice>
+                </xs:sequence>
+        </xs:complexType>
+        <xs:complexType name="ChangeUserResponseType">
+                <xs:annotation>
+                        <xs:documentation>Response for changing a user.</xs:documentation>
+                </xs:annotation>
+                <xs:complexContent>
+                        <xs:extension base="AbstractBaseResponseType">
+                                <xs:sequence>
+                                        <xs:element name="User" type="UserType" minOccurs="0">
+                                                <xs:annotation>
+                                                        <xs:documentation>Information on changed user.</xs:documentation>
+                                                </xs:annotation>
+                                        </xs:element>
+                                </xs:sequence>
+                        </xs:extension>
+                </xs:complexContent>
+        </xs:complexType>
 	<xs:annotation>
 		<xs:documentation>**** Message container ****</xs:documentation>
 	</xs:annotation>
@@ -1976,6 +2064,16 @@
 						<xs:documentation>Unlock a booked vehicle.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+                                <xs:element name="CreateUser" type="CreateUserRequestType">
+                                        <xs:annotation>
+                                                <xs:documentation>Create a user.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
+                                <xs:element name="ChangeUser" type="ChangeUserRequestType">
+                                        <xs:annotation>
+                                                <xs:documentation>Change a User.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2040,6 +2138,16 @@
 						<xs:documentation>Unlock a booked vehicle.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+                                <xs:element name="CreateUser" type="CreateUserResponseType">
+                                        <xs:annotation>
+                                                <xs:documentation>Create a User.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
+                                <xs:element name="ChangeUser" type="ChangeUserResponseType">
+                                        <xs:annotation>
+                                                <xs:documentation>Change a User.</xs:documentation>
+                                        </xs:annotation>
+                                </xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
