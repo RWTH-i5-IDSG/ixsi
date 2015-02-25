@@ -1001,6 +1001,7 @@
 				<xs:annotation>
 					<xs:documentation>ProviderID Referenz für den Fall, dass BookingIDs nicht global eindeutig sind.</xs:documentation>
 				</xs:annotation>
+			</xs:element>
 			<xs:element name="Type" type="ConsumptionClassType">
 				<xs:annotation>
 					<xs:documentation>Typ des Verbrauchs.</xs:documentation>
