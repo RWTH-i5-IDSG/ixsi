@@ -994,9 +994,13 @@
 		<xs:sequence>
 			<xs:element name="BookingID" type="BookingIDType">
 				<xs:annotation>
-					<xs:documentation>BookingID reference for this Consumption item.</xs:documentation>
+					<xs:documentation>BookingID Referenz für diesen Verbrauchsdatenposten.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="ProviderID" type="ProviderIDType">
+				<xs:annotation>
+					<xs:documentation>ProviderID Referenz für den Fall, dass BookingIDs nicht global eindeutig sind.</xs:documentation>
+				</xs:annotation>
 			<xs:element name="Type" type="ConsumptionClassType">
 				<xs:annotation>
 					<xs:documentation>Typ des Verbrauchs.</xs:documentation>
@@ -1010,7 +1014,7 @@
 			<xs:choice>
 				<xs:element name="Value" type="xs:decimal">
 					<xs:annotation>
-						<xs:documentation>Dezimaler Verbrauchswert (e.g., Distanz).</xs:documentation>
+						<xs:documentation>Dezimaler Verbrauchswert (z.B., Distanz).</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="TimePeriod" type="TimePeriodType">
