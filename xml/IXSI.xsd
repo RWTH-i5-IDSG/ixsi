@@ -1109,7 +1109,7 @@
                         </xs:element>
                         <xs:element name="Info" type="InfoType" minOccurs="0" maxOccurs="unbounded">
                                 <xs:annotation>
-                                        <xs:documentation>Additional information on this booking.</xs:documentation>
+                                        <xs:documentation>Additional information on user.</xs:documentation>
                                 </xs:annotation>
                         </xs:element>
                 </xs:sequence>
@@ -1967,13 +1967,13 @@
                 <xs:sequence>
                         <xs:element name="UserInfoType" type="UserInfoType">
                                 <xs:annotation>
-                                        <xs:documentation>Booking to change.</xs:documentation>
+                                        <xs:documentation>User to change.</xs:documentation>
                                 </xs:annotation>
                         </xs:element>
                         <xs:choice>
                                 <xs:element name="NewInfo" type="InfoType" minOccurs="0" maxOccurs="unbounded">
                                         <xs:annotation>
-                                                <xs:documentation>Additional information on this booking.</xs:documentation>
+                                                <xs:documentation>Additional information on this user.</xs:documentation>
                                         </xs:annotation>
                                 </xs:element>
                                 <xs:element name="Ban" type="xs:boolean">
