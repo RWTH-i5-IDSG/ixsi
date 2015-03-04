@@ -1973,7 +1973,7 @@
                         <xs:choice>
                                 <xs:element name="NewInfo" type="InfoType" minOccurs="0" maxOccurs="unbounded">
                                         <xs:annotation>
-                                                <xs:documentation>Additional information on this user.</xs:documentation>
+                                                <xs:documentation>Additional information on this user. All previous Infos are overwritten.</xs:documentation>
                                         </xs:annotation>
                                 </xs:element>
                                 <xs:element name="Ban" type="xs:boolean">
