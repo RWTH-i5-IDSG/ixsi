@@ -24,7 +24,7 @@ chmod +x .git/hooks/post-{checkout,merge}
 ```
 IXSI is currently still under development and the API is not final. The branch `mobilitybroker` contains non standard additions developed in project mobilitybroker.
 
-precomiled pdfs are available under: 
+precompiled pdfs are available under: 
 
 https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-german.pdf
 
