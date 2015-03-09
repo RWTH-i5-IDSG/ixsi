@@ -1001,11 +1001,6 @@
 					 <xs:documentation>BookingID reference for this Consumption item.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="ProviderID" type="ProviderIDType">
-				<xs:annotation>
-					<xs:documentation>ProviderID reference in case BookingIDs are not globally unique.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="Type" type="ConsumptionClassType">
 				<xs:annotation>
 					 <xs:documentation>Type of consumption.</xs:documentation>
