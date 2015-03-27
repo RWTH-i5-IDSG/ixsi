@@ -1034,6 +1034,11 @@
 					<xs:documentation>Druckbare Beschreibung des des Rechnungsposten.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="Final" type="xs:boolean" default="false" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Verbrauchsdaten für diese Buchung sind final, weitere Verbrauchsdaten werden nicht erwartet.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="OriginDestType">
@@ -1088,23 +1093,23 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-        <xs:complexType name="UserType">
-                <xs:annotation>
-                        <xs:documentation>Typ für einen Benutzer (Für Benutzerverwaltung)).</xs:documentation>
-                </xs:annotation>
-                <xs:sequence>
-                        <xs:element name="ID" type="UserInfoType">
-                                <xs:annotation>
-                                        <xs:documentation>UserID und ProviderID zur (eindeutigen) Identifikation.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                        <xs:element name="Info" type="InfoType" minOccurs="0" maxOccurs="unbounded">
-                                <xs:annotation>
-                                        <xs:documentation>Zusätzliche Benutzerinformationen.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                </xs:sequence>
-        </xs:complexType>
+	<xs:complexType name="UserType">
+		<xs:annotation>
+			<xs:documentation>Typ für einen Benutzer (Für Benutzerverwaltung)).</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="UserInfoType">
+				<xs:annotation>
+					<xs:documentation>UserID und ProviderID zur (eindeutigen) Identifikation.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Info" type="InfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Zusätzliche Benutzerinformationen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="AbstractBaseResponseType" abstract="true">
 		<xs:annotation>
 			<xs:documentation>Abstrakter Typ als eine Basis für Antworten.</xs:documentation>
@@ -1920,77 +1925,77 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-        <xs:annotation>
-                <xs:documentation>**** Service (9) : Benutzerverwaltung ****</xs:documentation>
-        </xs:annotation>
-        <xs:complexType name="CreateUserRequestType">
-                <xs:annotation>
-                        <xs:documentation>Anfrage um einen Benutzer zu erstellen (Löschen wird nicht bewusst nicht unterstützt).</xs:documentation>
-                </xs:annotation>
-                <xs:sequence>
-                        <xs:element name="User" type="UserType">
-                                <xs:annotation>
-                                        <xs:documentation>Vorgeschlagene Benutzeridentifikation (kann von Server geändert werden, z.B. bei doppelten UserIDs).</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                </xs:sequence>
-        </xs:complexType>
-        <xs:complexType name="CreateUserResponseType">
-                <xs:annotation>
-                        <xs:documentation>Antwort um einen Benutzer zu erstellen.</xs:documentation>
-                </xs:annotation>
-                <xs:complexContent>
-                        <xs:extension base="AbstractBaseResponseType">
-                                <xs:sequence>
-                                        <xs:element name="User" type="UserType">
-                                                <xs:annotation>
-                                                        <xs:documentation>Informationen über den erstellen Benutzer (kann von der Anfrage abweichen).</xs:documentation>
-                                                </xs:annotation>
-                                        </xs:element>
-                                </xs:sequence>
-                        </xs:extension>
-                </xs:complexContent>
-        </xs:complexType>
-        <xs:complexType name="ChangeUserRequestType">
-                <xs:annotation>
-                        <xs:documentation>Anfrage um einen Benutzer zu ändern..</xs:documentation>
-                </xs:annotation>
-                <xs:sequence>
-                        <xs:element name="UserInfoType" type="UserInfoType">
-                                <xs:annotation>
-                                        <xs:documentation>der zu ändernde Benutzer.</xs:documentation>
-                                </xs:annotation>
-                        </xs:element>
-                        <xs:choice>
-                                <xs:element name="NewInfo" type="InfoType" minOccurs="0" maxOccurs="unbounded">
-                                        <xs:annotation>
-                                                <xs:documentation>Weitere Informationen über diesen Benutzer. Alle vorherigen Information werden überschrieben.</xs:documentation>
-                                        </xs:annotation>
-                                </xs:element>
-                                <xs:element name="Ban" type="xs:boolean">
-                                        <xs:annotation>
-                                                <xs:documentation>Der Benutzer soll gesperrt/entsperrt werden.</xs:documentation>
-                                        </xs:annotation>
-                                </xs:element>
-                        </xs:choice>
-                </xs:sequence>
-        </xs:complexType>
-        <xs:complexType name="ChangeUserResponseType">
-                <xs:annotation>
-                        <xs:documentation>Antwort Benutzeränderung.</xs:documentation>
-                </xs:annotation>
-                <xs:complexContent>
-                        <xs:extension base="AbstractBaseResponseType">
-                                <xs:sequence>
-                                        <xs:element name="User" type="UserType" minOccurs="0">
-                                                <xs:annotation>
-                                                        <xs:documentation>Informationen über den geänderten Benutzer.</xs:documentation>
-                                                </xs:annotation>
-                                        </xs:element>
-                                </xs:sequence>
-                        </xs:extension>
-                </xs:complexContent>
-        </xs:complexType>
+	<xs:annotation>
+		<xs:documentation>**** Service (9) : Benutzerverwaltung ****</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="CreateUserRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um einen Benutzer zu erstellen (Löschen wird nicht bewusst nicht unterstützt).</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="User" type="UserType">
+				<xs:annotation>
+					<xs:documentation>Vorgeschlagene Benutzeridentifikation (kann von Server geändert werden, z.B. bei doppelten UserIDs).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreateUserResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort um einen Benutzer zu erstellen.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType">
+				<xs:sequence>
+					<xs:element name="User" type="UserType">
+						<xs:annotation>
+							<xs:documentation>Informationen über den erstellen Benutzer (kann von der Anfrage abweichen).</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ChangeUserRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um einen Benutzer zu ändern..</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="UserInfoType" type="UserInfoType">
+				<xs:annotation>
+					<xs:documentation>der zu ändernde Benutzer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="NewInfo" type="InfoType" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Weitere Informationen über diesen Benutzer. Alle vorherigen Information werden überschrieben.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Ban" type="xs:boolean">
+					<xs:annotation>
+						<xs:documentation>Der Benutzer soll gesperrt/entsperrt werden.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChangeUserResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort Benutzeränderung.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType">
+				<xs:sequence>
+					<xs:element name="User" type="UserType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Informationen über den geänderten Benutzer.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 	<xs:annotation>
 		<xs:documentation>**** Nachrichtencontainer ****</xs:documentation>
 	</xs:annotation>
@@ -2055,16 +2060,16 @@
 						<xs:documentation>Fahrzeugfreischaltung.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-                                <xs:element name="CreateUser" type="CreateUserRequestType">
-                                        <xs:annotation>
-                                                <xs:documentation>Benutzer erstellen.</xs:documentation>
-                                        </xs:annotation>
-                                </xs:element>
-                                <xs:element name="ChangeUser" type="ChangeUserRequestType">
-                                        <xs:annotation>
-                                                <xs:documentation>Benutzer ändern.</xs:documentation>
-                                        </xs:annotation>
-                                </xs:element>
+				<xs:element name="CreateUser" type="CreateUserRequestType">
+					<xs:annotation>
+						<xs:documentation>Benutzer erstellen.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ChangeUser" type="ChangeUserRequestType">
+					<xs:annotation>
+						<xs:documentation>Benutzer ändern.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2129,16 +2134,16 @@
 						<xs:documentation>Fahrzeugfreischaltung.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-                                <xs:element name="CreateUser" type="CreateUserResponseType">
-                                        <xs:annotation>
-                                                <xs:documentation>Benutzer erstellen.</xs:documentation>
-                                        </xs:annotation>
-                                </xs:element>
-                                <xs:element name="ChangeUser" type="ChangeUserResponseType">
-                                        <xs:annotation>
-                                                <xs:documentation>Benutzer ändern.</xs:documentation>
-                                        </xs:annotation>
-                                </xs:element>
+				<xs:element name="CreateUser" type="CreateUserResponseType">
+					<xs:annotation>
+						<xs:documentation>Benutzer erstellen.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="ChangeUser" type="ChangeUserResponseType">
+					<xs:annotation>
+						<xs:documentation>Benutzer ändern.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
