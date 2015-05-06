@@ -97,6 +97,23 @@ Wert & Bedeutung\\
 \end{tabularx}
 \end{flushleft}
 
+\section{Nutzerzustände}
+\label{sec:CodeTabellen:UserStateType}
+
+Zustände die ein Benutzer im System haben kann, wird in  \emph{UserStateType} gespeichert. Folgende Werte sind dabei erlaubt:
+
+\begin{flushleft}
+\rowcolors{1}{}{gray!10}
+\begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}X}
+\toprule
+Wert & Bedeutung\\
+\midrule
+\verb|operative| & Benutzer ist aktiviert und darf Fahrzeuge buchen.\\
+\verb|nonoperative| & Benutzer ist gesperrt und darf keine Fahrzeuge buchen (kann entsperrt werden).\\
+\verb|deleted| & Benutzer ist (entgültig) gelöscht.\\
+\bottomrule
+\end{tabularx}
+\end{flushleft}
 \section{Fehlercodes}
 \label{sec:CodeTabellen:ErrorCode}
 Das FVS kann alternativ zu den normalen Response-, Update- und Handshake-Nachrichten auch im Fall eines Fehlers Fehlernachrichten an das RIS schicken. Fehlercodes werden im Datentyp \emph{ErrorCodeType} gespeichert.
