@@ -1975,11 +1975,13 @@
 		<xs:annotation>
 			<xs:documentation>Request for changing users.</xs:documentation>
 		</xs:annotation>
+		<xs:sequence>
 			<xs:element name="User" type="UserType" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>changed user info.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="ChangeUserResponseType">
 		<xs:annotation>
