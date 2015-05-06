@@ -437,12 +437,6 @@
 		</xs:annotation>
 		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
-	<xs:simpleType name="UserStateType">
-		<xs:annotation>
-			<xs:documentation>Aufzählung von Benutzerzuständen.</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:token"/>
-	</xs:simpleType>
 	<xs:simpleType name="AttributeIDType">
 		<xs:annotation>
 			<xs:documentation>Aufzählung von Attributcodes.</xs:documentation>
@@ -496,6 +490,35 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+        <xs:simpleType name="UserStateType">
+                <xs:annotation>
+                        <xs:documentation>Aufzählung für Benutzerzustand..</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:token"/>
+        </xs:simpleType>
+        <xs:simpleType name="UserFeatureClassType">
+                <xs:annotation>
+                        <xs:documentation>Aufzählung für Eigenschaften von Benutzern.</xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:token"/>
+        </xs:simpleType>
+        <xs:complexType name="UserFeatureType">
+                <xs:annotation>
+                        <xs:documentation>Typ für Eigenschaft von Benutzern.</xs:documentation>
+                </xs:annotation>
+                <xs:sequence>
+                        <xs:element name="Value" type="xs:string">
+                                <xs:annotation>
+                                        <xs:documentation>Wert der Klasse.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                        <xs:element name="Class" type="UserFeatureClassType">
+                                <xs:annotation>
+                                        <xs:documentation>Eigenschaftenklasse.</xs:documentation>
+                                </xs:annotation>
+                        </xs:element>
+                </xs:sequence>
+        </xs:complexType>
 	<xs:complexType name="InfoType">
 		<xs:annotation>
 			<xs:documentation>Typ für struktuierte Information und Text.</xs:documentation>
@@ -1114,7 +1137,7 @@
 					<xs:documentation>State of the (e.g., default, banned etc).</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Info" type="InfoType" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="Info" type="UserFeatureType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Zusätzliche Benutzerinformationen.</xs:documentation>
 				</xs:annotation>
