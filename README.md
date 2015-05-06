@@ -22,13 +22,15 @@ echo "`git rev-parse --git-dir`/../xml/generate-tex-from-schema.sh" >> .git/hook
 echo "`git rev-parse --git-dir`/../xml/generate-tex-from-schema.sh" >> .git/hooks/post-merge
 chmod +x .git/hooks/post-{checkout,merge}
 ```
-IXSI is currently still under development and the API is not final. The branch `mobilitybroker` contains non standard additions developed in project mobilitybroker.
+IXSI is currently still under development and the API is not final. 
 
-precomiled pdfs are available under: 
+precompiled pdfs are available under: 
 
 https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-german.pdf
 
 https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-english.pdf
+
+The branch `mobilitybroker` contains non standard additions developed in project mobilitybroker.
 
 https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-mobilitybroker.pdf
 
