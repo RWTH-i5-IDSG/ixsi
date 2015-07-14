@@ -1409,7 +1409,7 @@
 	</xs:annotation>
 	<xs:complexType name="BookingRequestType">
 		<xs:annotation>
-			<xs:documentation>Anfrage zum Buchen eines Buchungsziels.</xs:documentation>
+			<xs:documentation>Anfrage zum Buchen eines Buchungsziels. Eine Buchung impliziert nicht eine Nicht-Verfügbarkeit.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="BookingTargetID" type="BookingTargetIDType"/>

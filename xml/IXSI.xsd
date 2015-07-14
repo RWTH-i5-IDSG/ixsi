@@ -1411,7 +1411,7 @@
 	</xs:annotation>
 	<xs:complexType name="BookingRequestType">
 		<xs:annotation>
-			<xs:documentation>Request for booking a booking target.</xs:documentation>
+			<xs:documentation>Request for booking a booking target. A booking does not imply a inavailability.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="BookingTargetID" type="BookingTargetIDType"/>
