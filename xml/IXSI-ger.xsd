@@ -1031,9 +1031,9 @@
 					<xs:documentation>Typ des Verbrauchs.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Name" type="xs:string">
+			<xs:element name="Description" type="TextType" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Druckbarer Name des Rechnungsposten.</xs:documentation>
+					<xs:documentation>Druckbare Beschreibung des Rechnungsposten.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:choice>
@@ -1058,9 +1058,9 @@
 					<xs:documentation>Preis in Euro-Cent.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Description" type="xs:string" minOccurs="0">
+			<xs:element name="Annotation" type="TextType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Druckbare Beschreibung des des Rechnungsposten.</xs:documentation>
+					<xs:documentation>Druckbare Erläuterung zu dem Rechnungsposten.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="Final" type="xs:boolean" default="false" minOccurs="0">
