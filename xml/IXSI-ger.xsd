@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns="http://www.ixsi-schnittstelle.de/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ixsi-schnittstelle.de/" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--*******************************************************************-->
-	<!-- MobilityBroker Schnittstelle Version 0.9.3 basierend auf IXSI     -->
+	<!-- MobilityBroker Schnittstelle Version 0.10.0 basierend auf IXSI	-->
 	<!--*******************************************************************-->
-	<!--Spezifikation, Version 4.9 vom 2015-02-24-->
 	<!--Urheber: Peter von Grumbkow, HaCon Ing.-Ges. mbH; Dirk Hillbrecht, cantamen GmbH; Christian Samsel, RWTH Aachen-->
 	<!--Diese Schnittstellenspezifikation steht unter folgender Lizenz: CC BY-ND 3.0 DE (Creative Commons Namensnennung-Keine Bearbeitung 3.0 Deutschland), http://creativecommons.org/licenses/by-nd/3.0/de/-->
 	<!--*******************************************************************-->
-	<!--Specification, Version 4.9 of 2015-02-24-->
 	<!--Authors: Peter von Grumbkow, HaCon Ing.-Ges. mbH; Dirk Hillbrecht, cantamen GmbH; Christian Samsel, RWTH Aachen-->
 	<!--This interface specification is licensed according to: CC BY-ND 3.0 DE (Creative Commons Namensnennung-Keine Bearbeitung 3.0 Deutschland), http://creativecommons.org/licenses/by-nd/3.0/de/-->
 	<!--*******************************************************************-->
@@ -492,7 +490,7 @@
 	</xs:complexType>
 	<xs:simpleType name="UserStateType">
 		<xs:annotation>
-			<xs:documentation>Aufzählung für Benutzerzustand..</xs:documentation>
+			<xs:documentation>Aufzählung für Benutzerzustand.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
@@ -935,6 +933,16 @@
 			<xs:element name="Reason" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:simpleType name="BookingStateType">
+		<xs:annotation>
+			<xs:documentation>Aufzählung von verschiedenen Buchungszuständen.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="open"/>
+			<xs:enumeration value="suspended"/>
+			<xs:enumeration value="closed"/>
+		  </xs:restriction>
+	</xs:simpleType>
 	<xs:complexType name="ExternalBookingType">
 		<xs:annotation>
 			<xs:documentation>Type für Informationen über externe Buchungen.</xs:documentation>
@@ -1933,23 +1941,28 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:annotation>
-		<xs:documentation>**** Service (8) : Fahrzeugfreischaltung ****</xs:documentation>
+		<xs:documentation>**** Service (8) : Buchungszustand ändern (offen, pausiert, geschlossen) ****</xs:documentation>
 	</xs:annotation>
-	<xs:complexType name="BookingUnlockRequestType">
+	<xs:complexType name="ChangeBookingStateRequestType">
 		<xs:annotation>
-			<xs:documentation>Anfrage um zur Buchung gehörendes Fahrzeug für die Fahrt freizuschalten.</xs:documentation>
+			<xs:documentation>Anfrage um den Buchungszustand (Fahrzeug) zu ändern.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="BookingID" type="BookingIDType">
 				<xs:annotation>
-					<xs:documentation>Die freizuschaltene Buchung.</xs:documentation>
+					<xs:documentation>Die entsprechende Buchung.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BookingState" type="BookingStateType">
+				<xs:annotation>
+					<xs:documentation>Der neue Zustand der Buchung (open = Fahrzeug aufschließen, suspended = Fahrzeug abschließen aber Buchung nicht beenden, close = Fahrzeug abschließen  und Buchung beenden).</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="BookingUnlockResponseType">
+	<xs:complexType name="ChangeBookingStateResponseType">
 		<xs:annotation>
-			<xs:documentation>Antwort die den Status der Freischaltung zurück gibt. Enthält Attribute zur Information des Benutzers, z.B. das Kennzeichen des freigeschalteten Fahrzeuges.</xs:documentation>
+			<xs:documentation>Antwort auf Buchungszustandsänderung. Enthält zusätzliche Attribute die dem Nutzer übermittelt werden sollen.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">

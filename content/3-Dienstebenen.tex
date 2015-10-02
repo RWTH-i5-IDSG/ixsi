@@ -16,7 +16,7 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
   \node[rectangleTX, right= 1cm of s4](s6) {Dienst 6\\Preisauskunft};
   \node[rectangleTX, right= 1cm of s6](s9) {Dienst 9\\Benutzermanagement};
 
-  \node[rectangleTX, below right = 1cm of s4](s8) {Dienst 8\\Fahrzeugfreischaltung};
+  \node[rectangleTX, below right = 1cm of s4](s8) {Dienst 8\\Buchungsstatus\\(Freischaltung)};
   \node[rectangleTX, left= 1cm of s8](s7) {Dienst 7\\Verbrauchsdaten};
   \node[rectangleTX, left= 1cm of s7](s5) {Dienst 5\\Buchungsabonnement};
   %   arrows
@@ -181,12 +181,15 @@ Dienst 7 dient dem Austausch von Verbrauchsdaten wie z.B. Nutzungsdauer und Entf
 \item Basisdienst B
 \end{itemize}
 
-\section{Dienst 8 -- Fahrzeugfreischaltung (booking unlock)}
-Dienst 8 dient dem Freischalten von Fahrzeugen bzw. Buchungszielen (ggfs. auch ein Schlüsselkasten) durch das RIS. Dies erlaubt die Öffnung bzw. Freischaltung das Fahrzeug innerhalb der Endanwenderanwendung des RIS, z.B. innerhalb einer mobilen App. Die Freischaltung bezieht sich immer auf eine vorausgegangene Buchung und eine Authentifizierung ist erforderlich.
+\section{Dienst 8 -- Buchungsstatus ändern (freischalten / pausieren / abschließen) (booking state change)}
+Dienst 8 dient dem Freischalten von Buchungen respektive Fahrzeugen (ggfs. Schlüsselkasten) durch das RIS. Dies erlaubt sowohl die Öffnung bzw. Freischaltung als auch die Rückgabe das Fahrzeug innerhalb der Endanwenderanwendung des RIS, z.B. innerhalb einer mobilen App. Weiterhin kann eine Buchung pausiert werden, dies schließt dass Fahrzeug physikalisch ab, beendet aber nicht die Buchung.
+Der Status bezieht sich immer auf eine vorausgegangene Buchung und eine Authentifizierung ist erforderlich.
 
 \subsection*{Funktionen}
 \begin{itemize}
-\item Fahrzeugfreischaltung
+\item Buchung freischalten
+\item Buchung pausieren
+\item Buchung abschließen
 \end{itemize}
 
 \subsection*{Abhängigkeiten}

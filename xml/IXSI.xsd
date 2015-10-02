@@ -3,13 +3,11 @@
 <!-- edited with XMLSpy v2010 rel. 3 sp1 (x64) (http://www.altova.com) by Peter von Grumbkow (HaCon Ingenieurgesellschaft mbH) -->
 <xs:schema xmlns="http://www.ixsi-schnittstelle.de/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ixsi-schnittstelle.de/" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--*******************************************************************-->
-	<!-- MobilityBroker Schnittstelle Version 0.9.3 basierend auf IXSI     -->
+	<!-- MobilityBroker Schnittstelle Version 0.10 basierend auf IXSI      -->
 	<!--*******************************************************************-->
-	<!--Spezifikation, Version 4.9 vom 2015-02-24-->
 	<!--Urheber: Peter von Grumbkow, HaCon Ing.-Ges. mbH; Dirk Hillbrecht, cantamen GmbH; Christian Samsel, RWTH Aachen-->
 	<!--Diese Schnittstellenspezifikation steht unter folgender Lizenz: CC BY-ND 3.0 DE (Creative Commons Namensnennung-Keine Bearbeitung 3.0 Deutschland), http://creativecommons.org/licenses/by-nd/3.0/de/-->
 	<!--*******************************************************************-->
-	<!--Specification, Version 4.9 of 2015-02-24-->
 	<!--Authors: Peter von Grumbkow, HaCon Ing.-Ges. mbH; Dirk Hillbrecht, cantamen GmbH; Christian Samsel, RWTH Aachen-->
 	<!--This interface specification is licensed according to: CC BY-ND 3.0 DE (Creative Commons Namensnennung-Keine Bearbeitung 3.0 Deutschland), http://creativecommons.org/licenses/by-nd/3.0/de/-->
 	<!--*******************************************************************-->
@@ -939,6 +937,16 @@
 			<xs:element name="Reason" type="TextType" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:simpleType name="BookingStateType">
+		<xs:annotation>
+			<xs:documentation>Enumeration for booking state types.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="open"/>
+			<xs:enumeration value="suspended"/>
+			<xs:enumeration value="closed"/>
+		  </xs:restriction>
+	</xs:simpleType>
 	<xs:complexType name="ExternalBookingType">
 		<xs:annotation>
 			<xs:documentation>Type for information for external bookings.</xs:documentation>
@@ -1937,11 +1945,11 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:annotation>
-		<xs:documentation>**** Service (8) : Vehicle unlock ****</xs:documentation>
+		<xs:documentation>**** Service (8) : Booking state change (open, suspended, closed) ****</xs:documentation>
 	</xs:annotation>
-	<xs:complexType name="BookingUnlockRequestType">
+	<xs:complexType name="ChangeBookingStateRequestType">
 		<xs:annotation>
-			<xs:documentation>Request to unlock the booked vehicle.</xs:documentation>
+			<xs:documentation>Request to change to booking state.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:element name="BookingID" type="BookingIDType">
@@ -1949,11 +1957,16 @@
 					<xs:documentation>The respective booking.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="BookingState" type="BookingStateType">
+				<xs:annotation>
+					<xs:documentation>The new state of the booking (open = unlock vehicle, suspended = lock vehicle but dont close booking, close = lock and return vehicle).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="BookingUnlockResponseType">
+	<xs:complexType name="ChangeBookingStateResponseType">
 		<xs:annotation>
-			<xs:documentation>Response to unlock request with attributes to be conveyed to the customer. Can include e.g. license plate information.</xs:documentation>
+			<xs:documentation>Response to change booking state with attributes to be conveyed to the customer.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">

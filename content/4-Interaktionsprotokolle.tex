@@ -558,7 +558,7 @@ Das RIS kann Verbrauchsdaten (Nutzungsdauer, Entfernung, ggfs. andere) für eine
 Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3}.
 
 
-\section{Dienst 8 -- Fahrzeugfreischaltung}
+\section{Dienst 8 -- Buchungsstatus ändern}
 \label{sec:Interaktionsprotokolle:Dienst8}
 
 \begin{center}
@@ -575,8 +575,8 @@ Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3
     \end{call}
   \end{sdblock}
 
-  \begin{sdblock}{Fahrzeugfreischaltung}{Dienst 8}
-  \begin{call}{ris}{Buchungsreferenz}{fvs}{Zusatzinformationen}
+  \begin{sdblock}{Buchungsstatus ändern}{Dienst 8}
+  \begin{call}{ris}{Buchungsreferenz, Buchungsstatus}{fvs}{Zusatzinformationen}
     \end{call}
   \end{sdblock}
 
@@ -587,7 +587,7 @@ Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3
 \end{center}
 \smallskip
 
-Um ein Buchungsziel (Fahrzeug bzw. Schlüsselkasten) durch das RIS freischalten zu lassen, muss eine Buchung für dieses Buchungsziel bereits vorliegen (diese muss ggfs. für den Nutzer transparent durchgeführt werden). Mit einer Referenz auf diese Buchung kann das Buchungsziel dann freigeschaltet werden. Eine Authentifizierung ist hierfür erforderlich.
+Um ein Buchungsziel (Fahrzeug bzw. Schlüsselkasten) durch das RIS freischalten zu lassen, muss eine Buchung für dieses Buchungsziel bereits vorliegen (diese muss ggfs. für den Nutzer transparent durchgeführt werden). Mit einer Referenz auf diese Buchung kann das Buchungsziel dann freigeschaltet werden. Eine Authentifizierung ist hierfür erforderlich. Pausieren und Abschließen einer Buchung passiert analog.
 
 
 
