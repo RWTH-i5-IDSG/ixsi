@@ -2094,9 +2094,9 @@
 						<xs:documentation>Change a booking.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="BookingUnlock" type="BookingUnlockRequestType">
+				<xs:element name="ChangeBookingState" type="ChangeBookingStateRequestType">
 					<xs:annotation>
-						<xs:documentation>Unlock a booked vehicle.</xs:documentation>
+						<xs:documentation>Change the state of the booked vehicle.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="CreateUser" type="CreateUserRequestType">
@@ -2168,9 +2168,9 @@
 						<xs:documentation>Change a booking.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="BookingUnlock" type="BookingUnlockResponseType">
+				<xs:element name="ChangeBookingState" type="ChangeBookingStateResponseType">
 					<xs:annotation>
-						<xs:documentation>Unlock a booked vehicle.</xs:documentation>
+						<xs:documentation>Change the state of the booked vehicle.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="CreateUser" type="CreateUserResponseType">
