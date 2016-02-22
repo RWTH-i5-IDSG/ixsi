@@ -16,9 +16,11 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
   \node[rectangleTX, right= 1cm of s4](s6) {Dienst 6\\Preisauskunft};
   \node[rectangleTX, right= 1cm of s6](s9) {Dienst 9\\Benutzermanagement};
 
+
   \node[rectangleTX, below right = 1cm of s4](s8) {Dienst 8\\Buchungsstatus\\(Freischaltung)};
   \node[rectangleTX, left= 1cm of s8](s7) {Dienst 7\\Verbrauchsdaten};
   \node[rectangleTX, left= 1cm of s7](s5) {Dienst 5\\Buchungsabonnement};
+  \node[rectangleTX, right= 1cm of s8](s10) {Dienst 10\\Fahrzeugeinstellungen};
   %   arrows
   \draw (s2) edge[->,thick=1cm] (s1);
   \draw (s3) edge[->,thick=1cm] (s1);
@@ -28,6 +30,7 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
   \draw (s7) edge[->,thick=1cm] (s4);
   \draw (s8) edge[->,thick=1cm] (s4);
   \draw (s9) edge[->,thick=1cm] (s1);
+  \draw (s10) edge[->,thick=1cm] (s4);
   \end{tikzpicture}
   }
   \caption{Dienstabhängigkeiten \label{fig:depend}}
@@ -82,11 +85,11 @@ Dienst 1 dient dem Austausch von Informationen über Fahrzeugverleihanbietern un
 \end{itemize}
 
 \subsection*{Abhängigkeiten}
-keine 
+keine
 
 \section{Dienst 2 -- Verfügbarkeitsauskunft (availability query) }
 \label{sec:Hierachiemodell:Dienst2}
-Dienst 2 dient dem synchronen Abruf von Verfügbarkeitsinformationen. Die tatsächlichen Verfügbarkeitszeiten von Buchungszielen werden während der Reiseauskunft durch das RIS beim FVS abgerufen. 
+Dienst 2 dient dem synchronen Abruf von Verfügbarkeitsinformationen. Die tatsächlichen Verfügbarkeitszeiten von Buchungszielen werden während der Reiseauskunft durch das RIS beim FVS abgerufen.
 
 \subsection*{Funktionen}
 \begin{itemize}
@@ -210,5 +213,21 @@ Dienst 9 dient dem anlegen und sperren von FVS Nutzern durch das RIS. Dies erlau
 \subsection*{Abhängigkeiten}
 \begin{itemize}
 \item Dienst 1
+\item Basisdienst A
+\end{itemize}
+
+
+\section{Dienst 10 -- Fahrzeug- bzw. Buchungseinstellungsmanagement (booking settings)}
+Dienst 10 dient dem Management von Fahrzeugeinstellungen. Das RIS kann Fahrzeugeinstellungen (Temperatur der Klimaanlage, eingestellter Radiosender etc) an das FVS übertragen und Einstellung für bestehende Buchungen abonnieren.
+
+\subsection*{Funktionen}
+\begin{itemize}
+\item Fahrzeugeinstellungen setzten
+\item Fahrzeugeinstellungen abonnieren
+\end{itemize}
+
+\subsection*{Abhängigkeiten}
+\begin{itemize}
+\item Dienst 4
 \item Basisdienst A
 \end{itemize}

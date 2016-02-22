@@ -435,6 +435,12 @@
 		</xs:annotation>
 		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
+	<xs:simpleType name="BookingSettingsClassType">
+		<xs:annotation>
+			<xs:documentation>Aufzählung von Buchungseinstellungsklassen.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token"/>
+	</xs:simpleType>
 	<xs:simpleType name="AttributeIDType">
 		<xs:annotation>
 			<xs:documentation>Aufzählung von Attributcodes.</xs:documentation>
@@ -1076,6 +1082,35 @@
 					<xs:documentation>Verbrauchsdaten für diese Buchung sind final, weitere Verbrauchsdaten werden nicht erwartet.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BookingSettingsType">
+		<xs:annotation>
+			<xs:documentation>Typ für eine einzelne Buchungseinstellung.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BookingID" type="BookingIDType">
+				<xs:annotation>
+					 <xs:documentation>BookingID Referenz für diese Buchungseinstellung.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Type" type="BookingSettingsClassType">
+				<xs:annotation>
+					 <xs:documentation>Klasse der Buchungseinstellung.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="Value" type="xs:decimal">
+					<xs:annotation>
+						<xs:documentation>Dezimale Wert (z.B. Temperatur in C).</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="Value" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>Wert als String.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="OriginDestType">
@@ -2032,6 +2067,122 @@
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:annotation>
+		<xs:documentation>**** Service (10) : Fahrzeug / Buchungseinstellungen verwalten ****</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="SetBookingSettingsRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um Buchungseinstellungen zu setzen.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BookingID" type="BookingIDType">
+				<xs:annotation>
+					<xs:documentation>Die entsprechende Buchung.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BookingSettings" type="BookingSettingsType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Menge von anzuwendenen Einstellungen (Sitzposition, Temperatur).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SetBookingSettingsResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort um Buchungseinstellungen zu setzen.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType" />
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BookingSettingsSubscriptionRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um Buchungseinstellungen zu abonnieren oder zu stornieren.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BookingID" type="BookingIDType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>zu abonnierende BuchungsID.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Unsubscription" type="xs:boolean" default="false" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Falls gesetzt, abo stornieren.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BookingSettingsSubscriptionResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort auf Buchungseinstellungsabo.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BookingSettingsSubscriptionStatusRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um den Status von abonnierten Buchungseinstellungen abzufragen.</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:complexType name="BookingSettingsSubscriptionStatusResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort um den Status von abonnierten Buchungseinstellungen abzufragen.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType">
+				<xs:sequence>
+					<xs:element name="BookingID" type="BookingIDType" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Abonnierte Buchungen.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CompleteBookingSettingsRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um alle abonnierten Buchungseinstellungen abzufragen.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MaxResults" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Maximale Anzahl Ergebnisse..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompleteBookingSettingsResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort um alle abonnierten Buchungseinstellungen abzufragen.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType">
+				<xs:sequence>
+					<xs:element name="MessageBlockID" type="xs:token">
+						<xs:annotation>
+							<xs:documentation>Block ID, alle Nachrichten eines Blocks enthalten die gleiche ID.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Last" type="xs:boolean" default="false" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Falls gesetzt ist dies die letzte Nachricht des Blocks.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="BookingSettings" type="BookingSettingsType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BookingSettingsPushMessageType">
+		<xs:annotation>
+			<xs:documentation>Pushnachricht mit Buchungseinstellungen.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BookingSettings" type="BookingSettingsType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:annotation>
 		<xs:documentation>**** Nachrichtencontainer ****</xs:documentation>
 	</xs:annotation>
 	<xs:group name="UserTriggeredRequestGroup">
@@ -2103,6 +2254,11 @@
 				<xs:element name="ChangeUser" type="ChangeUserRequestType">
 					<xs:annotation>
 						<xs:documentation>Benutzer ändern.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="SetBookingSettings" type="SetBookingSettingsRequestType">
+					<xs:annotation>
+						<xs:documentation>Buchungseinstellungen setzen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -2177,6 +2333,11 @@
 				<xs:element name="ChangeUser" type="ChangeUserResponseType">
 					<xs:annotation>
 						<xs:documentation>Benutzer ändern.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="SetBookingSettings" type="SetBookingResponseType">
+					<xs:annotation>
+						<xs:documentation>Buchungseinstellungen setzen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -2304,6 +2465,16 @@
 						<xs:documentation>Abonnentments von externen Buchungen überprüfen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="BookingSettingsSubscription" type="BookingSettingsSubscriptionRequestType">
+                                        <xs:annotation>
+                                                <xs:documentation>Abonnieren von Buchungseinstellungen.</xs:documentation>
+                                        </xs:annotation>
+				</xs:element>
+				<xs:element name="BookingSettingsSubscriptionStatus" type="BookingSettingsSubscriptionStatusRequestType">
+                                        <xs:annotation>
+                                                <xs:documentation>Überprüfen des Abostatus von Buchungseinstellungen.</xs:documentation>
+                                        </xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2363,6 +2534,16 @@
 						<xs:documentation>Prüfen von externen Buchungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="BookingSettingsSubscription" type="BookingSettingsSubscriptionResponseType">
+				    <xs:annotation>
+					<xs:documentation>Abonnieren von Buchungseinstellungen.</xs:documentation>
+				    </xs:annotation>
+				</xs:element>
+				<xs:element name="BookingSettingsSubscriptionStatus" type="BookingSettingsSubscriptionStatusResponseType">
+				    <xs:annotation>
+					<xs:documentation>Überprüfen des Abostatus von Buchungseinstellungen.</xs:documentation>
+				    </xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2397,6 +2578,11 @@
 						<xs:documentation>Beziehen aller abonnierten externen Buchungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="CompleteBookingSettings" type="CompleteBookingSettingsRequestType">
+					<xs:annotation>
+						<xs:documentation>Beziehen aller Buchungseinstellungen.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2428,8 +2614,13 @@
 				</xs:element>
 				<xs:element name="CompleteExternalBooking" type="CompleteExternalBookingRequestType">
 				      <xs:annotation>
-						<xs:documentation>Bziehen aller abonnierter externen Buchungen.</xs:documentation>
+						<xs:documentation>Beziehen aller abonnierter externen Buchungen.</xs:documentation>
 				      </xs:annotation>
+				</xs:element>
+				<xs:element name="CompleteBookingSettings" type="CompleteBookingSettingsResponseType">
+				    <xs:annotation>
+					<xs:documentation>Beziehen aller Buchungseinstellungen.</xs:documentation>
+				    </xs:annotation>
 				</xs:element>
 			</xs:choice>
 		</xs:sequence>
@@ -2463,6 +2654,11 @@
 				<xs:element name="ExternalBookingPush" type="ExternalBookingPushMessageType">
 					<xs:annotation>
 						<xs:documentation>Push-Nachricht für externe Buchungen.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="BookingSettingsPush" type="BookingSettingsPushMessageType">
+					<xs:annotation>
+						<xs:documentation>Push-Nachricht für Buchungseinstellungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
