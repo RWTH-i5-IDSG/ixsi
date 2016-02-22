@@ -951,7 +951,7 @@
 			</xs:element>
 			<xs:element name="Info" type="InfoType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>Additional information for this tariff.</xs:documentation>
+					<xs:documentation>Zusatzinformationen für den Tarif.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1791,7 +1791,7 @@
 	</xs:group>
 	<xs:group name="SubscriptionRequestGroup">
 		<xs:annotation>
-			<xs:documentation>Requests for subscriptions. Each request is answered by exactly one response.</xs:documentation>
+			<xs:documentation>Requests für Abonnementverwaltung.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
 			<xs:choice>
