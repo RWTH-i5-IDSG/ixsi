@@ -1,0 +1,16 @@
+sudo: required
+dist: trusty
+
+install:
+    - sudo apt-get -y install texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra texlive-humanities texlive-science texlive-lang-english texlive-lang-german texlive-math-extra
+    - sudo apt-get -y install xsltproc
+    - sudo apt-get -y install chktex
+    - sudo apt-get -y install libxml2-utils
+
+script:
+    - xml/generate-tex-from-schema.sh
+    - make
+    #- chktex -W # Print version information.
+    #- chktex -q -n 6 *.tex chapters.*.tex 2>/dev/null | tee lint.out
+    ## If lint output is non-empty report an error.
+    #- test ! -s lint.out
