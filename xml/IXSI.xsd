@@ -2339,7 +2339,7 @@
 						<xs:documentation>Change a User.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="SetBookingSettings" type="ChangeUserResponseType">
+				<xs:element name="SetBookingSettings" type="SetBookingSettingsResponseType">
 					<xs:annotation>
 						<xs:documentation>Set settings for a specific booking.</xs:documentation>
 					</xs:annotation>
