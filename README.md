@@ -1,8 +1,8 @@
-ixsi
+# IXSI - Interface for X-Sharing Information documentation
 ====
 [![Build Status](https://travis-ci.org/RWTH-i5-IDSG/ixsi.svg)](https://travis-ci.org/RWTH-i5-IDSG/ixsi)
 
-IXSI - Interface for X-Sharing Information documentation
+
 
 IXSI is a interface for exchanging information  between a Travel Information System and a Ride Sharing System (Carsharing, Bikesharing).
 This repository contains the documentation written in TeX. To generate the pdf:
