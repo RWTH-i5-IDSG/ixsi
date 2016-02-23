@@ -25,9 +25,14 @@ group="Gruppenzugehoerigkeit"
 basetype="Basistyp"
 
 command -v xsltproc >/dev/null 2>&1 || { echo >&2 "I require xsltproc but it's not installed.  Aborting."; exit 1; }
+command -v xmllint >/dev/null 2>&1 || { echo >&2 "I require xmllint but it's not installed.  Aborting."; exit 1; }
 
 # switch to working directory
 cd "`git rev-parse --git-dir`/../xml"
+
+echo "checking schema for consistency"
+xmllint $file >/dev/null 2>&1 || { echo >&2 "Schema malformed.  Aborting."; exit 1; }
+
 
 mkdir -p generated
 
