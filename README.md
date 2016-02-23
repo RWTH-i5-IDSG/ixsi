@@ -1,5 +1,4 @@
 # IXSI - Interface for X-Sharing Information documentation
-====
 [![Build Status](https://travis-ci.org/RWTH-i5-IDSG/ixsi.svg)](https://travis-ci.org/RWTH-i5-IDSG/ixsi)
 
 
