@@ -1,6 +1,6 @@
 \chapter{Nachrichten}
 \label{cha:Nachrichten}
-Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf fünf Nachrichtentypen der Art Request / Response und Push. Alle Nachrichten vom RIS an das FVS stellen Anfragen dar und sind daher vom Typ Request. Der Typ Response wird für direkte Antworten des FVS auf Anfragen des RIS verwendet. Um eine Zuordnung der Response-Nachrichten zu den zugehörigen Request-Nachrichten zu erlauben, wird jede Request-Nachricht mit einer eindeutigen Transaction-ID markiert, die in der zugehörigen Response-Nachricht wieder mitgegeben werden muss. Eine Response-Nachricht kann anstelle ihres normalen Inhalts auch einen Fehler enthalten. Der letzte Nachrichtentyp Push findet in den Fällen Verwendung, wenn das RIS fortlaufende Aktualisierungen (Abonnement) FVS angefordert hat. 
+Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf fünf Nachrichtentypen der Art Request / Response und Push. Alle Nachrichten vom RIS an das FVS stellen Anfragen dar und sind daher vom Typ Request. Der Typ Response wird für direkte Antworten des FVS auf Anfragen des RIS verwendet. Um eine Zuordnung der Response-Nachrichten zu den zugehörigen Request-Nachrichten zu erlauben, wird jede Request-Nachricht mit einer eindeutigen Transaction-ID markiert, die in der zugehörigen Response-Nachricht wieder mitgegeben werden muss. Eine Response-Nachricht kann anstelle ihres normalen Inhalts auch einen Fehler enthalten. Der letzte Nachrichtentyp Push findet in den Fällen Verwendung, wenn das RIS fortlaufende Aktualisierungen (Abonnement) FVS angefordert hat.
 
 \section{Basisnachrichten}
 \label{sec:Nachrichten:Basisnachrichten}
@@ -54,10 +54,10 @@ Anmerkung: Im XML Schema sind weitere Gruppen definiert die jedoch nur der Organ
 \begin{samepage}
 \begin{flushleft}
 \rowcolors{1}{}{gray!10}
-\begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}X} 
+\begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}X}
 \toprule
 Name &  Kommentar \label{tab:miscGroups}\\
-\midrule 
+\midrule
 \texttt{StaticDataRequestGroup} & \\
 \texttt{StaticDataResponseGroup}& \\
 \texttt{SubscriptionAdministrationRequestGroup} & \\
@@ -67,7 +67,7 @@ Name &  Kommentar \label{tab:miscGroups}\\
 \texttt{RequestMessageGroup}& \\
 \texttt{ResponseMessageGroup}& \\
 \texttt{PushMessageGroup}& \\
-\bottomrule 
+\bottomrule
 \end{tabularx}\end{flushleft}\end{samepage}
 
 \section{Dienst A - Sitzungen}
@@ -277,10 +277,6 @@ Name &  Kommentar \label{tab:miscGroups}\\
 \input{xml/generated/ConsumptionSubscriptionResponseType-schema}
 \input{xml/generated/ConsumptionSubscriptionStatusRequestType}
 \input{xml/generated/ConsumptionSubscriptionStatusResponseType}
-\input{xml/generated/CompleteConsumptionRequestType}
-\input{xml/generated/CompleteConsumptionRequestType-schema}
-\input{xml/generated/CompleteConsumptionResponseType}
-\input{xml/generated/CompleteConsumptionResponseType-schema}
 \input{xml/generated/ConsumptionPushMessageType}
 \input{xml/generated/ConsumptionPushMessageType-schema}
 
