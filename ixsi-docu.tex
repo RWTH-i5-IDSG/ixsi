@@ -1,6 +1,6 @@
 \documentclass[a4paper,
-  DIV=15, % Faktor Nutzefläche vs. Rand (zwischen 6 und 15)
-  BCOR=12mm, % Bindekorrekturfaktor für Klebebindung
+  DIV=14, % Faktor Nutzefläche vs. Rand (zwischen 6 und 15)
+  BCOR=8mm, % Bindekorrekturfaktor für Klebebindung
   twoside,
   german,
   titlepage=false,
@@ -49,12 +49,11 @@
 \input{content/5-Datenmodell.tex}
 \input{content/6-TechnischeRealisierung.tex}
 \input{content/7-Nachrichten.tex}
-\appendix
-% \addchap{Anhang}
 \input{content/8-Codetabellen.tex}
 
 \cleardoublepage
 
+\appendix
 
 
 % \setglossarysection{section}
@@ -65,7 +64,6 @@
 \lstlistoflistings
 
 \renewcommand{\indexname}{Stichwortverzeichnis}
-% \addchap{\indexname}
 \printindex
 
 % \bibliographystyle{plain}
