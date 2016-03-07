@@ -26,9 +26,9 @@ IXSI is currently still under development and the API is not final.
 
 precompiled pdfs are available under: 
 
-https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-german.pdf
+https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-econnect.pdf
 
-https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-english.pdf
+https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-english.pdf (translation not complete)
 
 The branch `mobilitybroker` contains non standard additions developed in project mobilitybroker.
 
