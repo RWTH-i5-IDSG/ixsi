@@ -90,18 +90,12 @@ strict
 \usepackage[underline=false,rounded corners=false]{texmf/pgf-umlsd} % for interactions graphs
 \usepackage{texmf/tikz-er2}
 \usetikzlibrary{positioning}
-\tikzstyle{circleTX} = [draw, circle, minimum height=1.2cm, node
-distance=3cm]
-  \tikzstyle{rectangleTX} = [draw, rectangle, minimum height=1.2cm, minimum width=2cm, node
-  distance=3cm, align=left]
-% flafter forces float to be placed after referenced
-% \usepackage{flafter} 
+\tikzstyle{circleTX} = [draw, circle, minimum height=1.2cm, node distance=3cm]
+\tikzstyle{rectangleTX} = [draw, rectangle, minimum height=1.2cm, minimum width=2cm, node distance=3cm, align=left]
+
 
 %  fancy captions (use default for insticc)
-% \usepackage[small,hang]{caption}
-
-%table caption on top
-\usepackage[small]{caption}
+\usepackage[small,hang]{caption}
 
 \usepackage[
 caption=false,
@@ -110,16 +104,16 @@ caption=false,
 \graphicspath{{./graphics/}}
 
 % remove identation
-% \usepackage{parskip}
+\usepackage{parskip}
 
 % permissive float placement
-\setcounter{topnumber}{4}
-\setcounter{bottomnumber}{4}
-\setcounter{totalnumber}{10}
-\renewcommand{\textfraction}{0.15}
-\renewcommand{\topfraction}{0.85}
-\renewcommand{\bottomfraction}{0.70}
-\renewcommand{\floatpagefraction}{0.66}
+% \setcounter{topnumber}{4}
+% \setcounter{bottomnumber}{4}
+% \setcounter{totalnumber}{10}
+% \renewcommand{\textfraction}{0.15}
+% \renewcommand{\topfraction}{0.85}
+% \renewcommand{\bottomfraction}{0.70}
+% \renewcommand{\floatpagefraction}{0.66}
 
 
 
@@ -146,12 +140,6 @@ caption=false,
 %----------------------------------------------------------
 %---- Settings --------------------------------------------
 %----------------------------------------------------------
-
-
-    
-
-
-
 
 
 
@@ -247,58 +235,6 @@ postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}}
 \newcommand*{\TODO}[1]{\marginline{\scriptsize\textcolor{red}{TODO: #1}}}
 %\newcommand*{\TODO}[1]{}
 
-% Style abbreviations
-\newcommand*{\ebf}[1]{\emph{\textbf{#1}}}
-\newcommand*{\bs}[1]{\boldsymbol{#1}}
-\renewcommand*{\_}{\ensuremath{\mathunderscore}\xspace}
-
-% Enumeration
-\newcommand*{\st}{\ensuremath{1^{\mbox{\scriptsize st}}}\xspace}
-\newcommand*{\nd}{\ensuremath{2^{\mbox{\scriptsize nd}}}\xspace}
-\newcommand*{\rd}{\ensuremath{3^{\mbox{\scriptsize rd}}}\xspace}
-\newcommand*{\nth}[1]{\ensuremath{#1^{\mbox{\scriptsize th}}}\xspace}
-
-% Arrows
-\renewcommand*{\implies}{\ensuremath{\rightarrow}\xspace}
-\renewcommand*{\iff}{\ensuremath{\leftrightarrow}\xspace}
-\newcommand*{\IF}{\ensuremath{\Rightarrow}\xspace}
-\newcommand*{\sra}{\ensuremath{\shortrightarrow}\xspace}
-\newcommand*{\sla}{\ensuremath{\shortleftarrow}\xspace}
-
-
-\newcolumntype{M}[1]{
-  >{\RaggedRight\arraybackslash\hspace{0pt}}m{#1}%
-}
-\newcolumntype{R}[1]{
-  >{\begin{turn}{90}\begin{minipage}{#1}%
-  \RaggedRight\arraybackslash\hspace{0pt}}l
-  <{\end{minipage}\end{turn}}%
-}
-\newcommand*{\armultirow}[3]{%
-  \multicolumn{#1}{#2}{%
-    \begin{picture}(0,0)%
-    \put(0,0){\begin{tabular}[t]{@{}#2@{}}#3\end{tabular}}%
-    \end{picture}%
-  }%
-}
-\makeatletter
-\newcolumntype{K}[1]{%
-  >{\DC@{.}{.}{#1}}l<{\DC@end}%
-}
-\makeatother
-
-%---- hyperref --------------------------------------------
-% Write Section instead of section for \ref
-\addto\extrasenglish{%
-  \renewcommand*{\sectionautorefname}{Section}%
-  \renewcommand*{\subsectionautorefname}{\sectionautorefname}%
-  \renewcommand*{\subsubsectionautorefname}{\sectionautorefname}%
-}
-
-\newcommand*{\definitionautorefname}{Definiton}
-\newcommand*{\subfigureautorefname}{\figureautorefname}
-
-
 
 \usepackage{scrpage2}
 
@@ -307,9 +243,6 @@ postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}}
 
 % ------ Fussnoten
 \pagestyle{scrheadings} 
-
-% \foot{\thispublishers ~- \textbf{\thistitleshort}}
-% \lofoot{Stand \thisdate ~ \thistime ~- Version \thisversion}
 
 \ifoot{\thispublishers ~-- \textbf{\thistitleshort} \\
 Stand \thisdate~\thistime ~-- Version \thisversion
@@ -356,11 +289,10 @@ pdfstartview={FitH},
 unicode
 ]{hyperref}
 % 
-% %--- hyperref meta data -----------------------------------
-% \hypersetup{%
-%   %   pdfauthor={\author},
-%   % %   pdfkeywords={\thiskeywords},
-%   %   pdftitle={\title},
-% }
+%--- hyperref meta data -----------------------------------
+\hypersetup{%
+    pdfauthor={\thisauthor},
+    pdftitle={\thistitle},
+}
 
 \usepackage{cleveref}
