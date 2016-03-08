@@ -657,3 +657,49 @@ Das RIS legt Benutzer im FVS an um eine doppelte Anmeldung bei beiden Diensten �
 Das RIS kann Buchungs bzw. Fahrzeugeinstellungen beim FVS abonnieren.
 Nach einer abgeschlossenen Buchung (oder in intervallen) übermittelt das FVS die durch den Benutzer durchgeführten Fahrzeugeinstellungen wie Sitzposition, Zieltemperatur der Klimaanlage, eingestellter Radiosender usw.
 Kurz vor dem Start einer Folgebuchung kann das RIS dann wiederrum Fahrzeugeinstellung übermitteln damit der Benutzer bei betreten des Fahrzeugs die gleiche Konfiguration wie vorher wiederfindet.
+
+
+
+\section{Dienst 11 -- Fernkonfiguration Navigationssystem und Fahrtverlauf überwachen}
+\label{sec:Interaktionsprotokolle:Dienst11}
+
+\begin{center}
+\begin{sequencediagram}
+\newthread{ris}{:RIS}
+\newinst[8]{fvs}{:FVS}
+
+\begin{sdblock}{Fernkonfiguration Navigationssystem}{}
+\begin{call}{ris}{Buchungsreferenz, Zielort}{fvs}{}
+  \end{call}
+\end{sdblock}
+\postlevel
+  
+\begin{sdblock}{Fahrtverlauf überwachen}{}
+
+\begin{call}{ris}{Buchungsreferenz, (Abostornierung)*}{fvs}{}
+\end{call}
+
+\end{sdblock}
+
+\begin{sdblock}{Fahrtverlauf}{}
+
+\begin{mess}{fvs}{Position / vorraus. Ankunftszeit}{ris}
+\end{mess}
+
+\begin{mess}{fvs}{Position / vorraus. Ankunftszeit}{ris}
+\end{mess}
+
+\begin{mess}{fvs}{Position / vorraus. Ankunftszeit}{ris}
+\end{mess}
+
+\begin{mess}{fvs}{Bestätigung Ankunft}{ris}
+\end{mess}
+\end{sdblock}
+\postlevel
+
+\end{sequencediagram}
+\end{center}
+\smallskip
+
+Das RIS kann nach der Buchung dem Fahrzeug den Zielort übermitteln (Fernkonfiguration Navigationssystem), so dass der Reisende den Zielort nicht selbst eingeben muss. 
+Außerdem kann das RIS den Fortschritt der Fahrt abonnieren, und wird dann fortlaufend vom FVS über Änderungen der Position und der vorraussichtlichen Ankunftszeit informiert.

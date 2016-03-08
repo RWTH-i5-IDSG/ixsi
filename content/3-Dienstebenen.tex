@@ -17,10 +17,11 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
   \node[rectangleTX, right= 1cm of s6](s9) {Dienst 9\\Benutzermanagement};
 
 
-  \node[rectangleTX, below right = 1cm of s4](s8) {Dienst 8\\Buchungsstatus\\(Freischaltung)};
+  \node[rectangleTX, below left = 1cm of s4](s8) {Dienst 8\\Buchungsstatus\\(Freischaltung)};
   \node[rectangleTX, left= 1cm of s8](s7) {Dienst 7\\Verbrauchsdaten};
   \node[rectangleTX, left= 1cm of s7](s5) {Dienst 5\\Buchungsabonnement};
   \node[rectangleTX, right= 1cm of s8](s10) {Dienst 10\\Fahrzeugeinstellungen};
+  \node[rectangleTX, right= 1cm of s10](s11) {Dienst 11\\Navigation und Fahrtverlauf};
   %   arrows
   \draw (s2) edge[->,thick=1cm] (s1);
   \draw (s3) edge[->,thick=1cm] (s1);
@@ -31,6 +32,7 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
   \draw (s8) edge[->,thick=1cm] (s4);
   \draw (s9) edge[->,thick=1cm] (s1);
   \draw (s10) edge[->,thick=1cm] (s4);
+  \draw (s11) edge[->,thick=1cm] (s4);
   \end{tikzpicture}
   }
   \caption{Dienstabhängigkeiten \label{fig:depend}}
@@ -224,6 +226,21 @@ Dienst 10 dient dem Management von Fahrzeugeinstellungen. Das RIS kann Fahrzeuge
 \begin{itemize}
 \item Fahrzeugeinstellungen setzten
 \item Fahrzeugeinstellungen abonnieren
+\end{itemize}
+
+\subsection*{Abhängigkeiten}
+\begin{itemize}
+\item Dienst 4
+\item Basisdienst A
+\end{itemize}
+
+\section{Dienst 11 -- Fernkonfiguration Navigationssystem und Fahrtverlauf überwachen}
+Dienst 11 dient der Integration des Fahrzeugnavigationssystems in eine intermodale Reise. Das RIS kann nach der Buchung dem Fahrzeug den Zielort übermitteln, so dass der Reisende den Ort nicht selbst eingeben muss. Zusätzlich kann das RIS den Fortschritt der Fahrt überwachen um ggfs. auf Verzögerungen zu reagieren.
+
+\subsection*{Funktionen}
+\begin{itemize}
+\item Navigationsziel des Fahrzeugs setzten
+\item Fahrtverlauf abonnieren
 \end{itemize}
 
 \subsection*{Abhängigkeiten}
