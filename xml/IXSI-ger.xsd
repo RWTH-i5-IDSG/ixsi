@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns="http://www.ixsi-schnittstelle.de/" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.ixsi-schnittstelle.de/" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<!--*******************************************************************-->
-	<!-- MobilityBroker Interface version 0.20 based on IXSI               -->
-	<!-- with Smartcar Extension                                           -->
+	<!-- MobilityBroker Interface version 0.20 based on IXSI	       -->
+	<!-- with Smartcar Extension					       -->
 	<!--*******************************************************************-->
 	<!--Urheber: Peter von Grumbkow, HaCon Ing.-Ges. mbH; Dirk Hillbrecht, cantamen GmbH; Christian Samsel, RWTH Aachen-->
 	<!--Diese Schnittstellenspezifikation steht unter folgender Lizenz: CC BY-ND 3.0 DE (Creative Commons Namensnennung-Keine Bearbeitung 3.0 Deutschland), http://creativecommons.org/licenses/by-nd/3.0/de/-->
