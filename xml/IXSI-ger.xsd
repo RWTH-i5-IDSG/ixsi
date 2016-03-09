@@ -2426,10 +2426,10 @@
 						<xs:documentation>Beziehen aller abonnierten Verbrauchsdaten.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="CompleteExternalBooking" type="CompleteExternalBookingRequestType">
-				      <xs:annotation>
+				<xs:element name="CompleteExternalBooking" type="CompleteExternalBookingResponseType">
+					<xs:annotation>
 						<xs:documentation>Bziehen aller abonnierter externen Buchungen.</xs:documentation>
-				      </xs:annotation>
+					</xs:annotation>
 				</xs:element>
 			</xs:choice>
 		</xs:sequence>
