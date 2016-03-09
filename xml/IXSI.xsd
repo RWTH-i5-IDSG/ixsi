@@ -2187,6 +2187,34 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:annotation>
+		<xs:documentation>**** Service (11) : remote configuration navigation system and track progress ****</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="SetNavigationDestinationRequestType">
+		<xs:annotation>
+			<xs:documentation>Request to set the navigation destination.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BookingID" type="BookingIDType">
+				<xs:annotation>
+					<xs:documentation>The respective booking.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Destination" type="GeoPositionType">
+				<xs:annotation>
+					<xs:documentation>The destination of the booking target.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SetNavigationDestinationResponseType">
+		<xs:annotation>
+			<xs:documentation>Response to set the navigation destination.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:annotation>
 		<xs:documentation>**** Message container ****</xs:documentation>
 	</xs:annotation>
 	<xs:group name="UserTriggeredRequestGroup">
@@ -2263,6 +2291,11 @@
 				<xs:element name="SetBookingSettings" type="SetBookingSettingsRequestType">
 					<xs:annotation>
 						<xs:documentation>Set settings for a specific booking.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="SetNavigationDestination" type="SetNavigationDestinationRequestType">
+					<xs:annotation>
+						<xs:documentation>Set the navigation system destination of the booking.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -2342,6 +2375,11 @@
 				<xs:element name="SetBookingSettings" type="SetBookingSettingsResponseType">
 					<xs:annotation>
 						<xs:documentation>Set settings for a specific booking.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="SetNavigationDestination" type="SetNavigationDestinationResponseType">
+					<xs:annotation>
+						<xs:documentation>Set the navigation system destination of the booking.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>

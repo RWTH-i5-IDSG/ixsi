@@ -2183,6 +2183,34 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:annotation>
+		<xs:documentation>**** Service (11) : Fernkonfiguration Navigationssystem und Fahrtverlauf überwachen ****</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="SetNavigationDestinationRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um den Zielort des Navigationssystems zu setzen.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BookingID" type="BookingIDType">
+				<xs:annotation>
+					<xs:documentation>Die entsprechende Buchung.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Destination" type="GeoPositionType">
+				<xs:annotation>
+					<xs:documentation>Der Zielort der Buchung.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SetNavigationDestinationResponseType">
+		<xs:annotation>
+			<xs:documentation>Anwort für setzen des Zielorts.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:annotation>
 		<xs:documentation>**** Nachrichtencontainer ****</xs:documentation>
 	</xs:annotation>
 	<xs:group name="UserTriggeredRequestGroup">
@@ -2259,6 +2287,11 @@
 				<xs:element name="SetBookingSettings" type="SetBookingSettingsRequestType">
 					<xs:annotation>
 						<xs:documentation>Buchungseinstellungen setzen.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="SetNavigationDestination" type="SetNavigationDestinationRequestType">
+					<xs:annotation>
+						<xs:documentation>Den Zielort des Fahrzeug Navigationssystems setzten.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -2338,6 +2371,11 @@
 				<xs:element name="SetBookingSettings" type="SetBookingResponseType">
 					<xs:annotation>
 						<xs:documentation>Buchungseinstellungen setzen.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="SetNavigationDestination" type="SetNavigationDestinationResponseType">
+					<xs:annotation>
+						<xs:documentation>Den Zielort des Fahrzeug Navigationssystems setzten.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -2466,14 +2504,14 @@
 					</xs:annotation>
 				</xs:element>
 				<xs:element name="BookingSettingsSubscription" type="BookingSettingsSubscriptionRequestType">
-                                        <xs:annotation>
-                                                <xs:documentation>Abonnieren von Buchungseinstellungen.</xs:documentation>
-                                        </xs:annotation>
+					<xs:annotation>
+						<xs:documentation>Abonnieren von Buchungseinstellungen.</xs:documentation>
+					</xs:annotation>
 				</xs:element>
 				<xs:element name="BookingSettingsSubscriptionStatus" type="BookingSettingsSubscriptionStatusRequestType">
-                                        <xs:annotation>
-                                                <xs:documentation>Überprüfen des Abostatus von Buchungseinstellungen.</xs:documentation>
-                                        </xs:annotation>
+					<xs:annotation>
+						<xs:documentation>Überprüfen des Abostatus von Buchungseinstellungen.</xs:documentation>
+					</xs:annotation>
 				</xs:element>
 			</xs:choice>
 		</xs:sequence>
