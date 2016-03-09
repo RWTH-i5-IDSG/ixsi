@@ -1114,6 +1114,38 @@
 			</xs:choice>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="BookingProgressType">
+		<xs:annotation>
+			<xs:documentation>Typ für einzelnen Buchungsfortschritt (Reisefortschritt).</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BookingID" type="BookingIDType">
+				<xs:annotation>
+					 <xs:documentation>Buchungsreferenz.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Timestamp" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Zeitstempel der Geopositionierung / ETA Berechnung.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ETA" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Geschätze Ankunftszeit des Buchungsziel am Zielort.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Position" type="GeoPosition" minOccurs="0">
+				<xs:annotation>
+					 <xs:documentation>Aktuelle Position des Buchungsziel. Optional wegen möglicher Datenschutzbedenken.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Progress" type="PercentType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Prozentuale Schätzung des Reisefortschritt zur Visualisierung.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="OriginDestType">
 		<xs:annotation>
 			<xs:documentation>Typ für den Ausgangspunkt oder den Reisezielort.</xs:documentation>
@@ -2211,6 +2243,94 @@
 			<xs:extension base="AbstractBaseResponseType"/>
 		</xs:complexContent>
 	</xs:complexType>
+	<xs:complexType name="BookingProgressSubscriptionRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um einen Buchungsfortschritt zu abonnieren oder zu stornieren.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BookingID" type="BookingIDType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Buchungsreferenz.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Unsubscription" type="xs:boolean" default="false" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Falls gesetzt stornieren.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BookingProgressSubscriptionResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort um einen Buchungsfortschritt zu abonnieren oder zu stornieren.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BookingProgressSubscriptionStatusRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um den Abonnementstatus von Buchungsfortschritten zu erhalten.</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:complexType name="BookingProgressSubscriptionStatusResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort um den Abonnementstatus von Buchungsfortschritten zu erhalten.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType">
+				<xs:sequence>
+					<xs:element name="BookingID" type="BookingIDType" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Abonnierte Buchungen.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CompleteBookingProgressRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um alle abonnierten Buchungsfortschritte zu erhalten.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MaxResults" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Maximale Anzahl Ergebnisse pro Nachricht.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompleteBookingProgressResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort um alle abonnierten Buchungsfortschritte zu erhalten</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType">
+				<xs:sequence>
+					<xs:element name="MessageBlockID" type="xs:token">
+						<xs:annotation>
+							<xs:documentation>Block ID, alle Nachrichten eines Blocks enthalten die gleiche ID.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Last" type="xs:boolean" default="false" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Falls gesetzt ist dies die letzte Nachricht des Blocks.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="BookingProgress" type="BookingProgressType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BookingProgressPushMessageType">
+		<xs:annotation>
+			<xs:documentation>Pushnachricht mit Buchungsfortschritten.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BookingProgress" type="BookingProgressType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:annotation>
 		<xs:documentation>**** Nachrichtencontainer ****</xs:documentation>
 	</xs:annotation>
@@ -2514,6 +2634,16 @@
 						<xs:documentation>Überprüfen des Abostatus von Buchungseinstellungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="BookingProgressSubscription" type="BookingProgressSubscriptionRequestType">
+					<xs:annotation>
+						<xs:documentation>Abonnieren von Buchungsfortschritten.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="BookingProgressSubscriptionStatus" type="BookingProgressSubscriptionStatusRequestType">
+					<xs:annotation>
+						<xs:documentation>Überprüfen des Abostatus von Buchungsfortschritten.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2583,6 +2713,16 @@
 						<xs:documentation>Überprüfen des Abostatus von Buchungseinstellungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="BookingProgressSubscription" type="BookingProgressSubscriptionResponseType">
+					<xs:annotation>
+						<xs:documentation>Abonnieren von Buchungsfortschritten.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="BookingProgressSubscriptionStatus" type="BookingProgressSubscriptionStatusResponseType">
+					<xs:annotation>
+						<xs:documentation>Überprüfen des Abostatus von Buchungsfortschritten.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2619,7 +2759,12 @@
 				</xs:element>
 				<xs:element name="CompleteBookingSettings" type="CompleteBookingSettingsRequestType">
 					<xs:annotation>
-						<xs:documentation>Beziehen aller Buchungseinstellungen.</xs:documentation>
+						<xs:documentation>Beziehen aller abonnierter Buchungseinstellungen.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="CompleteProgressSettings" type="CompleteBookingProgressRequestType">
+					<xs:annotation>
+						<xs:documentation>Beziehen aller abonnierter Buchungsfortschritte.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>
@@ -2661,6 +2806,11 @@
 						<xs:documentation>Beziehen aller Buchungseinstellungen.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+				<xs:element name="CompleteProgressSettings" type="CompleteBookingProgressResponseType">
+					<xs:annotation>
+						<xs:documentation>Beziehen aller abonnierter Buchungsfortschritte.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 			</xs:choice>
 		</xs:sequence>
 	</xs:group>
@@ -2698,6 +2848,11 @@
 				<xs:element name="BookingSettingsPush" type="BookingSettingsPushMessageType">
 					<xs:annotation>
 						<xs:documentation>Push-Nachricht für Buchungseinstellungen.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="BookingProgressPush" type="BookingProgressPushMessageType">
+					<xs:annotation>
+						<xs:documentation>Push-Nachricht für Buchungsfortschritt.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
 			</xs:choice>

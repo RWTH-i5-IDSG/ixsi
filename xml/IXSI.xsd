@@ -2274,12 +2274,12 @@
 	</xs:complexType>
 	<xs:complexType name="BookingProgressSubscriptionStatusRequestType">
 		<xs:annotation>
-			<xs:documentation>Request for getting all subscribed settings data items.</xs:documentation>
+			<xs:documentation>Request for getting all subscribed progress items.</xs:documentation>
 		</xs:annotation>
 	</xs:complexType>
 	<xs:complexType name="BookingProgressSubscriptionStatusResponseType">
 		<xs:annotation>
-			<xs:documentation>Response for getting all subscribed settings data items.</xs:documentation>
+			<xs:documentation>Response for getting all subscribed progress items.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType">
