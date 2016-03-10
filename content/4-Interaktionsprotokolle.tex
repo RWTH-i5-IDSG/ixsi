@@ -195,7 +195,7 @@ Als Basis für die Informationskopplung dient der Austausch von sogenannten Buch
 \end{center}
 \smallskip
 
-Um nicht intervallweise alle Buchungszielinformationen übertragen zu müssen, kann mit dem Aufruf \texttt{ChangedProviders} angefragt werden, bei welchem Anbieter sich Änderungen seit einem bestimmten Zeitpunkt, vorgegeben durch den Parameter \texttt{timestamp}, ergeben haben. Rückgegeben wird eine Providerreferenz, die wiederum bei beim Funktionsaufruf \texttt{BookingTargetsInfo} als Parameter übergeben werden kann.
+Um nicht intervallweise alle Buchungszielinformationen übertragen zu müssen, kann mit dem Aufruf \texttt{ChangedProviders} angefragt werden, bei welchem Anbieter sich Änderungen seit einem bestimmten Zeitpunkt, vorgegeben durch den Parameter \texttt{timestamp}, ergeben haben. Rückgegeben wird eine Providerreferenz, die wiederum bei beim Funktionsaufruf \texttt{Booking\-TargetsInfo} als Parameter übergeben werden kann.
 
 \section{Dienst 2 -- Verfügbarkeitsauskunft}
 \label{sec:Interaktionsprotokolle:Dienst2}
@@ -289,7 +289,7 @@ Das RIS kann Informationen zu Buchungszielen abonnieren, um unmittelbar über Ä
 
 Durch die initiale Anfrage \texttt{AvailabilitySubscriptionRequest} wird ein Abonnement (subscription) begonnen. Hierzu übergibt das RIS die entsprechende Buchungszielreferenz. Durch das Setzen des Flags Kündigung kann ein Abonnement storniert werden. Bei Änderungen an Verfügbarkeiten überträgt das FVS asynchron \texttt{AvailabilityPushMessage}s. Diese werden über den gleichen Kommunikationskanal geliefert über den das Abonnement erstellt wurde. Beim Beenden des Kommunikationskanals werden alle Abonnements hinfällig.
 
-Zur anfänglichen Synchronisierung aller Verfügbarkeiten kann das RIS die Funktion \texttt{CompleteAvailabilityRequest} aufrufen. 
+Zur anfänglichen Synchronisierung aller Verfügbarkeiten kann das RIS die Funktion \texttt{Complete\-Availability\-Request} aufrufen. 
 
 
 
