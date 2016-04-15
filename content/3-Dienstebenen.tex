@@ -1,6 +1,6 @@
-\chapter{Hierachiemodell}
+\chapter{Hierarchiemodell}
 \label{cha:Hierachiemodell}
-Das Hierachiemodell beschreibt unterschiedliche Qualitäten der Informationskopplung, basierend auf Dienstgruppen und dient als Empfehlung für unterschiedliche Ausbaustufen der Implementierung.
+Das Hierarchiemodell beschreibt unterschiedliche Qualitäten der Informationskopplung, basierend auf Dienstgruppen und dient als Empfehlung für unterschiedliche Ausbaustufen der Implementierung.
 Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst 1 Statische Daten (static data) von beiden Interaktionspartnern unterstützt werden. In \cref{fig:depend} sind die Abhängigkeiten zwischen den Diensten dargestellt.
 
 \begin{figure}[h]
@@ -82,11 +82,11 @@ Dienst 1 dient dem Austausch von Informationen über Fahrzeugverleihanbietern un
 \end{itemize}
 
 \subsection*{Abhängigkeiten}
-keine 
+keine
 
 \section{Dienst 2 -- Verfügbarkeitsauskunft (availability query) }
 \label{sec:Hierachiemodell:Dienst2}
-Dienst 2 dient dem synchronen Abruf von Verfügbarkeitsinformationen. Die tatsächlichen Verfügbarkeitszeiten von Buchungszielen werden während der Reiseauskunft durch das RIS beim FVS abgerufen. 
+Dienst 2 dient dem synchronen Abruf von Verfügbarkeitsinformationen. Die tatsächlichen Verfügbarkeitszeiten von Buchungszielen werden während der Reiseauskunft durch das RIS beim FVS abgerufen.
 
 \subsection*{Funktionen}
 \begin{itemize}
@@ -107,7 +107,7 @@ Dienst 2 dient dem asynchronen Austausch von Verfügbarkeitsinformationen. Um di
 \begin{itemize}
 \item Abonnement von Verfügbarkeiten
 \item Verfügbarkeitsinformation (push)
-\item Abonnement von Standortskapazitäten (Dienst 3a)
+\item Abonnement von Standortkapazitäten (Dienst 3a)
 \end{itemize}
 
 \subsection*{Abhängigkeiten}
@@ -135,7 +135,7 @@ Dienst 4 dient der Buchung, Umbuchung und Stornierung von Fahrzeugen durch das R
 
 \section{Dienst 5 -- Buchungsabonnement (booking subscription)}
 \label{sec:Hierachiemodell:Dienst5}
-Dienst 5 dient dem Abonnement von Buchungsänderungen. Das RIS kann durchgeführte Buchungen beim FVS abbonnieren, um den Benutzer bei Änderungen (z.B. durch ein defektes Fahrzeug) informieren zu können.
+Dienst 5 dient dem Abonnement von Buchungsänderungen. Das RIS kann durchgeführte Buchungen beim FVS abonnieren, um den Benutzer bei Änderungen (z.\,B. durch ein defektes Fahrzeug) informieren zu können.
 
 \subsection*{Funktionen}
 \begin{itemize}
@@ -152,7 +152,7 @@ Dienst 5 dient dem Abonnement von Buchungsänderungen. Das RIS kann durchgeführ
 \section{Dienst 6 -- Preisauskunft (price information)}
 \label{sec:Hierachiemodell:Dienst6}
 
-Dienst 6 dient der Preisauskunft von Verleihdienstleistungen. Durch die Übermittlung von Start-, Zielort und Startzeitpunkt und Endzeitpunkt der Fahrt kann das RIS beim FVS eine unverbindliche Preisauskunft zur Information des Benutzers einhohlen. Das FVS antwortet mit einem Preis und ggfs. Einzelposten.
+Dienst 6 dient der Preisauskunft von Verleihdienstleistungen. Durch die Übermittlung von Start-, Zielort und Startzeitpunkt und Endzeitpunkt der Fahrt kann das RIS beim FVS eine unverbindliche Preisauskunft zur Information des Benutzers einholen. Das FVS antwortet mit einem Preis und ggfs. Einzelposten.
 
 \subsection*{Funktionen}
 \begin{itemize}
@@ -166,7 +166,7 @@ Dienst 6 dient der Preisauskunft von Verleihdienstleistungen. Durch die Übermit
 
 
 \section{Dienst 7 -- Abonnement Verbrauchsdaten / Abrechnung (consumption data)}
-Dienst 7 dient dem Austausch von Verbrauchsdaten wie z.B. Nutzungsdauer und Entfernung. Durch die Übermittlung der Verbrauchsdaten kann das RIS Rechnungen für Endkunden erstellen. Das RIS abonniert hierzu die Verbrauchsdaten einer durchgeführten Buchung beim FVS und erhält dann automatisch die zu dieser Buchung gehörigen Verbrauchsdaten.
+Dienst 7 dient dem Austausch von Verbrauchsdaten wie z.\,B. Nutzungsdauer und Entfernung. Durch die Übermittlung der Verbrauchsdaten kann das RIS Rechnungen für Endkunden erstellen. Das RIS abonniert hierzu die Verbrauchsdaten einer durchgeführten Buchung beim FVS und erhält dann automatisch die zu dieser Buchung gehörigen Verbrauchsdaten.
 
 \subsection*{Funktionen}
 \begin{itemize}
@@ -182,7 +182,7 @@ Dienst 7 dient dem Austausch von Verbrauchsdaten wie z.B. Nutzungsdauer und Entf
 \end{itemize}
 
 \section{Dienst 8 -- Buchungsstatus ändern (freischalten / pausieren / abschließen) (booking state change)}
-Dienst 8 dient dem Freischalten von Buchungen respektive Fahrzeugen (ggfs. Schlüsselkasten) durch das RIS. Dies erlaubt sowohl die Öffnung bzw. Freischaltung als auch die Rückgabe das Fahrzeug innerhalb der Endanwenderanwendung des RIS, z.B. innerhalb einer mobilen App. Weiterhin kann eine Buchung pausiert werden, dies schließt dass Fahrzeug physikalisch ab, beendet aber nicht die Buchung.
+Dienst 8 dient dem Freischalten von Buchungen respektive Fahrzeugen (ggfs. Schlüsselkasten) durch das RIS. Dies erlaubt sowohl die Öffnung bzw. Freischaltung als auch die Rückgabe das Fahrzeug innerhalb der Endanwenderanwendung des RIS, z.\,B. innerhalb einer mobilen App. Weiterhin kann eine Buchung pausiert werden, dies schließt dass Fahrzeug physikalisch ab, beendet aber nicht die Buchung.
 Der Status bezieht sich immer auf eine vorausgegangene Buchung und eine Authentifizierung ist erforderlich.
 
 \subsection*{Funktionen}
@@ -199,7 +199,7 @@ Der Status bezieht sich immer auf eine vorausgegangene Buchung und eine Authenti
 \end{itemize}
 
 \section{Dienst 9 -- Anlegen und Sperren von Nutzern (user management)}
-Dienst 9 dient dem anlegen und sperren von FVS Nutzern durch das RIS. Dies erlaubt dass sich Nutzer nur beim RIS Betreiber registieren müssen und diese Registierung auch für das FVS gilt.
+Dienst 9 dient dem Anlegen und Sperren von FVS Nutzern durch das RIS. Dies erlaubt, dass sich Nutzer nur beim RIS Betreiber registrieren müssen und diese Registrierung auch für das FVS gilt.
 
 \subsection*{Funktionen}
 \begin{itemize}
