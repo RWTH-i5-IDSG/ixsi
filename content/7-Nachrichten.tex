@@ -1,6 +1,6 @@
 \chapter{Nachrichten}
 \label{cha:Nachrichten}
-Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf fünf Nachrichtentypen der Art Request / Response und Push. Alle Nachrichten vom RIS an das FVS stellen Anfragen dar und sind daher vom Typ Request. Der Typ Response wird für direkte Antworten des FVS auf Anfragen des RIS verwendet. Um eine Zuordnung der Response-Nachrichten zu den zugehörigen Request-Nachrichten zu erlauben, wird jede Request-Nachricht mit einer eindeutigen Transaction-ID markiert, die in der zugehörigen Response-Nachricht wieder mitgegeben werden muss. Eine Response-Nachricht kann anstelle ihres normalen Inhalts auch einen Fehler enthalten. Der letzte Nachrichtentyp Push findet in den Fällen Verwendung, wenn das RIS fortlaufende Aktualisierungen (Abonnement) FVS angefordert hat.
+Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf fünf Nachrichtentypen der Art Request / Response und Push. Alle Nachrichten vom RIS an das FVS stellen Anfragen dar und sind daher vom Typ Request. Der Typ Response wird für direkte Antworten des FVS auf Anfragen des RIS verwendet. Um eine Zuordnung der Response-Nachrichten zu den zugehörigen Request-Nachrichten zu erlauben, wird jede Request-Nachricht mit einer eindeutigen Transaction-ID markiert, die in der zugehörigen Response-Nachricht wieder mitgegeben werden muss. Eine Response-Nachricht kann anstelle ihres normalen Inhalts auch einen Fehler enthalten. Der letzte Nachrichtentyp Push findet in den Fällen Verwendung, in denen das RIS fortlaufende Aktualisierungen (Abonnement) vom FVS angefordert hat.
 
 \section{Basisnachrichten}
 \label{sec:Nachrichten:Basisnachrichten}
@@ -39,7 +39,7 @@ Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf f�
 \section{Basisgruppen}
 \label{sec:Nachrichten:Basisgruppen}
 
-\subsection*{Benutzer-initiert}
+\subsection*{Benutzer-initiiert}
 \input{xml/generated/UserTriggeredRequestGroup}
 \input{xml/generated/UserTriggeredRequestGroup-schema}
 \input{xml/generated/UserTriggeredResponseGroup}
@@ -50,7 +50,7 @@ Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf f�
 \input{xml/generated/OriginDestGroup-schema}
 
 \subsection*{Gruppen rein zur Organisation}
-Anmerkung: Im XML Schema sind weitere Gruppen definiert die jedoch nur der Organisation dienen und keinen Einfluss auf das Nachrichtenformat haben und deshalb hier nicht aufgelistet sind.
+Anmerkung: Im XML Schema sind weitere Gruppen definiert, die jedoch nur der Organisation dienen und keinen Einfluss auf das Nachrichtenformat haben und deshalb hier nicht aufgelistet sind.
 \begin{samepage}
 \begin{flushleft}
 \rowcolors{1}{}{gray!10}
@@ -117,7 +117,7 @@ Name &  Kommentar \label{tab:miscGroups}\\
 \input{xml/generated/BookingTargetsInfoResponseType}
 \input{xml/generated/BookingTargetsInfoResponseType-schema}
 
-\subsection*{Abfrage Änderungen Buchungszielen}
+\subsection*{Abfrage Änderungen Buchungsziele}
 \label{subsec:Nachrichten:Dienst1:ChangeProviders}
 \input{xml/generated/ChangedProvidersRequestType}
 \input{xml/generated/ChangedProvidersRequestType-schema}
