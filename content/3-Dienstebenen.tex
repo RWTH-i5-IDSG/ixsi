@@ -1,6 +1,6 @@
-\chapter{Hierachiemodell}
+\chapter{Hierarchiemodell}
 \label{cha:Hierachiemodell}
-Das Hierachiemodell beschreibt unterschiedliche Qualitäten der Informationskopplung, basierend auf Dienstgruppen und dient als Empfehlung für unterschiedliche Ausbaustufen der Implementierung.
+Das Hierarchiemodell beschreibt unterschiedliche Qualitäten der Informationskopplung, basierend auf Dienstgruppen und dient als Empfehlung für unterschiedliche Ausbaustufen der Implementierung.
 Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst 1 Statische Daten (static data) von beiden Interaktionspartnern unterstützt werden. In \cref{fig:depend} sind die Abhängigkeiten zwischen den Diensten dargestellt.
 
 \begin{figure}[h]
@@ -74,13 +74,13 @@ Dienst 1 kann beispielsweise dafür verwendet werden, um nur Hinweise zu vorhand
 \end{itemize}
 
 \subsection*{Abhängigkeiten}
-keine 
+keine
 
 \section{Dienst 2 -- Verfügbarkeitsauskunft (availability query) }
 \label{sec:Hierachiemodell:Dienst2}
 Dienst 2 dient dem synchronen Abruf von Verfügbarkeitsinformationen.
 
-Die tatsächlichen Verfügbarkeitszeiten von Buchungszielen werden während der Reiseauskunft durch das RIS beim FVS abgerufen. 
+Die tatsächlichen Verfügbarkeitszeiten von Buchungszielen werden während der Reiseauskunft durch das RIS beim FVS abgerufen.
 
 \subsection*{Funktionen}
 \begin{itemize}
@@ -103,7 +103,7 @@ Um die Reiseauskunft zu beschleunigen, kann das RIS Verfügbarkeitszeiträume vo
 \begin{itemize}
 \item Abonnement von Verfügbarkeiten
 \item Verfügbarkeitsinformation (push)
-\item Abonnement von Standortskapazitäten (Dienst 3a)
+\item Abonnement von Standortkapazitäten (Dienst 3a)
 \end{itemize}
 
 \subsection*{Abhängigkeiten}
@@ -117,7 +117,7 @@ Um die Reiseauskunft zu beschleunigen, kann das RIS Verfügbarkeitszeiträume vo
 \label{sec:Hierachiemodell:Dienst4}
 Dienst 4 dient der Buchung, Umbuchung und Stornierung von Fahrzeugen durch das RIS im Auftrag eines Kunden des FVS.
 
-Für die Buchung eines Fahrzeuges ist es notwendig, dass der Kunde sich gegenüber dem FVS authentifiziert. Dazu werden die Authentifizierungsinformationen vom RIS an das FVS weitergeleitet. Das Geheimnis (Passwort, PIN, etc.) des Kunden darf vom RIS aus Sicherheitsgründen nicht gespeichert werden. Das RIS erhält bei erfolgreicher Authentifizierung eines Kunden für diesen ein Authentifizierungs-Token. Dieser kann entweder im RIS oder auf dem Endgerät des Kunden gespeichert werden. Unter Verwendung des Authentifizierungs-Tokens kann das RIS Anfragen zur Buchung und Stornierung von Buchungen durchführen. 
+Für die Buchung eines Fahrzeuges ist es notwendig, dass der Kunde sich gegenüber dem FVS authentifiziert. Dazu werden die Authentifizierungsinformationen vom RIS an das FVS weitergeleitet. Das Geheimnis (Passwort, PIN, etc.) des Kunden darf vom RIS aus Sicherheitsgründen nicht gespeichert werden. Das RIS erhält bei erfolgreicher Authentifizierung eines Kunden für diesen ein Authentifizierungs-Token. Dieser kann entweder im RIS oder auf dem Endgerät des Kunden gespeichert werden. Unter Verwendung des Authentifizierungs-Tokens kann das RIS Anfragen zur Buchung und Stornierung von Buchungen durchführen.
 Um dem Nutzer die Änderung einer Buchung zu ermöglichen, kann eine Buchung durch eine Umbuchungsanfrage des RIS durch eine neue Buchung ersetzt werden. Dabei muss sichergestellt werden, dass im Fall, dass keine neue Buchung möglich ist, die alte Buchung ihre Gültigkeit behält.
 
 \subsection*{Funktionen}
@@ -136,7 +136,7 @@ Um dem Nutzer die Änderung einer Buchung zu ermöglichen, kann eine Buchung dur
 \label{sec:Hierachiemodell:Dienst5}
 Dienst 5 dient dem Abonnement von Buchungsänderungen.
 
-Das RIS kann durchgeführte Buchungen beim FVS abbonnieren, um den Benutzer bei Änderungen (z.B. durch ein defektes Fahrzeug) informieren zu können.
+Das RIS kann durchgeführte Buchungen beim FVS abonnieren, um den Benutzer bei Änderungen (z.\,B. durch ein defektes Fahrzeug) informieren zu können.
 \subsection*{Funktionen}
 \begin{itemize}
 \item Buchungsabonnement
@@ -151,9 +151,9 @@ Das RIS kann durchgeführte Buchungen beim FVS abbonnieren, um den Benutzer bei 
 
 \section{Dienst 6 -- Preisauskunft (price information)}
 \label{sec:Hierachiemodell:Dienst6}
-Dienst 6 dient der Preisauskunft von Verleihdienstleistungen. 
+Dienst 6 dient der Preisauskunft von Verleihdienstleistungen.
 
-Durch die Übermittlung von Start-, Zielort und Startzeitpunkt und Endzeitpunkt der Fahrt kann das RIS beim FVS eine unverbindliche Preisauskunft zur Information des Benutzers einhohlen. Das FVS antwortet mit einem Preis und ggfs. Einzelposten.
+Durch die Übermittlung von Start-, Zielort und Startzeitpunkt und Endzeitpunkt der Fahrt kann das RIS beim FVS eine unverbindliche Preisauskunft zur Information des Benutzers einholen. Das FVS antwortet mit einem Preis und ggfs. Einzelposten.
 
 \subsection*{Funktionen}
 \begin{itemize}

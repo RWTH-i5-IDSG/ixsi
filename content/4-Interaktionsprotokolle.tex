@@ -1,15 +1,15 @@
 \chapter{Interaktionsprotokolle}
 \label{cha:Interaktionsprotokolle}
-Dieser Abschnitt gibt einen Überblick über die in IXSI verwendeten Interaktionsschemata. Zur Vereinfachung werden die Interaktionsschemata in den Sequenzdiagramm informell ohne Verwendung der technischen Bezeichnungen der Funktionsaufrufe beschrieben. Grundsätzlich werden werden zwei Typen von Interaktionen verwendet: Das einfache und wohlbekannte Request/Response- bzw. Query-Interaktionsschema bei dem auf jede Anfrage des Clients (in diesem Fall das RIS) genau eine Antwort des Servers folgt (FVS). Weiterhin das Subscription-Schema bei dem einmalig ein Objekt durch den Client abonniert wird und dann Aktualisierungen an diesem Objekt laufend durch den Server geliefert werden. Hierbei bleibt der Kommunikationskanal die ganze Zeit über geöffnet. 
+Dieser Abschnitt gibt einen Überblick über die in IXSI verwendeten Interaktionsschemata. Zur Vereinfachung werden die Interaktionsschemata in den Sequenzdiagrammen informell ohne Verwendung der technischen Bezeichnungen der Funktionsaufrufe beschrieben. Grundsätzlich werden werden zwei Typen von Interaktionen verwendet: Das einfache und wohlbekannte Request/Response- bzw. Query-Interaktionsschema bei dem auf jede Anfrage des Clients (in diesem Fall das RIS) genau eine Antwort des Servers folgt (FVS). Weiterhin das Subscription-Schema bei dem einmalig ein Objekt durch den Client abonniert wird und dann Aktualisierungen an diesem Objekt laufend durch den Server geliefert werden. Hierbei bleibt der Kommunikationskanal die ganze Zeit über geöffnet.
 
 
 \section{Überblick}
-Das folgende Sequenzdiagramm gibt einen Überblick über eine beispielhafte Informationskopplung wie sie durch IXSI realisiert werden kann. Die im einzelnen verwendeten Dienste werden in den folgenden Abschnitt genauer beschrieben. In diesem Anwendungsfall holt ein Kunde beim RIS eine Reiseauskunft ein, bucht eine entsprechende Reise und lässt sich über Änderungen an der Buchung benachrichtigen. 
+Das folgende Sequenzdiagramm gibt einen Überblick über eine beispielhafte Informationskopplung wie sie durch IXSI realisiert werden kann. Die im einzelnen verwendeten Dienste werden in den folgenden Abschnitten genauer beschrieben. In diesem Anwendungsfall holt ein Kunde beim RIS eine Reiseauskunft ein, bucht eine entsprechende Reise und lässt sich über Änderungen an der Buchung benachrichtigen.
 
-Im ersten Block \textit{Austausch Buchungsziele} werden die vom \index{FVS}FVS zur Verfügung gestellten Buchungsziele mit dem \index{RIS}RIS ausgetauscht und relevante Buchungsziele abonniert (vl. \cref{sec:Interaktionsprotokolle:Dienst1,sec:Interaktionsprotokolle:Dienst3}). Die geschieht proaktiv ohne Involvierung eines Kunden. 
-Im Block \textit{Reiseauskunft} führt ein Kunde, z.B. mit einem Mobilgerät, eine Reiseauskunft beim RIS durch. Hierbei kommen mehrere Leihfahrzeuge in Frage deren Verfügbarkeit dann synchron beim FVS abgefragt wird. Für die verfügbaren Fahrzeuge fragt das RIS zusätzlich eine Preisauskunft an. Als Ergebnis gibt das RIS eine Auswahl an möglichen Reiserouten / Verbindungen an den Kunden zurück. Da es sich um durch einen Kunden ausgelöste Kommunikation handelt wird implizit eine Sitzung erstellt in deren Kontext die Abfragen ausgeführt werden. Da sich der Kunde nicht auf seinem Gerät eingeloggt hat, wird eine anonyme Sitzung verwendet.
-Im Block \textit{Reisebuchung} hat sich der Kunde für eine Reiseroute entschieden und möchte diese buchen. Hierzu loggt er sich auf seinem Mobilgerät ein wodurch ein Token generiert wird (Block \emph{Anmeldung}. Mit diesem Token wird eine (nicht anonyme) Sitzung erstellt in welcher der Buchungsvorgang durchgeführt wird. Hierzu übergibt das RIS die Buchungszielreferenz und einen Zeitvorschlag an das FVS. Das sendet eine Buchungsbestätigung welche vom RIS an den Kunden weitergegeben wird. Zusätzlich abonniert das RIS die entsprechende Buchung beim FVS.
-Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an der Buchung die das RIS vom FVS erhält, benachrichtigt.
+Im ersten Block \textit{Austausch Buchungsziele} werden die vom \index{FVS}FVS zur Verfügung gestellten Buchungsziele mit dem \index{RIS}RIS ausgetauscht und relevante Buchungsziele abonniert (vgl. \cref{sec:Interaktionsprotokolle:Dienst1,sec:Interaktionsprotokolle:Dienst3}). Dies geschieht proaktiv ohne Involvierung eines Kunden.
+Im Block \textit{Reiseauskunft} führt ein Kunde, z.\,B. mit einem Mobilgerät, eine Reiseauskunft beim RIS durch. Hierbei kommen mehrere Leihfahrzeuge in Frage, deren Verfügbarkeit dann synchron beim FVS abgefragt wird. Für die verfügbaren Fahrzeuge fragt das RIS zusätzlich eine Preisauskunft an. Als Ergebnis gibt das RIS eine Auswahl an möglichen Reiserouten / Verbindungen an den Kunden zurück. Da es sich um durch einen Kunden ausgelöste Kommunikation handelt, wird implizit eine Sitzung erstellt, in deren Kontext die Abfragen ausgeführt werden. Da sich der Kunde nicht auf seinem Gerät eingeloggt hat, wird eine anonyme Sitzung verwendet.
+Im Block \textit{Reisebuchung} hat sich der Kunde für eine Reiseroute entschieden und möchte diese buchen. Hierzu loggt er sich auf seinem Mobilgerät ein, wodurch ein Token generiert wird (Block \emph{Anmeldung}). Mit diesem Token wird eine (nicht anonyme) Sitzung erstellt, in welcher der Buchungsvorgang durchgeführt wird. Hierzu übergibt das RIS die Buchungszielreferenz und einen Zeitvorschlag an das FVS. Das sendet eine Buchungsbestätigung, welche vom RIS an den Kunden weitergegeben wird. Zusätzlich abonniert das RIS die entsprechende Buchung beim FVS.
+Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an der Buchung, die das RIS vom FVS erhält, benachrichtigt.
 \begin{center}
 \begin{sequencediagram}
 
@@ -144,9 +144,9 @@ Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an 
 \end{center}
 \smallskip
 
-Als Basis für die Informationskopplung dient der Austausch von sogenannten Buchungszielen. Buchungsziele sind eine logische Repräsentation von einem oder mehreren Fahrzeugen mit gemeinsamen Eingeschaften, wie z.B. vom gleichen Anbieter bereitgestellt, gleicher Fahrzeugtyp und gleiche Verleihstation. Diese Eigenschaften sind statisch. Um nur Informationen zu Buchungszielen eines bestimmten Anbieters zu erhalten, kann nach Provider gefiltert werden. Die Übertragung wird vom RIS ausgelöst.
+Als Basis für die Informationskopplung dient der Austausch von sogenannten Buchungszielen. Buchungsziele sind eine logische Repräsentation von einem oder mehreren Fahrzeugen mit gemeinsamen Eigenschaften, wie z.\,B. vom gleichen Anbieter bereitgestellt, gleicher Fahrzeugtyp und gleiche Verleihstation. Diese Eigenschaften sind statisch. Um nur Informationen zu Buchungszielen eines bestimmten Anbieters zu erhalten, kann nach Provider gefiltert werden. Die Übertragung wird vom RIS ausgelöst.
 
-\subsection*{Abfrage Änderungen Buchungszielen}
+\subsection*{Abfrage Änderungen Buchungsziele}
 
 \begin{center}
 \begin{sequencediagram}
@@ -155,7 +155,7 @@ Als Basis für die Informationskopplung dient der Austausch von sogenannten Buch
 
 \begin{sdblock}{Änderungen Buchungsziele}{}
 
-\begin{call}{ris}{Abfrage Änderungenbuchungsziele}{fvs}{Anbieterliste}
+\begin{call}{ris}{Abfrage Änderungen Buchungsziele}{fvs}{Anbieterliste}
 \end{call}
 
 % \begin{messcall}{ris}{Asynchrone Nachricht}{fvs}
@@ -166,7 +166,7 @@ Als Basis für die Informationskopplung dient der Austausch von sogenannten Buch
 \end{center}
 \smallskip
 
-Um nicht intervallweise alle Buchungszielinformationen übertragen zu müssen, kann mit dem Aufruf \texttt{ChangedProviders} angefragt werden, bei welchem Anbieter sich Änderungen seit einem bestimmten Zeitpunkt, vorgegeben durch den Parameter \texttt{timestamp}, ergeben haben. Rückgegeben wird eine Providerreferenz, die wiederum bei beim Funktionsaufruf \texttt{Booking\-TargetsInfo} als Parameter übergeben werden kann.
+Um nicht intervallweise alle Buchungszielinformationen übertragen zu müssen, kann mit dem Aufruf \texttt{ChangedProviders} angefragt werden, bei welchem Anbieter sich Änderungen seit einem bestimmten Zeitpunkt, vorgegeben durch den Parameter \texttt{timestamp}, ergeben haben. Zurückgegeben wird eine Providerreferenz, die wiederum bei beim Funktionsaufruf \texttt{Booking\-TargetsInfo} als Parameter übergeben werden kann.
 
 \section{Dienst 2 -- Verfügbarkeitsauskunft}
 \label{sec:Interaktionsprotokolle:Dienst2}
@@ -189,10 +189,10 @@ Um nicht intervallweise alle Buchungszielinformationen übertragen zu müssen, k
 \end{center}
 \smallskip
 
-Um die konkreten Verfügbarkeiten abzufragen, sendet das RIS eine Anfrage die entweder eine Liste mit Buchungszielen oder ein geographisches Gebiet in Form einer Umgebungssuche oder als Rechteck und eine geünschte Zeitperiode enthält. Ohne Angabe wird die Verfügbarkeit von allen Buchungszielen zurückgegeben. Als Antwort sendet das FVS eine Liste mit Buchungszielen und deren Verfügbarkeiten zurück.
+Um die konkreten Verfügbarkeiten abzufragen, sendet das RIS eine Anfrage die entweder eine Liste mit Buchungszielen oder ein geographisches Gebiet in Form einer Umgebungssuche oder als Rechteck und eine gewünschte Zeitperiode enthält. Ohne Angabe wird die Verfügbarkeit von allen Buchungszielen zurückgegeben. Als Antwort sendet das FVS eine Liste mit Buchungszielen und deren Verfügbarkeiten zurück.
 
 
-\subsection*{Abfrage aktuelle Stationkapazität (Dienst 2a)}
+\subsection*{Abfrage aktuelle Stationskapazität (Dienst 2a)}
 
 \begin{center}
 \begin{sequencediagram}
@@ -209,7 +209,7 @@ Um die konkreten Verfügbarkeiten abzufragen, sendet das RIS eine Anfrage die en
 \end{sequencediagram}
 \end{center}
 \smallskip
-Das RIS kann die aktuellen Kapazitäten, bspw. zur Kartendarstellung, von Verleihstation anfragen. Hierzu wird eine Liste mit Standort IDs oder ein Gebiet übermittelt und eine Liste mit Standorten und deren aktuelle Anzahl verfügbarer Fahrzeuge zurückgegeben.
+Das RIS kann die aktuellen Kapazitäten, bspw. zur Kartendarstellung, von Verleihstation anfragen. Hierzu wird eine Liste mit Standort IDs oder ein Gebiet übermittelt und eine Liste mit Standorten und deren aktueller Anzahl verfügbarer Fahrzeuge zurückgegeben.
 
 
 \section{Dienst 3 -- Verfügbarkeitsabonnement}
@@ -256,17 +256,17 @@ Das RIS kann die aktuellen Kapazitäten, bspw. zur Kartendarstellung, von Verlei
 \end{center}
 \smallskip
 
-Das RIS kann Informationen zu Buchungszielen abonnieren, um unmittelbar über Änderungen von Verfügbarkeiten informiert zu werden. Dies dient im Wesentlichen dazu, Reiseauskünfte ohne zusätzliche (synchrone) Anfrage an das FVS beantworten zu können. 
+Das RIS kann Informationen zu Buchungszielen abonnieren, um unmittelbar über Änderungen von Verfügbarkeiten informiert zu werden. Dies dient im Wesentlichen dazu, Reiseauskünfte ohne zusätzliche (synchrone) Anfrage an das FVS beantworten zu können.
 
-Durch die initiale Anfrage \texttt{AvailabilitySubscriptionRequest} wird ein Abonnement (subscription) begonnen. Hierzu übergibt das RIS die entsprechende Buchungszielreferenz. Durch das Setzen des Flags Kündigung kann ein Abonnement storniert werden. Bei Änderungen an Verfügbarkeiten überträgt das FVS asynchron \texttt{AvailabilityPushMessage}s. Diese werden über den gleichen Kommunikationskanal geliefert über den das Abonnement erstellt wurde. Beim Beenden des Kommunikationskanals werden alle Abonnements hinfällig.
+Durch die initiale Anfrage \texttt{AvailabilitySubscriptionRequest} wird ein Abonnement (subscription) begonnen. Hierzu übergibt das RIS die entsprechende Buchungszielreferenz. Durch das Setzen des Flags Kündigung kann ein Abonnement storniert werden. Bei Änderungen an Verfügbarkeiten überträgt das FVS asynchron \texttt{AvailabilityPushMessage}s. Diese werden über den gleichen Kommunikationskanal geliefert, über den das Abonnement erstellt wurde. Beim Beenden des Kommunikationskanals werden alle Abonnements hinfällig.
 
-Zur anfänglichen Synchronisierung aller Verfügbarkeiten kann das RIS die Funktion \texttt{Complete\-Availability\-Request} aufrufen. 
-
-
+Zur anfänglichen Synchronisierung aller Verfügbarkeiten kann das RIS die Funktion \texttt{Complete\-Availability\-Request} aufrufen.
 
 
 
-\subsection*{Standortkapazitätabonement (Dienst 3a)}
+
+
+\subsection*{Standortkapazitätabonnement (Dienst 3a)}
 \label{subsec:Interaktionsprotokolle:Dienst3a}
 
 \begin{center}
@@ -274,7 +274,7 @@ Zur anfänglichen Synchronisierung aller Verfügbarkeiten kann das RIS die Funkt
 \newthread{ris}{:RIS}
 \newinst[8]{fvs}{:FVS}
 
-\begin{sdblock}{Stantortkapazitäten abonnieren}{}
+\begin{sdblock}{Standortkapazitäten abonnieren}{}
 
 \begin{call}{ris}{Standortreferenz, (Kündigung)*}{fvs}{}
 \end{call}
@@ -320,10 +320,10 @@ Das RIS kann die Kapazitätsinformation von Standorten abonnieren. Der Interakti
 \newinst[8]{fvs}{:FVS}
 
 % \begin{sdblock}{OpenSession*}{}
-% 
+%
 % \begin{call}{ris}{}{fvs}{}
 % \end{call}
-% 
+%
 % \end{sdblock}
 
 
@@ -343,17 +343,17 @@ Das RIS kann die Kapazitätsinformation von Standorten abonnieren. Der Interakti
 \end{sdblock}
 
 % \begin{sdblock}{CloseSession*}{}
-% 
+%
 % \begin{call}{ris}{}{fvs}{}
 % \end{call}
-% 
+%
 % \end{sdblock}
 
 \end{sequencediagram}
 \end{center}
 \smallskip
 
-Um im Kundenauftrag ein Fahrzeug zu Buchen, ist es erfoderlich, dass das RIS den Kunden gegenüber dem FVS authentifizert. Hierzu gibt es drei Möglichkeiten die in \cref{sec:Datenmodell:Auth} genauer dargestellt sind. In diesem Beispiel wird explizit eine Sitzung geöffnet und im Anschluss der Transaktion wieder geschlossen. Danach kann eine Buchung durch den Aufruf von \texttt{Booking} mit Angabe der entsprechenden Buchungsziel ID und einem Vorschlag für einen Zeitraum durchgeführt werden. \blockquote{Vorschlag} deshalb, da das FVS z.B. den Zeitraum auf das verwendete Buchungsraster ändern kann. Als Antwort wird die verwendete Buchungsreferenz und der tatsächliche Buchungszeitraum zurückgegeben. Die Buchungsreferenz kann zur Überwachung der Buchung verwendet werden (vgl. \cref{sec:Interaktionsprotokolle:Dienst5}). Zur Änderung des Buchungszeitraums oder zur Stornierung, kann \texttt{ChangeBooking} aufgerufen werden. Bei Änderung des Buchungsziels ist eine Stornierung und Neubuchung erforderlich. 
+Um im Kundenauftrag ein Fahrzeug zu buchen, ist es erforderlich, dass das RIS den Kunden gegenüber dem FVS authentifizert. Hierzu gibt es drei Möglichkeiten, die in \cref{sec:Datenmodell:Auth} genauer dargestellt sind. In diesem Beispiel wird explizit eine Sitzung geöffnet und im Anschluss an die Transaktion wieder geschlossen. Danach kann eine Buchung durch den Aufruf von \texttt{Booking} mit Angabe der entsprechenden Buchungsziel ID und einem Vorschlag für einen Zeitraum durchgeführt werden. \blockquote{Vorschlag} deshalb, da das FVS z.\,B. den Zeitraum auf das verwendete Buchungsraster ändern kann. Als Antwort wird die verwendete Buchungsreferenz und der tatsächliche Buchungszeitraum zurückgegeben. Die Buchungsreferenz kann zur Überwachung der Buchung verwendet werden (vgl. \cref{sec:Interaktionsprotokolle:Dienst5}). Zur Änderung des Buchungszeitraums oder zur Stornierung kann \texttt{ChangeBooking} aufgerufen werden. Bei Änderung des Buchungsziels ist eine Stornierung und Neubuchung erforderlich.
 
 
 \section{Dienst 5 --  Buchungsabonnement}
@@ -396,7 +396,7 @@ Um im Kundenauftrag ein Fahrzeug zu Buchen, ist es erfoderlich, dass das RIS den
 \end{center}
 \smallskip
 
-Das RIS kann Änderungen an Buchung abonnieren, um diese Informationen dem Kunden weiterzugeben und ggfs. Alternativen anzubieten. Beispielsweise im Falle eines technischen Defekts an einem Fahrzeug, kann das FVS das RIS darüber informieren, dass die Buchung nicht mehr möglich ist. Ebenfalls ist es möglich, eine Buchung als \blockquote{wieder möglich} festzulegen. Endgültig storniert werden kann eine Buchung nur vom Endkunden.
+Das RIS kann Änderungen an Buchungen abonnieren, um diese Informationen dem Kunden weiterzugeben und ggfs. Alternativen anzubieten. Beispielsweise im Falle eines technischen Defekts an einem Fahrzeug kann das FVS das RIS darüber informieren, dass die Buchung nicht mehr möglich ist. Ebenfalls ist es möglich, eine Buchung als \blockquote{wieder möglich} festzulegen. Endgültig storniert werden kann eine Buchung nur vom Endkunden.
 
 Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3}.
 
@@ -412,10 +412,10 @@ Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3
 \newinst[8]{fvs}{:FVS}
 
 % \begin{sdblock}{OpenSession*}{}
-% 
+%
 % \begin{call}{ris}{}{fvs}{}
 % \end{call}
-% 
+%
 % \end{sdblock}
 
 \begin{sdblock}{Preisauskunft}{}
@@ -427,14 +427,14 @@ Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3
 \end{sdblock}
 
 % \begin{sdblock}{EndSession*}{}
-% 
+%
 % \begin{call}{ris}{}{fvs}{}
 % \end{call}
-% 
+%
 % \end{sdblock}
 
 \end{sequencediagram}
 \end{center}
 \smallskip
 
-Mit einer Anfrage \texttt{PriceInformationRequest} kann das RIS beim FVS eine Preisauskunft auf Basis von Buchungsziel ID, Zeitraum und zurückzulegende Distanz anfragen. Falls vorher eine Authentifizierung des Endkunden z.B. durch \texttt{OpenSession} stattgefunden hat, ist die Preisanfrage entsprechend des Kundenvertrags zu beantworten.
+Mit einer Anfrage \texttt{PriceInformationRequest} kann das RIS beim FVS eine Preisauskunft auf Basis von Buchungsziel ID, Zeitraum und zurückzulegende Distanz anfragen. Falls vorher eine Authentifizierung des Endkunden z.\,B. durch \texttt{OpenSession} stattgefunden hat, ist die Preisanfrage entsprechend des Kundenvertrags zu beantworten.
