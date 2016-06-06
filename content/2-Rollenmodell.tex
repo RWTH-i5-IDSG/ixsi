@@ -1,76 +1,75 @@
-\chapter{Rollenmodell}
+\chapter{Role Model}
 \label{cha:Rollenmodell}
 
-Das Rollenmodell beschreibt die vorkommenden Rollen des Integrationsszenarios eines Fahrzeugverleihsystems (z.\,B. CarSharing) in ein Reiseinformationssystem.
+The role model describes the occuring roles in the information exchange.
 
 \begin{figure*}[ht]
 \centering
-\includegraphics[width=0.8\textwidth]{ixsi.pdf}
-\caption{Überblick Rollenmodell.\label{fig:Rollenmodell}}
+\includegraphics[width=0.8\textwidth]{rollenmodell_en.pdf}
+\caption{Overview Roles.\label{fig:Rollenmodell}}
 \end{figure*}
 
-\section*{Reiseinformationssystem}
+\section*{Travel Information System}
 \label{sec:Rollenmodell:RIS}
 \index{RIS}\index{Reiseinformationssystem}
-Das Reiseinformationssystem (RIS) stellt ein Informationssystem für Reiseauskünfte dar und umfasst die Zusammenführung der Reiseangebote, die Konstruktion von Reiseketten, die Berechnung des Gesamtpreises für eine Reisekette, die Reservierung der Mobilitätsangebote für die einzelnen Elemente einer Reisekette, die Aufbereitung der Daten für die Darstellung in Benutzerschnittstellen und abschließend die Darstellung der Informationen.
+The Travel Information System (TIS) is a information system, responsible for travel inquiries and covers the unification of travel options, the construction of travel chains, the calculation of a total price for a travel chain, the reservation of travel options for separated elements of the travel chain, the processing of data for representations in user interfaces and finally the presentation of information.
 
-\subsection*{Anwendungsfälle}
+\subsection*{Use Cases}
 \begin{itemize}
-\item Kunde fragt mit Suchbedingungen und Präferenzen Auskünfte über Mobilitätsangebote beim RIS an. Suchbedingungen und Präferenzen sind beispielsweise Start- und Zielort, Abfahrt- und Ankunftszeitpunkt, zu berücksichtigende Verkehrsmittel, Anzahl der Umstiege, Preisspanne, etc. Die Ergebnisse werden dem Kunden über die Benutzerschnittstelle des RIS in Form von Reiseketten dargestellt.
+\item User inquiries the TIS concerning mobility options, using search filters and preferences. Search filters and preferneces might be starting- and traget- location, departure- and arrival- time, transportation modes, amount of (mode-) switchings, price range, etc. results are provided via user-interfaces of the TIS in the form of travel chains. 
 \end{itemize}
 
-\section*{Fahrzeugverleihsystem}
+\section*{Vehicle Sharing System}
 \label{sec:Rollenmodell:FVS}
 \index{FVS}\index{Fahrzeugverleihsystem}
-Das Fahrzeugverleihsystem (FVS) stellt ein Informationssystem zur Verwaltung und Buchung von Leihfahrzeugen und Kunden dar. Fahrzeuge können sowohl unterschiedlichen Typs, als auch stationsgebunden oder -ungebunden sein.
+The Vehicle Sharing System (VRS) is a information system, responsible for managing and booking of sharing vehicles. Vehicles may vary in type or might be attached or unattached to sharing stations.
 
-\subsection*{Anwendungsfälle}
+\subsection*{Use Cases}
 \begin{itemize}
-\item Ein Kunde bucht (leiht) über das FVS ein Fahrzeug zu vertraglich geregelten Preisen, Zeiten und Stationen aus und nutzt dieses.
-\item Ein Kunde fragt über das FVS die Verfügbarkeit eines Fahrzeugs an.
+\item A user books a vehicle via VRS to specific prices, times and stations and uses it.
+\item A user inquiries the availability of a vehicle via VRS. 
 \end{itemize}
 
-\section*{Benutzer RIS}
+\section*{User TIS}
 \index{Benutzer!RIS}
-Kunde RIS – stellt eine juristische Person dar, die befugt ist eine Reise zu buchen und unter Nutzung der gewählten Verkehrsmittel anzutreten.
+User TIS – represents a legal person, which is authorized to book and utilize a travel chain under use of selected modes of transportation.
 
-\subsection*{Anwendungsfälle}
+\subsection*{Use Cases}
 \begin{itemize}
-\item Benutzer stellt Auskunftsanfrage an das RIS.
-\item Benutzer bucht Reise über das RIS.
+\item User sets up a travel inquiry towards the TIS.
+\item User books a travel via TIS.
 \end{itemize}
 
-\section*{Benutzer FVS}
+\section*{User VRS}
 \index{Benutzer!FVS}
-Kunde FVS - stellt eine juristische Person dar, die befugt ist ein Fahrzeug zu leihen und zu nutzen.
+User VRS - represents a legal person, which is authorized to rent and use a vehicle.
 
-\subsection*{Anwendungsfälle}
+\subsection*{Use Cases}
 \begin{itemize}
-\item Benutzer stellt Auskunftsanfrage an das FVS.
+\item User sets up a travel inquiry towards the VRS.
 % \item Benutzer reserviert ein Fahrzeug über das FVS.
-\item Benutzer bucht ein Fahrzeug über das FVS.
+\item User books a travel via VRS.
 \end{itemize}
 
-\section*{Betreiber RIS}
+\section*{Operator TIS}
 \index{Betreiber!RIS}
-Betreiber RIS – stellt das RIS als Informationssystem für einen Mobilitätsanbieter als Dienstleistung bereit.
+Operator TIS – provides the TIS as a service for transportation service providers.
 
 % \subsection{Anwendungsfälle}
 
-\section*{Betreiber FVS}
+\section*{Operator VRS}
 \index{Betreiber!FVS}
-Betreiber FVS - stellt ein Informationssystem für FVS für einen Fahrzeugverleiher als Dienstleistung bereit.
-
+Operator VRS - provides the VRS as a service for vehicle rental companies.
 % \subsection{Anwendungsfälle}
 
 % \section{FVS-Standort}
-%
-% Ein FVS-Standort (z.\,B. eine CarSharing-Station) stellt die Fahrzeuge eines Mobilitätsanbieters an einem Ort bereit.
-%
+% 
+% Ein FVS-Standort (z.B. eine CarSharing-Station) stellt die Fahrzeuge eines Mobilitätsanbieters an einem Ort bereit.
+% 
 % % \subsection{Anwendungsfälle}
-%
+% 
 % \section{Fahrzeug}
-%
+% 
 % Fahrzeug – wird vom Mobilitätsanbieter über das FVS an einer Station als Mobilitätsangebot für den Kunden angeboten.
 
 % \subsection{Anwendungsfälle}
