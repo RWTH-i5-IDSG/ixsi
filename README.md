@@ -26,16 +26,31 @@ IXSI is currently still under development and the API is not final.
 
 precompiled pdfs are available under: 
 
-https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-econnect.pdf
+https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-econnect.pdf (german version)
 
-https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-english.pdf (translation not complete)
+https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-english.pdf (english version, translation not complete)
 
-The branch `mobilitybroker` contains non standard additions developed in project mobilitybroker.
+The respective XML schema is available under:
 
-https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-mobilitybroker.pdf
+https://github.com/RWTH-i5-IDSG/ixsi/blob/econnect/xml/IXSI.xsd
 
-IXSI was developed for eConnect Germany, Hub Osnabrück by
+IXSI was initially developed for eConnect Germany, Hub Osnabrück by
 
 cantamen GmbH,
 HaCon Ing.-Ges. mbH,
 RWTH Aachen
+
+
+
+## Mobility Broker 
+The branch `mobilitybroker` contains non standard additions developed in project Mobility Broker. More Information about Mobility Broker is available: http://mobility-broker.com/ (in german)
+
+precompiled pdf:
+https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-mobilitybroker.pdf
+
+The respective XML schema for branch `mobilitybroker` is available under:
+https://github.com/RWTH-i5-IDSG/ixsi/blob/mobilitybroker/xml/IXSI.xsd
+
+
+
+
