@@ -1,7 +1,7 @@
-\chapter{Hierarchiemodell}
-\label{cha:Hierachiemodell}
-Das Hierarchiemodell beschreibt unterschiedliche Qualitäten der Informationskopplung, basierend auf Dienstgruppen und dient als Empfehlung für unterschiedliche Ausbaustufen der Implementierung.
-Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst 1 Statische Daten (static data) von beiden Interaktionspartnern unterstützt werden. In \cref{fig:depend} sind die Abhängigkeiten zwischen den Diensten dargestellt.
+\chapter{Hierarchical Model}
+\label{cha:HierarchicalModel}
+The hierarchical model describes different qualities of information coupling, based on service groups and serves as a recommendation concerning possible stages of implementation.
+To realize a coupling between VRS and TIS, at least service 1 (static data) of both interacting parties has to be supported. In \cref{fig:depend}, dependencies between different services are depicted.
 
 \begin{figure}[h]
 \centering
@@ -29,17 +29,17 @@ Um eine Kopplung zwischen FVS und RIS zu realisieren, muss mindestens der Dienst
 \end{figure}
 
 
-\section{Basisdienst A -- Sitzungen (session handling)}
-\label{sec:Hierachiemodell:BasisdientA}
-Dienst A dient der Authentifizierung von Endkunden gegenüber dem FVS.
+\section{Base Service A -- Session Handling}
+\label{sec:HierarchicalModel:BaseServiceA}
+Service A enables the authentication of end-customers towards the VRS.
 
-\subsection*{Funktionen}
+\subsection*{Functions}
 \begin{itemize}
-\item Sitzung öffnen / schließen
+\item Open / Close Session
 \end{itemize}
 
-\subsection*{Abhängigkeiten}
-keine
+\subsection*{Dependencies}
+none
 
 \section{Basisdienst B -- Abonnements (subscription handling)}
 \label{sec:Hierachiemodell:BasisdientB}
