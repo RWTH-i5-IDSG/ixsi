@@ -41,78 +41,77 @@ Service A enables the authentication of end-customers towards the VRS.
 \subsection*{Dependencies}
 none
 
-\section{Basisdienst B -- Abonnements (subscription handling)}
+\section{Base Service B -- Subscription Handling)}
 \label{sec:Hierachiemodell:BasisdienstB}
-Dienst B enthält eine Funktion zur Überprüfung des Status einer Abonnementverbindung (heartbeat)
+Service B contains a function to check the status of a subscription connection (heartbeat)
 
-\subsection*{Funktionen}
+\subsection*{Functions}
 \begin{itemize}
 \item Heartbeat
 \end{itemize}
 
-\subsection*{Abhängigkeiten}
-keine
+\subsection*{Dependencies}
+none
 
-\section{Basisdienst C -- tokens}
+\section{Base Service C -- tokens}
 \label{sec:Hierachiemodell:BasisdienstC}
-Dienst C enthält eine Funktion zur Erstellung von Authentifizierungstokens für Endkunden, die an Stelle von Klartextpasswörtern gespeichert / übertragen werden können.
+Service C contains a function to create authentication tokens for users, which can be saved/ transferred instead of plaintext passwords.
 
-\subsection*{Funktionen}
+\subsection*{Functions}
 \begin{itemize}
-\item Erstellung von Tokens
+\item Creation of tokens
 \end{itemize}
 
-\subsection*{Abhängigkeiten}
-keine
+\subsection*{Dependencies}
+none
 
 
-\section{Dienst 1 -- Statische Daten (static data)}
+\section{Service 1 -- Static Data}
 \label{sec:Hierachiemodell:Dienst1}
-Dienst 1 dient dem Austausch von Informationen über Fahrzeugverleihanbietern und statischen Daten von Buchungszielen. Hierzu gehören Anbieter, Standort- und Fahrzeugdaten. 
+Service 1 serves the information exchange across vehicle rental companies and static data of booking targets. These include provider-, position-, and vehicle-data. 
 
-Dienst 1 kann beispielsweise dafür verwendet werden, um nur Hinweise zu vorhandenen Standorten eines FVS-Betreibers in einem RIS anzuzeigen.
-\subsection*{Funktionen}
+For example, service 1 can be used, to display messages solely for existing locations of an VRS-provider in a TIS. 
+\subsection*{Functions}
 \begin{itemize}
-\item Abruf von Buchungsziel- und Betreiberinformationen
+\item Call of booking targets and provider information.
 \end{itemize}
 
-\subsection*{Abhängigkeiten}
-keine
+\subsection*{Dependencies}
+none
 
-\section{Dienst 2 -- Verfügbarkeitsauskunft (availability query) }
+\section{Service 2 -- Availability Query}
 \label{sec:Hierachiemodell:Dienst2}
-Dienst 2 dient dem synchronen Abruf von Verfügbarkeitsinformationen.
+Service 2 serves for asynchronous calls of availability information.
 
-Die tatsächlichen Verfügbarkeitszeiten von Buchungszielen werden während der Reiseauskunft durch das RIS beim FVS abgerufen.
-
-\subsection*{Funktionen}
+The actual availability times of booking targets are called during the travel inquiry by the TIS at the VRS.
+\subsection*{Functions}
 \begin{itemize}
-\item Abruf von Verfügbarkeiten von Buchungszielen
-\item Abruf von Standortkapazitäten (Dienst 2a)
+\item Calls of availabilities of booking targets
+\item Calls of location capacities (Service 2a)
 \end{itemize}
 
-\subsection*{Abhängigkeiten}
+\subsection*{Dependencies}
 \begin{itemize}
-\item Dienst 1
+\item Service 1
 \end{itemize}
 
-\section{Dienst 3 -- Verfügbarkeitsabonnement (availability subscription) }
+\section{Service 3 -- Availability Subscription}
 \label{sec:Hierachiemodell:Dienst3}
-Dienst 2 dient dem asynchronen Austausch von Verfügbarkeitsinformationen.
+Services 2 serves the asynchronous exchange of availability information.
 
-Um die Reiseauskunft zu beschleunigen, kann das RIS Verfügbarkeitszeiträume von Buchungszielen abonnieren um eine Abfrage während der Reiseauskunft zu vermeiden. Nach dem Abonnement einer Menge von Buchungszielen, informiert das FVS fortlaufend über Änderungen an Verfügbarkeitszeiträumen.
+To accelerate the travel inquiry, the TIS can subscribe availability timescales of booking targets to avoid a query during the travel inquiry. After subscribing for an amount of booking targets, the VRS informs continuously about changes in availability timescales. 
 
-\subsection*{Funktionen}
+\subsection*{Functions}
 \begin{itemize}
-\item Abonnement von Verfügbarkeiten
-\item Verfügbarkeitsinformation (push)
-\item Abonnement von Standortkapazitäten (Dienst 3a)
+\item Availability subscription
+\item Availability information (push)
+\item Subscription of location capacities (Service 3a)
 \end{itemize}
 
-\subsection*{Abhängigkeiten}
+\subsection*{Dependencies}
 \begin{itemize}
-\item Dienst 1
-\item Basisdienst B
+\item Service 1
+\item Base Service B
 \end{itemize}
 
 
