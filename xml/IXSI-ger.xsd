@@ -2090,7 +2090,7 @@
 						<xs:documentation>Ändern einer Buchung.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="BookingUnlock" type="BookingUnlockRequestType">
+				<xs:element name="ChangeBookingState" type="ChangeBookingStateRequestType">
 					<xs:annotation>
 						<xs:documentation>Fahrzeugfreischaltung.</xs:documentation>
 					</xs:annotation>
@@ -2164,7 +2164,7 @@
 						<xs:documentation>Ändern einer Buchung.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="BookingUnlock" type="BookingUnlockResponseType">
+				<xs:element name="ChangeBookingState" type="ChangeBookingStateResponseType">
 					<xs:annotation>
 						<xs:documentation>Fahrzeugfreischaltung.</xs:documentation>
 					</xs:annotation>
