@@ -5,7 +5,7 @@
             <TimeStamp>2014-11-03T11:16:05.842+01:00</TimeStamp>
             <MessageID>100</MessageID>
     	</Transaction>
-    	<SystemID>Test-System</SystemID>
+        <SystemID>Test-System</SystemID>
         <BookingTargetsInfo/>
     </Request>
 </Ixsi>
