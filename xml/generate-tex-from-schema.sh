@@ -31,7 +31,7 @@ command -v xmllint >/dev/null 2>&1 || { echo >&2 "I require xmllint but it's not
 cd "`git rev-parse --git-dir`/../xml"
 
 echo "checking schema for consistency"
-xmllint $file >/dev/null 2>&1 || { echo >&2 "Schema malformed.  Aborting."; exit 1; }
+xmllint --noout --schema $file test-message.xml 2>&1 || { echo >&2 "Schema malformed. Aborting."; exit 1; }
 
 
 mkdir -p generated
