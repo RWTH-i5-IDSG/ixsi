@@ -1134,7 +1134,7 @@
 					<xs:documentation>Geschätze Ankunftszeit des Buchungsziel am Zielort.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="Position" type="GeoPosition" minOccurs="0">
+			<xs:element name="Position" type="CoordType" minOccurs="0">
 				<xs:annotation>
 					 <xs:documentation>Aktuelle Position des Buchungsziel. Optional wegen möglicher Datenschutzbedenken.</xs:documentation>
 				</xs:annotation>
@@ -2489,7 +2489,7 @@
 						<xs:documentation>Benutzer ändern.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
-				<xs:element name="SetBookingSettings" type="SetBookingResponseType">
+				<xs:element name="SetBookingSettings" type="SetBookingSettingsResponseType">
 					<xs:annotation>
 						<xs:documentation>Buchungseinstellungen setzen.</xs:documentation>
 					</xs:annotation>
