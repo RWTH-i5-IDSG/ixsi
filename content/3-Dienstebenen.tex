@@ -115,56 +115,56 @@ To accelerate the travel inquiry, the TIS can subscribe availability timescales 
 \end{itemize}
 
 
-\section{Dienst 4 -- Buchung (booking)}
+\section{Service 4 -- Booking}
 \label{sec:Hierachiemodell:Dienst4}
-Dienst 4 dient der Buchung, Umbuchung und Stornierung von Fahrzeugen durch das RIS im Auftrag eines Kunden des FVS.
+Service 4 serves booking, booking changes and canceling of vehicles via the TIS on behalf of the customer of a VRS.
 
-Für die Buchung eines Fahrzeuges ist es notwendig, dass der Kunde sich gegenüber dem FVS authentifiziert. Dazu werden die Authentifizierungsinformationen vom RIS an das FVS weitergeleitet. Das Geheimnis (Passwort, PIN, etc.) des Kunden darf vom RIS aus Sicherheitsgründen nicht gespeichert werden. Das RIS erhält bei erfolgreicher Authentifizierung eines Kunden für diesen ein Authentifizierungs-Token. Dieser kann entweder im RIS oder auf dem Endgerät des Kunden gespeichert werden. Unter Verwendung des Authentifizierungs-Tokens kann das RIS Anfragen zur Buchung und Stornierung von Buchungen durchführen.
-Um dem Nutzer die Änderung einer Buchung zu ermöglichen, kann eine Buchung durch eine Umbuchungsanfrage des RIS durch eine neue Buchung ersetzt werden. Dabei muss sichergestellt werden, dass im Fall, dass keine neue Buchung möglich ist, die alte Buchung ihre Gültigkeit behält.
+The booking of a vehicle requires that a customer authenticates himself towards the VRS. Therefore, authentication information is forwarded from the TIS to the VRS. The secret (Password, key, etc.) of the customer is not allowed to be saved due to security reasons. The TIS receives an authentication-token in case of a successful authentication of a user. It can either be saved on the TIS or the user's device. Using the authentication-token, the TIS can proceed queries concerning bookings and canceling. 
+To allow booking changes, a booking can be replaced by another booking via a booking change request. In case of an impossible booking, is has to be secured that the initial booking retains it's validity. 
 
-\subsection*{Funktionen}
+\subsection*{Functions}
 \begin{itemize}
-\item Authentifizierung von Nutzern gegenüber dem FVS.
-\item Anfrage zur Buchung
-\item Anfrage zur Buchungsänderung / Stornierung
+\item Authentication of users towards the VHR 
+\item Booking Query
+\item Query concerning booking changes/ canceling
 \end{itemize}
 
-\subsection*{Abhängigkeiten}
+\subsection*{Dependencies}
 \begin{itemize}
-\item Dienst 1
+\item Service 1
 \end{itemize}
 
-\section{Dienst 5 -- Buchungsabonnement (booking subscription)}
+\section{Service 5 -- Booking subscription}
 \label{sec:Hierachiemodell:Dienst5}
-Dienst 5 dient dem Abonnement von Buchungsänderungen.
+Service 5 serves the subscription of booking changes.
 
-Das RIS kann durchgeführte Buchungen beim FVS abonnieren, um den Benutzer bei Änderungen (z.\,B. durch ein defektes Fahrzeug) informieren zu können.
-\subsection*{Funktionen}
+The TIS is able to subscribe conducted bookings at the VRS to inform users in case of changes, e.g., damaged vehicles.
+\subsection*{Functions}
 \begin{itemize}
-\item Buchungsabonnement
-\item Buchungsalarm (Push)
+\item Booking subscriptions 
+\item Booking alert (Push)
 \end{itemize}
 
-\subsection*{Abhängigkeiten}
+\subsection*{Dependencies}
 \begin{itemize}
-\item Dienst 4
-\item Basisdienst B
+\item Service 4
+\item Base Service B
 \end{itemize}
 
-\section{Dienst 6 -- Preisauskunft (price information)}
+\section{Service 6 -- Price information}
 \label{sec:Hierachiemodell:Dienst6}
-Dienst 6 dient der Preisauskunft von Verleihdienstleistungen.
+Service 6 serves price information of rental services.
 
-Durch die Übermittlung von Start-, Zielort und Startzeitpunkt und Endzeitpunkt der Fahrt kann das RIS beim FVS eine unverbindliche Preisauskunft zur Information des Benutzers einholen. Das FVS antwortet mit einem Preis und ggfs. Einzelposten.
+Through the transmission of starting and target location as well as departure and arrival time of the travel, the TIS is able to query price information at the VRS to inform the user. The VRS responds with an overall price and eventually individual price parts.
 
-\subsection*{Funktionen}
+\subsection*{Functions}
 \begin{itemize}
-\item Anfrage eines Preises
+\item Query of Prices
 \end{itemize}
 
-\subsection*{Abhängigkeiten}
+\subsection*{Dependencies}
 \begin{itemize}
-\item Dienst 1
+\item Service 1
 \end{itemize}
 
 
