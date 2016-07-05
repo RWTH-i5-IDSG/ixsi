@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Ixsi xmlns="http://www.ixsi-schnittstelle.de/">
+    <Request>
+        <Transaction>
+            <TimeStamp>2014-11-03T11:16:05.842+01:00</TimeStamp>
+            <MessageID>100</MessageID>
+    	</Transaction>
+        <SystemID>Test-System</SystemID>
+        <BookingTargetsInfo/>
+    </Request>
+</Ixsi>
+
