@@ -1,9 +1,8 @@
-\chapter{Interaktionsprotokolle}
+\chapter{Interaction Sequences}
 \label{cha:Interaktionsprotokolle}
-Dieser Abschnitt gibt einen Überblick über die in IXSI verwendeten Interaktionsschemata. Zur Vereinfachung werden die Interaktionsschemata in den Sequenzdiagrammen informell ohne Verwendung der technischen Bezeichnungen der Funktionsaufrufe beschrieben. Grundsätzlich werden werden zwei Typen von Interaktionen verwendet: Das einfache und wohlbekannte Request/Response- bzw. Query-Interaktionsschema bei dem auf jede Anfrage des Clients (in diesem Fall das RIS) genau eine Antwort des Servers folgt (FVS). Weiterhin das Subscription-Schema bei dem einmalig ein Objekt durch den Client abonniert wird und dann Aktualisierungen an diesem Objekt laufend durch den Server geliefert werden. Hierbei bleibt der Kommunikationskanal die ganze Zeit über geöffnet.
+This section provides an overview about the interaction schemes, used by IXSI. For simplification, these interaction schemes are described in interaction sequence diagrams without using the technical terms of function calls. In principal, two types of interactions are used: The simple and well-known request/response- or. query- interaction scheme, whereby every call of the client (in this case TIS) is followed by exactly one response of the server (VRS). Furthermore, the subscription-scheme, whereby one object is subscribed by the client once and updated continuously by the server. Hereby, the communication channel is opened all the time. 
 
-
-\section{Überblick}
+\section{Overview}
 Das folgende Sequenzdiagramm gibt einen Überblick über eine beispielhafte Informationskopplung wie sie durch IXSI realisiert werden kann. Die im einzelnen verwendeten Dienste werden in den folgenden Abschnitten genauer beschrieben. In diesem Anwendungsfall holt ein Kunde beim RIS eine Reiseauskunft ein, bucht eine entsprechende Reise und lässt sich über Änderungen an der Buchung benachrichtigen.
 
 Im ersten Block \textit{Austausch Buchungsziele} werden die vom \index{FVS}FVS zur Verfügung gestellten Buchungsziele mit dem \index{RIS}RIS ausgetauscht und relevante Buchungsziele abonniert (vgl. \cref{sec:Interaktionsprotokolle:Dienst1,sec:Interaktionsprotokolle:Dienst3}). Dies geschieht proaktiv ohne Involvierung eines Kunden.
@@ -14,36 +13,36 @@ Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an 
 \begin{sequencediagram}
 
 
-\newthread{kunde}{:Kunde}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{customer}{:Customer}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
 
-\begin{sdblock}{Austausch Buchungsziele}{Dienst 1, Dienst 3}
+\begin{sdblock}{Exchange booking targets}{Service 1, Service 3}
 
-  \begin{call}{ris}{Anfrage}{fvs}{Liste Buchungsziele}
+  \begin{call}{tis}{Request}{vrs}{List booking targets}
   \end{call}
 
-  \begin{call}{ris}{Abonnement Buchungsziele}{fvs}{}
+  \begin{call}{tis}{Subscription booking targets}{vrs}{}
   \end{call}
   
-  \begin{mess}{fvs}{Buchungszieländerung}{ris}
+  \begin{mess}{vrs}{Change booking target}{tis}
   \end{mess}
 \end{sdblock}
 \postlevel
 
-\begin{sdblock}{Reiseauskunft}{}
-  \begin{call}{kunde}{Reiseauskunft}{ris}{mögliche Reiserouten}
+\begin{sdblock}{Travel inquiry}{}
+  \begin{call}{customer}{Travel inquiry}{tis}{Possible routes}
 
-    \begin{sdblock}{Sitzung (anonym)}{Basisdienst A}
+    \begin{sdblock}{Session (anonymous)}{Base service A}
         
-        \begin{sdblock}{Verfügbarkeitsauskunft}{Dienst 2}
-          \begin{call}{ris}{Verfügbarkeitsauskunft Buchungsziele, Zeitraum}{fvs}{mögliche Buchungsziele}
+        \begin{sdblock}{Availability information}{Service 2}
+          \begin{call}{tis}{Availability information booking targets,  time span}{vrs}{Possible booking targets}
           \end{call}
         \end{sdblock}
 
-        \begin{sdblock}{Preisauskunft}{Dienst 6}
-          \begin{call}{ris}{Preisauskunft Buchungsziele, Zeitraum, Distanz}{fvs}{Preis}
+        \begin{sdblock}{Price inquiry}{Service 6}
+          \begin{call}{tis}{Price information booking targets, time span, distance}{vrs}{Price}
           \end{call}
         \end{sdblock}
       
