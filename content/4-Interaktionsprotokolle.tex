@@ -3,12 +3,12 @@
 This section provides an overview about the interaction schemes, used by IXSI. For simplification, these interaction schemes are described in interaction sequence diagrams without using the technical terms of function calls. In principal, two types of interactions are used: The simple and well-known request/response- or. query- interaction scheme, whereby every call of the client (in this case TIS) is followed by exactly one response of the server (VRS). Furthermore, the subscription-scheme, whereby one object is subscribed by the client once and updated continuously by the server. Hereby, the communication channel is opened all the time. 
 
 \section{Overview}
-The following sequence diagram gives an exemplary overview of information coupling, possibly enabled by IXSI. The used services are going to be described in detail in the following chapters. In this use case, a user sets up a travel inquiry, books a respective travel and gets informed concerning relevant booking changes. 
+The following sequence diagram gives an exemplary overview of information coupling, possibly enabled by IXSI. The used services are going to be described in detail in the following chapters. In this use case, a customer sets up a travel inquiry, books a respective travel and gets informed concerning relevant booking changes. 
 
-In the first block \textit{Exchange booking targets}, the booking targets, provided by the \index{VRS}VRS are exchanged with the \index{TIS}TIS and relevant booking targets are subscribed (see. \cref{sec:Interaktionsprotokolle:Dienst1,sec:Interaktionsprotokolle:Dienst3}). This happens proactive, without involving the user.
-In block \textit{Travel Inquiry} führt ein Kunde, z.\,B. mit einem Mobilgerät, eine Reiseauskunft beim RIS durch. Hierbei kommen mehrere Leihfahrzeuge in Frage, deren Verfügbarkeit dann synchron beim FVS abgefragt wird. Für die verfügbaren Fahrzeuge fragt das RIS zusätzlich eine Preisauskunft an. Als Ergebnis gibt das RIS eine Auswahl an möglichen Reiserouten / Verbindungen an den Kunden zurück. Da es sich um durch einen Kunden ausgelöste Kommunikation handelt, wird implizit eine Sitzung erstellt, in deren Kontext die Abfragen ausgeführt werden. Da sich der Kunde nicht auf seinem Gerät eingeloggt hat, wird eine anonyme Sitzung verwendet.
-Im Block \textit{Reisebuchung} hat sich der Kunde für eine Reiseroute entschieden und möchte diese buchen. Hierzu loggt er sich auf seinem Mobilgerät ein, wodurch ein Token generiert wird (Block \emph{Anmeldung}). Mit diesem Token wird eine (nicht anonyme) Sitzung erstellt, in welcher der Buchungsvorgang durchgeführt wird. Hierzu übergibt das RIS die Buchungszielreferenz und einen Zeitvorschlag an das FVS. Das sendet eine Buchungsbestätigung, welche vom RIS an den Kunden weitergegeben wird. Zusätzlich abonniert das RIS die entsprechende Buchung beim FVS.
-Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an der Buchung, die das RIS vom FVS erhält, benachrichtigt.
+In the first block \textit{Exchange booking targets}, the booking targets, provided by the \index{VRS}VRS are exchanged with the \index{TIS}TIS and relevant booking targets are subscribed (see. \cref{sec:Interaktionsprotokolle:Dienst1,sec:Interaktionsprotokolle:Dienst3}). This happens proactive, without involving the customer.
+In block \textit{Travel Inquiry}, a customer sets up a travel inquiry with, e.g. his mobile device, on the TIS. Thereby, various rental vehicles are suitable for booking, whose availabilities are requested synchronously towards the VRS. For availabilities, the TIS additionally requests price information. As a result, the TIS provides a selection of possible routes/ connections to the customer. Because this is a communication triggered by the customer, a session which proceeds the queries is created implicitly. An anonymous session is used, because the customer did not register on his device beforehand.
+In block \textit{Tarvel booking}, a customer has chosen a travel route and intends to book it. For this purpose, he registers on his mobile device, whereby a token is generated(Block \emph{Registration}). With this token, a (not anonymous) session is created, which proceeds the booking operation. For that, the TIS forwards booking reference and a time proposal to the VRS. This sends a booking confirmation, which is forwarded to the customer. In addition, the TIS subscribes the respective booking on the VRS.
+In the last block \textit{Travel monitoring}, the customers gets informed concerning booking changes, which are received by the TIS, coming from the VRS.
 \begin{center}
 \begin{sequencediagram}
 
@@ -103,12 +103,12 @@ Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an 
 
 \postlevel
 
-\begin{sdblock}{Reiseüberwachung}{Dienst 5}
+\begin{sdblock}{Travel monitoring}{Service 5}
 \postlevel
-  \begin{mess}{fvs}{Buchungsänderung}{ris}
+  \begin{mess}{vrs}{Booking change}{tis}
   \end{mess}
 
-  \begin{mess}{ris}{Buchungsänderung}{kunde}
+  \begin{mess}{tis}{Booking change}{customer}
   \end{mess}
   
 \end{sdblock}
@@ -120,19 +120,19 @@ Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an 
 
 
 
-\section{Dienst 1 -- Statische Daten}
+\section{Service 1 -- Static Data}
 \label{sec:Interaktionsprotokolle:Dienst1}
 
-\subsection*{Abfrage Buchungsziele}
+\subsection*{Booking Target Query}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
-\begin{sdblock}{Buchungszielaustausch}{}
+\begin{sdblock}{Booking target exchange}{}
 
-\begin{call}{ris}{Buchungszielabfrage(Anbieter*)}{fvs}{Buchungszielliste}
+\begin{call}{tis}{Booking target query(Provider*)}{vrs}{Booking target list}
 
 \end{call}
 
