@@ -76,13 +76,13 @@ Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an 
 \end{sdblock}
 \postlevel
 
-\begin{sdblock}{Reisebuchung}{}
+\begin{sdblock}{Travel booking}{}
 
-  \begin{call}{kunde}{Auswahl Reiseroute, Token}{ris}{Buchungsbestätigung}
-    \begin{sdblock}{Sitzung}{Basisdienst A}
+  \begin{call}{customer}{Route selection, token}{tis}{Booking confirmation}
+    \begin{sdblock}{Session}{Base service A}
 
-      \begin{sdblock}{Fahrzeugbuchung}{Dienst 4}
-        \begin{call}{ris}{Buchungszielreferenz, Zeitraumvorschlag}{fvs}{Buchungsreferenz, Zeitraum}
+      \begin{sdblock}{Vehicle booking}{Service 4}
+        \begin{call}{tis}{Booking target reference, time span proposal}{vrs}{booking reference, time span}
         \end{call}
       \end{sdblock}
       
@@ -90,9 +90,9 @@ Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an 
     
   \end{call}
     
-    \begin{sdblock}{Buchungsabonnement}{Dienst 5}
+    \begin{sdblock}{Booking subscription}{Service 5}
 
-      \begin{call}{ris}{Buchungsreferenz}{fvs}{}
+      \begin{call}{ris}{Booking reference}{vrs}{}
       \end{call}
 
     \end{sdblock}
