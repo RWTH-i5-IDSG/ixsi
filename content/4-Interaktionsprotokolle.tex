@@ -143,18 +143,18 @@ In the last block \textit{Travel monitoring}, the customers gets informed concer
 \end{center}
 \smallskip
 
-Als Basis für die Informationskopplung dient der Austausch von sogenannten Buchungszielen. Buchungsziele sind eine logische Repräsentation von einem oder mehreren Fahrzeugen mit gemeinsamen Eigenschaften, wie z.\,B. vom gleichen Anbieter bereitgestellt, gleicher Fahrzeugtyp und gleiche Verleihstation. Diese Eigenschaften sind statisch. Um nur Informationen zu Buchungszielen eines bestimmten Anbieters zu erhalten, kann nach Provider gefiltert werden. Die Übertragung wird vom RIS ausgelöst.
+Basis for information coupling is the exchange of booking targets. Booking targets are a logical representation of one or several vehicles with common characteristics, e.g., provided by the same provider, same vehicle type or same rental station. These characteristics are statically. To receive booking target information concerning a certain provider solely, it is possible to filter concerning the respective provider. The transmission is initiated by the TIS.
 
-\subsection*{Abfrage Änderungen Buchungsziele}
+\subsection*{Booking Target Change Query}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
-\begin{sdblock}{Änderungen Buchungsziele}{}
+\begin{sdblock}{Booking Target Changes}{}
 
-\begin{call}{ris}{Abfrage Änderungen Buchungsziele}{fvs}{Anbieterliste}
+\begin{call}{tis}{Booking target change query}{vrs}{Provider list}
 \end{call}
 
 % \begin{messcall}{ris}{Asynchrone Nachricht}{fvs}
@@ -165,21 +165,21 @@ Als Basis für die Informationskopplung dient der Austausch von sogenannten Buch
 \end{center}
 \smallskip
 
-Um nicht intervallweise alle Buchungszielinformationen übertragen zu müssen, kann mit dem Aufruf \texttt{ChangedProviders} angefragt werden, bei welchem Anbieter sich Änderungen seit einem bestimmten Zeitpunkt, vorgegeben durch den Parameter \texttt{timestamp}, ergeben haben. Zurückgegeben wird eine Providerreferenz, die wiederum bei beim Funktionsaufruf \texttt{Booking\-TargetsInfo} als Parameter übergeben werden kann.
+To avoid the transmission of all booking information per interval, with the help of the query \texttt{ChangedProviders} it is possible to inquire the provider, related to changes since a specific point in time, set by the parameter \texttt{timestamp}. A provider reference is returned, which in turn can be transferred as a parameter by the function call \texttt{Booking\-TargetsInfo}. 
 
-\section{Dienst 2 -- Verfügbarkeitsauskunft}
+\section{Service 2 -- Availability Information}
 \label{sec:Interaktionsprotokolle:Dienst2}
 
-\subsection*{Abfrage Verfügbarkeit}
+\subsection*{Availability Query}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
-\begin{sdblock}{Verfügbarkeitsauskunft}{}
+\begin{sdblock}{Availability Information}{}
 
-\begin{call}{ris}{Buchungsziele/Gebiet, Zeitraum}{fvs}{Buchungsziele}
+\begin{call}{tis}{Booking targets/ area, time span}{vrs}{Booking targets}
 \end{call}
 
 \end{sdblock}
