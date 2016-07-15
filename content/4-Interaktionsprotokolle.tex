@@ -165,7 +165,7 @@ Basis for information coupling is the exchange of booking targets. Booking targe
 \end{center}
 \smallskip
 
-To avoid the transmission of all booking information per interval, with the help of the query \texttt{ChangedProviders} it is possible to inquire the provider, related to changes since a specific point in time, set by the parameter \texttt{timestamp}. A provider reference is returned, which in turn can be transferred as a parameter by the function call \texttt{Booking\-TargetsInfo}. 
+To avoid the transmission of all booking information per interval, with the help of the query \texttt{ChangedProviders} it is possible to request the provider, related to changes since a specific point in time, set by the parameter \texttt{timestamp}. A provider reference is returned, which in turn can be transferred as a parameter by the function call \texttt{Booking\-TargetsInfo}. 
 
 \section{Service 2 -- Availability Information}
 \label{sec:Interaktionsprotokolle:Dienst2}
@@ -188,19 +188,18 @@ To avoid the transmission of all booking information per interval, with the help
 \end{center}
 \smallskip
 
-Um die konkreten Verfügbarkeiten abzufragen, sendet das RIS eine Anfrage die entweder eine Liste mit Buchungszielen oder ein geographisches Gebiet in Form einer Umgebungssuche oder als Rechteck und eine gewünschte Zeitperiode enthält. Ohne Angabe wird die Verfügbarkeit von allen Buchungszielen zurückgegeben. Als Antwort sendet das FVS eine Liste mit Buchungszielen und deren Verfügbarkeiten zurück.
+To request specific availabilities, the TIS sends a query, which either contains a list of booking targets or a geographic area in form of a proximity search or as a rectangle and a required time period. Without specification, the availabilities of all booking targets are returned. As a response, the VRS returns a list of booking targets and their availabilities. 
 
-
-\subsection*{Abfrage aktuelle Stationskapazität (Dienst 2a)}
+\subsection*{Current Station Capacity Query (Service 2a)}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
-\begin{sdblock}{Abfrage Stationskapazität}{}
+\begin{sdblock}{Station Capacity Query}{}
 
-\begin{call}{ris}{Referenz Stationen / Gebiet}{fvs}{Liste Stationskapazitäten}
+\begin{call}{tis}{Station reference/ area}{vrs}{List of station capacities}
 \end{call}
 
 \end{sdblock}
@@ -208,43 +207,42 @@ Um die konkreten Verfügbarkeiten abzufragen, sendet das RIS eine Anfrage die en
 \end{sequencediagram}
 \end{center}
 \smallskip
-Das RIS kann die aktuellen Kapazitäten, bspw. zur Kartendarstellung, von Verleihstation anfragen. Hierzu wird eine Liste mit Standort IDs oder ein Gebiet übermittelt und eine Liste mit Standorten und deren aktueller Anzahl verfügbarer Fahrzeuge zurückgegeben.
+The TIS is able to request current capacities from rental stations, e.g., for map illustration. For this purpose, a list containing station IDs or an area has to be transferred. As a response, a list of locations and their current amount of available vehicles is returned.
 
-
-\section{Dienst 3 -- Verfügbarkeitsabonnement}
+\section{Service 3 -- Availability Subscription}
 \label{sec:Interaktionsprotokolle:Dienst3}
 
-\subsection*{Verfügbarkeitsabonnement}
+\subsection*{Availability Subscription}
 \label{subsec:Interaktionsprotokolle:Dienst3}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
-\begin{sdblock}{Verfügbarkeit abonnieren}{}
+\begin{sdblock}{Subscribe availabilities}{}
 
-\begin{call}{ris}{Buchungsziel, (Kündigung)*, Zeithorizont}{fvs}{}
+\begin{call}{tis}{Booking target, (cancellation)*, time horizon}{vrs}{}
 \end{call}
 
 \end{sdblock}
 \postlevel
-\begin{sdblock}{Verfügbarkeitsaktualisierungen}{}
+\begin{sdblock}{Availability updates}{}
 
-\begin{mess}{fvs}{Verfügbarkeitsaktualisierung}{ris}
+\begin{mess}{vrs}{Availability update}{tis}
 \end{mess}
-\begin{mess}{fvs}{Verfügbarkeitsaktualisierung}{ris}
+\begin{mess}{vrs}{Availability update}{tis}
 \end{mess}
-\begin{mess}{fvs}{Verfügbarkeitsaktualisierung}{ris}
+\begin{mess}{vrs}{Availability update}{tis}
 \end{mess}
-\begin{mess}{fvs}{...}{ris}
+\begin{mess}{vrs}{...}{tis}
 \end{mess}
 \end{sdblock}
 
 \postlevel
-\begin{sdblock}{Gesamte Verfügbarkeit}{}
+\begin{sdblock}{Overall availability}{}
 
-\begin{call}{ris}{Maximale Anzahl Objekte}{fvs}{Buchungsziele}
+\begin{call}{tis}{Maximum amount of objects}{vrs}{Booking targets}
 \end{call}
 
 \end{sdblock}
