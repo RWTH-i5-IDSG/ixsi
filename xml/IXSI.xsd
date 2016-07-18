@@ -1099,6 +1099,11 @@
 					 <xs:documentation>BookingID reference for this setting item.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="BookingTargetSpecific" type="xs:boolean" default="false" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Falls gesetzt, ist die Einstellung nur für das gleiche Buchungsziel anwendbar (fahrzeugspezifisch).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="Type" type="BookingSettingsClassType">
 				<xs:annotation>
 					 <xs:documentation>Type of booking setting.</xs:documentation>
@@ -2111,11 +2116,6 @@
 			<xs:documentation>Request for setting vehicle settings for a specific booking.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="BookingID" type="BookingIDType">
-				<xs:annotation>
-					<xs:documentation>The respective booking.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="BookingSettings" type="BookingSettingsType" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>Set of settings to be applied (e.g. seat position, air conditioning, radio station etc).</xs:documentation>
