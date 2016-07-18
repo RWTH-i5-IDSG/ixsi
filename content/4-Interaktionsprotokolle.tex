@@ -253,48 +253,45 @@ The TIS is able to request current capacities from rental stations, e.g., for ma
 \end{center}
 \smallskip
 
-Das RIS kann Informationen zu Buchungszielen abonnieren, um unmittelbar über Änderungen von Verfügbarkeiten informiert zu werden. Dies dient im Wesentlichen dazu, Reiseauskünfte ohne zusätzliche (synchrone) Anfrage an das FVS beantworten zu können.
+The TIS can subscribe to information concerning booking targets to get informed about availability changes immediately. In Principal, this serves to enable responses to travel inquiries without additional (synchronous) requests towards the VRS.
 
-Durch die initiale Anfrage \texttt{AvailabilitySubscriptionRequest} wird ein Abonnement (subscription) begonnen. Hierzu übergibt das RIS die entsprechende Buchungszielreferenz. Durch das Setzen des Flags Kündigung kann ein Abonnement storniert werden. Bei Änderungen an Verfügbarkeiten überträgt das FVS asynchron \texttt{AvailabilityPushMessage}s. Diese werden über den gleichen Kommunikationskanal geliefert, über den das Abonnement erstellt wurde. Beim Beenden des Kommunikationskanals werden alle Abonnements hinfällig.
+Through the initial query \texttt{AvailabilitySubscriptionRequest} a subscription is started. For this purpose, the TIS forwards the related booking reference. By setting the flag "Cancellation", a subscription can be canceled. In case of changes concerning availabilities, the VRS forwards asynchronously \texttt{AvailabilityPushMessage}. These a delivered via the same communication channel as upon the subscription was created beforehand. By cancellation of the communication channel, all subscriptions turn to be obsolete.
 
-Zur anfänglichen Synchronisierung aller Verfügbarkeiten kann das RIS die Funktion \texttt{Complete\-Availability\-Request} aufrufen.
-
-
+For initial synchronization of overall availabilities, the TIS is able to call the function \texttt{Complete\-Availability\-Request}.
 
 
-
-\subsection*{Standortkapazitätabonnement (Dienst 3a)}
+\subsection*{Location Capacity Subscription (Service 3a)}
 \label{subsec:Interaktionsprotokolle:Dienst3a}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
-\begin{sdblock}{Standortkapazitäten abonnieren}{}
+\begin{sdblock}{Subscribe Location Capacities}{}
 
-\begin{call}{ris}{Standortreferenz, (Kündigung)*}{fvs}{}
+\begin{call}{tis}{Location refernce, (Cancellation)*}{vrs}{}
 \end{call}
 
 \end{sdblock}
 \postlevel
-\begin{sdblock}{Kapazitätsaktualisierungen}{}
+\begin{sdblock}{Capacity updates}{}
 
-\begin{mess}{fvs}{Standortkapazität}{ris}
+\begin{mess}{vrs}{Location capacity}{tis}
 \end{mess}
 
-\begin{mess}{fvs}{Standortkapazität}{ris}
+\begin{mess}{vrs}{Location capacity}{tis}
 \end{mess}
-\begin{mess}{fvs}{Standortkapazität}{ris}
+\begin{mess}{vrs}{Location capacity}{tis}
 \end{mess}
-\begin{mess}{fvs}{...}{ris}
+\begin{mess}{vrs}{...}{tis}
 \end{mess}
 \end{sdblock}
 \postlevel
 
-\begin{sdblock}{Vollständige Standortkapazitäten}{}
+\begin{sdblock}{Entire location capacities}{}
 
-\begin{call}{ris}{}{fvs}{Standortkapazitäten}
+\begin{call}{tis}{}{vrs}{Location capacity}
 \end{call}
 
 \end{sdblock}
@@ -305,16 +302,16 @@ Zur anfänglichen Synchronisierung aller Verfügbarkeiten kann das RIS die Funkt
 \end{center}
 \smallskip
 
-Das RIS kann die Kapazitätsinformation von Standorten abonnieren. Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3}.
+The TIS can subscribe capacity information of locations. The interaction procedure is analogous to \cref{subsec:Interaktionsprotokolle:Dienst3}.
 
 
-\section{Dienst 4 -- Buchung / Buchungsänderung}
+\section{Service 4 -- Booking/ Booking Change}
 \label{sec:Interaktionsprotokolle:Dienst4}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
 % \begin{sdblock}{OpenSession*}{}
 %
@@ -324,17 +321,17 @@ Das RIS kann die Kapazitätsinformation von Standorten abonnieren. Der Interakti
 % \end{sdblock}
 
 
-\begin{sdblock}{Buchung}{}
+\begin{sdblock}{Booking}{}
 
-\begin{call}{ris}{Buchungszielreferenz, Zeitraumvorschlag}{fvs}{Buchungsreferenz, Zeitraum}
+\begin{call}{tis}{Booking target reference, time span proposal}{vrs}{Booking reference, time span}
 \end{call}
 
 \end{sdblock}
 \postlevel
 
-\begin{sdblock}{Buchungsänderung*}{}
+\begin{sdblock}{Booking change*}{}
 
-\begin{call}{ris}{Vorschlag für neuen Zeitraum / Stornierung}{fvs}{Zeitraum}
+\begin{call}{tis}{Proposal for new time span / Cancellation}{vrs}{Time span}
 \end{call}
 
 \end{sdblock}
