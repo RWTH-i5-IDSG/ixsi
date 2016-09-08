@@ -1,113 +1,113 @@
-\chapter{Datenmodell}
+\chapter{Data Model}
 \label{cha:Datenmodell}
-Dieser Abschnitt beschreibt das der Schnittstelle zugrunde liegende Datenmodell. \medskip
+This chapter describes the underlying data model. \medskip
 
-\noindent Symbollegende:\\
-$\medcircle$ Auswahl (\verb|xs:choice|)\\
+\noindent Legend of Symbols:\\
+$\medcircle$ Choice (\verb|xs:choice|)\\
 $\medsquare$ Optional (\verb|minOccurs=0|)\\
-$\boxbox$ Mehrwertig (\verb|maxOccurs=0|)\\
+$\boxbox$ Multivalent (\verb|maxOccurs=0|)\\
 
 
-\section{Basisdatentypen}
+\section{Base Data Types}
 \label{sec:Datenmodell:Basisdatentypen}
 
-\subsection*{Einfache Basistypen}
-Einfache Basistypen sind Aliasnamen für vorhandene Datentypen, um eine semantische Unterscheidung zu erlauben.
+\subsection*{Simple Base Types}
+Simple base types are aliases for existing data types to allow a semantic differentiation.
 \input{xml/generated/simpleTypes}
 \input{xml/generated/simpleTypes-schema}
-Erlaubte Werte für die Aufzählungen \emph{ClassType}, \emph{EngineType}, \emph{AttributeClassType} und \emph{ErrorCodeType} sind in \autoref{cha:CodeTabellen} dargestellt.
+Allowed values for enumerations \emph{ClassType}, \emph{EngineType}, \emph{AttributeClassType} and \emph{ErrorCodeType} are described in \autoref{cha:CodeTabellen}.
 
 \subsection*{Text}
 \input{xml/generated/TextType}
 \input{xml/generated/TextType-schema}
 
-\subsection*{Geografische Koordinaten}
+\subsection*{Geographical Coordinates}
 \input{xml/generated/CoordType}
 \input{xml/generated/CoordType-schema}
 
-\subsection*{Adresse}
+\subsection*{Address}
 \input{xml/generated/AddressType}
 \input{xml/generated/AddressType-schema}
 
-\subsection*{Ort}
+\subsection*{Location}
 \input{xml/generated/GeoPositionType}
 \input{xml/generated/GeoPositionType-schema}
 
-\subsection*{Kreis}
+\subsection*{Cycle}
 \input{xml/generated/GeoCircleType}
 \input{xml/generated/GeoCircleType-schema}
 
-\subsection*{Rechteck}
+\subsection*{Rectangle}
 \input{xml/generated/GeoRectangleType}
 \input{xml/generated/GeoRectangleType-schema}
 
-\subsection*{Gebiet}
+\subsection*{Area}
 \input{xml/generated/GeoAreaType}
 \input{xml/generated/GeoAreaType-schema}
 
-\subsection*{Gebiet (Einschluss / Ausschluss)}
+\subsection*{Area (Inclusion / Exclusion)}
 \input{xml/generated/IncExcGeoAreaType}
 \input{xml/generated/IncExcGeoAreaType-schema}
 
-\subsection*{Zeitperiode}
+\subsection*{Time Period}
 \input{xml/generated/TimePeriodType}
 \input{xml/generated/TimePeriodType-schema}
 
-\subsection*{Zeitperiode (Vorschlag)}
+\subsection*{Time Period (Proposal)}
 \input{xml/generated/TimePeriodProposalType}
 \input{xml/generated/TimePeriodProposalType-schema}
 
-\subsection*{Herkunft/Ziel}
+\subsection*{Origin/Target}
 \input{xml/generated/OriginDestType}
 \input{xml/generated/OriginDestType-schema}
 
-\subsection*{Strukturierte Information}
+\subsection*{Structured Information}
 \input{xml/generated/InfoType}
 \input{xml/generated/InfoType-schema}
 
-\subsection*{Verknüpfung zum ÖPNV}
+\subsection*{Connection to Public Transportation}
 \input{xml/generated/StopLinkType}
 \input{xml/generated/StopLinkType-schema}
 
-\section{Basisgruppen}
+\section{Base Groups}
 \label{sec:Datenmodell:Baisgruppen}
 
-\subsection*{Standort oder Gebiet}
+\subsection*{Position or Area}
 \input{xml/generated/PlaceOrAreaGroup}
 \input{xml/generated/PlaceOrAreaGroup-schema}
 
-\subsection*{Dauer}
+\subsection*{Duration}
 \input{xml/generated/DurationGroup}
 \input{xml/generated/DurationGroup-schema}
 
-\section{Dienst 1 - Statische Daten}
+\section{Service 1 - Static Data}
 \label{sec:Datenmodell:Dienst1}
 
-\subsection*{Buchungsziel ID}
+\subsection*{Booking Target ID}
 \input{xml/generated/BookingTargetIDType}
 \input{xml/generated/BookingTargetIDType-schema}
 
-\subsection*{Verleihstations ID}
+\subsection*{Rental Station ID}
 \input{xml/generated/ProviderPlaceIDType}
 \input{xml/generated/ProviderPlaceIDType-schema}
 
-\subsection*{Fahrzeugattribut}
+\subsection*{Vehicle Attribute}
 \input{xml/generated/AttributeType}
 \input{xml/generated/AttributeType-schema}
 
-\subsection*{Verleihstation}
+\subsection*{Rental Station}
 \input{xml/generated/PlaceType}
 \input{xml/generated/PlaceType-schema}
 
-\subsection*{Gebiet mit Dichteangabe}
+\subsection*{Area with Dense Indication}
 \input{xml/generated/DensityAreaType}
 \input{xml/generated/DensityAreaType-schema}
 
-\subsection*{Freefloating Gebiet}
+\subsection*{Freefloating Area}
 \input{xml/generated/FloatingAreaType}
 \input{xml/generated/FloatingAreaType-schema}
 
-\subsection*{Gruppe von Verleihstationen}
+\subsection*{Group of Rental Stations}
 \input{xml/generated/PlaceGroupType}
 \input{xml/generated/PlaceGroupType-schema}
 
@@ -115,67 +115,67 @@ Erlaubte Werte für die Aufzählungen \emph{ClassType}, \emph{EngineType}, \emph
 \input{xml/generated/ProviderType}
 \input{xml/generated/ProviderType-schema}
 
-\subsection*{Buchungsziel}
+\subsection*{Booking Target}
 \input{xml/generated/BookingTargetType}
 \input{xml/generated/BookingTargetType-schema}
 
-\subsection*{Buchung}
+\subsection*{Booking}
 \input{xml/generated/BookingType}
 \input{xml/generated/BookingType-schema}
 
-\section{Dienst 2 - Verfügbarkeitsauskunft}
+\section{Service 2 - Availability Information}
 \label{sec:Datenmodell:Dienst2}
 
-\subsection*{Buchungseigenschaften}
+\subsection*{Booking Characteristics}
 \input{xml/generated/BookingTargetPropertiesType}
 \input{xml/generated/BookingTargetPropertiesType-schema}
 
-\subsection*{Buchungszielverfügbarkeit}
+\subsection*{Booking Target Availability}
 \input{xml/generated/BookingTargetAvailabilityType}
 \input{xml/generated/BookingTargetAvailabilityType-schema}
 
-\section{Dienst 4 - Buchung}
+\section{Service 4 - Booking}
 \label{sec:Datenmodell:Dienst4}
 
-\subsection*{Fahrzeugverfügbarkeit}
+\subsection*{Vehicle Availability}
 \input{xml/generated/BookingTargetChangeAvailabilityType}
 \input{xml/generated/BookingTargetChangeAvailabilityType-schema}
 
-\subsection*{Standortkapazität}
+\subsection*{Location Capacity}
 \input{xml/generated/PlaceAvailabilityType}
 \input{xml/generated/PlaceAvailabilityType-schema}
 
-\section{Dienst 5 - Buchungsabonnement}
+\section{Service 5 - Booking Subscription}
 \label{sec:Datenmodell:Dienst5}
 
-\subsection*{Buchungsverfügbarkeit}
+\subsection*{Booking Availability}
 \input{xml/generated/BookingChangeType}
 \input{xml/generated/BookingChangeType-schema}
 
-\section{Dienst 6 - Preisauskunft}
+\section{Service 6 - Price Information}
 \label{sec:Datenmodell:Dienst6}
 
-\subsection*{Preisinformation (Details)}
+\subsection*{Price Information (Details)}
 \input{xml/generated/TariffDetailType}
 \input{xml/generated/TariffDetailType-schema}
 
-\subsection*{Preisinformation}
+\subsection*{Price Information}
 \input{xml/generated/TariffType}
 \input{xml/generated/TariffType-schema}
 
-\section{Authentifizierung}
+\section{Authentication}
 \label{sec:Datenmodell:Auth}
 
-\subsection*{Benutzeridentifikation}
+\subsection*{User Identification}
 \input{xml/generated/UserInfoType}
 \input{xml/generated/UserInfoType-schema}
 
-\subsection*{Authentifizierung}
+\subsection*{Authentication}
 \input{xml/generated/AuthType}
 \input{xml/generated/AuthType-schema}
 
 
-\section{Fehlerbehandlung}
-\subsection*{Fehler}
+\section{Error Handling}
+\subsection*{Errors}
 \input{xml/generated/ErrorType}
 \input{xml/generated/ErrorType-schema}
