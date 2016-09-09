@@ -28,7 +28,7 @@ precompiled pdfs are available under:
 
 https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-econnect.pdf (german version)
 
-https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-english.pdf (english version, translation not complete)
+https://treibhaus.informatik.rwth-aachen.de/ixsi/ixsi-econnect-english.pdf (english version, translation not complete)
 
 The respective XML schema is available under:
 
