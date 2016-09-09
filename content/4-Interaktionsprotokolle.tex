@@ -1,49 +1,48 @@
-\chapter{Interaktionsprotokolle}
+\chapter{Interaction Sequences}
 \label{cha:Interaktionsprotokolle}
-Dieser Abschnitt gibt einen Überblick über die in IXSI verwendeten Interaktionsschemata. Zur Vereinfachung werden die Interaktionsschemata in den Sequenzdiagrammen informell ohne Verwendung der technischen Bezeichnungen der Funktionsaufrufe beschrieben. Grundsätzlich werden werden zwei Typen von Interaktionen verwendet: Das einfache und wohlbekannte Request/Response- bzw. Query-Interaktionsschema bei dem auf jede Anfrage des Clients (in diesem Fall das RIS) genau eine Antwort des Servers folgt (FVS). Weiterhin das Subscription-Schema bei dem einmalig ein Objekt durch den Client abonniert wird und dann Aktualisierungen an diesem Objekt laufend durch den Server geliefert werden. Hierbei bleibt der Kommunikationskanal die ganze Zeit über geöffnet.
+This section provides an overview about the interaction schemes, used by IXSI. For simplification, these interaction schemes are described in interaction sequence diagrams without using the technical terms of function calls. In principal, two types of interactions are used: The simple and well-known request/response- or. query- interaction scheme, whereby every call of the client (in this case TIS) is followed by exactly one response of the server (VRS). Furthermore, the subscription-scheme, whereby one object is subscribed by the client once and updated continuously by the server. Hereby, the communication channel is opened all the time. 
 
+\section{Overview}
+The following sequence diagram gives an exemplary overview of information coupling, possibly enabled by IXSI. The used services are going to be described in detail in the following chapters. In this use case, a customer sets up a travel inquiry, books a respective travel and gets informed concerning relevant booking changes. 
 
-\section{Überblick}
-Das folgende Sequenzdiagramm gibt einen Überblick über eine beispielhafte Informationskopplung wie sie durch IXSI realisiert werden kann. Die im einzelnen verwendeten Dienste werden in den folgenden Abschnitten genauer beschrieben. In diesem Anwendungsfall holt ein Kunde beim RIS eine Reiseauskunft ein, bucht eine entsprechende Reise und lässt sich über Änderungen an der Buchung benachrichtigen.
-
-Im ersten Block \textit{Austausch Buchungsziele} werden die vom \index{FVS}FVS zur Verfügung gestellten Buchungsziele mit dem \index{RIS}RIS ausgetauscht und relevante Buchungsziele abonniert (vgl. \cref{sec:Interaktionsprotokolle:Dienst1,sec:Interaktionsprotokolle:Dienst3}). Dies geschieht proaktiv ohne Involvierung eines Kunden.
-Im Block \textit{Reiseauskunft} führt ein Kunde, z.\,B. mit einem Mobilgerät, eine Reiseauskunft beim RIS durch. Hierbei kommen mehrere Leihfahrzeuge in Frage, deren Verfügbarkeit dann synchron beim FVS abgefragt wird. Für die verfügbaren Fahrzeuge fragt das RIS zusätzlich eine Preisauskunft an. Als Ergebnis gibt das RIS eine Auswahl an möglichen Reiserouten / Verbindungen an den Kunden zurück. Da es sich um durch einen Kunden ausgelöste Kommunikation handelt, wird implizit eine Sitzung erstellt, in deren Kontext die Abfragen ausgeführt werden. Da sich der Kunde nicht auf seinem Gerät eingeloggt hat, wird eine anonyme Sitzung verwendet.
-Im Block \textit{Reisebuchung} hat sich der Kunde für eine Reiseroute entschieden und möchte diese buchen. Hierzu loggt er sich auf seinem Mobilgerät ein, wodurch ein Token generiert wird (Block \emph{Anmeldung}). Mit diesem Token wird eine (nicht anonyme) Sitzung erstellt, in welcher der Buchungsvorgang durchgeführt wird. Hierzu übergibt das RIS die Buchungszielreferenz und einen Zeitvorschlag an das FVS. Das sendet eine Buchungsbestätigung, welche vom RIS an den Kunden weitergegeben wird. Zusätzlich abonniert das RIS die entsprechende Buchung beim FVS.
-Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an der Buchung, die das RIS vom FVS erhält, benachrichtigt.
+In the first block \textit{Exchange booking targets}, the booking targets, provided by the \index{VRS}VRS are exchanged with the \index{TIS}TIS and relevant booking targets are subscribed (see. \cref{sec:Interaktionsprotokolle:Dienst1,sec:Interaktionsprotokolle:Dienst3}). This happens proactive, without involving the customer.
+In block \textit{Travel Inquiry}, a customer sets up a travel inquiry with, e.g. his mobile device, on the TIS. Thereby, various rental vehicles are suitable for booking, whose availabilities are requested synchronously towards the VRS. For availabilities, the TIS additionally requests price information. As a result, the TIS provides a selection of possible routes/ connections to the customer. Because this is a communication triggered by the customer, a session which proceeds the queries is created implicitly. An anonymous session is used, because the customer did not register on his device beforehand.
+In block \textit{Tarvel booking}, a customer has chosen a travel route and intends to book it. For this purpose, he registers on his mobile device, whereby a token is generated(Block \emph{Registration}). With this token, a (not anonymous) session is created, which proceeds the booking operation. For that, the TIS forwards booking reference and a time proposal to the VRS. This sends a booking confirmation, which is forwarded to the customer. In addition, the TIS subscribes the respective booking on the VRS.
+In the last block \textit{Travel monitoring}, the customers gets informed concerning booking changes, which are received by the TIS, coming from the VRS.
 \begin{center}
 \begin{sequencediagram}
 
 
-\newthread{kunde}{:Kunde}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{customer}{:Customer}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
 
-\begin{sdblock}{Austausch Buchungsziele}{Dienst 1, Dienst 3}
+\begin{sdblock}{Exchange booking targets}{Service 1, Service 3}
 
-  \begin{call}{ris}{Anfrage}{fvs}{Liste Buchungsziele}
+  \begin{call}{tis}{Request}{vrs}{List booking targets}
   \end{call}
 
-  \begin{call}{ris}{Abonnement Buchungsziele}{fvs}{}
+  \begin{call}{tis}{Subscription booking targets}{vrs}{}
   \end{call}
-
-  \begin{mess}{fvs}{Buchungszieländerung}{ris}
+  
+  \begin{mess}{vrs}{Change booking target}{tis}
   \end{mess}
 \end{sdblock}
 \postlevel
 
-\begin{sdblock}{Reiseauskunft}{}
-  \begin{call}{kunde}{Reiseauskunft}{ris}{mögliche Reiserouten}
+\begin{sdblock}{Travel inquiry}{}
+  \begin{call}{customer}{Travel inquiry}{tis}{Possible routes}
 
-    \begin{sdblock}{Sitzung (anonym)}{Basisdienst A}
-
-        \begin{sdblock}{Verfügbarkeitsauskunft}{Dienst 2}
-          \begin{call}{ris}{Verfügbarkeitsauskunft Buchungsziele, Zeitraum}{fvs}{mögliche Buchungsziele}
+    \begin{sdblock}{Session (anonymous)}{Base service A}
+        
+        \begin{sdblock}{Availability information}{Service 2}
+          \begin{call}{tis}{Availability information booking targets,  time span}{vrs}{Possible booking targets}
           \end{call}
         \end{sdblock}
 
-        \begin{sdblock}{Preisauskunft}{Dienst 6}
-          \begin{call}{ris}{Preisauskunft Buchungsziele, Zeitraum, Distanz}{fvs}{Preis}
+        \begin{sdblock}{Price inquiry}{Service 6}
+          \begin{call}{tis}{Price information booking targets, time span, distance}{vrs}{Price}
           \end{call}
         \end{sdblock}
 
@@ -57,18 +56,18 @@ Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an 
 
 
 \begin{sequencediagram}
-\newthread{kunde}{:Kunde}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{customer}{:Customer}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
-\begin{sdblock}{Anmeldung}{}
+\begin{sdblock}{Registration}{}
 
-  \begin{call}{kunde}{Anmeldung}{ris}{Token}
+  \begin{call}{customer}{Registration}{tis}{Token}
+        
+    \begin{sdblock}{Token generation}{Base service C}
 
-    \begin{sdblock}{Tokengenerierung}{Basisdienst C}
 
-
-      \begin{call}{ris}{Benutzername, Passwort}{fvs}{Token}
+      \begin{call}{tis}{User name, password}{vrs}{Token}
       \end{call}
 
     \end{sdblock}
@@ -77,30 +76,30 @@ Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an 
 \end{sdblock}
 \postlevel
 
-\begin{sdblock}{Reisebuchung}{}
+\begin{sdblock}{Travel booking}{}
 
-  \begin{call}{kunde}{Auswahl Reiseroute, Token}{ris}{Buchungsbestätigung}
-    \begin{sdblock}{Sitzung}{Basisdienst A}
+  \begin{call}{customer}{Route selection, token}{tis}{Booking confirmation}
+    \begin{sdblock}{Session}{Base service A}
 
-      \begin{sdblock}{Fahrzeugbuchung}{Dienst 4}
-        \begin{call}{ris}{Buchungszielreferenz, Zeitraumvorschlag}{fvs}{Buchungsreferenz, Zeitraum}
+      \begin{sdblock}{Vehicle booking}{Service 4}
+        \begin{call}{tis}{Booking target reference, time span proposal}{vrs}{booking reference, time span}
         \end{call}
       \end{sdblock}
 
     \end{sdblock}
 
   \end{call}
+    
+    \begin{sdblock}{Booking subscription}{Service 5}
 
-    \begin{sdblock}{Buchungsabonnement}{Dienst 5}
-
-      \begin{call}{ris}{Buchungsreferenz}{fvs}{}
+      \begin{call}{tis}{Booking reference}{vrs}{}
       \end{call}
 
     \end{sdblock}
 
     \begin{sdblock}{Verbrauchsdatenabonnement}{Dienst 7}
 
-      \begin{call}{ris}{Buchungsreferenz}{fvs}{}
+      \begin{call}{tis}{Buchungsreferenz}{vrs}{}
       \end{call}
 
     \end{sdblock}
@@ -124,13 +123,13 @@ Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an 
 
 \postlevel
 
-\begin{sdblock}{Reiseüberwachung}{Dienst 5}
+\begin{sdblock}{Travel monitoring}{Service 5}
 \postlevel
-\begin{mess}{fvs}{Buchungsänderung}{ris}
-\end{mess}
-
-\begin{mess}{ris}{Buchungsänderung}{kunde}
-\end{mess}
+  \begin{mess}{vrs}{Booking change}{tis}
+  \end{mess}
+	      
+  \begin{mess}{tis}{Booking change}{customer}
+  \end{mess}
 
 \end{sdblock}
 
@@ -150,19 +149,19 @@ Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an 
 \smallskip
 
 
-\section{Dienst 1 -- Statische Daten}
+\section{Service 1 -- Static Data}
 \label{sec:Interaktionsprotokolle:Dienst1}
 
-\subsection*{Abfrage Buchungsziele}
+\subsection*{Booking Target Query}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
-\begin{sdblock}{Buchungszielaustausch}{}
+\begin{sdblock}{Booking target exchange}{}
 
-\begin{call}{ris}{Buchungszielabfrage(Anbieter*)}{fvs}{Buchungszielliste}
+\begin{call}{tis}{Booking target query(Provider*)}{vrs}{Booking target list}
 
 \end{call}
 
@@ -173,18 +172,18 @@ Im letzten Block \textit{Reiseüberwachung} wird der Kunde über Änderungen an 
 \end{center}
 \smallskip
 
-Als Basis für die Informationskopplung dient der Austausch von sogenannten Buchungszielen. Buchungsziele sind eine logische Repräsentation von einem oder mehreren Fahrzeugen mit gemeinsamen Eigenschaften, wie z.\,B. vom gleichen Anbieter bereitgestellt, gleicher Fahrzeugtyp und gleiche Verleihstation. Diese Eigenschaften sind statisch. Um nur Informationen zu Buchungszielen eines bestimmten Anbieters zu erhalten, kann nach Provider gefiltert werden. Die Übertragung wird vom RIS ausgelöst.
+Basis for information coupling is the exchange of booking targets. Booking targets are a logical representation of one or several vehicles with common characteristics, e.g., provided by the same provider, same vehicle type or same rental station. These characteristics are statically. To receive booking target information concerning a certain provider solely, it is possible to filter concerning the respective provider. The transmission is initiated by the TIS.
 
-\subsection*{Abfrage Änderungen Buchungsziele}
+\subsection*{Booking Target Change Query}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
-\begin{sdblock}{Änderungen Buchungsziele}{}
+\begin{sdblock}{Booking Target Changes}{}
 
-\begin{call}{ris}{Abfrage Änderungen Buchungsziele}{fvs}{Anbieterliste}
+\begin{call}{tis}{Booking target change query}{vrs}{Provider list}
 \end{call}
 
 % \begin{messcall}{ris}{Asynchrone Nachricht}{fvs}
@@ -195,21 +194,21 @@ Als Basis für die Informationskopplung dient der Austausch von sogenannten Buch
 \end{center}
 \smallskip
 
-Um nicht intervallweise alle Buchungszielinformationen übertragen zu müssen, kann mit dem Aufruf \texttt{ChangedProviders} angefragt werden, bei welchem Anbieter sich Änderungen seit einem bestimmten Zeitpunkt, vorgegeben durch den Parameter \texttt{timestamp}, ergeben haben. Zurückgegeben wird eine Providerreferenz, die wiederum bei beim Funktionsaufruf \texttt{Booking\-TargetsInfo} als Parameter übergeben werden kann.
+To avoid the transmission of all booking information per interval, with the help of the query \texttt{ChangedProviders} it is possible to request the provider, related to changes since a specific point in time, set by the parameter \texttt{timestamp}. A provider reference is returned, which in turn can be transferred as a parameter by the function call \texttt{Booking\-TargetsInfo}. 
 
-\section{Dienst 2 -- Verfügbarkeitsauskunft}
+\section{Service 2 -- Availability Information}
 \label{sec:Interaktionsprotokolle:Dienst2}
 
-\subsection*{Abfrage Verfügbarkeit}
+\subsection*{Availability Query}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
-\begin{sdblock}{Verfügbarkeitsauskunft}{}
+\begin{sdblock}{Availability Information}{}
 
-\begin{call}{ris}{Buchungsziele/Gebiet, Zeitraum}{fvs}{Buchungsziele}
+\begin{call}{tis}{Booking targets/ area, time span}{vrs}{Booking targets}
 \end{call}
 
 \end{sdblock}
@@ -218,19 +217,18 @@ Um nicht intervallweise alle Buchungszielinformationen übertragen zu müssen, k
 \end{center}
 \smallskip
 
-Um die konkreten Verfügbarkeiten abzufragen, sendet das RIS eine Anfrage die entweder eine Liste mit Buchungszielen oder ein geographisches Gebiet in Form einer Umgebungssuche oder als Rechteck und eine gewünschte Zeitperiode enthält. Ohne Angabe wird die Verfügbarkeit von allen Buchungszielen zurückgegeben. Als Antwort sendet das FVS eine Liste mit Buchungszielen und deren Verfügbarkeiten zurück.
+To request specific availabilities, the TIS sends a query, which either contains a list of booking targets or a geographic area in form of a proximity search or as a rectangle and a required time period. Without specification, the availabilities of all booking targets are returned. As a response, the VRS returns a list of booking targets and their availabilities. 
 
-
-\subsection*{Abfrage aktuelle Stationskapazität (Dienst 2a)}
+\subsection*{Current Station Capacity Query (Service 2a)}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
-\begin{sdblock}{Abfrage Stationskapazität}{}
+\begin{sdblock}{Station Capacity Query}{}
 
-\begin{call}{ris}{Referenz Stationen / Gebiet}{fvs}{Liste Stationskapazitäten}
+\begin{call}{tis}{Station reference/ area}{vrs}{List of station capacities}
 \end{call}
 
 \end{sdblock}
@@ -238,43 +236,46 @@ Um die konkreten Verfügbarkeiten abzufragen, sendet das RIS eine Anfrage die en
 \end{sequencediagram}
 \end{center}
 \smallskip
-Das RIS kann die aktuellen Kapazitäten, bspw. zur Kartendarstellung, von Verleihstation anfragen. Hierzu wird eine Liste mit Standort IDs oder ein Gebiet übermittelt und eine Liste mit Standorten und deren aktueller Anzahl verfügbarer Fahrzeuge zurückgegeben.
+The TIS is able to request current capacities from rental stations, e.g., for map illustration. For this purpose, a list containing station IDs or an area has to be transferred. As a response, a list of locations and their current amount of available vehicles is returned.
 
-
-\section{Dienst 3 -- Verfügbarkeitsabonnement}
+\section{Service 3 -- Availability Subscription}
 \label{sec:Interaktionsprotokolle:Dienst3}
 
+<<<<<<< HEAD
 \subsection*{Verfügbarkeitsabonnement}
+=======
+\subsection*{Availability Subscription}
+>>>>>>> econnect-english-version
 \label{subsec:Interaktionsprotokolle:Dienst3}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
-\begin{sdblock}{Verfügbarkeit abonnieren}{}
+\begin{sdblock}{Subscribe availabilities}{}
 
-\begin{call}{ris}{Buchungsziel, (Kündigung)*, Zeithorizont}{fvs}{}
+\begin{call}{tis}{Booking target, (cancellation)*, time horizon}{vrs}{}
 \end{call}
 
 \end{sdblock}
 \postlevel
-\begin{sdblock}{Verfügbarkeitsaktualisierungen}{}
+\begin{sdblock}{Availability updates}{}
 
-\begin{mess}{fvs}{Verfügbarkeitsaktualisierung}{ris}
+\begin{mess}{vrs}{Availability update}{tis}
 \end{mess}
-\begin{mess}{fvs}{Verfügbarkeitsaktualisierung}{ris}
+\begin{mess}{vrs}{Availability update}{tis}
 \end{mess}
-\begin{mess}{fvs}{Verfügbarkeitsaktualisierung}{ris}
+\begin{mess}{vrs}{Availability update}{tis}
 \end{mess}
-\begin{mess}{fvs}{...}{ris}
+\begin{mess}{vrs}{...}{tis}
 \end{mess}
 \end{sdblock}
 
 \postlevel
-\begin{sdblock}{Gesamte Verfügbarkeit}{}
+\begin{sdblock}{Overall availability}{}
 
-\begin{call}{ris}{Maximale Anzahl Objekte}{fvs}{Buchungsziele}
+\begin{call}{tis}{Maximum amount of objects}{vrs}{Booking targets}
 \end{call}
 
 \end{sdblock}
@@ -285,45 +286,43 @@ Das RIS kann die aktuellen Kapazitäten, bspw. zur Kartendarstellung, von Verlei
 \end{center}
 \smallskip
 
-Das RIS kann Informationen zu Buchungszielen abonnieren, um unmittelbar über Änderungen von Verfügbarkeiten informiert zu werden. Dies dient im Wesentlichen dazu, Reiseauskünfte ohne zusätzliche (synchrone) Anfrage an das FVS beantworten zu können.
+The TIS can subscribe to information concerning booking targets to get informed about availability changes immediately. In Principal, this serves to enable responses to travel inquiries without additional (synchronous) requests towards the VRS.
 
-Durch die initiale Anfrage \texttt{AvailabilitySubscriptionRequest} wird ein Abonnement (subscription) begonnen. Hierzu übergibt das RIS die entsprechende Buchungszielreferenz. Durch das Setzen des Flags Kündigung kann ein Abonnement storniert werden. Bei Änderungen an Verfügbarkeiten überträgt das FVS asynchron \texttt{AvailabilityPushMessage}s. Diese werden über den gleichen Kommunikationskanal geliefert, über den das Abonnement erstellt wurde. Beim Beenden des Kommunikationskanals werden alle Abonnements hinfällig.
-
-Zur anfänglichen Synchronisierung aller Verfügbarkeiten kann das RIS die Funktion \texttt{Complete\-Availability\-Request} aufrufen.
+Through the initial query \texttt{AvailabilitySubscriptionRequest} a subscription is started. For this purpose, the TIS forwards the related booking reference. By setting the flag "Cancellation", a subscription can be canceled. In case of changes concerning availabilities, the VRS forwards asynchronously \texttt{AvailabilityPushMessage}. These a delivered via the same communication channel as upon the subscription was created beforehand. By cancellation of the communication channel, all subscriptions turn to be obsolete.
 
 
-\subsection*{Standortkapazitätabonnement (Dienst 3a)}
+\subsection*{Location Capacity Subscription (Service 3a)}
 \label{subsec:Interaktionsprotokolle:Dienst3a}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
-\begin{sdblock}{Standortkapazitäten abonnieren}{}
+\begin{sdblock}{Subscribe Location Capacities}{}
 
-\begin{call}{ris}{Standortreferenz, (Kündigung)*}{fvs}{}
+\begin{call}{tis}{Location refernce, (Cancellation)*}{vrs}{}
 \end{call}
 
 \end{sdblock}
 \postlevel
-\begin{sdblock}{Kapazitätsaktualisierungen}{}
+\begin{sdblock}{Capacity updates}{}
 
-\begin{mess}{fvs}{Standortkapazität}{ris}
+\begin{mess}{vrs}{Location capacity}{tis}
 \end{mess}
 
-\begin{mess}{fvs}{Standortkapazität}{ris}
+\begin{mess}{vrs}{Location capacity}{tis}
 \end{mess}
-\begin{mess}{fvs}{Standortkapazität}{ris}
+\begin{mess}{vrs}{Location capacity}{tis}
 \end{mess}
-\begin{mess}{fvs}{...}{ris}
+\begin{mess}{vrs}{...}{tis}
 \end{mess}
 \end{sdblock}
 \postlevel
 
-\begin{sdblock}{Vollständige Standortkapazitäten}{}
+\begin{sdblock}{Entire location capacities}{}
 
-\begin{call}{ris}{}{fvs}{Standortkapazitäten}
+\begin{call}{tis}{}{vrs}{Location capacity}
 \end{call}
 
 \end{sdblock}
@@ -334,16 +333,16 @@ Zur anfänglichen Synchronisierung aller Verfügbarkeiten kann das RIS die Funkt
 \end{center}
 \smallskip
 
-Das RIS kann die Kapazitätsinformation von Standorten abonnieren. Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3}.
+The TIS can subscribe capacity information of locations. The interaction procedure is analogous to \cref{subsec:Interaktionsprotokolle:Dienst3}.
 
 
-\section{Dienst 4 -- Buchung / Buchungsänderung}
+\section{Service 4 -- Booking/ Booking Change}
 \label{sec:Interaktionsprotokolle:Dienst4}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
 % \begin{sdblock}{OpenSession*}{}
 %
@@ -353,17 +352,17 @@ Das RIS kann die Kapazitätsinformation von Standorten abonnieren. Der Interakti
 % \end{sdblock}
 
 
-\begin{sdblock}{Buchung}{}
+\begin{sdblock}{Booking}{}
 
-\begin{call}{ris}{Buchungszielreferenz, Zeitraumvorschlag}{fvs}{Buchungsreferenz, Zeitraum}
+\begin{call}{tis}{Booking target reference, time span proposal}{vrs}{Booking reference, time span}
 \end{call}
 
 \end{sdblock}
 \postlevel
 
-\begin{sdblock}{Buchungsänderung*}{}
+\begin{sdblock}{Booking change*}{}
 
-\begin{call}{ris}{Vorschlag für neuen Zeitraum / Stornierung}{fvs}{Zeitraum}
+\begin{call}{tis}{Proposal for new time span / Cancellation}{vrs}{Time span}
 \end{call}
 
 \end{sdblock}
@@ -379,82 +378,81 @@ Das RIS kann die Kapazitätsinformation von Standorten abonnieren. Der Interakti
 \end{center}
 \smallskip
 
-Um im Kundenauftrag ein Fahrzeug zu buchen, ist es erforderlich, dass das RIS den Kunden gegenüber dem FVS authentifizert. Hierzu gibt es drei Möglichkeiten, die in \cref{sec:Datenmodell:Auth} genauer dargestellt sind. In diesem Beispiel wird explizit eine Sitzung geöffnet und im Anschluss an die Transaktion wieder geschlossen. Danach kann eine Buchung durch den Aufruf von \texttt{Booking} mit Angabe der entsprechenden Buchungsziel ID und einem Vorschlag für einen Zeitraum durchgeführt werden. \blockquote{Vorschlag} deshalb, da das FVS z.\,B. den Zeitraum auf das verwendete Buchungsraster ändern kann. Als Antwort wird die verwendete Buchungsreferenz und der tatsächliche Buchungszeitraum zurückgegeben. Die Buchungsreferenz kann zur Überwachung der Buchung verwendet werden (vgl. \cref{sec:Interaktionsprotokolle:Dienst5}). Zur Änderung des Buchungszeitraums oder zur Stornierung kann \texttt{ChangeBooking} aufgerufen werden. Bei Änderung des Buchungsziels ist eine Stornierung und Neubuchung erforderlich.
-
 \subsection*{Abonnement externe Buchungen (Dienst 4a)}
 \label{subsec:Interaktionsprotokolle:Dienst4a}
 
 \begin{center}
-\begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+	\begin{sequencediagram}
+		\newthread{ris}{:RIS}
+		\newinst[8]{fvs}{:FVS}
 
-\begin{sdblock}{Abonnement von externen Buchungen}{}
+		\begin{sdblock}{Abonnement von externen Buchungen}{}
 
-\begin{call}{ris}{Kundenreferenz, (Abostornierung)*}{fvs}{}
-\end{call}
+			\begin{call}{ris}{Kundenreferenz, (Abostornierung)*}{fvs}{}
+			\end{call}
 
-\end{sdblock}
-\postlevel
-\begin{sdblock}{externe Buchung}{}
+		\end{sdblock}
+		\postlevel
+		\begin{sdblock}{externe Buchung}{}
 
-\begin{mess}{fvs}{externe Buchung}{ris}
-\end{mess}
+			\begin{mess}{fvs}{externe Buchung}{ris}
+			\end{mess}
 
-\begin{mess}{fvs}{externe Buchung}{ris}
-\end{mess}
-\begin{mess}{fvs}{externe Buchung}{ris}
-\end{mess}
-\begin{mess}{fvs}{...}{ris}
-\end{mess}
-\end{sdblock}
-\postlevel
+			\begin{mess}{fvs}{externe Buchung}{ris}
+			\end{mess}
+			\begin{mess}{fvs}{externe Buchung}{ris}
+			\end{mess}
+			\begin{mess}{fvs}{...}{ris}
+			\end{mess}
+		\end{sdblock}
+		\postlevel
 
-\begin{sdblock}{Vollständige externe Buchungen}{}
+		\begin{sdblock}{Vollständige externe Buchungen}{}
 
-\begin{call}{ris}{}{fvs}{externe Buchungen}
-\end{call}
+			\begin{call}{ris}{}{fvs}{externe Buchungen}
+			\end{call}
 
-\end{sdblock}
+		\end{sdblock}
 
-\end{sequencediagram}
+	\end{sequencediagram}
 \end{center}
 \smallskip
 
-Das RIS kann extern durchgeführte Buchungen (z.\,B. direkt an der Verleihstation ohne Mitwirken des RIS) beim FVS abonnieren, um Änderungen an diesen zu abonnieren oder entsprechende Verbrauchsdaten abzufragen. Hierzu wird eine oder mehrere Kundenreferenzen übergeben.
 
-\section{Dienst 5 --  Buchungsabonnement}
+To book a vehicle in customer order, it is necessary that the TIS authenticates the customers towards the VRS. For this purpose, there are three possibilities, further specified in \cref{sec:Datenmodell:Auth} In this example, a session is opened explicitly and closed after the transaction. After that, a booking can utilized by calling \texttt{Booking} with provision of the respective booking target ID and a time span proposal. \blockquote{Vorschlag} because the VRS is able to change the time span to the used booking grid. As response, the used booking reference and the actual time span is returned. The booking reference can be used for monitoring of the booking (see \cref{sec:Interaktionsprotokolle:Dienst5}). For changes of the booking time span or for cancellation, \texttt{ChangeBooking} can be called. In case of changes of the booking target, a cancellation or a new booking becomes necessary.
+
+\section{Service 5 --  Booking Subscription}
 \label{sec:Interaktionsprotokolle:Dienst5}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
-\begin{sdblock}{Buchungsabonnement}{}
+\begin{sdblock}{Booking subscription}{}
 
-\begin{call}{ris}{Buchungsreferenz, (Abostornierung)*}{fvs}{}
+\begin{call}{tis}{Booking reference, (Subscription cancellation)*}{vrs}{}
 \end{call}
 
 \end{sdblock}
 \postlevel
-\begin{sdblock}{Buchungsänderungen}{}
+\begin{sdblock}{Booking changes}{}
 
-\begin{mess}{fvs}{Buchungsänderung}{ris}
+\begin{mess}{vrs}{Booking change}{tis}
 \end{mess}
 
-\begin{mess}{fvs}{Buchungsänderung}{ris}
+\begin{mess}{vrs}{Booking change}{tis}
 \end{mess}
-\begin{mess}{fvs}{Buchungsänderung}{ris}
+\begin{mess}{vrs}{Booking change}{tis}
 \end{mess}
-\begin{mess}{fvs}{...}{ris}
+\begin{mess}{vrs}{...}{tis}
 \end{mess}
 \end{sdblock}
 \postlevel
 
-\begin{sdblock}{Vollständige Buchungsinformation}{}
+\begin{sdblock}{Complete Booking Information}{}
 
-\begin{call}{ris}{}{fvs}{Buchungsänderungen}
+\begin{call}{tis}{}{vrs}{Booking changes}
 \end{call}
 
 \end{sdblock}
@@ -463,20 +461,20 @@ Das RIS kann extern durchgeführte Buchungen (z.\,B. direkt an der Verleihstatio
 \end{center}
 \smallskip
 
-Das RIS kann Änderungen an Buchungen abonnieren, um diese Informationen dem Kunden weiterzugeben und ggfs. Alternativen anzubieten. Beispielsweise im Falle eines technischen Defekts an einem Fahrzeug kann das FVS das RIS darüber informieren, dass die Buchung nicht mehr möglich ist. Ebenfalls ist es möglich, eine Buchung als \blockquote{wieder möglich} festzulegen. Endgültig storniert werden kann eine Buchung nur vom Endkunden.
+The TIS can subscribe to changes concerning bookings to provide this information to customers and probably propose alternatives. For example in case of an technical failure of a vehicle, the VRS can inform the TIS that a booking is not longer possible. In addition, it is possible to set a booking to \blockquote{possible again}. The booking can be canceled ultimately only by the customer himself. 
 
-Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3}.
+The interaction procedure is analogous to \cref{subsec:Interaktionsprotokolle:Dienst3}.
 
 
-\section{Dienst 6 -- Preisauskunft}
+\section{Service 6 -- Price Information}
 \label{sec:Interaktionsprotokolle:Dienst6}
 
 % \subsection{Abfrage Preis}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
 % \begin{sdblock}{OpenSession*}{}
 %
@@ -485,9 +483,9 @@ Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3
 %
 % \end{sdblock}
 
-\begin{sdblock}{Preisauskunft}{}
+\begin{sdblock}{Price information}{}
 
-\begin{call}{ris}{Buchungszielreferenz, Vorschlag Zeitraum, Distanz}{fvs}{Preis}
+\begin{call}{tis}{Booking target reference, time span proposal, distance}{vrs}{Price}
 
 \end{call}
 
@@ -504,7 +502,7 @@ Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3
 \end{center}
 \smallskip
 
-Mit einer Anfrage \texttt{PriceInformationRequest} kann das RIS beim FVS eine Preisauskunft auf Basis von Buchungsziel ID, Zeitraum und zurückzulegende Distanz anfragen. Falls vorher eine Authentifizierung des Endkunden z.\,B. durch \texttt{OpenSession} stattgefunden hat, ist die Preisanfrage entsprechend des Kundenvertrags zu beantworten.
+With the query \texttt{PriceInformationRequest}, the TIS can request price information towards the VRS on the basis of booking target ID, time span and traveled distance. In case of a customer authentication through \texttt{OpenSession} took place beforehand, the price request has to be replied-to accordingly to the customer contract.
 
 
 

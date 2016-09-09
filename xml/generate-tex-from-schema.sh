@@ -9,20 +9,20 @@
 # Configuration
 
 # Schema file to parse
-file="IXSI-ger.xsd"
+file="IXSI.xsd"
 
 # Headings
 name="Name"
 element="Element"
-type="Typ"
-comment="Kommentar"
+type="Type"
+comment="Comment"
 optional="optional"
-multivalue="mehrwertig"
-choice="auswahl"
-empty="(leer)"
-schema="XML Schema"
-group="Gruppenzugehoerigkeit"
-basetype="Basistyp"
+multivalue="multivalue"
+choice="choice"
+empty="(empty)"
+schema="XML schema"
+group="group membership"
+basetype="Basetype"
 
 command -v xsltproc >/dev/null 2>&1 || { echo >&2 "I require xsltproc but it's not installed.  Aborting."; exit 1; }
 command -v xmllint >/dev/null 2>&1 || { echo >&2 "I require xmllint but it's not installed.  Aborting."; exit 1; }

@@ -94,6 +94,7 @@ strict
 \tikzstyle{rectangleTX} = [draw, rectangle, minimum height=1.2cm, minimum width=2cm, node distance=3cm, align=left]
 
 
+
 %  fancy captions (use default for insticc)
 \usepackage[small,hang]{caption}
 
@@ -164,7 +165,7 @@ caption=false,
   escapeinside={(*}{*)},
   captionpos=b,
 }
-\renewcommand{\lstlistingname}{XML Quellcode} 
+\renewcommand{\lstlistingname}{XML source code} 
 
 \lstset{literate=%
 {Ö}{{\"O}}1 
@@ -218,7 +219,7 @@ postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\hookrightarrow\space}}
 \pagestyle{scrheadings} 
 
 \ifoot{\thispublishers ~-- \textbf{\thistitleshort} \\
-Stand \thisdate ~-- Version \thisversion
+\thisdate ~-- Version \thisversion
 }
 
 
@@ -262,6 +263,7 @@ pdfstartview={FitH},
 unicode
 ]{hyperref}
 % 
+
 %--- hyperref meta data -----------------------------------
 \hypersetup{%
     pdfauthor={\thisauthor},
