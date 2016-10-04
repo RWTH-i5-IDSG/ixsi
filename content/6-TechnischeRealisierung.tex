@@ -8,10 +8,11 @@ Die Nachrichten zwischen den beiden System werden als XML übertragen. Eine prä
 Falls sich der Overhead, der durch die Einführung von XML, entsteht als problematisch herausstellen sollte, besteht die Möglichkeit das Efficient XML Interchange (EXI) Protokoll einzusetzen. Der Einsatz von EXI würde die Größe der Nachrichten erheblich verringern, ohne die Vorteile der Verwendung von XML zu verlieren.
 
 \section{Kommunikationskanal}
-Da die Schnittstelle neben dem Anfrage- und Antwort-Schema auch ein asynchrones Abonnementmodell vorsieht und eine geringe Antwortzeit wünschenswert ist, wird für den Kommunikationskanal das WebSocket-Protokoll empfohlen. WebSockets erlauben es, eine bestehende Verbindung der beiden Systeme herzustellen und über diese bidirektional Nachrichten auszutauschen. Das FVS stellt den Server und das RIS den Client (im HTTP Kontext) dar. Es können im Prinzip beliebig viele Kommunikationskanäle geöffnet werden. Aktualisierungen von abonnierten Objekten werden über die gleiche Verbindung geliefert, über die sie abonniert wurden. Bei Unterbrechung der Verbindung endet das Abonnement.
+As the interface allows asynchronous subscription besides the usual request/response scheme, usage of the WebSocket protocol instead of plain HTTP is recommended.
+WebSockets allow persistent connections between both systems and a bidirectional message exchange. Da die Schnittstelle neben dem Anfrage- und Antwort-Schema auch ein asynchrones Abonnementmodell vorsieht und eine geringe Antwortzeit wünschenswert ist, wird für den Kommunikationskanal das WebSocket-Protokoll empfohlen. WebSockets erlauben es, eine bestehende Verbindung der beiden Systeme herzustellen und über diese bidirektional Nachrichten auszutauschen. Das FVS stellt den Server und das RIS den Client (im HTTP Kontext) dar. Es können im Prinzip beliebig viele Kommunikationskanäle geöffnet werden. Aktualisierungen von abonnierten Objekten werden über die gleiche Verbindung geliefert, über die sie abonniert wurden. Bei Unterbrechung der Verbindung endet das Abonnement.
 
 \section{Authentifizierung}
-IXSI ist als B2B-Schnittstelle konzipiert und enthält deswegen keinen eigenen Authentifizierungsmechanismus. Falls erforderlich können die Kommunikationspartner vorhandene Mechanismen wie eine SSL-Zertifikatsauthentifizierung (empfohlen), VPN oder HTTP Authentifizierung verwenden.
+IXSI is a B2B interface and therefore does not include an internal authentication mechanism. Instead the communication partners are advised to use existing authentication mechanisms such as SSL certificates, a virtual private network (VPN) or HTTP authentication.
 
 \subsection*{Endkunde}
 Da per IXSI auch nutzergesteuerte Requests von System zu System geschickt werden, ist
@@ -25,4 +26,4 @@ Bei aufeinanderfolgenden Anfragen, die vom selben Nutzer ausgelöst werden, soll
 geschlossen werden.
 
 \section{Verbindungssicherheit}
-Um die Sicherheit der übermittelten Daten zu gewährleisten ist eine Verschlüsselung der Verbindung notwendig. Hierfür eignet sich SSL/TLS-Protokoll. Dieses sollte verwendet werden, wenn die Verbindung nicht bereits durch andere entsprechende Maßnahmen (z.\,B. durch die Verwendung von Virtuellen Privaten Netzwerken (VPN)) gesichert ist.
+To ensure confidentiality of the transferred data, encryption is required. Therefore, the SSL/TLS-protocol is suitable. This should be used in case that the connection is not already secured through other measures (e.g., by using VPN).
