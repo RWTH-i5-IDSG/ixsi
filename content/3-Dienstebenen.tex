@@ -178,81 +178,81 @@ Through the transmission of starting and target location as well as departure an
 \end{itemize}
 
 
-\section{Dienst 7 -- Abonnement Verbrauchsdaten / Abrechnung (consumption data)}
-Dienst 7 dient dem Austausch von Verbrauchsdaten wie z.\,B. Nutzungsdauer und Entfernung. Durch die Übermittlung der Verbrauchsdaten kann das RIS Rechnungen für Endkunden erstellen. Das RIS abonniert hierzu die Verbrauchsdaten einer durchgeführten Buchung beim FVS und erhält dann automatisch die zu dieser Buchung gehörigen Verbrauchsdaten.
+\section{Service 7 -- Subscription consumption data/ billing}
+Service 7 serves to exchange consumption data, e.g, usage duration and distance. Through the transmission of consumption data, the TIS is able to create bills for end-customers. Therefore, the TIS subscribes consumption data of an executed booking at the VRS and receives the corresponding consumption data automatically. 
 
-\subsection*{Funktionen}
+\subsection*{Functions}
 \begin{itemize}
-\item Abonnement Verbrauchsdaten
-\item Austausch Verbrauchsdaten (Push)
+\item Subscription consumption data 
+\item Exchange consumption data (Push)
 \end{itemize}
 
-\subsection*{Abhängigkeiten}
+\subsection*{Dependencies}
 \begin{itemize}
-\item Dienst 4
+\item Service 4
 %\ item Basisdienst A
-\item Basisdienst B
+\item Base service B
 \end{itemize}
 
-\section{Dienst 8 -- Buchungsstatus ändern (freischalten / pausieren / abschließen) (booking state change)}
-Dienst 8 dient dem Freischalten von Buchungen respektive Fahrzeugen (ggfs. Schlüsselkasten) durch das RIS. Dies erlaubt sowohl die Öffnung bzw. Freischaltung als auch die Rückgabe das Fahrzeug innerhalb der Endanwenderanwendung des RIS, z.\,B. innerhalb einer mobilen App. Weiterhin kann eine Buchung pausiert werden, dies schließt dass Fahrzeug physikalisch ab, beendet aber nicht die Buchung.
-Der Status bezieht sich immer auf eine vorausgegangene Buchung und eine Authentifizierung ist erforderlich.
+\section{Service 8 -- Booking state change (unlocking / pausing / finishing)}
+Service 8 serves to unlock booking of respective vehicles (probably via key case) by the TIS. This allows to unlock as well as to return of the vehicle during the usage phase of the TIS, e.g. via a mobile application. Furthermore, a booking can be paused, which locks the vehicle physically without finishing the booking. 
+The state always refers to a preceding booking and a authentication is required.  
 
-\subsection*{Funktionen}
+\subsection*{Functions}
 \begin{itemize}
-\item Buchung freischalten
-\item Buchung pausieren
-\item Buchung abschließen
+\item Unlock booking
+\item Pause booking 
+\item Finish booking 
 \end{itemize}
 
-\subsection*{Abhängigkeiten}
+\subsection*{Dependencies}
 \begin{itemize}
-\item Dienst 4
-\item Basisdienst A
+\item Service 4
+\item Base service A
 \end{itemize}
 
-\section{Dienst 9 -- Anlegen und Sperren von Nutzern (user management)}
-Dienst 9 dient dem Anlegen und Sperren von FVS Nutzern durch das RIS. Dies erlaubt, dass sich Nutzer nur beim RIS Betreiber registrieren müssen und diese Registrierung auch für das FVS gilt.
+\section{Service 9 -- User management}
+Service 9 serves to create and lock of user accounts of the VRS through the TIS. Therefore, a user just has to register himself at the TIS operator. This registration is valid even for usage of the VRS.
 
-\subsection*{Funktionen}
+\subsection*{Functions}
 \begin{itemize}
-\item Benutzer anlegen
-\item Benutzer sperren
+\item Create user account
+\item Lock user account
 \end{itemize}
 
-\subsection*{Abhängigkeiten}
+\subsection*{Dependencies}
 \begin{itemize}
-\item Dienst 1
-\item Basisdienst A
+\item Service 1
+\item Base service A
 \end{itemize}
 
 
-\section{Dienst 10 -- Fahrzeug- bzw. Buchungseinstellungsmanagement (booking settings)}
-Dienst 10 dient dem Management von Fahrzeugeinstellungen. Das RIS kann Fahrzeugeinstellungen (Temperatur der Klimaanlage, eingestellter Radiosender etc) an das FVS übertragen und Einstellung für bestehende Buchungen abonnieren.
+\section{Service 10 -- vehicle or booking settings}
+Service 10 serves the management of vehicle settings. The TIS is able to transfer vehicle settings (e.g., air condition temperature, preferred radio stations) to the VRS and subscribe to settings of existing bookings.
 
-\subsection*{Funktionen}
+\subsection*{Functions}
 \begin{itemize}
-\item Fahrzeugeinstellungen setzten
-\item Fahrzeugeinstellungen abonnieren
+\item Put vehicle settings 
+\item Subscribe to vehicle settings
 \end{itemize}
 
-\subsection*{Abhängigkeiten}
+\subsection*{Dependencies}
 \begin{itemize}
-\item Dienst 4
-\item Basisdienst A
+\item Service 4
+\item Base service A
 \end{itemize}
 
-\section{Dienst 11 -- Fernkonfiguration Navigationssystem und Fahrtverlauf überwachen}
-Dienst 11 dient der Integration des Fahrzeugnavigationssystems in eine intermodale Reise. Das RIS kann nach der Buchung dem Fahrzeug den Zielort übermitteln, so dass der Reisende den Ort nicht selbst eingeben muss. Zusätzlich kann das RIS den Fortschritt der Fahrt überwachen um ggfs. auf Verzögerungen zu reagieren.
+\section{Service 11 -- Remote configuration of navigation system and route monitoring}
+Service 11 serves the integration of the vehicle navigation system into an intermodal journey. The TIS is able to transfer the target location to the vehicle after the booking, so that the traveler does not need to enter the location by his self. Additionally, the TIS is able to monitor the progress of a journey, probably to react in case of delays.
 
-\subsection*{Funktionen}
+\subsection*{Functions}
 \begin{itemize}
-\item Navigationsziel des Fahrzeugs setzten
-\item Fahrtverlauf abonnieren
+\item Put navigation target of vehicle
+\item Subscribe to route progress
 \end{itemize}
 
-\subsection*{Abhängigkeiten}
+\subsection*{Dependencies}
 \begin{itemize}
-\item Dienst 4
-\item Basisdienst A
+\item Service 4
+\item Base service A
 \end{itemize}
