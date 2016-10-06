@@ -378,38 +378,38 @@ The TIS can subscribe capacity information of locations. The interaction procedu
 \end{center}
 \smallskip
 
-\subsection*{Abonnement externe Buchungen (Dienst 4a)}
+\subsection*{Subscription external bookings (Service 4a)}
 \label{subsec:Interaktionsprotokolle:Dienst4a}
 
 \begin{center}
 	\begin{sequencediagram}
-		\newthread{ris}{:RIS}
-		\newinst[8]{fvs}{:FVS}
+		\newthread{tis}{:TIS}
+		\newinst[8]{vrs}{:VRS}
 
-		\begin{sdblock}{Abonnement von externen Buchungen}{}
+		\begin{sdblock}{Subscription external bookings}{}
 
-			\begin{call}{ris}{Kundenreferenz, (Abostornierung)*}{fvs}{}
+			\begin{call}{tis}{Customer reference, (Subscription cancellation)*}{vrs}{}
 			\end{call}
 
 		\end{sdblock}
 		\postlevel
-		\begin{sdblock}{externe Buchung}{}
+		\begin{sdblock}{External booking}{}
 
-			\begin{mess}{fvs}{externe Buchung}{ris}
+			\begin{mess}{vrs}{External booking}{tis}
 			\end{mess}
 
-			\begin{mess}{fvs}{externe Buchung}{ris}
+			\begin{mess}{vrs}{External booking}{tis}
 			\end{mess}
-			\begin{mess}{fvs}{externe Buchung}{ris}
+			\begin{mess}{vrs}{External booking}{tis}
 			\end{mess}
-			\begin{mess}{fvs}{...}{ris}
+			\begin{mess}{vrs}{...}{tis}
 			\end{mess}
 		\end{sdblock}
 		\postlevel
 
-		\begin{sdblock}{Vollständige externe Buchungen}{}
+		\begin{sdblock}{Complete external booking}{}
 
-			\begin{call}{ris}{}{fvs}{externe Buchungen}
+			\begin{call}{tis}{}{vrs}{External bookings}
 			\end{call}
 
 		\end{sdblock}
