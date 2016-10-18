@@ -19,11 +19,9 @@ Da per IXSI auch nutzergesteuerte Requests von System zu System geschickt werden
 es nötig, dass sich ein Nutzer gegenüber dem FVS authentifizieren kann.
 Dies geschieht normalerweise über das Tripel Anbieter Referenz/Nutzer Referenz/Passwort. Um das  Passwort nicht im Klartext speichern zu müssen, kann alternativ zum Passwort ein Token
 verwendet werden, welches über die Funktion TokenGeneration (vgl. \cref{subsec:Nachrichten:DienstC:Tokengenerierung}) vom FVS
-generiert werden kann. So muss der Nutzer zwar initial sein Passwort einmalig eingeben, anschließend kann er sich aber über das daraus generierte, gespeicherte Token
-authentifizieren. Dieses kann z.\,B. auf dem Endgerät des Nutzers gespeichert werden.
+generiert werden kann. So muss der Nutzer zwar initial sein Passwort einmalig eingeben, anschließend kann er sich aber über das daraus generierte, gespeicherte Token authentifizieren. Dieses kann z.\,B. auf dem Endgerät des Nutzers gespeichert werden.
 
-Bei aufeinanderfolgenden Anfragen, die vom selben Nutzer ausgelöst werden, soll nicht in jedem Request eine Authentifizierung durchgeführt werden. Daher wird mit dem ersten Request eines Nutzers eine Session eröffnet (explizit durch OpenSession oder implizit). Für Folgerequests desselben Nutzers kann dann anstatt einer Authentifizierung die ID der eröffneten Session mitgeschickt werden. Diese Sessions besitzen nur eine beschränkte zeitliche Gültigkeit. Nach Ablauf dieser Gültigkeit muss der Nutzer neu identifiziert und eine neue Session eröffnet werden. Eine Session kann auch explizit durch CloseSession
-geschlossen werden.
+Bei aufeinanderfolgenden Anfragen, die vom selben Nutzer ausgelöst werden, soll nicht in jedem Request eine Authentifizierung durchgeführt werden. Daher wird mit dem ersten Request eines Nutzers eine Session eröffnet (explizit durch OpenSession oder implizit). Für Folgerequests desselben Nutzers kann dann anstatt einer Authentifizierung die ID der eröffneten Session mitgeschickt werden. Diese Sessions besitzen nur eine beschränkte zeitliche Gültigkeit. Nach Ablauf dieser Gültigkeit muss der Nutzer neu identifiziert und eine neue Session eröffnet werden. Eine Session kann auch explizit durch CloseSession geschlossen werden.
 
 \section{Verbindungssicherheit}
 To ensure confidentiality of the transferred data, encryption is required. Therefore, the SSL/TLS-protocol is suitable. This should be used in case that the connection is not already secured through other measures (e.g., by using VPN).
