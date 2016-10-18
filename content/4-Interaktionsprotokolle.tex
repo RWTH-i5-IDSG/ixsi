@@ -506,40 +506,40 @@ With the query \texttt{PriceInformationRequest}, the TIS can request price infor
 
 
 
-\section{Dienst 7 --  Verbrauchsdatenabonnement}
+\section{Service 7 -- Subscription consumption data}
 \label{sec:Interaktionsprotokolle:Dienst7}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
-\begin{sdblock}{Verbrauchsdatenabonnement}{}
+\begin{sdblock}{Subscription consumption data}{}
 
-\begin{call}{ris}{Buchungsreferenz, (Abostornierung)*}{fvs}{}
+\begin{call}{tis}{Booking reference, (Subscription cancellation)*}{vrs}{}
 \end{call}
 
 \end{sdblock}
 \postlevel
-\begin{sdblock}{Verbrauchsdaten}{}
+\begin{sdblock}{Consumption data}{}
 
-\begin{mess}{fvs}{Verbrauchsdaten}{ris}
+\begin{mess}{vrs}{Consumption data}{tis}
 \end{mess}
 
-\begin{mess}{fvs}{Verbrauchsdaten}{ris}
+\begin{mess}{vrs}{Consumption data}{tis}
 \end{mess}
 
-\begin{mess}{fvs}{Verbrauchsdaten}{ris}
+\begin{mess}{vrs}{Consumption data}{tis}
 \end{mess}
 
-\begin{mess}{fvs}{...}{ris}
+\begin{mess}{vrs}{...}{tis}
 \end{mess}
 \end{sdblock}
 \postlevel
 
-\begin{sdblock}{Vollständige Verbrauchsdaten}{}
+\begin{sdblock}{Complete consumption data}{}
 
-\begin{call}{ris}{}{fvs}{Verbrauchsdaten}
+\begin{call}{tis}{}{vrs}{Consumption data}
 \end{call}
 
 \end{sdblock}
@@ -548,30 +548,30 @@ With the query \texttt{PriceInformationRequest}, the TIS can request price infor
 \end{center}
 \smallskip
 
-Das RIS kann Verbrauchsdaten (Nutzungsdauer, Entfernung, ggfs. andere) für eine Buchung abonnieren. Sobald neue Verbrauchsdaten vorliegen (z.\,B. bei Rückgabe eines Fahrzeuges) informiert das FVS das RIS über den vorliegenden Verbrauch. Zu einer Buchung können mehrere Informationen zu Verbrauchsdaten versendet werden. Neue Verbrauchsdaten zu einer Buchung invalidieren alle vorherigen und müssen entsprechend vollständig sein.
+The TIS is able to subscribe for consumption data (e.g., usage duration, distance, others) for a booking. As soon as new consumption data occurs (e.g., by returning a vehicle), the VRS informs the TIS concerning the respective consumption. Concerning one booking, multiple consumption data information can be forwarded. New consumption datasets of one booking invalidate all previous datasets and need to be complete. 
 
-Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3}.
+The interaction sequence is analogous to \cref{subsec:Interaktionsprotokolle:Dienst3}.
 
 
-\section{Dienst 8 -- Buchungsstatus ändern}
+\section{Service 8 -- Change booking status}
 \label{sec:Interaktionsprotokolle:Dienst8}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
 
 
-\begin{sdblock}{Sitzung}{Basisdienst A}
+\begin{sdblock}{Session}{Base service A}
 
-  \begin{sdblock}{Fahrzeugbuchung}{Dienst 4}
-  \begin{call}{ris}{Buchungszielreferenz}{fvs}{Buchungsreferenz, Vorschlag Zeitraum}
+  \begin{sdblock}{Vehicle booking}{Service 4}
+  \begin{call}{tis}{Booking target reference}{vrs}{Booking reference, Proposal time span}
     \end{call}
   \end{sdblock}
 
-  \begin{sdblock}{Buchungsstatus ändern}{Dienst 8}
-  \begin{call}{ris}{Buchungsreferenz, Buchungsstatus}{fvs}{Zusatzinformationen}
+  \begin{sdblock}{Change booking status}{Service 8}
+  \begin{call}{tis}{Booking reference, Booking status}{vrs}{Additional information}
     \end{call}
   \end{sdblock}
 
@@ -582,26 +582,24 @@ Der Interaktionsablauf ist analog zu \cref{subsec:Interaktionsprotokolle:Dienst3
 \end{center}
 \smallskip
 
-Um ein Buchungsziel (Fahrzeug bzw. Schlüsselkasten) durch das RIS freischalten zu lassen, muss eine Buchung für dieses Buchungsziel bereits vorliegen (diese muss ggfs. für den Nutzer transparent durchgeführt werden). Mit einer Referenz auf diese Buchung kann das Buchungsziel dann freigeschaltet werden. Eine Authentifizierung ist hierfür erforderlich. Pausieren und Abschließen einer Buchung passiert analog.
+To unlock a booking target (vehicle or key box) via the TIS, a booking for this booking target has to be present (probably this has to be proceeded in a transparent way towards the user). Using a reference for this booking, the booking target can be unlocked. Therefore, a authentication is mandatory. Pausing and finishing of a booking happens analogous. 
 
-
-
-\section{Dienst 9 -- Benutzermanagement}
+\section{Service 9 -- User management}
 \label{sec:Interaktionsprotokolle:Dienst9}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
 
-\begin{sdblock}{Benutzer erstellen}{Dienst 9}
-\begin{call}{ris}{Benutzerinformation}{fvs}{}
+\begin{sdblock}{Create user}{Service 9}
+\begin{call}{tis}{User information}{vrs}{}
 \end{call}
 \end{sdblock}
 
-\begin{sdblock}{Benutzer sperren}{Dienst 9}
-\begin{call}{ris}{Benutzerreferenz, sperren/entsperren}{fvs}{}
+\begin{sdblock}{Lock user}{Service 9}
+\begin{call}{tis}{User reference, lock/unlock}{vrs}{}
 \end{call}
 \end{sdblock}
 
@@ -609,38 +607,37 @@ Um ein Buchungsziel (Fahrzeug bzw. Schlüsselkasten) durch das RIS freischalten 
 \end{center}
 \smallskip
 
-Das RIS legt Benutzer im FVS an, um eine doppelte Anmeldung bei beiden Diensten überflüssig zu machen. Optional können Benutzer auch gesperrt/entsperrt werden.
+The TIS creates user accounts in the VRS to avoid multiple registrations in both services. Optionally, users can be locked/unlocked, too.
 
 
-
-\section{Dienst 10 --  Fahrzeugseinstellungsmanagement}
+\section{Service 10 --  Vehicle setting management}
 \label{sec:Interaktionsprotokolle:Dienst10}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
-\begin{sdblock}{Einstellungsabonnement}{}
+\begin{sdblock}{Settings subscription}{}
 
-\begin{call}{ris}{Buchungsreferenz, (Abostornierung)*}{fvs}{}
+\begin{call}{tis}{Booking reference, (Subscription cancellation)*}{vrs}{}
 \end{call}
 
 \end{sdblock}
 \postlevel
-\begin{sdblock}{Fahrzeugeinstellungen}{}
+\begin{sdblock}{Vehicle settings}{}
 
-\begin{mess}{fvs}{Fahrzeugeinstellungen}{ris}
+\begin{mess}{vrs}{Vehicle settings}{tis}
 \end{mess}
 
-\begin{mess}{fvs}{...}{ris}
+\begin{mess}{vrs}{...}{tis}
 \end{mess}
 \end{sdblock}
 \postlevel
 
-\begin{sdblock}{Fahrzeugeinstellungen senden}{}
+\begin{sdblock}{Sending vehicle settings}{}
 
-\begin{call}{ris}{}{fvs}{Buchungsreferenz, Fahrzeugeinstellungen}
+\begin{call}{tis}{}{vrs}{Booking reference, vehicle settings}
 \end{call}
 
 \end{sdblock}
@@ -649,45 +646,44 @@ Das RIS legt Benutzer im FVS an, um eine doppelte Anmeldung bei beiden Diensten 
 \end{center}
 \smallskip
 
-Das RIS kann Buchungs bzw. Fahrzeugeinstellungen beim FVS abonnieren.
-Nach einer abgeschlossenen Buchung (oder in intervallen) übermittelt das FVS die durch den Benutzer durchgeführten Fahrzeugeinstellungen wie Sitzposition, Zieltemperatur der Klimaanlage, eingestellter Radiosender usw.
-Kurz vor dem Start einer Folgebuchung kann das RIS dann wiederrum Fahrzeugeinstellung übermitteln damit der Benutzer bei betreten des Fahrzeugs die gleiche Konfiguration wie vorher wiederfindet.
+The TIS is able to subscribe to booking or vehicle settings by the VRS. 
+After a completed booking (or in intervals), the VRS transfers the vehicle setting, e.g., seat position, target temperature of the air condition, preferred radio stations, ... which were previously set by the user. 
+Shortly before the beginning of a follow-up booking, the TIS is able to transfer vehicle settings, to provide the same vehicle configuration as before to the user.
 
 
-
-\section{Dienst 11 -- Fernkonfiguration Navigationssystem und Fahrtverlauf überwachen}
+\section{Service 11 -- Remote configuration of navigation system and journey progress monitoring}
 \label{sec:Interaktionsprotokolle:Dienst11}
 
 \begin{center}
 \begin{sequencediagram}
-\newthread{ris}{:RIS}
-\newinst[8]{fvs}{:FVS}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
 
-\begin{sdblock}{Fernkonfiguration Navigationssystem}{}
-\begin{call}{ris}{Buchungsreferenz, Zielort}{fvs}{}
+\begin{sdblock}{Remote configuration of navigation system}{}
+\begin{call}{tis}{Booking reference, target location}{vrs}{}
   \end{call}
 \end{sdblock}
 \postlevel
   
-\begin{sdblock}{Fahrtverlauf überwachen}{}
+\begin{sdblock}{Journey progress monitoring}{}
 
-\begin{call}{ris}{Buchungsreferenz, (Abostornierung)*}{fvs}{}
+\begin{call}{tis}{Booking reference, (Subscription cancellation)*}{vrs}{}
 \end{call}
 
 \end{sdblock}
 
-\begin{sdblock}{Fahrtverlauf}{}
+\begin{sdblock}{Journey progress}{}
 
-\begin{mess}{fvs}{Position / vorraus. Ankunftszeit}{ris}
+\begin{mess}{vrs}{Position / estimated arrival time}{tis}
 \end{mess}
 
-\begin{mess}{fvs}{Position / vorraus. Ankunftszeit}{ris}
+\begin{mess}{vrs}{Position / estimated arrival time}{tis}
 \end{mess}
 
-\begin{mess}{fvs}{Position / vorraus. Ankunftszeit}{ris}
+\begin{mess}{vrs}{Position / estimated arrival time}{tis}
 \end{mess}
 
-\begin{mess}{fvs}{Bestätigung Ankunft}{ris}
+\begin{mess}{vrs}{Confirmation arrival}{tis}
 \end{mess}
 \end{sdblock}
 \postlevel
@@ -696,5 +692,5 @@ Kurz vor dem Start einer Folgebuchung kann das RIS dann wiederrum Fahrzeugeinste
 \end{center}
 \smallskip
 
-Das RIS kann nach der Buchung dem Fahrzeug den Zielort übermitteln (Fernkonfiguration Navigationssystem), so dass der Reisende den Zielort nicht selbst eingeben muss. 
-Außerdem kann das RIS den Fortschritt der Fahrt abonnieren, und wird dann fortlaufend vom FVS über Änderungen der Position und der vorraussichtlichen Ankunftszeit informiert.
+After the booking, the TIS can transfer the target location to the vehicle (remote configuration navigation system), so that the traveler does not need to enter the target location by himself. 
+Furthermore, the TIS can subscribe to the progress of a journey and then gets continiously informed by the VRS concerning changes of the position and the estimated arrival time. 
