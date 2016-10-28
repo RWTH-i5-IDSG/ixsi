@@ -1,24 +1,24 @@
-\chapter{Nachrichten}
+\chapter{Messages}
 \label{cha:Nachrichten}
 Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf fünf Nachrichtentypen der Art Request / Response und Push. Alle Nachrichten vom RIS an das FVS stellen Anfragen dar und sind daher vom Typ Request. Der Typ Response wird für direkte Antworten des FVS auf Anfragen des RIS verwendet. Um eine Zuordnung der Response-Nachrichten zu den zugehörigen Request-Nachrichten zu erlauben, wird jede Request-Nachricht mit einer eindeutigen Transaction-ID markiert, die in der zugehörigen Response-Nachricht wieder mitgegeben werden muss. Eine Response-Nachricht kann anstelle ihres normalen Inhalts auch einen Fehler enthalten. Der letzte Nachrichtentyp Push findet in den Fällen Verwendung, in denen das RIS fortlaufende Aktualisierungen (Abonnement) vom FVS angefordert hat.
 
 Für einige Nachrichten sind Beispiele zur illustration vorhanden, siehe z.B. \cref{lst:AvailabilityRequestExample}.
 
-\section{Basisnachrichten}
+\section{Base Messages}
 \label{sec:Nachrichten:Basisnachrichten}
 
-\subsection*{Basisklasse}
+\subsection*{Base Class}
 \input{xml/generated/IxsiMessageType}
 \input{xml/generated/IxsiMessageType-schema}
 
-\subsection*{Basisantwort}
+\subsection*{Base Response}
 \input{xml/generated/AbstractBaseResponseType}
 \input{xml/generated/AbstractBaseResponseType-schema}
 \medskip
 
 \textit{Eine abstrakte Basisklasse für einen Request ist nicht vorhanden, da nicht erforderlich.}
 
-\subsection*{Transaktionsdaten}
+\subsection*{Transaction Data}
 \input{xml/generated/TransactionType}
 \input{xml/generated/TransactionType-schema}
 
@@ -38,27 +38,27 @@ Für einige Nachrichten sind Beispiele zur illustration vorhanden, siehe z.B. \c
 \input{xml/generated/SubscriptionResponseType}
 \input{xml/generated/SubscriptionResponseType-schema}
 
-\section{Basisgruppen}
+\section{Base Groups}
 \label{sec:Nachrichten:Basisgruppen}
 
-\subsection*{Benutzer-initiiert}
+\subsection*{User-Initiated}
 \input{xml/generated/UserTriggeredRequestGroup}
 \input{xml/generated/UserTriggeredRequestGroup-schema}
 \input{xml/generated/UserTriggeredResponseGroup}
 \input{xml/generated/UserTriggeredResponseGroup-schema}
 
-\subsection*{Herkunft/Zielangabe}
+\subsection*{Origin/Target Specification}
 \input{xml/generated/OriginDestGroup}
 \input{xml/generated/OriginDestGroup-schema}
 
-\subsection*{Gruppen rein zur Organisation}
+\subsection*{Groups solely for Organisation Purposes}
 Anmerkung: Im XML Schema sind weitere Gruppen definiert, die jedoch nur der Organisation dienen und keinen Einfluss auf das Nachrichtenformat haben und deshalb hier nicht aufgelistet sind.
 \begin{samepage}
 \begin{flushleft}
 \rowcolors{1}{}{gray!10}
 \begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}X}
 \toprule
-Name &  Kommentar \label{tab:miscGroups}\\
+Name &  Comment \label{tab:miscGroups}\\
 \midrule
 \texttt{StaticDataRequestGroup} & \\
 \texttt{StaticDataResponseGroup}& \\
@@ -72,17 +72,17 @@ Name &  Kommentar \label{tab:miscGroups}\\
 \bottomrule
 \end{tabularx}\end{flushleft}\end{samepage}
 
-\section{Dienst A - Sitzungen}
+\section{Service A - Sessions}
 \label{sec:Nachrichten:DienstA}
 
-\subsection*{Session öffnen}
+\subsection*{Open Session}
 \label{subsec:Nachrichten:DienstA:OpenSession}
 \input{xml/generated/OpenSessionRequestType}
 \input{xml/generated/OpenSessionRequestType-schema}
 \input{xml/generated/OpenSessionResponseType}
 \input{xml/generated/OpenSessionResponseType-schema}
 
-\subsection*{Session schließen}
+\subsection*{Close Session}
 \label{subsec:Nachrichten:DienstA:CloseSession}
 \input{xml/generated/CloseSessionRequestType}
 \input{xml/generated/CloseSessionRequestType-schema}
