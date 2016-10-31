@@ -1,8 +1,8 @@
 \chapter{Messages}
 \label{cha:Nachrichten}
-Die zwischen den Interaktionspartnern ausgetauschten Nachrichten basieren auf fünf Nachrichtentypen der Art Request / Response und Push. Alle Nachrichten vom RIS an das FVS stellen Anfragen dar und sind daher vom Typ Request. Der Typ Response wird für direkte Antworten des FVS auf Anfragen des RIS verwendet. Um eine Zuordnung der Response-Nachrichten zu den zugehörigen Request-Nachrichten zu erlauben, wird jede Request-Nachricht mit einer eindeutigen Transaction-ID markiert, die in der zugehörigen Response-Nachricht wieder mitgegeben werden muss. Eine Response-Nachricht kann anstelle ihres normalen Inhalts auch einen Fehler enthalten. Der letzte Nachrichtentyp Push findet in den Fällen Verwendung, in denen das RIS fortlaufende Aktualisierungen (Abonnement) vom FVS angefordert hat.
+The messages that are transferred between the interaction partners are based upon five message types the way request / response and push. All messages going from TIS to VRS represent requests. The type response is used for direct responses of the VRS of requests, coming from the TIS. To allow an allocation of response-messages to the corresponding request-messages, every request-message is marked by a unique transaction-ID, which has to be delivered within the corresponding response-message. Instead of its' usual content, a response-message can also contain errors. The last message type push is used in that cases, where the TIS demanded for ongoing updates (subscriptions) towards the VRS.
 
-Für einige Nachrichten sind Beispiele zur illustration vorhanden, siehe z.B. \cref{lst:AvailabilityRequestExample}.
+For some messages, examples for illustration purposes are available, see \cref{lst:AvailabilityRequestExample}.
 
 \section{Base Messages}
 \label{sec:Nachrichten:Basisnachrichten}
@@ -16,7 +16,7 @@ Für einige Nachrichten sind Beispiele zur illustration vorhanden, siehe z.B. \c
 \input{xml/generated/AbstractBaseResponseType-schema}
 \medskip
 
-\textit{Eine abstrakte Basisklasse für einen Request ist nicht vorhanden, da nicht erforderlich.}
+\textit{A abstract base class for a request does not exist, because it is not necessary.}
 
 \subsection*{Transaction Data}
 \input{xml/generated/TransactionType}
@@ -89,7 +89,7 @@ Name &  Comment \label{tab:miscGroups}\\
 \input{xml/generated/CloseSessionResponseType}
 \input{xml/generated/CloseSessionResponseType-schema}
 
-\section{Dienst B - Abonnements}
+\section{Service B - Subscriptions}
 \label{sec:Nachrichten:DienstB}
 
 \subsection*{Heartbeat}
@@ -99,37 +99,37 @@ Name &  Comment \label{tab:miscGroups}\\
 \input{xml/generated/HeartBeatResponseType}
 \input{xml/generated/HeartBeatResponseType-schema}
 
-\section{Dienst C - Tokens}
+\section{Service C - Tokens}
 \label{sec:Nachrichten:DienstC}
 
-\subsection*{Tokengenerierung}
+\subsection*{Token Generation}
 \label{subsec:Nachrichten:DienstC:Tokengenerierung}
 \input{xml/generated/TokenGenerationRequestType}
 \input{xml/generated/TokenGenerationRequestType-schema}
 \input{xml/generated/TokenGenerationResponseType}
 \input{xml/generated/TokenGenerationResponseType-schema}
 
-\section{Dienst 1 - Statische Daten}
+\section{Service 1 - Statistical Data}
 \label{sec:Nachrichten:Dienst1}
 
-\subsection*{Abfrage Buchungsziele}
+\subsection*{Request Booking Targets}
 \label{subsec:Nachrichten:Dienst1:BookingTargets}
 \input{xml/generated/BookingTargetsInfoRequestType}
 \input{xml/generated/BookingTargetsInfoRequestType-schema}
 \input{xml/generated/BookingTargetsInfoResponseType}
 \input{xml/generated/BookingTargetsInfoResponseType-schema}
 
-\subsection*{Abfrage Änderungen Buchungsziele}
+\subsection*{Request Change Booking Targets}
 \label{subsec:Nachrichten:Dienst1:ChangeProviders}
 \input{xml/generated/ChangedProvidersRequestType}
 \input{xml/generated/ChangedProvidersRequestType-schema}
 \input{xml/generated/ChangedProvidersResponseType}
 \input{xml/generated/ChangedProvidersResponseType-schema}
 
-\section{Dienst 2 - Verfügbarkeitsauskunft}
+\section{Service 2 - Availability Information}
 \label{sec:Nachrichten:Dienst2}
 
-\subsection*{Abfrage Verfügbarkeiten}
+\subsection*{Request Availabilities}
 \label{subsec:Nachrichten:Dienst2:Availability}
 \input{xml/generated/AvailabilityRequestType}
 \input{xml/generated/AvailabilityRequestType-schema}
@@ -141,17 +141,17 @@ Name &  Comment \label{tab:miscGroups}\\
 \medskip
 
 
-\subsection*{Abfrage Standortkapazitäten (Dienst 2a)}
+\subsection*{Request Location Capacities (Service 2a)}
 \label{subsec:Nachrichten:Dienst2:PlaceAvailability}
 \input{xml/generated/PlaceAvailabilityRequestType}
 \input{xml/generated/PlaceAvailabilityRequestType-schema}
 \input{xml/generated/PlaceAvailabilityResponseType}
 \input{xml/generated/PlaceAvailabilityResponseType-schema}
 
-\section{Dienst 3 - Verfügbarkeitsabonnement}
+\section{Service 3 - Availability Subscription}
 \label{sec:Nachrichten:Dienst3}
 
-\subsection*{Verfügbarkeitsabonnement}
+\subsection*{Availability Subscription}
 \label{subsec:Nachrichten:Dienst3:AvailabilitySubscription}
 \input{xml/generated/AvailabilitySubscriptionRequestType}
 \input{xml/generated/AvailabilitySubscriptionRequestType-schema}
@@ -167,7 +167,7 @@ Name &  Comment \label{tab:miscGroups}\\
 \input{xml/generated/AvailabilityPushMessageType-schema}
 \lstinputlisting[style=XML-style,caption={AvailabilityPush Beispiel},label=lst:AvailabilitySubscriptionPushExample]{xml/examples/availability-subscription-push.xml}
 
-\subsection*{Vollständige Verfügbarkeitsabonnementinformation}
+\subsection*{Complete Availability Subscription Information}
 \label{subsec:Nachrichten:Dienst3:CompleteAvailability}
 \input{xml/generated/CompleteAvailabilityRequestType}
 \input{xml/generated/CompleteAvailabilityRequestType-schema}
@@ -177,7 +177,7 @@ Name &  Comment \label{tab:miscGroups}\\
 \input{xml/generated/CompleteAvailabilityResponseType-schema}
 \lstinputlisting[style=XML-style,caption={CompleteAvailabilityResponse Beispiel},label=lst:CompleteAvailabilityResponseExample]{xml/examples/complete-availability-response.xml}
 
-\subsection*{Standortkapazitätsabonnement (Dienst 3a)}
+\subsection*{Location Capacity Subscription (Service 3a)}
 \label{subsec:Nachrichten:Dienst3:PlaceAvailabilitySubscription}
 \input{xml/generated/PlaceAvailabilitySubscriptionRequestType}
 \input{xml/generated/PlaceAvailabilitySubscriptionRequestType-schema}
@@ -190,17 +190,17 @@ Name &  Comment \label{tab:miscGroups}\\
 \input{xml/generated/PlaceAvailabilityPushMessageType}
 \input{xml/generated/PlaceAvailabilityPushMessageType-schema}
 
-\subsection*{Vollständige Standortkapazitätsinformation (Dienst 3a)}
+\subsection*{Complete Location Capacity Information (Service 3a)}
 \label{subsec:Nachrichten:Dienst3:CompletePlaceAvailability}
 \input{xml/generated/CompletePlaceAvailabilityRequestType}
 \input{xml/generated/CompletePlaceAvailabilityRequestType-schema}
 \input{xml/generated/CompletePlaceAvailabilityResponseType}
 \input{xml/generated/CompletePlaceAvailabilityResponseType-schema}
 
-\section{Dienst 4 - Buchung / Buchungsänderung}
+\section{Service 4 - Booking / Booking Change}
 \label{sec:Nachrichten:Dienst4}
 
-\subsection*{Buchung}
+\subsection*{Booking}
 \label{subsec:Nachrichten:Dienst4:Booking}
 \input{xml/generated/BookingRequestType}
 \input{xml/generated/BookingRequestType-schema}
@@ -210,7 +210,7 @@ Name &  Comment \label{tab:miscGroups}\\
 \input{xml/generated/BookingResponseType-schema}
 \lstinputlisting[style=XML-style,caption={BookingResponse Beispiel},label=lst:BookingResponseExample]{xml/examples/booking-response.xml}
 
-\subsection*{Buchungsänderung}
+\subsection*{Booking Change}
 \label{subsec:Nachrichten:Dienst4:ChangeBooking}
 \input{xml/generated/ChangeBookingRequestType}
 \input{xml/generated/ChangeBookingRequestType-schema}
@@ -218,7 +218,7 @@ Name &  Comment \label{tab:miscGroups}\\
 \input{xml/generated/ChangeBookingResponseType-schema}
 
 
-\subsection*{Externe Buchungen abfragen (Dienst 4a)}
+\subsection*{Request External Bookings (Service 4a)}
 \label{subsec:Nachrichten:Dienst4:externalBookingRequestType}
 \input{xml/generated/ExternalBookingSubscriptionRequestType}
 \input{xml/generated/ExternalBookingSubscriptionRequestType-schema}
@@ -235,10 +235,10 @@ Name &  Comment \label{tab:miscGroups}\\
 \input{xml/generated/CompleteExternalBookingResponseType}
 \input{xml/generated/CompleteExternalBookingResponseType-schema}
 
-\section{Dienst 5 - Buchungsabonnement}
+\section{Service 5 - Booking Subscription}
 \label{sec:Nachrichten:Dienst5}
 
-\subsection*{Buchungsabonnement}
+\subsection*{Booking Subscription}
 \label{subsec:Nachrichten:Dienst5:BookingAlertSubscription}
 \input{xml/generated/BookingAlertSubscriptionRequestType}
 \input{xml/generated/BookingAlertSubscriptionRequestType-schema}
@@ -251,27 +251,27 @@ Name &  Comment \label{tab:miscGroups}\\
 \input{xml/generated/BookingAlertPushMessageType}
 \input{xml/generated/BookingAlertPushMessageType-schema}
 
-\subsection*{Vollständige Buchungsabonnementinformation}
+\subsection*{Complete Booking Subscription Information}
 \label{subsec:Nachrichten:Dienst5:CompleteBookingAlert}
 \input{xml/generated/CompleteBookingAlertRequestType}
 \input{xml/generated/CompleteBookingAlertRequestType-schema}
 \input{xml/generated/CompleteBookingAlertResponseType}
 \input{xml/generated/CompleteBookingAlertResponseType-schema}
 
-\section{Dienst 6 - Preisauskunft}
+\section{Service 6 - Price Inquiry}
 \label{sec:Nachrichten:Dienst6}
 
-\subsection*{Preisinformation}
+\subsection*{Price Information}
 \label{subsec:Nachrichten:Dienst6:PriceInformation}
 \input{xml/generated/PriceInformationRequestType}
 \input{xml/generated/PriceInformationRequestType-schema}
 \input{xml/generated/PriceInformationResponseType}
 \input{xml/generated/PriceInformationResponseType-schema}
 
-\section{Dienst 7 - Verbrauchsdatenabonnement}
+\section{Service 7 - Consumption Data Subscription}
 \label{sec:Nachrichten:Dienst7}
 
-\subsection*{Nutzungsdatenabonnement}
+\subsection*{Consumption Data Subscription}
 \label{subsec:Nachrichten:Dienst7:ConsumptionSubscription}
 \input{xml/generated/ConsumptionSubscriptionRequestType}
 \input{xml/generated/ConsumptionSubscriptionRequestType-schema}
@@ -282,7 +282,7 @@ Name &  Comment \label{tab:miscGroups}\\
 \input{xml/generated/ConsumptionPushMessageType}
 \input{xml/generated/ConsumptionPushMessageType-schema}
 
-\subsection*{Vollständige Nutzungsdaten}
+\subsection*{Complete Consumption Data}
 \label{subsec:Nachrichten:Dienst5:CompleteConsumption}
 \input{xml/generated/CompleteConsumptionRequestType}
 \input{xml/generated/CompleteConsumptionRequestType-schema}
@@ -290,24 +290,24 @@ Name &  Comment \label{tab:miscGroups}\\
 \input{xml/generated/CompleteConsumptionResponseType-schema}
 
 
-\section{Dienst 8 - Buchungsstatus ändern}
+\section{Service 8 - Change Booking Status}
 \label{sec:Nachrichten:Dienst8}
 \input{xml/generated/ChangeBookingStateRequestType}
 \input{xml/generated/ChangeBookingStateRequestType-schema}
 \input{xml/generated/ChangeBookingStateResponseType}
 \input{xml/generated/ChangeBookingStateResponseType-schema}
 
-\section{Dienst 9 - User Management}
+\section{Service 9 - User Management}
 \label{sec:Nachrichten:Dienst9}
 
-\subsection*{Benutzer erstellen}
+\subsection*{Create User}
 \label{subsec:Nachrichten:Dienst9:CreateUser}
 \input{xml/generated/CreateUserRequestType}
 \input{xml/generated/CreateUserRequestType-schema}
 \input{xml/generated/CreateUserResponseType}
 \input{xml/generated/CreateUserResponseType-schema}
 
-\subsection*{Benutzer ändern}
+\subsection*{Change User}
 \label{subsec:Nachrichten:Dienst9:ChangeUser}
 \input{xml/generated/ChangeUserRequestType}
 \input{xml/generated/ChangeUserRequestType-schema}
@@ -315,17 +315,17 @@ Name &  Comment \label{tab:miscGroups}\\
 \input{xml/generated/ChangeUserResponseType-schema}
 
 
-\section{Dienst 10 - Fahrzeugseinstellungsmanagement}
+\section{Service 10 - Vehicle Settings Management}
 \label{sec:Nachrichten:Dienst10}
 
-\subsection*{Fahrzeugeinstellung setzen}
+\subsection*{Set Vehicle Settings}
 \label{subsec:Nachrichten:Dienst10:SetBookingSettings}
 \input{xml/generated/SetBookingSettingsRequestType}
 \input{xml/generated/SetBookingSettingsRequestType-schema}
 \input{xml/generated/SetBookingSettingsResponseType}
 \input{xml/generated/SetBookingSettingsResponseType-schema}
 
-\subsection*{Fahrzeugeinstellung abonnieren}
+\subsection*{Subscribe to Vehicle Settings}
 \label{subsec:Nachrichten:Dienst10:BookingSettingsSubscription}
 \input{xml/generated/BookingSettingsSubscriptionRequestType}
 \input{xml/generated/BookingSettingsSubscriptionRequestType-schema}
@@ -341,17 +341,17 @@ Name &  Comment \label{tab:miscGroups}\\
 \input{xml/generated/BookingSettingsPushMessageType-schema}
 
 
-\section{Dienst 11 - Fernkonfiguration Navigationssystem und Fahrtverlauf überwachen}
+\section{Service 11 - Remote Configuration Navigation System and Journey Progress Monitoring}
 \label{sec:Nachrichten:Dienst11}
 
-\subsection*{Zielort des Navigationssystems setzen}
+\subsection*{Set Target Location of Navigation System}
 \label{subsec:Nachrichten:Dienst11:SetNavigationDestination}
 \input{xml/generated/SetNavigationDestinationRequestType}
 \input{xml/generated/SetNavigationDestinationRequestType-schema}
 \input{xml/generated/SetNavigationDestinationResponseType}
 \input{xml/generated/SetNavigationDestinationResponseType-schema}
 
-\subsection*{Fahrtverlauf (Buchungsfortschritt) überwachen}
+\subsection*{Journey Progress (Booking Progress) Monitoring}
 \label{subsec:Nachrichten:Dienst11:BookingProgressSubscription}
 \input{xml/generated/BookingProgressSubscriptionRequestType}
 \input{xml/generated/BookingProgressSubscriptionRequestType-schema}
