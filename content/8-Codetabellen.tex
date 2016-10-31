@@ -1,148 +1,148 @@
-\chapter{Code Tabellen}
+\chapter{Code Tables}
 \label{cha:CodeTabellen}
-Die syntaktische Definition für IXSI enthält keine konkreten Werte (Enumerations) für beispielsweise Fahrzeugtypen oder Fehlercodes. Stattdessen werden diese Werte in den nachfolgenden Codetabellen festgelegt. Nur die hier festgelegten Werte dürfen innerhalb von IXSI verwendet werden.
+The syntactical definition for IXSI does not contain concrete values (enumerations) for e.g., vehicle types or error codes. Instead, these values are determined within the following code tables. Only these determined values are allowed to be used by IXSI. 
 
-\section{Fahrzeugklassen}
+\section{Vehicle Types}
 \label{sec:CodeTabellen:ClassType}
-Für die Auswahl \emph{ClassType} können folgende Werte verwendet werden:
+For the selection \emph{ClassType}, the following values can be used:
 
 \begin{flushleft}
 \rowcolors{1}{}{gray!10}
 \begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}X}
 \toprule
-Wert & Bedeutung\\
+Value & Meaning\\
 \midrule
-\verb|bike| & Fahrrad\\
-\verb|motorcycle| & Motorrad\\
-\verb|micro| & Kleinstwagen (z.\,B. Smart4two)\\
-\verb|mini| & Kleinwagen (z.\,B. Opel Corsa)\\
-\verb|small| & Kompaktwagen (z.\,B. VW Golf)\\
-\verb|medium| & Mittelklassewagen (z.\,B. Audi A4)\\
-\verb|large| & Oberklassewagen (z.\,B. BMW 7er)\\
+\verb|bike| & Bike\\
+\verb|motorcycle| & Motorcycle\\
+\verb|micro| & Micro car (z.\,B. Smart4two)\\
+\verb|mini| & Mini car (z.\,B. Opel Corsa)\\
+\verb|small| & Small car (z.\,B. VW Golf)\\
+\verb|medium| & Medium class car (z.\,B. Audi A4)\\
+\verb|large| & Upper class car (z.\,B. BMW 7er)\\
 \verb|van| & Van (z.\,B. VW T5 Multivan)\\
 \verb|transporter| & Transporter (z.\,B. Ford Transit)\\
 \bottomrule
 \end{tabularx}
 \end{flushleft}
 
-\section{Antriebsklassen}
+\section{Engine Types}
 \label{sec:CodeTabellen:EngineType}
-Für die Auswahl \emph{EngineType} können folgende Werte verwendet werden:
+For the selection \emph{EngineType}, the following values can be used:
 
 \begin{flushleft}
 \rowcolors{1}{}{gray!10}
 \begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}X}
 \toprule
-Wert & Bedeutung\\
+Value & Meaning\\
 \midrule
-\verb|none| & Kein Kraftantrieb (Muskelkraft)\\
-\verb|diesel| & Dieselmotor\\
-\verb|gasoline| & Ottomotor\\
-\verb|electric| & Elektromotor\\
-\verb|liquidgas| & Flüssiggas (LPG)\\
-\verb|naturalgas| & Erdgas (CNG)\\
-\verb|hydrogen| & Wasserstoffantrieb\\
-\verb|hybrid| & Hybridantrieb mit Elektro- und Verbrennungsmotor\\
+\verb|none| & No engine (Muscle Power)\\
+\verb|diesel| & Diesel engine\\
+\verb|gasoline| & Otto engine\\
+\verb|electric| & Electro engine\\
+\verb|liquidgas| & Liquid gas (LPG)\\
+\verb|naturalgas| & Natural gas (CNG)\\
+\verb|hydrogen| & Hydrogen power\\
+\verb|hybrid| & Hybrid power with electro- and internal combustion engine\\
 \bottomrule
 \end{tabularx}
 \end{flushleft}
 
-Hinweis: Ein Pedelec kann als Kombination Fahrzeugklasse \verb|bike| und Antriebsklasse \verb|electric| dargestellt werden.
+Note: A pedelec can be described as a combination of vehicle type \verb|bike| and engine type \verb|electric|.
 
-\section{Fahrzeugeigenschaften}
+\section{Vehicle Attributes}
 \label{sec:CodeTabellen:AttributeClass}
-Attribute und Eigenschaften eines Buchungsziels oder eines Standorts können klassifiziert werden, um sie automatisch interpretieren zu können. Dazu werden Attributsklassen verwendet. Attributsklassen werden in IXSI im Datentyp \emph{AttributeClassType} gespeichert. Folgende Werte sind dabei erlaubt:
+Attributes and characteristics of a booking target can be classified to interpret them automatically. Therefore, attribute classes are used. Attribute classes are saved in IXSI in the data type \emph{AttributeClassType}. The following values are allowed:
 
 \begin{flushleft}
 \rowcolors{1}{}{gray!10}
 \begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}X}
 \toprule
-Wert & Bedeutung\\
+Value & Meaning\\
 \midrule
-\verb|trailer_hitch| & Anhängerkupplung\\
-\verb|automatic| & Automatikgetriebe\\
+\verb|trailer_hitch| & Trailer hitch\\
+\verb|automatic,| & Automatic gear\\
 \verb|convertible| & Cabriolet\\
-\verb|air_condition| & Klimaanlage\\
-\verb|navigation| & Navigationssystem\\
-\verb|cruise_control| & Tempomat\\
-\verb|winter_tyres| & Winter- bzw. Ganzjahresreifen\\
-\verb|child_seat_0| & Babyschale\\
-\verb|child_seat_1| & Kindersitz (9-18kg)\\
-\verb|child_seat_4| & Kindersitz (15-36kg)\\
+\verb|air_condition| & Air condition\\
+\verb|navigation| & Navigation system\\
+\verb|cruise_control| & Cruise control\\
+\verb|winter_tyres| & Winter and all season tires\\
+\verb|child_seat_0| & Child seat\\
+\verb|child_seat_1| & Child seat (9-18kg)\\
+\verb|child_seat_4| & Child seat (15-36kg)\\
 \verb|utility| & Kombi\\
-\verb|doors_4| & 4/5-Türer\\
-\verb|seats_9| & Mindestens 9 Sitze\\
-\verb|seats_7| & Mindestens 7 Sitze\\
-\verb|seats_5| & Mindestens 5 Sitze\\
-\verb|seats_4| & Mindestens 4 Sitze\\
+\verb|doors_4| & 4/5 Doors\\
+\verb|seats_9| & At least 9 seats\\
+\verb|seats_7| & At least 7 seats\\
+\verb|seats_5| & At least 5 seats\\
+\verb|seats_4| & At least 4 seats\\
 \bottomrule
 \end{tabularx}
 \end{flushleft}
 
-\section{Verbrauchsdaten}
+\section{Consumption Data}
 \label{sec:CodeTabellen:ConsumptionClassType}
-Klassen von Verbrauchsdaten zur Abrechnung von Leistungen, wie z.\,B. Entfernung, Dauer oder Zusatzleistungen wie ein Kindersitz. Wird in  \emph{ConsumptionClassType} gespeichert. Folgende Werte sind dabei erlaubt:
+Classes of consumption data for accounting of services, e.g., distance, duration or additional services like seats for children. Is saved in \emph{ConsumptionClassType}. The following values are allowed: 
 
 \begin{flushleft}
 \rowcolors{1}{}{gray!10}
 \begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}X}
 \toprule
-Wert & Bedeutung\\
+Value & Meaning\\
 \midrule
-\verb|distance| & Entfernung\\
-\verb|duration| & Dauer\\
+\verb|distance| & Distance\\
+\verb|duration| & Duration\\
 \bottomrule
 \end{tabularx}
 \end{flushleft}
 
-\section{Nutzerzustände}
+\section{User States}
 \label{sec:CodeTabellen:UserStateType}
 
-Zustände, die ein Benutzer im System haben kann, wird in  \emph{UserStateType} gespeichert. Folgende Werte sind dabei erlaubt:
+States, a user can have in the system. Is saved in \emph{UserStateType}. The following values are allowed:
 
 \begin{flushleft}
 \rowcolors{1}{}{gray!10}
 \begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}X}
 \toprule
-Wert & Bedeutung\\
+Values & Meaning\\
 \midrule
-\verb|operative| & Benutzer ist aktiviert und darf Fahrzeuge buchen.\\
-\verb|nonoperative| & Benutzer ist gesperrt und darf keine Fahrzeuge buchen (kann entsperrt werden).\\
-\verb|deleted| & Benutzer ist (endgültig) gelöscht.\\
+\verb|operative| & User is activated and allowed to book vehicles.\\
+\verb|nonoperative| & User is locked and not allowed to book vehicles (possible to be unlocked).\\
+\verb|deleted| & User is (finally) deleted.\\
 \bottomrule
 \end{tabularx}
 \end{flushleft}
 
-\section{Fehlercodes}
+\section{Error Codes}
 \label{sec:CodeTabellen:ErrorCode}
-Das FVS kann alternativ zu den normalen Response-, Update- und Handshake-Nachrichten auch im Fall eines Fehlers Fehlernachrichten an das RIS schicken. Fehlercodes werden im Datentyp \emph{ErrorCodeType} gespeichert.
+Instead of usual response-, update- or handshake-messages, the VRS is able to transfer error- messages to the TIS in case an error occurs. Error codes are saved in the data type \emph{ErrorCodeType}.
 \begin{flushleft}
 \rowcolors{1}{}{gray!10}
 \begin{tabularx}{\linewidth}{l>{\raggedright\arraybackslash}X}
 \toprule
-Wert & Bedeutung\\
+Values & Meaning\\
 \midrule
-\verb|auth_provider_unknown| & Authentifizierung: Unbekannte Provider-ID\\
-\verb|auth_invalid_password| & Authentifizierung: User-Passwort-Kombination ungültig\\
-\verb|auth_invalid_token| & Authentifizierung: User-Token-Kombination ungültig\\
-\verb|auth_session_invalid| & Authentifizierung: Session ist ungültig/abgelaufen\\
-\verb|auth_anon_not_allowed| & Authentifizierung: Anonymer User nicht erlaubt\\
-\verb|auth_not_authorized| & Autorisation: Nutzer ist zu dieser Anfrage nicht berechtigt\\
-\verb|sys_backend_failed| & System: Hintergrundsystem antwortet nicht\\
-\verb|sys_unknown_failure| & System: unbekannter Fehler\\
-\verb|sys_not_implemented| & System: Request nicht implementiert\\
-\verb|sys_request_not_plausible| & System: Request ist nicht plausibel. Dieser Wert sollte stets verwendet werden, wenn inhaltlich Fehler im Request enthalten sind.\\
-\verb|booking_target_unknown| & Buchungsziel unbekannt\\
-\verb|price_info_not_available| & Preisinformationen nicht verfügbar\\
-\verb|booking_too_short| & Buchungsdauer zu kurz\\
-\verb|booking_too_long| & Buchungsdauer zu lang\\
-\verb|booking_target_not_available| & Buchungsziel im gegebenen Zeitraum nicht buchbar\\
-\verb|booking_change_not_possible| & Buchungsänderung kann nicht durchgeführt werden\\
-\verb|booking_id_unknown| & Unbekannte Buchungs-ID. Dieser Wert sollte auch verwendet werden, wenn die Buchungs-ID einem anderen User zugeordnet ist.\\
-\verb|booking_state_change_failed| & Änderung des Buchungsstatus fehlgeschlagen.\\
-\verb|booking_settings_not_understood| & Buchungseinstellung unbekannt.\\
-\verb|booking_navigation_set_failed| & Setzen des Reiseziels fehlgeschlagen.\\
-\verb|language_not_supported| & Angefragte Sprache nicht vollständig unterstützt, andere Sprache geliefert.\\
+\verb|auth_provider_unknown| & Authentication: Unknown provider-ID\\
+\verb|auth_invalid_password| & Authentication: User-password-combination invalid\\
+\verb|auth_invalid_token| & Authentication: User-token-combination invalid\\
+\verb|auth_session_invalid| & Authentication: Session is invalid/ expired\\
+\verb|auth_anon_not_allowed| & Authentication: Anonymous user not allowed\\
+\verb|auth_not_authorized| & Autorization: User is not justified for this request\\
+\verb|sys_backend_failed| & System: Background system does not respond\\
+\verb|sys_unknown_failure| & System: Unknown error\\
+\verb|sys_not_implemented| & System: Request not implemented\\
+\verb|sys_request_not_plausible| & System: Request is not plausible. This value should always be used in case of content errors, included in the request.\\
+\verb|booking_target_unknown| & Booking target unknown\\
+\verb|price_info_not_available| & Price information not available\\
+\verb|booking_too_short| & Booking duration too short\\
+\verb|booking_too_long| & Booking duration too long\\
+\verb|booking_target_not_available| & Booking target not bookable in the given time span\\
+\verb|booking_change_not_possible| & Booking change can not be executed\\
+\verb|booking_id_unknown| & Unknown booking-ID. This value should also be used, if the booking-ID is assigned to a different user.\\
+\verb|booking_state_change_failed| & Changes of booking status failed.\\
+\verb|booking_settings_not_understood| & Booking settings unknown.\\
+\verb|booking_navigation_set_failed| & Setting of journey target failed.\\
+\verb|language_not_supported| & Requested language not unconditionally supported, other language provided.\\
 \bottomrule
 \end{tabularx}
 \end{flushleft}

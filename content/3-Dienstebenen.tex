@@ -35,7 +35,7 @@ To realize a coupling between VRS and TIS, at least service 1 (static data) of b
   \draw (s11) edge[->,thick=1cm] (s4);
   \end{tikzpicture}
   }
-  \caption{Service dependencies \label{fig:depend}}
+  \caption{Service Dependencies \label{fig:depend}}
 \end{figure}
 
 
@@ -63,7 +63,7 @@ Service B contains a function to check the status of a subscription connection (
 \subsection*{Dependencies}
 none
 
-\section{Base Service C -- tokens}
+\section{Base Service C -- Tokens}
 \label{sec:Hierachiemodell:BasisdienstC}
 Service C contains a function to create authentication tokens for users, which can be saved/ transferred instead of plaintext passwords.
 
@@ -144,7 +144,7 @@ To allow booking changes, a booking can be replaced by another booking via a boo
 \item Service 1
 \end{itemize}
 
-\section{Service 5 -- Booking subscription}
+\section{Service 5 -- Booking Subscription}
 \label{sec:Hierachiemodell:Dienst5}
 Service 5 serves the subscription of booking changes.
 
@@ -161,7 +161,7 @@ The TIS is able to subscribe conducted bookings at the VRS to inform users in ca
 \item Base Service B
 \end{itemize}
 
-\section{Service 6 -- Price information}
+\section{Service 6 -- Price Information}
 \label{sec:Hierachiemodell:Dienst6}
 Service 6 serves price information of rental services.
 
@@ -178,7 +178,7 @@ Through the transmission of starting and target location as well as departure an
 \end{itemize}
 
 
-\section{Service 7 -- Subscription consumption data/ billing}
+\section{Service 7 -- Subscription Consumption Data/ Billing}
 Service 7 serves to exchange consumption data, e.g, usage duration and distance. Through the transmission of consumption data, the TIS is able to create bills for end-customers. Therefore, the TIS subscribes consumption data of an executed booking at the VRS and receives the corresponding consumption data automatically. 
 
 \subsection*{Functions}
@@ -194,7 +194,7 @@ Service 7 serves to exchange consumption data, e.g, usage duration and distance.
 \item Base service B
 \end{itemize}
 
-\section{Service 8 -- Booking state change (unlocking / pausing / finishing)}
+\section{Service 8 -- Booking State Change (Unlocking / Pausing / Finishing)}
 Service 8 serves to unlock booking of respective vehicles (probably via key case) by the TIS. This allows to unlock as well as to return of the vehicle during the usage phase of the TIS, e.g. via a mobile application. Furthermore, a booking can be paused, which locks the vehicle physically without finishing the booking. 
 The state always refers to a preceding booking and a authentication is required.  
 
@@ -211,7 +211,7 @@ The state always refers to a preceding booking and a authentication is required.
 \item Base service A
 \end{itemize}
 
-\section{Service 9 -- User management}
+\section{Service 9 -- User Management}
 Service 9 serves to create and lock of user accounts of the VRS through the TIS. Therefore, a user just has to register himself at the TIS operator. This registration is valid even for usage of the VRS.
 
 \subsection*{Functions}
@@ -227,7 +227,7 @@ Service 9 serves to create and lock of user accounts of the VRS through the TIS.
 \end{itemize}
 
 
-\section{Service 10 -- vehicle or booking settings}
+\section{Service 10 -- Vehicle or Booking Settings}
 Service 10 serves the management of vehicle settings. The TIS is able to transfer vehicle settings (e.g., air condition temperature, preferred radio stations) to the VRS and subscribe to settings of existing bookings.
 
 \subsection*{Functions}
@@ -242,7 +242,7 @@ Service 10 serves the management of vehicle settings. The TIS is able to transfe
 \item Base service A
 \end{itemize}
 
-\section{Service 11 -- Remote configuration of navigation system and route monitoring}
+\section{Service 11 -- Remote Configuration of Navigation System and Journey Progress Monitoring}
 Service 11 serves the integration of the vehicle navigation system into an intermodal journey. The TIS is able to transfer the target location to the vehicle after the booking, so that the traveler does not need to enter the location by his self. Additionally, the TIS is able to monitor the progress of a journey, probably to react in case of delays.
 
 \subsection*{Functions}
