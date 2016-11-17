@@ -1,6 +1,6 @@
 \chapter{Interaktionsprotokolle}
 \label{cha:Interaktionsprotokolle}
-Dieser Abschnitt gibt einen Überblick über die in IXSI verwendeten Interaktionsschemata. Zur Vereinfachung werden die Interaktionsschemata in den Sequenzdiagrammen informell ohne Verwendung der technischen Bezeichnungen der Funktionsaufrufe beschrieben. Grundsätzlich werden werden zwei Typen von Interaktionen verwendet: Das einfache und wohlbekannte Request/Response- bzw. Query-Interaktionsschema bei dem auf jede Anfrage des Clients (in diesem Fall das RIS) genau eine Antwort des Servers folgt (FVS). Weiterhin das Subscription-Schema bei dem einmalig ein Objekt durch den Client abonniert wird und dann Aktualisierungen an diesem Objekt laufend durch den Server geliefert werden. Hierbei bleibt der Kommunikationskanal die ganze Zeit über geöffnet.
+Dieser Abschnitt gibt einen Überblick über die in IXSI verwendeten Interaktionsschemata. Zur Vereinfachung werden die Interaktionsschemata in den Sequenzdiagrammen informell ohne Verwendung der technischen Bezeichnungen der Funktionsaufrufe beschrieben. Grundsätzlich werden zwei Typen von Interaktionen verwendet: Das einfache und wohlbekannte Request/Response- bzw. Query-Interaktionsschema bei dem auf jede Anfrage des Clients (in diesem Fall das RIS) genau eine Antwort des Servers folgt (FVS). Weiterhin das Subscription-Schema bei dem einmalig ein Objekt durch den Client abonniert wird und dann Aktualisierungen an diesem Objekt laufend durch den Server geliefert werden. Hierbei bleibt der Kommunikationskanal die ganze Zeit über geöffnet.
 
 
 \section{Überblick}
@@ -166,7 +166,7 @@ Als Basis für die Informationskopplung dient der Austausch von sogenannten Buch
 \end{center}
 \smallskip
 
-Um nicht intervallweise alle Buchungszielinformationen übertragen zu müssen, kann mit dem Aufruf \texttt{ChangedProviders} angefragt werden, bei welchem Anbieter sich Änderungen seit einem bestimmten Zeitpunkt, vorgegeben durch den Parameter \texttt{timestamp}, ergeben haben. Zurückgegeben wird eine Providerreferenz, die wiederum bei beim Funktionsaufruf \texttt{Booking\-TargetsInfo} als Parameter übergeben werden kann.
+Um nicht intervallweise alle Buchungszielinformationen übertragen zu müssen, kann mit dem Aufruf \texttt{ChangedProviders} angefragt werden, bei welchem Anbieter sich Änderungen seit einem bestimmten Zeitpunkt, vorgegeben durch den Parameter \texttt{timestamp}, ergeben haben. Zurückgegeben wird eine Providerreferenz, die wiederum bei einem Funktionsaufruf \texttt{Booking\-TargetsInfo} als Parameter übergeben werden kann.
 
 \section{Dienst 2 -- Verfügbarkeitsauskunft}
 \label{sec:Interaktionsprotokolle:Dienst2}
