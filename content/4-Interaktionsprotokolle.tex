@@ -1,14 +1,14 @@
 \chapter{Interaction Sequences}
 \label{cha:Interaktionsprotokolle}
-This section provides an overview about the interaction schemes, used by IXSI. For simplification, these interaction schemes are described in interaction sequence diagrams without using the technical terms of function calls. In principal, two types of interactions are used: The simple and well-known request/response- or. query- interaction scheme, whereby every call of the client (in this case TIS) is followed by exactly one response of the server (VRS). Furthermore, the subscription-scheme, whereby one object is subscribed by the client once and updated continuously by the server. Hereby, the communication channel is opened all the time. 
+This section provides an overview about the interaction schemes, used by IXSI. For simplification, these interaction schemes are described in interaction sequence diagrams without using the technical terms of function calls. In principle, two types of interactions are used: The simple and well-known request/response- or. query- interaction scheme, whereby every call of the client (in this case TIS) is followed by exactly one response of the server (VRS). Furthermore, the subscription-scheme, whereby one object is subscribed by the client once and updated continuously by the server. Hereby, the communication channel is opened all the time. 
 
 \section{Overview}
 The following sequence diagram gives an exemplary overview of information coupling, possibly enabled by IXSI. The used services are going to be described in detail in the following chapters. In this use case, a customer sets up a travel inquiry, books a respective travel and gets informed concerning relevant booking changes. 
 
 In the first block \textit{Exchange booking targets}, the booking targets, provided by the \index{VRS}VRS are exchanged with the \index{TIS}TIS and relevant booking targets are subscribed (see. \cref{sec:Interaktionsprotokolle:Dienst1,sec:Interaktionsprotokolle:Dienst3}). This happens proactive, without involving the customer.
-In block \textit{Travel Inquiry}, a customer sets up a travel inquiry with, e.g. his mobile device, on the TIS. Thereby, various rental vehicles are suitable for booking, whose availabilities are requested synchronously towards the VRS. For availabilities, the TIS additionally requests price information. As a result, the TIS provides a selection of possible routes/ connections to the customer. Because this is a communication triggered by the customer, a session which proceeds the queries is created implicitly. An anonymous session is used, because the customer did not register on his device beforehand.
-In block \textit{Tarvel booking}, a customer has chosen a travel route and intends to book it. For this purpose, he registers on his mobile device, whereby a token is generated(Block \emph{Registration}). With this token, a (not anonymous) session is created, which proceeds the booking operation. For that, the TIS forwards booking reference and a time proposal to the VRS. This sends a booking confirmation, which is forwarded to the customer. In addition, the TIS subscribes the respective booking on the VRS.
-In the last block \textit{Travel monitoring}, the customers gets informed concerning booking changes, which are received by the TIS, coming from the VRS.
+In block \textit{Travel Inquiry}, a customer sets up a travel inquiry with, e.g. his mobile device, on the TIS. Thereby, various rental vehicles are suitable for booking, whose availabilities are requested synchronously towards the VRS. For availabilities, the TIS additionally requests price information. As a result, the TIS provides a selection of possible routes/ connections to the customer. Since this is a communication triggered by the customer, a session which proceeds the queries is created implicitly. An anonymous session is used, because the customer did not register on his device beforehand.
+In block \textit{Travel booking}, a customer has chosen a travel route and intends to book it. For this purpose, he registers on his mobile device, whereby a token is generated (Block \emph{Registration}). With this token, a (not anonymous) session is created, which proceeds the booking operation. For that, the TIS forwards booking reference and a time proposal to the VRS. This sends a booking confirmation, which is forwarded to the customer. In addition, the TIS subscribes the respective booking on the VRS.
+In the last block \textit{Travel monitoring}, the customer gets informed concerning booking changes, which are received by the TIS, coming from the VRS.
 \begin{center}
 \begin{sequencediagram}
 
@@ -283,9 +283,9 @@ The TIS is able to request current capacities from rental stations, e.g., for ma
 \end{center}
 \smallskip
 
-The TIS can subscribe to information concerning booking targets to get informed about availability changes immediately. In Principal, this serves to enable responses to travel inquiries without additional (synchronous) requests towards the VRS.
+The TIS can subscribe to information concerning booking targets to get informed about availability changes immediately. In principle, this serves to enable responses to travel inquiries without additional (synchronous) requests towards the VRS.
 
-Through the initial query \texttt{AvailabilitySubscriptionRequest} a subscription is started. For this purpose, the TIS forwards the related booking reference. By setting the flag "Cancellation", a subscription can be canceled. In case of changes concerning availabilities, the VRS forwards asynchronously \texttt{AvailabilityPushMessage}. These a delivered via the same communication channel as upon the subscription was created beforehand. By cancellation of the communication channel, all subscriptions turn to be obsolete.
+Through the initial query \texttt{AvailabilitySubscriptionRequest} a subscription is started. For this purpose, the TIS forwards the related booking reference. A subscription can be canceled, by setting the flag "Cancellation". In case of changes concerning availabilities, the VRS forwards asynchronously \texttt{AvailabilityPushMessage}. These are delivered via the same communication channel as upon the subscription was created beforehand. By cancellation of the communication channel, all subscriptions become obsolete.
 
 
 \subsection*{Location Capacity Subscription (Service 3a)}
@@ -416,7 +416,7 @@ The TIS can subscribe capacity information of locations. The interaction procedu
 \smallskip
 
 
-To book a vehicle in customer order, it is necessary that the TIS authenticates the customers towards the VRS. For this purpose, there are three possibilities, further specified in \cref{sec:Datenmodell:Auth} In this example, a session is opened explicitly and closed after the transaction. After that, a booking can utilized by calling \texttt{Booking} with provision of the respective booking target ID and a time span proposal. \blockquote{Vorschlag} because the VRS is able to change the time span to the used booking grid. As response, the used booking reference and the actual time span is returned. The booking reference can be used for monitoring of the booking (see \cref{sec:Interaktionsprotokolle:Dienst5}). For changes of the booking time span or for cancellation, \texttt{ChangeBooking} can be called. In case of changes of the booking target, a cancellation or a new booking becomes necessary.
+To book a vehicle in customer order, it is necessary that the TIS authenticates the customers towards the VRS. For this purpose, there are three possibilities, further specified in \cref{sec:Datenmodell:Auth} In this example, a session is opened explicitly and closed after the transaction. After that, a booking can be utilized by calling \texttt{Booking} with provision of the respective booking target ID and a time span proposal. \blockquote{Vorschlag} because the VRS is able to change the time span to the used booking grid. As response, the used booking reference and the actual time span is returned. The booking reference can be used for monitoring of the booking (see \cref{sec:Interaktionsprotokolle:Dienst5}). For changes of the booking time span or for cancellation, \texttt{ChangeBooking} can be called. In case of changes of the booking target, a cancellation or a new booking becomes necessary.
 
 \section{Service 5 --  Booking Subscription}
 \label{sec:Interaktionsprotokolle:Dienst5}
@@ -458,7 +458,7 @@ To book a vehicle in customer order, it is necessary that the TIS authenticates 
 \end{center}
 \smallskip
 
-The TIS can subscribe to changes concerning bookings to provide this information to customers and probably propose alternatives. For example in case of an technical failure of a vehicle, the VRS can inform the TIS that a booking is not longer possible. In addition, it is possible to set a booking to \blockquote{possible again}. The booking can be canceled ultimately only by the customer himself. 
+The TIS can subscribe to changes concerning bookings to provide this information to customers and probably propose alternatives. For example in case of a technical failure of a vehicle, the VRS can inform the TIS that a booking is not longer possible. In addition, it is possible to set a booking to \blockquote{possible again}. The booking can be canceled ultimately only by the customer himself. 
 
 The interaction procedure is analogous to \cref{subsec:Interaktionsprotokolle:Dienst3}.
 
@@ -571,7 +571,6 @@ The interaction sequence is analogous to \cref{subsec:Interaktionsprotokolle:Die
   \begin{call}{tis}{Booking reference, Booking status}{vrs}{Additional information}
     \end{call}
   \end{sdblock}
-
 \end{sdblock}
 
 
@@ -690,4 +689,4 @@ Shortly before the beginning of a follow-up booking, the TIS is able to transfer
 \smallskip
 
 After the booking, the TIS can transfer the target location to the vehicle (remote configuration navigation system), so that the traveler does not need to enter the target location by himself. 
-Furthermore, the TIS can subscribe to the progress of a journey and then gets continiously informed by the VRS concerning changes of the position and the estimated arrival time. 
+Furthermore, the TIS can subscribe to the progress of a journey and then gets continuously informed by the VRS concerning changes of the position and the estimated arrival time. 
