@@ -287,6 +287,8 @@ The TIS can subscribe to information concerning booking targets to get informed 
 
 Through the initial query \texttt{AvailabilitySubscriptionRequest} a subscription is started. For this purpose, the TIS forwards the related booking reference. A subscription can be canceled, by setting the flag "Cancellation". In case of changes concerning availabilities, the VRS forwards asynchronously \texttt{AvailabilityPushMessage}. These are delivered via the same communication channel as upon the subscription was created beforehand. By cancellation of the communication channel, all subscriptions become obsolete.
 
+For the initial synchronization of the availabilites the TIS can call the function \texttt{Complete\-Availability\-Request}.
+
 
 \subsection*{Location Capacity Subscription (Service 3a)}
 \label{subsec:Interaktionsprotokolle:Dienst3a}
