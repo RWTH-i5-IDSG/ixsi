@@ -91,7 +91,7 @@ none
 
 \section{Service 2 -- Availability Query}
 \label{sec:Hierachiemodell:Dienst2}
-Service 2 serves for synchronous calls of availability information. The actual availability times of booking targets are called from the VRS during the travel infomative through the TIS.
+Service 2 serves for synchronous calls of availability information. The actual availability times of booking targets are called from the VRS during the travel inquiry through the TIS.
 
 The actual availability times of booking targets are called during the travel inquiry by the TIS at the VRS.
 \subsection*{Functions}
@@ -107,7 +107,7 @@ The actual availability times of booking targets are called during the travel in
 
 \section{Service 3 -- Availability Subscription}
 \label{sec:Hierachiemodell:Dienst3}
-Services 2 serves the asynchronous exchange of availability information.
+Service 3 serves the asynchronous exchange of availability information.
 
 To accelerate the travel inquiry, the TIS can subscribe availability timescales of booking targets to avoid a query during the travel inquiry. After subscribing for an amount of booking targets, the VRS informs continuously about changes in availability timescales. 
 
@@ -130,13 +130,14 @@ To accelerate the travel inquiry, the TIS can subscribe availability timescales 
 Service 4 serves booking, booking changes and canceling of vehicles via the TIS on behalf of the customer of a VRS.
 
 The booking of a vehicle requires that a customer authenticates himself towards the VRS. Therefore, authentication information is forwarded from the TIS to the VRS. The secret (Password, key, etc.) of the customer is not allowed to be saved due to security reasons. The TIS receives an authentication-token in case of a successful authentication of a user. It can either be saved on the TIS or the user's device. Using the authentication-token, the TIS can proceed queries concerning bookings and canceling. 
-To allow booking changes, a booking can be replaced by another booking via a booking change request. In case of an impossible booking, is has to be secured that the initial booking retains it's validity. 
+To allow booking changes, a booking can be replaced by another booking via a booking change request. In case of a booking errors, it has to be ensured that the initial booking retains it's validity. 
 
 \subsection*{Functions}
 \begin{itemize}
 \item Authentication of users towards the VHR 
 \item Booking Query
 \item Query concerning booking changes/ canceling
+\item Subscription of external Bookings (Service 4a)
 \end{itemize}
 
 \subsection*{Dependencies}
