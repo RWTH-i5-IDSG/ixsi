@@ -1,7 +1,7 @@
 \chapter{Hierarchical Model}
 \label{cha:Hierachiemodell}
 The hierarchical model describes different qualities of information coupling, based on service groups and serves as a recommendation concerning possible stages of implementation.
-To realize a coupling between VRS and TIS, at least service 1 (static data) of both interacting parties has to be supported. In \cref{fig:depend}, dependencies between different services are depicted.
+To realize a coupling between VRS and TIS, at least service 1 (static data) of both interacting parties has to be supported. Dependencies between different services are depicted in \cref{fig:depend}.
 
 \begin{figure}[h]
   \centering
@@ -9,7 +9,7 @@ To realize a coupling between VRS and TIS, at least service 1 (static data) of b
   \begin{tikzpicture}
   % Dienste
   \tikzstyle{ann} = [draw=none,fill=none,right]
-  \node[rectangleTX](s1) {Dienst 1\\Static data};
+  \node[rectangleTX](s1) {Service 1\\Static data};
   \node[rectangleTX, below left of=s1](s3) {Service 3\\Availability Subscription};
   \node[rectangleTX, left= 1cm of s3](s2) {Service 2\\Availability Query};
   \node[rectangleTX, below right of=s1](s4) {Service 4\\Booking};
@@ -65,11 +65,11 @@ none
 
 \section{Base Service C -- Tokens}
 \label{sec:Hierachiemodell:BasisdienstC}
-Service C contains a function to create authentication tokens for users, which can be saved/ transferred instead of plaintext passwords.
+Service C contains a function to create authentication tokens for users, which can be saved / transferred instead of plaintext passwords.
 
 \subsection*{Functions}
 \begin{itemize}
-\item Creation of tokens
+\item Creation of Tokens
 \end{itemize}
 
 \subsection*{Dependencies}
@@ -78,7 +78,7 @@ none
 
 \section{Service 1 -- Static Data}
 \label{sec:Hierachiemodell:Dienst1}
-Service 1 serves the information exchange across vehicle rental companies and static data of booking targets. These include provider-, position-, and vehicle-data. 
+Service 1 serves the information exchange across vehicle rental companies and static data of booking targets. These include provider-, position- and vehicle-data.
 
 For example, service 1 can be used, to display messages solely for existing locations of an VRS-provider in a TIS. 
 \subsection*{Functions}
@@ -91,7 +91,7 @@ none
 
 \section{Service 2 -- Availability Query}
 \label{sec:Hierachiemodell:Dienst2}
-Service 2 serves for asynchronous calls of availability information.
+Service 2 serves for synchronous calls of availability information. The actual availability times of booking targets are called from the VRS during the travel infomative through the TIS.
 
 The actual availability times of booking targets are called during the travel inquiry by the TIS at the VRS.
 \subsection*{Functions}
