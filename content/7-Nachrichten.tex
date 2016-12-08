@@ -1,6 +1,6 @@
 \chapter{Messages}
 \label{cha:Nachrichten}
-The messages that are transferred between the interaction partners are based upon five message types the way request / response and push. All messages going from TIS to VRS represent requests. The type response is used for direct responses of the VRS of requests, coming from the TIS. To allow an allocation of response-messages to the corresponding request-messages, every request-message is marked by a unique transaction-ID, which has to be delivered within the corresponding response-message. Instead of its' usual content, a response-message can also contain errors. The last message type push is used in that cases, where the TIS demanded for ongoing updates (subscriptions) towards the VRS.
+The messages that are transferred between the interaction partners are based upon five message types in form of request / response and push messages. All messages going from TIS to VRS represent requests. The type response is used for direct responses of the VRS of requests, coming from the TIS. To allow an allocation of response-messages to the corresponding request-messages, every request-message is marked by a unique transaction-ID, which has to be delivered within the corresponding response-message. Instead of its' usual content, a response-message can also contain errors. The last message type push is used in cases, where the TIS demanded for ongoing updates (subscriptions) towards the VRS.
 
 For some messages, examples for illustration purposes are available, see \cref{lst:AvailabilityRequestExample}.
 
@@ -52,7 +52,7 @@ For some messages, examples for illustration purposes are available, see \cref{l
 \input{xml/generated/OriginDestGroup-schema}
 
 \subsection*{Groups solely for Organisation Purposes}
-Anmerkung: Im XML Schema sind weitere Gruppen definiert, die jedoch nur der Organisation dienen und keinen Einfluss auf das Nachrichtenformat haben und deshalb hier nicht aufgelistet sind.
+Remark: In the XML scheme are further groups defined, which are solely used for organisational purposes, have no impact on the message format and therefore are not listed here.
 \begin{samepage}
 \begin{flushleft}
 \rowcolors{1}{}{gray!10}
