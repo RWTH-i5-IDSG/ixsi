@@ -14,14 +14,14 @@ To realize a coupling between VRS and TIS, at least service 1 (static data) of b
   \node[rectangleTX, left= 1cm of s3](s2) {Service 2\\Availability Query};
   \node[rectangleTX, below right of=s1](s4) {Service 4\\Booking};
   \node[rectangleTX, right= 1cm of s4](s6) {Service 6\\Price Information};
-  \node[rectangleTX, right= 1cm of s6](s9) {Service 9\\User Management};
+  \node[rectangleTX, right= 1.5cm of s6](s9) {Service 9\\User Management};
 
 
-  \node[rectangleTX, below left = 1cm of s4](s8) {Service 8\\Booking status\\(vehicle unlock)};
-  \node[rectangleTX, left= 1cm of s8](s7) {Service 7\\Consumption data};
-  \node[rectangleTX, left= 1cm of s7](s5) {Service 5\\Booking Subscription};
-  \node[rectangleTX, right= 1cm of s8](s10) {Service 10\\Vehicle Settings};
-  \node[rectangleTX, right= 1cm of s10](s11) {Service 11\\Navigation and Assistance};
+  \node[rectangleTX, below = 2cm of s4](s8) {Service 8\\Booking status\\(vehicle unlock)};
+  \node[rectangleTX, left= 0.5cm of s8](s7) {Service 7\\Consumption data};
+  \node[rectangleTX, left= 0.5cm of s7](s5) {Service 5\\Booking Subscription};
+  \node[rectangleTX, right= 0.5cm of s8](s10) {Service 10\\Vehicle Settings};
+  \node[rectangleTX, right= 0.5cm of s10](s11) {Service 11\\Navigation and Assistance};
   %   arrows
   \draw (s2) edge[->,thick=1cm] (s1);
   \draw (s3) edge[->,thick=1cm] (s1);
