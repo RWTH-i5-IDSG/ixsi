@@ -21,5 +21,5 @@ deploy:
     script: scripts/deploy.sh
     on:
           branch: econnect
-	  branch: econnect-english-version
-	  branch: mobilitybroker
+          branch: econnect-english-version
+          branch: mobilitybroker
