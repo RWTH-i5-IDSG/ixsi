@@ -2,16 +2,15 @@
 set -e # Exit with nonzero exit code if anything fails
 
 TARGET_BRANCH="master"
+TARGET_REPO="git@github.com:RWTH-i5-IDSG/RWTH-i5-IDSG.github.io"
 
-# Save some useful information
-REPO=`git config remote.origin.url`
 CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
 SHA=`git rev-parse --verify HEAD`
 
 # Clone the existing gh-pages for this repo into out/
 # Create a new empty branch if gh-pages doesn't exist yet (should only happen on first deply)
-git clone $REPO out
+git clone $TARGET_REPO out
 cd out
 git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 cd ..
