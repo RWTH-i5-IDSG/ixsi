@@ -19,11 +19,7 @@ eval `ssh-agent -s`
 ssh-add deploy_key
 
 # Clone the existing gh-pages for this repo into out/
-# Create a new empty branch if gh-pages doesn't exist yet (should only happen on first deply)
 git clone $TARGET_REPO out
-cd out
-git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
-cd ..
 
 # copy docu to target repo
 mkdir -p out/ixsi/
@@ -36,10 +32,11 @@ git config user.email "$COMMIT_AUTHOR_EMAIL"
 
 # Commit the "changes", i.e. the new version.
 # The delta will show diffs between new and old versions.
+echo "adding ixsi/ixsi-docu-${CURRENT_BRANCH}.pdf"
 git add ixsi/ixsi-docu-$CURRENT_BRANCH.pdf
 
 echo "Deploy to ${SSH_REPO}: commit ${SHA}"
-git commit -m "Deploy IXSI Docu to GitHub pages. Commit ${SHA}"
+git commit -m "Deploy IXSI docu ${CURRENT_BRANCH} to GitHub pages. Commit ${SHA}"
 
 # Now that we're all set up, we can push.
-git push $SSH_REPO $TARGET_BRANCH
+git push 
