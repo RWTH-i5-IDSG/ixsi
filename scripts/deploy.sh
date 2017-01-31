@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e # Exit with nonzero exit code if anything fails
 
-TARGET_BRANCH="master"
+TARGET_BRANCH="source"
 TARGET_REPO="git@github.com:RWTH-i5-IDSG/RWTH-i5-IDSG.github.io"
 
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
@@ -19,10 +19,13 @@ ssh-add deploy_key
 
 # Clone the existing gh-pages for this repo into out/
 git clone $TARGET_REPO out
+cd out
+git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
+cd ..
 
 # copy docu to target repo
-mkdir -p out/ixsi/
-cp -aR ixsi-docu.pdf out/ixsi/ixsi-docu-$TRAVIS_BRANCH.pdf
+mkdir -p out/downloads/ixsi/
+cp -aR ixsi-docu.pdf out/downloads/ixsi/ixsi-docu-$TRAVIS_BRANCH.pdf
 
 # Now let's go have some fun with the cloned repo
 cd out
@@ -31,11 +34,11 @@ git config user.email "$COMMIT_AUTHOR_EMAIL"
 
 # Commit the "changes", i.e. the new version.
 # The delta will show diffs between new and old versions.
-echo "adding ixsi/ixsi-docu-${TRAVIS_BRANCH}.pdf"
-git add ixsi/ixsi-docu-$TRAVIS_BRANCH.pdf
+echo "adding downloads/ixsi/ixsi-docu-${TRAVIS_BRANCH}.pdf"
+git add downloads/ixsi/ixsi-docu-$TRAVIS_BRANCH.pdf
 
 echo "Deploy to ${SSH_REPO}: commit ${SHA}"
-git commit -m "Deploy IXSI docu ${TRAVIS_BRANCH} to GitHub pages. Commit ${SHA}"
+git commit -m "Deploy IXSI docu ${TRAVIS_BRANCH} to jekyll source. Commit ${SHA}"
 
 # Now that we're all set up, we can push.
 git push 
