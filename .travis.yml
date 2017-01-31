@@ -20,7 +20,7 @@ deploy:
     provider: script 
     script: scripts/deploy.sh
     on:
-          branch: mobilitybroker 
+          branch: econnect-english-version 
 
 env:
   global:
