@@ -4,7 +4,6 @@ set -e # Exit with nonzero exit code if anything fails
 TARGET_BRANCH="master"
 TARGET_REPO="git@github.com:RWTH-i5-IDSG/RWTH-i5-IDSG.github.io"
 
-CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
 SHA=`git rev-parse --verify HEAD`
 
@@ -23,7 +22,7 @@ git clone $TARGET_REPO out
 
 # copy docu to target repo
 mkdir -p out/ixsi/
-cp -aR ixsi-docu.pdf out/ixsi/ixsi-docu-$CURRENT_BRANCH.pdf
+cp -aR ixsi-docu.pdf out/ixsi/ixsi-docu-$TRAVIS_BRANCH.pdf
 
 # Now let's go have some fun with the cloned repo
 cd out
@@ -32,11 +31,11 @@ git config user.email "$COMMIT_AUTHOR_EMAIL"
 
 # Commit the "changes", i.e. the new version.
 # The delta will show diffs between new and old versions.
-echo "adding ixsi/ixsi-docu-${CURRENT_BRANCH}.pdf"
-git add ixsi/ixsi-docu-$CURRENT_BRANCH.pdf
+echo "adding ixsi/ixsi-docu-${TRAVIS_BRANCH}.pdf"
+git add ixsi/ixsi-docu-$TRAVIS_BRANCH.pdf
 
 echo "Deploy to ${SSH_REPO}: commit ${SHA}"
-git commit -m "Deploy IXSI docu ${CURRENT_BRANCH} to GitHub pages. Commit ${SHA}"
+git commit -m "Deploy IXSI docu ${TRAVIS_BRANCH} to GitHub pages. Commit ${SHA}"
 
 # Now that we're all set up, we can push.
 git push 
