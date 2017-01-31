@@ -5,7 +5,7 @@ TARGET_BRANCH="master"
 
 # Save some useful information
 REPO=`git config remote.origin.url`
-CURRENT_BRANCH="git rev-parse --abbrev-ref HEAD"
+CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
 SHA=`git rev-parse --verify HEAD`
 
