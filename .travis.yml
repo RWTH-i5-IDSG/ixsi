@@ -21,3 +21,9 @@ deploy:
     script: scripts/deploy.sh
     on:
           branch: econnect
+
+env:
+  global:
+  - ENCRYPTION_LABEL: "d74e61722ce8"
+  - COMMIT_AUTHOR_EMAIL: "samsel@dbis.rwth-aachen.de"
+
