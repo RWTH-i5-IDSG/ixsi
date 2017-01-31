@@ -14,3 +14,16 @@ script:
     #- chktex -q -n 6 *.tex chapters.*.tex 2>/dev/null | tee lint.out
     ## If lint output is non-empty report an error.
     #- test ! -s lint.out
+
+deploy:
+    skip_cleanup: true
+    provider: script 
+    script: scripts/deploy.sh
+    on:
+          branch: mobilitybroker 
+
+env:
+  global:
+  - ENCRYPTION_LABEL: "d74e61722ce8"
+  - COMMIT_AUTHOR_EMAIL: "samsel@dbis.rwth-aachen.de"
+
