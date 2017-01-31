@@ -26,9 +26,9 @@ IXSI is currently still under development and the API is not final.
 
 precompiled pdfs are available under (automatically generated): 
 
-https://rwth-i5-idsg.github.io/ixsi/ixsi-docu-econnect.pdf (german version)
+https://rwth-i5-idsg.github.io/downloads/ixsi/ixsi-docu-econnect.pdf (german version)
 
-https://rwth-i5-idsg.github.io/ixsi/ixsi-docu-econnect-english-version.pdf (english version)
+https://rwth-i5-idsg.github.io/downloads/ixsi/ixsi-docu-econnect-english-version.pdf (english version)
 
 The respective XML schema is available under:
 
@@ -46,7 +46,7 @@ RWTH Aachen
 The branch `mobilitybroker` contains non standard additions developed in project Mobility Broker. More Information about Mobility Broker is available: http://mobility-broker.com/ (in german)
 
 precompiled pdf:
-https://rwth-i5-idsg.github.io/ixsi/ixsi-docu-mobilitybroker.pdf
+https://rwth-i5-idsg.github.io/downloads/ixsi/ixsi-docu-mobilitybroker.pdf
 
 The respective XML schema for branch `mobilitybroker` is available under:
 https://github.com/RWTH-i5-IDSG/ixsi/blob/mobilitybroker/xml/IXSI.xsd
