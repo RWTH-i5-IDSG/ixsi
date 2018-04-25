@@ -53,4 +53,15 @@ https://github.com/RWTH-i5-IDSG/ixsi/blob/mobilitybroker/xml/IXSI.xsd
 
 
 
+## Smart Car
+The branch `smartcar` contains non standard additions developed in project RWTH Aachen Ford Alliance - Mobility Services using AppLink. More Information can be found in the publication: https://dblp.org/rec/conf/vehits/SamselBTKK17
+
+precompiled pdf:
+https://rwth-i5-idsg.github.io/downloads/ixsi/ixsi-docu-smartcar.pdf (german)
+https://rwth-i5-idsg.github.io/downloads/ixsi/ixsi-docu-smartcar-english-version.pdf (english)
+
+The respective XML schema for branch `smartcar` is available under:
+https://github.com/RWTH-i5-IDSG/ixsi/raw/smartcar-english-version/xml/IXSI.xsd
+
+
 
