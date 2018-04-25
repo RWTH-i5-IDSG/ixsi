@@ -58,6 +58,7 @@ The branch `smartcar` contains non standard additions developed in project RWTH 
 
 precompiled pdf:
 https://rwth-i5-idsg.github.io/downloads/ixsi/ixsi-docu-smartcar.pdf (german)
+
 https://rwth-i5-idsg.github.io/downloads/ixsi/ixsi-docu-smartcar-english-version.pdf (english)
 
 The respective XML schema for branch `smartcar` is available under:
