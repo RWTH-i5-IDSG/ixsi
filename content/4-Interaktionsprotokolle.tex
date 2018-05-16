@@ -700,3 +700,155 @@ Kurz vor dem Start einer Folgebuchung kann das RIS dann wiederum Fahrzeugeinstel
 
 Das RIS kann nach der Buchung dem Fahrzeug den Zielort übermitteln (Fernkonfiguration Navigationssystem), so dass der Reisende den Zielort nicht selbst eingeben muss. 
 Außerdem kann das RIS den Fortschritt der Fahrt abonnieren, und wird dann fortlaufend vom FVS über Änderungen der Position und der voraussichtlichen Ankunftszeit informiert.
+
+
+
+\section{Dienst 12 -- Dialog Intermodale Alternative}
+\label{sec:Interaktionsprotokolle:Dienst12}
+
+\begin{center}
+\begin{sequencediagram}
+\newthread{ris}{:RIS}
+\newinst[8]{fvs}{:FVS}
+
+\begin{sdblock}{Alternative Routen senden}{}
+\begin{call}{ris}{Buchungsreferenz, Alternative Routen}{fvs}{}
+  \end{call}
+\end{sdblock}
+\postlevel
+  
+\begin{sdblock}{Gewählte Routen überwachen}{}
+
+\begin{call}{ris}{Buchungsreferenz, (Abostornierung)*}{fvs}{}
+\end{call}
+
+\end{sdblock}
+
+\begin{sdblock}{Auswahl des Reisenden}{}
+
+\begin{mess}{fvs}{Alternative Route, Buchungswunsch}{ris}
+\end{mess}
+\end{sdblock}
+\postlevel
+
+
+\begin{sdblock}{Bestätigung Auswahl / Buchung alternative Route}{}
+\begin{call}{ris}{Alternative Route, Erfolg, (Fehlermeldung)}{fvs}{}
+  \end{call}
+\end{sdblock}
+\postlevel
+
+\end{sequencediagram}
+\end{center}
+\smallskip
+
+
+Das RIS kann, falls alternative Routen erkannt werden, diese an das Fahrzeug übermitteln (Alternative Routen senden). Dem Nutzer werden diese Alternativen dargestellt. Er kann eine von diesen Wählen und zusätzlich angeben, dass alle Teile der Route gebucht werden sollen. Um über die Wahl des Nutzers benachrichtigt zu werden kann das RIS diese beim FVS abonnieren.
+Nachdem die Route des Reisenden erfolgreich aktualisiert und gewünschte Teile gebucht wurden, schickt das RIS eine Bestätigung an das FVS oder benachrichtigt über mögliche Fehler.
+
+Das folgende Sequenzdiagram gibt einen Überblick über eine beispielhafte Interaktion bestehend aus Dienst 11 und 12.
+In diesem Anwendungsfall konfiguriert zunächst das RIS das Navigationssystems des vom Kunden gebuchten Fahrzeugs und startet eine Überwachung des Fahrtverlaufs.
+Nachdem das RIS über eine Positionsänderung informiert wird, findet es eine alternative intermodale Route.
+Diese wird über das FVS an das Fahrzeug übertragen, welches diese dem Reisenden über einen Dialog darstellt.
+Dieser kann dann eine der alternativen Route wählen und falls gewünscht die gesamte Route buchen.
+Gleichzeitig erstellt das RIS ein Abonnement um über die Auswahl des Reisenden benachrichtigt zu werden.
+Sobald es über eine Auswahl benachrichtigt wird, bucht das RIS die entsprechenden Teile der Route und informiert das FVS.
+
+
+\begin{center}
+\begin{sequencediagram}
+\newthread{ris}{:RIS}
+\newinst[4]{fvs}{:FVS}
+\newinst[2]{vehicle}{:Fahrzeug}
+\newinst[2]{user}{:Reisende}
+
+\begin{sdblock}{Fernkonfiguration Navigationssystem}{}
+\begin{call}{ris}{Buchungsreferenz, Zielort}{fvs}{}
+  \end{call}
+\end{sdblock}
+\postlevel
+
+\begin{call}{fvs}{Setze Zielort}{vehicle}{}
+  \end{call}
+
+\begin{sdblock}{Fahrtverlauf überwachen}{}
+
+\begin{call}{ris}{Buchungsreferenz}{fvs}{}
+\end{call}
+
+\postlevel
+
+\begin{mess}{fvs}{Position}{ris}
+\end{mess}
+
+\end{sdblock}
+
+\prelevel \prelevel \prelevel
+\begin{mess}{vehicle}{Position}{fvs}
+\end{mess}
+
+\postlevel \postlevel \postlevel
+
+\begin{call}{ris}{Prüfe alternative Route}{ris}{Alternative Route}
+\end{call}
+
+\end{sequencediagram}
+\begin{sequencediagram}
+\newthread{ris}{:RIS}
+\newinst[4]{fvs}{:FVS}
+\newinst[2]{vehicle}{:Fahrzeug}
+\newinst[2]{user}{:Kunde}
+
+\begin{sdblock}{Alternative Routen senden}{}
+\begin{call}{ris}{Buchungsreferenz, Alternative Routen}{fvs}{}
+  \end{call}
+\end{sdblock}
+  
+\begin{sdblock}{Gewählte Routen überwachen}{}
+
+\begin{call}{ris}{Buchungsreferenz}{fvs}{}
+\end{call}
+
+\end{sdblock}
+\postlevel
+
+\begin{call}{fvs}{Alternative Routen}{vehicle}{}
+  \end{call}
+\begin{mess}{vehicle}{Alternative Routen}{user}
+  \end{mess}
+
+\postlevel
+
+\begin{mess}{user}{Auswahl, Buchungswunsch}{vehicle}
+  \end{mess}
+\begin{mess}{vehicle}{Auswahl, Buchungswunsch}{fvs}
+  \end{mess}
+
+\begin{sdblock}{Auswahl des Reisenden}{}
+
+\begin{mess}{fvs}{Alternative Route, Buchungswunsch}{ris}
+\end{mess}
+\end{sdblock}
+\postlevel
+
+\begin{call}{ris}{Buchung Streckenabschnitte}{ris}{Erfolg}
+\end{call}
+
+\begin{sdblock}{Bestätigung Auswahl / Buchung alternative Route}{}
+\begin{call}{ris}{Alternative Route, Erfolg}{fvs}{}
+  \end{call}
+\end{sdblock}
+\postlevel
+
+\begin{mess}{fvs}{Erfolg}{vehicle}
+\end{mess}
+\begin{mess}{vehicle}{Erfolg}{user}
+\end{mess}
+
+\end{sequencediagram}
+\end{center}
+\smallskip
+
+
+
+
