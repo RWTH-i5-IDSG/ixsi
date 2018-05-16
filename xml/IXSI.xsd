@@ -71,7 +71,7 @@
 	</xs:simpleType>
 	<xs:simpleType name="GlobalIDType">
 		<xs:annotation>
-			<xs:documentation>Type for globally unique IDs for identifiying clone entities.</xs:documentation>
+			<xs:documentation>Type for globally unique IDs for identifying clone entities.</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
@@ -823,7 +823,7 @@
 			</xs:element>
 			<xs:element name="SeverityFactor" type="xs:nonNegativeInteger" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation>Severity factor of the proposed route in percentage. 100 represents a nearly flat route. The higher the value, the more energy is cosumed for driving the route. E.g. a value of 200 indecates, that twice as much energy will be consumed as would be for a nearly flat route of the same length.</xs:documentation>
+					<xs:documentation>Severity factor of the proposed route in percentage. 100 represents a nearly flat route. The higher the value, the more energy is consumed for driving the route. E.g. a value of 200 indicates, that twice as much energy will be consumed as would be for a nearly flat route of the same length.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -1260,7 +1260,7 @@
 	</xs:complexType>
 	<xs:complexType name="CloseSessionResponseType">
 		<xs:annotation>
-			<xs:documentation>Response for clsoing an existing session.</xs:documentation>
+			<xs:documentation>Response for closing an existing session.</xs:documentation>
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="AbstractBaseResponseType"/>
