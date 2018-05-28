@@ -257,3 +257,22 @@ Service 11 serves the integration of the vehicle navigation system into an inter
 \item Service 4
 \item Base service A
 \end{itemize}
+
+\section{Service 12 -- Dialog alternative intermodal itinerary}
+Service 12 serves the integration of vehicle navigation systems into an intermodal journey.
+If the TIS identifies alternative itineraries due to delays on the current route, it can send them to the vehicle.
+These alternatives are offered to the traveler who can choose one of them and decide whether he wants to book the chosen one.
+
+\subsection*{Functions}
+\begin{itemize}
+\item Inform travelers of an alternative intermodal itinerary
+\item Subscribe to the travelers selections and booking request
+\end{itemize}
+
+\subsection*{Dependencies}
+\begin{itemize}
+\item Service 4
+\item Service 11
+\item Base service A
+\end{itemize}
+

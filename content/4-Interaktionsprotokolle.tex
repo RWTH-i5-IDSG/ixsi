@@ -694,3 +694,150 @@ Shortly before the beginning of a follow-up booking, the TIS is able to transfer
 
 After the booking, the TIS can transfer the target location to the vehicle (remote configuration navigation system), so that the traveler does not need to enter the target location by himself. 
 Furthermore, the TIS can subscribe to the progress of a journey and then gets continuously informed by the VRS concerning changes of the position and the estimated arrival time. 
+
+\section{Service 12 -- Dialog alternative intermodal itinerary}
+\label{sec:Interaktionsprotokolle:Dienst12}
+
+\begin{center}
+\begin{sequencediagram}
+\newthread{tis}{:TIS}
+\newinst[8]{vrs}{:VRS}
+
+\begin{sdblock}{Send alternative itineraries}{}
+\begin{call}{tis}{Booking reference, Alternative itineraries}{vrs}{}
+  \end{call}
+\end{sdblock}
+\postlevel
+  
+\begin{sdblock}{Itinerary selection monitoring}{}
+
+\begin{call}{tis}{Booking reference, (Subscription cancellation)*}{vrs}{}
+\end{call}
+
+\end{sdblock}
+
+\begin{sdblock}{Selection of the traveler}{}
+
+\begin{mess}{vrs}{Alternative itinerary, Book}{tis}
+\end{mess}
+\end{sdblock}
+\postlevel
+
+
+\begin{sdblock}{Confirm itinerary selection / booking}{}
+\begin{call}{tis}{Alternative itinerary, Success, (Error message)*}{vrs}{}
+  \end{call}
+\end{sdblock}
+\postlevel
+
+\end{sequencediagram}
+\end{center}
+\smallskip
+
+When the TIS detects an alternative intermodal itineraries, it send them to the vehicle (Send alternative itineraries).
+These are displayed to the traveler.
+He can select one of them and optionally instruct the TIS to book all part of the itinerary.
+To be notified of the selection of the traveler the TIS creates a subscription.
+After being notified of a selection of the traveler, the TIS updates the itinerary and if desired books legs of the route.
+On completion it send a confirmation to the VRS or informs it of possible errors.
+
+The following sequence diagram gives an exemplary overview of an interaction consisting of service 11 and 12.
+In this use case, the TIS initially configures the navigation system of the vehicle booked by the traveler and initiates the monitoring of the journey progress.
+After being notified of a route progress it detects an delay and find multiple alternative intermodal itineraries.
+These is transferred to the vehicle via the VRS and is displayed to the traveler as a dialog.
+The traveler may select one of the itineraries and optionally instruct the TIS to book it.
+At the same time the TIS created a subscription to the selection of the traveler.
+As soon as the TIS is informed of the selection it updates and books the selected itinerary and sends a confirmation to the VRS.
+
+\begin{center}
+\begin{sequencediagram}
+\newthread{tis}{:RIS}
+\newinst[4]{vrs}{:FVS}
+\newinst[2]{vehicle}{:Vehicle}
+\newinst[2]{user}{:Traveler}
+
+\begin{sdblock}{Remote configuration of navigation system}{}
+\begin{call}{tis}{Booking reference, target location}{vrs}{}
+  \end{call}
+\end{sdblock}
+\postlevel
+
+\begin{call}{vrs}{Set destination}{vehicle}{}
+\end{call}
+
+\begin{sdblock}{Monitor journey progress}{}
+
+\begin{call}{tis}{Booking reference}{vrs}{}
+\end{call}
+
+\postlevel
+
+\begin{mess}{vrs}{Position}{tis}
+\end{mess}
+
+\end{sdblock}
+
+\prelevel \prelevel \prelevel
+\begin{mess}{vehicle}{Position}{vrs}
+\end{mess}
+
+\postlevel \postlevel \postlevel
+
+\begin{call}{tis}{Check for alternative itineraries}{tis}{Alternative itinerary}
+\end{call}
+
+\end{sequencediagram}
+\begin{sequencediagram}
+\newthread{tis}{:RIS}
+\newinst[4]{vrs}{:FVS}
+\newinst[2]{vehicle}{:Vehicle}
+\newinst[2]{user}{:Traveler}
+
+\begin{sdblock}{Send alternative itineraries}{}
+\begin{call}{tis}{Booking reference, Alternative itineraries}{vrs}{}
+  \end{call}
+\end{sdblock}
+  
+\begin{sdblock}{Monitor selected itinerary}{}
+
+\begin{call}{tis}{Booking reference}{vrs}{}
+\end{call}
+
+\end{sdblock}
+\postlevel
+
+\begin{call}{vrs}{Alternative itineraries}{vehicle}{}
+  \end{call}
+\begin{mess}{vehicle}{Alternative itineraries}{user}
+  \end{mess}
+
+\postlevel
+
+\begin{mess}{user}{Selection, Book}{vehicle}
+  \end{mess}
+\begin{mess}{vehicle}{Selection, Book}{vrs}
+  \end{mess}
+
+\begin{sdblock}{Selection of the traveler}{}
+
+\begin{mess}{vrs}{Alternative itinerary, Book}{tis}
+\end{mess}
+\end{sdblock}
+\postlevel
+
+\begin{call}{tis}{Booking of the itinerary}{tis}{Success}
+\end{call}
+
+\begin{sdblock}{Confirm selection and booking of the itinerary}{}
+\begin{call}{tis}{Alternative itinerary, Success}{vrs}{}
+  \end{call}
+\end{sdblock}
+\postlevel
+
+\begin{mess}{vrs}{Success}{vehicle}
+\end{mess}
+\begin{mess}{vehicle}{Success}{user}
+\end{mess}
+
+\end{sequencediagram}
+\end{center}
