@@ -55,6 +55,12 @@
 		</xs:annotation>
 		<xs:restriction base="xs:token"/>
 	</xs:simpleType>
+	<xs:simpleType name="ItineraryIDType">
+		<xs:annotation>
+			<xs:documentation>Typ für intermodale Routen-IDs.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:token"/>
+	</xs:simpleType>
 	<xs:simpleType name="UserIDType">
 		<xs:annotation>
 			<xs:documentation>Typ für User-IDs.</xs:documentation>
@@ -1147,6 +1153,65 @@
 			<xs:element name="Progress" type="PercentType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation>Prozentuale Schätzung des Reisefortschritt zur Visualisierung.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ItinerarySuggestionType">
+		<xs:annotation>
+			<xs:documentation>Typ für einen einzelnen intermodalen Routenvorschlag.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ItineraryID" type="ItineraryIDType">
+				<xs:annotation>
+					<xs:documentation>Eindeutige ID der intermodalen Route. Wird genutzt um gewählte Routen zu identifizieren.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NextDestination" type="OriginDestType">
+				<xs:annotation>
+					 <xs:documentation>Zielort des aktuellen Teils der intermodalen Route. An diesem Ort findet der Wechsel auf ein anderes Verkehrsmittel statt.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ExpectedArrivalTime" type="xs:dateTime">
+				<xs:annotation>
+					 <xs:documentation>Die erwartete Ankunftszeit der gesamte intermodalen Route.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Price" type="EuroPriceType">
+				<xs:annotation>
+					 <xs:documentation>Der Preis in Euro Cent um alle Teile dieser Route zu buchen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ShortDescription" type="TextType">
+				<xs:annotation>
+					 <xs:documentation>Eine kurze Beschreibung der Route.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LongDescription" type="TextType">
+				<xs:annotation>
+					 <xs:documentation>Eine detaillierte Beschreibung der Route.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ItinerarySuggestionsSelectionType">
+		<xs:annotation>
+			<xs:documentation>Typ für eine einzelne intermodale Routenauswahl.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BookingID" type="BookingIDType">
+				<xs:annotation>
+					 <xs:documentation>Buchungsreferenz.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ItinerarySuggestionId" type="ItineraryIDType">
+				<xs:annotation>
+					<xs:documentation>Eindeutige ID der intermodalen Route.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Book" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Zeigt an, ob der Nutzer die Route buchen möchte.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -2330,6 +2395,167 @@
 		<xs:sequence>
 			<xs:element name="BookingProgress" type="BookingProgressType" maxOccurs="unbounded"/>
 		</xs:sequence>
+	</xs:complexType>
+	<xs:annotation>
+		<xs:documentation>**** Service (12) : Dialog Intermodale Alternative ****</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="ItinerarySuggestionsRequestType">
+		<xs:annotation>
+			<xs:documentation>Vorschlag einer intermodalen Alternative zur aktuellen Route.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BookingID" type="BookingIDType">
+				<xs:annotation>
+					<xs:documentation>Buchungsreferenz.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CurrentItineraryArrivalTime" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Erwartete Ankunftszeit der aktuellen Route.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DelayExplanation" type="TextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Begründung der Verspätung der aktuellen Route.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ItinerarySuggestions" type="ItinerarySuggestionType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Menge an alternativen intermodalen Routenvorschlägen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ItinerarySuggestionsResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort auf den Vorschlag einer intermodalen Alternative zur aktuellen Route.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ItinerarySuggestionsSelectionSubscriptionRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um Antworten auf einen Routenvorschlag zu abonnieren oder zu stornieren.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BookingID" type="BookingIDType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Zu abonnierende BuchungsID.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Unsubscription" type="xs:boolean" default="false" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Falls gesetzt, Abo stornieren.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ItinerarySuggestionsSelectionSubscriptionResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort auf Routenvorschlagsauswahlabo.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ItinerarySuggestionsSelectionPushMessageType">
+		<xs:annotation>
+			<xs:documentation>Pushnachricht mit dem gewählten Routenvorschlag.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ItinerarySuggestionsSelection" type="ItinerarySuggestionsSelectionType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ItinerarySuggestionsSelectionSubscriptionStatusRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um den Abonnementstatus der Auswahl von Routenvorschlägen zu erhalten.</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	<xs:complexType name="ItinerarySuggestionsSelectionSubscriptionStatusResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort um den Abonnementstatus der Auswahl von Routenvorschlägen zu erhalten.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType">
+				<xs:sequence>
+					<xs:element name="BookingID" type="BookingIDType" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Abonnierte Buchungen.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CompleteItinerarySuggestionsSelectionRequestType">
+		<xs:annotation>
+			<xs:documentation>Anfrage um alle abonnierten Auswahlen von Routenvorschlägen zu erhalten.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MaxResults" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Maximale Anzahl Ergebnisse pro Nachricht.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompleteItinerarySuggestionsSelectionResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort um alle abonnierten Auswahlen von Routenvorschlägen zu erhalten.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType">
+				<xs:sequence>
+					<xs:element name="MessageBlockID" type="xs:token">
+						<xs:annotation>
+							<xs:documentation>Block ID, alle Nachrichten eines Blocks enthalten die gleiche ID.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="Last" type="xs:boolean" default="false" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Falls gesetzt ist dies die letzte Nachricht des Blocks.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="BookingProgress" type="BookingProgressType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ItinerarySelectionConfirmationRequestType">
+		<xs:annotation>
+			<xs:documentation>Bestätigung, dass eine gewählte Route erfolgreich aktualisiert oder gebucht wurde oder Benachrichtigung über mögliche Fehler.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="BookingID" type="BookingIDType">
+				<xs:annotation>
+					<xs:documentation>Buchungsreferenz.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SuggestedItineraryId" type="ItineraryIDType">
+				<xs:annotation>
+					<xs:documentation>ID des zugehörigen Routenvorschlags.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Success" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Zeigt an ob die Aktualisierung und die Buchung der gewählten Route erfolgreich waren.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ErrorMessage" type="TextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Fehlermeldung im Falle eines Misserfolges.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ItinerarySelectionConfirmationResponseType">
+		<xs:annotation>
+			<xs:documentation>Antwort auf die Routenwahlbestätigung.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="AbstractBaseResponseType"/>
+		</xs:complexContent>
 	</xs:complexType>
 	<xs:annotation>
 		<xs:documentation>**** Nachrichtencontainer ****</xs:documentation>
